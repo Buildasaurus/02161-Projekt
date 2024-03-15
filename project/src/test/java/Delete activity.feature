@@ -1,4 +1,10 @@
 Feature: Deleting activities
+    Description: An employee is deleting activities
+    Actor: Employee
+
+
+    Background:
+    Given an employee exists
 
 Scenario: Delete Activity
     Given 1 activity exists
