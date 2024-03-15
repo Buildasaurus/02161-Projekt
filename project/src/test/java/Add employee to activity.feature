@@ -1,8 +1,10 @@
 Feature: Add employee to activity
+    Description: A project leader adds an employee to an activity, or an employee adds themselves to an activity
+    Actors: project leader, employee
 
 Background:
-  Given an activity exists
-  And an employee exists
+    Given an activity exists
+    And an employee exists
   And a timeslot is selected
 
 Scenario: Adding employee to project activity
