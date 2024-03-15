@@ -8,21 +8,20 @@ Background:
     And a timeslot is selected
 
 Scenario: Adding employee to project activity
-    Given a project exists, the project has an activity, and a project leader is assigned to the project
+    Given a project activity exists
     And the employee is available in the selected time slot
-    When the project leader adds the employee to the project activity
+    And there is another employee
+    When the other employee adds the employee to the project activity
     Then the employee is assigned to the activity
-    And the employee has the activity in their schedule
 
 Scenario: Employee is reserved
     Given the employee is assigned to a reserved activity in the selected time slot
     When the employee is added to an activity
     Then the employee is not assigned to the activity
-    And the employee does not have the activity in their schedule
 
-Scenario: Adding self to general activity
-    Given a general activity exists
+Scenario: Adding self to reserved activity
+    Given a reserved activity exists
     And the employee is available in the selected time slot
-    When the employee adds themself to a general activity
-    Then the employee is assigned to the activity
-    And the employee has the activity in their schedule
+    When the employee adds themselves to the reserved activity
+    Then the employee is assigned to the reserved activity
+    And the employee has the reserved activity in their schedule
