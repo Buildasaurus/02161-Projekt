@@ -1,21 +1,21 @@
 Feature: Adding / creating activities
-    Description: A user is manipulating activities. This can be a leader is adding / creating activities
-    or a user adding a vacation activity to themself.
+    Description: A user is adding activities.
     Actors: Project leader or User
 
 Background:
-
-Scenario: Add expected activity end at week 7
-    Given an employee exists.
-    When a project leader adds an activity with expected end in 7 weeks
-    Then The activity ends in 7 weeks
-
-Scenario: Add expected activity start at week 4
-    Given an employee exists.
-    When a project leader adds an activity with expected end in 4 weeks
-    Then The activity starts in 4 weeks
-
-Scenario: Add reserved activity
     Given an employee exists
-    When the employee adds a reserved activity on the next wednesday
-    Then the employee is booked the next wednesday
+
+Scenario: Add activity ending in week 7
+    When the employee adds an activity with an end date in week 7
+    Then An activity is created
+    And The activity ends in week 7
+
+Scenario: Add activity ending in week 4
+    When the employee adds an activity with an end date in week 4
+    Then An activity is created
+    And The activity ends in week 4
+
+Scenario: Add reserved activity for 16/9
+    When the employee adds a reserved activity for the day 16/9
+    Then A reserved activity is created
+    And The activity ends in 16/9
