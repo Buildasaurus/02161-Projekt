@@ -1,6 +1,5 @@
 Feature: Deleting activities
 
-
 Scenario: Delete Activity
     Given 1 activity exists
     When the activity is deleted
