@@ -3,6 +3,7 @@ Feature: Add employee to activity
 Background:
   Given an activity exists
   And an employee exists
+  And a timeslot is selected
 
 Scenario: Adding employee to project activity
   Given a project exists, the project has an activity, and a project leader is assigned to the project
