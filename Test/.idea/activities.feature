@@ -13,3 +13,4 @@ Scenario: Delete Activity
 Scenario: Put a worker on an activity
   Given that there is an available worker
   Then add the worker to the activity
+
