@@ -4,5 +4,6 @@ Feature: Set used time
 
 Scenario: Worker sets used time on activity
     Given 1 activity exists
-    When a worker sets the used time on the activity
-    Then the activity has the used time, set by the worker.
+    And an employee exists
+    When the employee adds used time to the activity
+    Then the activity has the used time, set by the employee
