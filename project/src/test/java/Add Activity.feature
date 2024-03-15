@@ -1,5 +1,6 @@
 Feature: Adding / creating activities
-    Description: A project leader is adding / creating activities
+    Description: A user is manipulating activities. This can be a leader is adding / creating activities
+    or a user adding a vacation activity to himself
     Actors: Project leader
 
 Background:
