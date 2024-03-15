@@ -13,7 +13,7 @@ Scenario: Add expected activity end at week 7
 Scenario: Add expected activity start at week 4
     Given an employee exists.
     When a project leader adds an activity with expected end in 4 weeks
-    Then The activity ends in 4 weeks
+    Then The activity starts in 4 weeks
 
 Scenario: Add reserved activity
     Given an employee exists
