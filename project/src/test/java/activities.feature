@@ -14,3 +14,13 @@ Scenario: Put a worker on an activity
   Given that there is an available worker
   Then add the worker to the activity
 
+Scenario: User deletes an activity in a project with multiple activities
+  Given a user tries to delete an activity
+  And the project the activity is inside has multiple activities
+  Then delete the activity
+
+Scenario: User deletes an activity in a project with only 1 activity
+  Given a user tries to delete an activity
+  And the project the activity is inside has only 1 activity
+  Then delete the activity
+  And prompt the user for deleting the project
