@@ -22,3 +22,8 @@ Scenario: Project leader adds new employee to an activity
   Given 1 activity exists
   When a project leader adds a new employee to an activity
   Then the employee is in the activity.
+
+Scenario: Worker sets used time on activity
+  Given 1 activity exists
+  When a worker sets the used time on the activity
+  Then the activity has the used time, set by the worker.
