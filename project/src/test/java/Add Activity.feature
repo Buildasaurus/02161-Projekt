@@ -1,14 +1,11 @@
-Feature: Project leader options
+Feature: Adding / creating activities
 
 Background:
-  Given a project assist, and a Project Leader is assigned to it .
 
-Scenario: Project Leader generates report
-  When the Project Leader generates the report.
-  Then the Project Leader is prompted to choose a location to save the report
-  And an excel file is created and saved to the disk
-  And the Project Leader gets a notification that the report is generated
+Scenario: Add expected activity end at week 7
+    When a user adds an activity with expected end in 7 weeks
+    Then The activity ends in 7 weeks
 
-Scenario: Project leader checks overview
-  When the project checks the overview
-  Then it is possible to generate time usage per activity and total time on the project
+Scenario:  Add expected activity start at week 4
+    When a user adds an activity with expected start in 7 weeks
+    Then The activity start in 7 weeks
