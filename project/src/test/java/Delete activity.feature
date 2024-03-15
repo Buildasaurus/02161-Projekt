@@ -24,4 +24,4 @@ Scenario: Activity with registered hours is not deleted
     When a user tries to delete an activity
     Then the user is warned that someone has spent time on the activity
     When the user declines
-    Then an activity exists 
+    Then an activity exists
