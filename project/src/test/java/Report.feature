@@ -1,7 +1,9 @@
-Feature: Project leader options
+Feature: Creating reports based on a project
+    Description: A projectleader is creating a report on the project they are in
+    Actors: Project leader
 
 Background:
-    Given a project exists, and a Project Leader is assigned to it .
+    Given a project exists, and a Project Leader is assigned to it.
 
 Scenario: Project Leader generates report
     When the Project Leader generates the report.

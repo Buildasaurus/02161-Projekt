@@ -1,6 +1,7 @@
-Feature: Project leader options
-    User: Employee
-    Description: A project leader is creating an
+Feature: Create new project
+    Description: An employee is creating a new project
+    Actor: Employee
+
 
 Scenario: An employee creates a project
     Given an employee exists
