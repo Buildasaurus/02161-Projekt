@@ -3,7 +3,7 @@ Feature: Deleting activities
     Actor: Employee
 
 
-    Background:
+Background:
     Given an employee exists
 
 Scenario: Delete Activity
