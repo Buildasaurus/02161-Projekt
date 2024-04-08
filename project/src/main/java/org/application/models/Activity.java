@@ -1,4 +1,4 @@
-package org.application.models;
+package org.application.Models;
 
 public abstract class Activity {
     String name;
