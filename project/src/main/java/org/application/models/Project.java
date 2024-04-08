@@ -11,15 +11,15 @@ public class Project {
 
     }
 
-    public addActivity(Activity activity){
+    public void addActivity(Activity activity){
 
     }
 
-    public deleteActivity(Activity activity){
+    public void deleteActivity(Activity activity){
 
     }
 
-    public assignProjectLeader(String projectLeaderID){
+    public void assignProjectLeader(String projectLeaderID){
 
     }
 }
