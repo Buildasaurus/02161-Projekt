@@ -19,7 +19,7 @@ public class ProjectActivity {
     public int calculateCompletionTime(){
         //Returns numbers of half
         //TODO: Implement this
-
+        return 0;
     }
 
     public void removeTimeBlock(TimeBlock timeBlock){

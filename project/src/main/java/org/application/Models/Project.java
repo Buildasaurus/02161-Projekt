@@ -1,5 +1,7 @@
 package org.application.Models;
 
+import java.util.Date;
+
 public class Project {
     String name;
     int projectID;
@@ -7,19 +9,19 @@ public class Project {
     Date startWeek;
     String projectLeaderID;
 
-    public Report createReport(){
+    public Report createReport() {
+        return null;
+    }
+
+    public void addActivity(Activity activity) {
 
     }
 
-    public addActivity(Activity activity){
+    public void deleteActivity(Activity activity) {
 
     }
 
-    public deleteActivity(Activity activity){
-
-    }
-
-    public assignProjectLeader(String projectLeaderID){
+    public void assignProjectLeader(String projectLeaderID) {
 
     }
 }
