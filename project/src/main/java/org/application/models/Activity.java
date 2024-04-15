@@ -5,6 +5,10 @@ public abstract class Activity {
     String name;
     List<String> assignedEmployees;
 
+    public Activity(String name) {
+        this.name = name;
+    }
+
     public void assignEmployee(String employeeID) {
         if (!assignedEmployees.contains(employeeID)) {
             assignedEmployees.add(employeeID);
