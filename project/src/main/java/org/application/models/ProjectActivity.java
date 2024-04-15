@@ -7,7 +7,7 @@ public class ProjectActivity {
     Date startTime;
     Date endTime;
     Date expectedDuration;
-    List<TimeBlock> timeBlocks = new ArrayList();
+    List<TimeBlock> timeBlocks = new ArrayList<>();
 
     public ProjectActivity(Date startTime, Date endTime, Date expectedDuration) {
         this.startTime = startTime;
