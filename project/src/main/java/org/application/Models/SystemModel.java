@@ -1,18 +1,21 @@
 package org.application.Models;
 
-import org.application.Controllers.EmployeeController;
-
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public class MainModel { // should be public static class, but java is stupid
+public class SystemModel { // should be public static class, but java is stupid
     //STATIC class!
     public static List<Project> projects = new ArrayList<Project>();
     public static List<Employee> employees = new ArrayList<>();
 
     static {
         //Loading employees
-        employees.add(new Employee("404040"));
+        Employee e = new Employee("404040");
+        Activity activity = new ReservedActivity(new Date(1,1,1), new Date(1,1,1), "MyActivity");
+        e.addActivity(activity);
+        employees.add(e);
 
         // TODO : make this read employees from a file
         //  - This is though an extra feature. Not high priority
