@@ -5,6 +5,6 @@ Feature: Check Overview
 Background:
     Given a project leader exists.
 
-Scenario: Project leader checks overview
+Scenario: project leader checks overview
     When the project leader checks the overview
     Then it is possible to generate time usage per activity and total time on the project

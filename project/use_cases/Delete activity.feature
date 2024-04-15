@@ -6,17 +6,17 @@ Feature: Deleting activities
 Background:
     Given an employee exists
 
-Scenario: Delete Activity
+Scenario: delete Activity
     Given 1 activity exists
     When a user tries to delete an activity
     Then the activity no longer exists
 
-Scenario: User deletes an activity in a project with multiple activities
+Scenario: user deletes an activity in a project with multiple activities
     Given 2 activity exists
     When a user tries to delete an activity
     Then the activity no longer exists
 
-Scenario: Activity with registered hours is deleted
+Scenario: activity with registered hours is deleted
     Given 1 activity exists
     And a user has spent time on the activity
     When a user tries to delete an activity
@@ -24,7 +24,7 @@ Scenario: Activity with registered hours is deleted
     When the user accepts
     Then the activity no longer axists
 
-Scenario: Activity with registered hours is not deleted
+Scenario: activity with registered hours is not deleted
     Given 1 activity exists
     And a user has spent time on the activity
     When a user tries to delete an activity

@@ -7,19 +7,19 @@ Background:
     And an employee exists
     And a timeslot is selected
 
-Scenario: Adding employee to project activity
+Scenario: adding employee to project activity
     Given a project activity exists
     And the employee is available in the selected time slot
     And there is another employee
     When the other employee adds the employee to the project activity
     Then the employee is assigned to the activity
 
-Scenario: Employee is reserved
+Scenario: employee is reserved
     Given the employee is assigned to a reserved activity in the selected time slot
     When the employee is added to an activity
     Then the employee is not assigned to the activity
 
-Scenario: Adding self to reserved activity
+Scenario: adding self to reserved activity
     Given a reserved activity exists
     And the employee is available in the selected time slot
     When the employee adds themselves to the reserved activity
