@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-17T21:54:42.365Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="fQqil8szjrTfDI71XVj-" version="24.0.7" type="device">
+<mxfile host="app.diagrams.net" modified="2024-03-17T22:06:46.012Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="3uTpu40a1FpHFCzCOFMa" version="24.0.7" type="device">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
     <mxGraphModel dx="794" dy="507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -10,7 +10,7 @@
         <mxCell id="aM9ryv3xv72pqoxQDRHE-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="aM9ryv3xv72pqoxQDRHE-1" vertex="1">
           <mxGeometry x="45" y="70" width="10" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="aM9ryv3xv72pqoxQDRHE-3" value="add Project X activity in starting in&lt;div&gt;week 4&lt;/div&gt;" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="aM9ryv3xv72pqoxQDRHE-1" target="aM9ryv3xv72pqoxQDRHE-2" edge="1">
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-3" value="add Project X activity ending in&lt;div&gt;week 7&lt;/div&gt;" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="aM9ryv3xv72pqoxQDRHE-1" target="aM9ryv3xv72pqoxQDRHE-2" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-120" y="70" as="sourcePoint" />
             <mxPoint x="45" y="70.14" as="targetPoint" />
@@ -31,7 +31,7 @@
         <mxCell id="PLMixNP9zVYm_wW4tpXz-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="PLMixNP9zVYm_wW4tpXz-1" vertex="1">
           <mxGeometry x="75" y="160" width="10" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="PLMixNP9zVYm_wW4tpXz-21" value="startWeek = 4" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="PLMixNP9zVYm_wW4tpXz-1" target="PLMixNP9zVYm_wW4tpXz-20" edge="1">
+        <mxCell id="PLMixNP9zVYm_wW4tpXz-21" value="endWeek = 7" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="PLMixNP9zVYm_wW4tpXz-1" target="PLMixNP9zVYm_wW4tpXz-20" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="80" y="140" as="sourcePoint" />
             <Array as="points">

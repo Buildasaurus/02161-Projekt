@@ -1,8 +1,8 @@
-module org.example.project {
+module org.application {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
-
-    opens org.example.project to javafx.fxml;
-    exports org.example.project;
+    opens org.application.Controllers to javafx.fxml;
+    exports org.application;
 }
