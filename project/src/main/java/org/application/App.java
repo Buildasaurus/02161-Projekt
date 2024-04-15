@@ -17,11 +17,9 @@ public class App extends Application {
         MainView view = new MainView();
         MainController controller = new MainController(view);
         view.setController(controller);
-        scene = new Scene(controller.getView(), 100, 100);
+        scene = new Scene(controller.getView(), 300, 300);
         stage.setScene(scene);
         stage.show();
-        java.lang.System.out.println("Highscore at start of game is: ");
-        stage.setResizable(false);
     }
 
     public static void main(String[] args) {
