@@ -6,4 +6,4 @@ Feature: Create new project
 Scenario: An employee creates a project
     Given an employee exists
     When the employee creates a project
-    Then A project exists
+    Then a project exists

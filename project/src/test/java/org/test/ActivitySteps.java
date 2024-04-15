@@ -8,13 +8,13 @@ import io.cucumber.java.en.When;
 //TODO implement steps
 
 public class ActivitySteps {
-    @Then("An activity is created")
+    @Then("an activity is created")
     public void anActivityIsCreated() {
         // Write code here that turns the phrase above into concrete actions  
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("The activity ends in week {int}")
+    @Then("the activity ends in week {int}")
     public void theActivityEndsInWeek(Integer int1) {
         // Write code here that turns the phrase above into concrete actions  
         throw new io.cucumber.java.PendingException();
@@ -26,7 +26,7 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("The activity starts in week {int}")
+    @Then("the activity starts in week {int}")
     public void theActivityStartsInWeek(Integer int1) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
@@ -38,13 +38,13 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("A reserved activity is created")
+    @Then("a reserved activity is created")
     public void aReservedActivityIsCreated() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("The activity ends in {int}\\/{int}")
+    @Then("the activity ends in {int}\\/{int}")
     public void theActivityEndsIn(Integer int1, Integer int2) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
