@@ -3,7 +3,7 @@ Feature: Create new project
     Actor: Employee
 
 
-Scenario: an employee creates a project
+Scenario: An employee creates a project
     Given an employee exists
     When the employee creates a project
-    Then a project exists
+    Then A project exists

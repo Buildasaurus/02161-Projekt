@@ -5,7 +5,7 @@ Feature: Creating reports based on a project
 Background:
     Given a project exists, and a Project Leader is assigned to it.
 
-Scenario: project Leader generates report
+Scenario: Project Leader generates report
     When the Project Leader generates the report.
     Then the Project Leader is prompted to choose a location to save the report
     And a csv file is created and saved to the disk with the project data

@@ -6,12 +6,12 @@ Background:
     Given a project exists
     And an employee exists
 
-Scenario: assigning project leader
+Scenario: Assigning project leader
     Given the project has no project leader
     When the employee is assigned as project leader
     Then the assignment is successful
 
-Scenario: project already has a project leader
+Scenario: Project already has a project leader
     Given the project has a project leader
     When the employee is assigned as project leader
     Then the assignment fails
