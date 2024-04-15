@@ -8,6 +8,5 @@ Background:
 Scenario: Project Leader generates report
     When the Project Leader generates the report.
     Then the Project Leader is prompted to choose a location to save the report
-    And an excel file is created and saved to the disk with the project data
+    And a csv file is created and saved to the disk with the project data
     And the Project Leader gets a notification that the report is generated
-

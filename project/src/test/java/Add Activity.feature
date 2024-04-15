@@ -10,10 +10,10 @@ Scenario: Add activity ending in week 7
     Then An activity is created
     And The activity ends in week 7
 
-Scenario: Add activity ending in week 4
+Scenario: Add activity starting in week 4
     When the employee adds an activity with an end date in week 4
     Then An activity is created
-    And The activity ends in week 4
+    And The activity starts in week 4
 
 Scenario: Add reserved activity for 16/9
     When the employee adds a reserved activity for the day 16/9
