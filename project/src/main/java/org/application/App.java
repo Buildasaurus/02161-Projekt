@@ -1,7 +1,6 @@
 package org.application;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.application.Controllers.IController;
@@ -10,7 +9,7 @@ import org.application.Views.MainView;
 
 import java.io.IOException;
 
-public class System extends Application {
+public class App extends Application {
     private static IController controller;
     private static Scene scene;
 
