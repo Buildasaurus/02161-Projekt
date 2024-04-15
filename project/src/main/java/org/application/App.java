@@ -10,7 +10,6 @@ import org.application.Views.MainView;
 import java.io.IOException;
 
 public class App extends Application {
-    private static IController controller;
     private static Scene scene;
 
     @Override
@@ -27,5 +26,10 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static void setRoot(IController newController)
+    {
+        scene.setRoot(newController.getView());
     }
 }

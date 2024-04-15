@@ -7,18 +7,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.application.Controllers.LoginController;
 import org.application.Controllers.MainController;
 
 import java.awt.color.ICC_ColorSpace;
 
-public class MainView extends StackPane {
-    MainController controller;
+public class LoginView extends StackPane {
+    LoginController controller;
 
-    public MainView()
+    public LoginView()
     {
     }
 
-    public void setController(MainController controller) {
+    public void setController(LoginController controller) {
         this.controller = controller;
         initialize();
     }
@@ -27,21 +28,17 @@ public class MainView extends StackPane {
     {
 
         // title
-        Text title = new Text("!AMaZing ApPliCation!");
+        Text title = new Text("!Username!");
         title.setFill(Color.BLACK);
         setAlignment(title, Pos.TOP_CENTER);
         getChildren().add(title);
 
-        // buttons
-        Button playButton = new Button("Login");
-        playButton.setOnAction(controller::handleButton);
-
-        // Alignment
-        VBox vbox = new VBox(0.05);
-        vbox.getChildren().addAll(playButton);
-        vbox.setStyle("-fx-alignment: center");
-        getChildren().add(vbox);
-
+        // input text
+        // TODO make field for login - username
+        Text atitle = new Text("Your username");
+        atitle.setFill(Color.GRAY);
+        setAlignment(atitle, Pos.CENTER);
+        getChildren().add(atitle);
     }
 
 }
