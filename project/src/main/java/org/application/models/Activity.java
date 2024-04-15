@@ -18,4 +18,9 @@ public abstract class Activity {
     public void removeEmployee(String employeeID) {
         assignedEmployees.remove(employeeID);
     }
+
+    @Override
+    public String toString() {
+        return name + " " + assignedEmployees;
+    }
 }

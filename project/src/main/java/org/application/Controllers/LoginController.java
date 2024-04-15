@@ -3,7 +3,7 @@ package org.application.Controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import org.application.App;
-import org.application.Models.MainModel;
+import org.application.Models.SystemModel;
 import org.application.Views.EmployeeView;
 
 
@@ -23,7 +23,7 @@ public class LoginController implements IController {
     {
         System.out.println("Logging in");
         EmployeeView newView = new EmployeeView();
-        EmployeeController controller = new EmployeeController(newView, MainModel.getEmployee("404040"));
+        EmployeeController controller = new EmployeeController(newView, SystemModel.getEmployee("404040"));
         newView.setController(controller);
 
         App.setRoot(controller);
