@@ -1,14 +1,17 @@
 package org.application.Models;
+import java.util.List;
 
 public abstract class Activity {
     String name;
-    public void assignEmployee(String employeeID)
-    {
-        //TODO: Implement this
+    List<String> assignedEmployees;
+
+    public void assignEmployee(String employeeID) {
+        if (!assignedEmployees.contains(employeeID)) {
+            assignedEmployees.add(employeeID);
+        }
     }
 
-    public void removeEmployee(String employeeID)
-    {
-        //TODO: Implement this
+    public void removeEmployee(String employeeID) {
+        assignedEmployees.remove(employeeID);
     }
 }
