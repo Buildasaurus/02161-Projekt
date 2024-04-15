@@ -19,11 +19,16 @@ public class LoginController implements IController {
         return view;
     }
 
-    public void handleLogin(ActionEvent event)
-    {
+    public void handleLogin(ActionEvent event, String userName) {
+        if (SystemModel.getEmployee(userName) == null)
+        {
+            System.out.println("User not found");
+            return;
+        }
+
         System.out.println("Logging in");
         EmployeeView newView = new EmployeeView();
-        EmployeeController controller = new EmployeeController(newView, SystemModel.getEmployee("404040"));
+        EmployeeController controller = new EmployeeController(newView, SystemModel.getEmployee(userName));
         newView.setController(controller);
 
         App.setRoot(controller);

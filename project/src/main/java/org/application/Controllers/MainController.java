@@ -1,7 +1,6 @@
 package org.application.Controllers;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import org.application.App;

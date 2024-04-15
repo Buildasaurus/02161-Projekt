@@ -1,6 +1,5 @@
 module org.application {
-    requires javafx.controls;
-    requires javafx.fxml;
+    requires transitive javafx.controls;
     requires java.desktop;
 
     opens org.application.Controllers to javafx.fxml;
