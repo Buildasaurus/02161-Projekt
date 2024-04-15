@@ -44,19 +44,6 @@
             <version>7.16.1</version>
             <scope>test</scope>
         </dependency>
-        <!-- these dependencies aren't really used 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency> -->
     </dependencies>
 
     <build>
