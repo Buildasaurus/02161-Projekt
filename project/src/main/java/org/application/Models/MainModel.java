@@ -1,9 +1,11 @@
 package org.application.Models;
 
+import org.application.Controllers.EmployeeController;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class System { // should be public static class, but java is stupid
+public class MainModel { // should be public static class, but java is stupid
     //STATIC class!
     public static List<Project> projects = new ArrayList<Project>();
     public static List<Employee> employees = new ArrayList<>();
@@ -22,6 +24,15 @@ public class System { // should be public static class, but java is stupid
         // - This is though an extra feature. Not high priority
     }
 
+    public static Employee getEmployee(String id) {
+        for (Employee employee : employees) {
+            if (employee.getID().equals(id)) {
+                return employee;
+            }
+        }
+        return null;
+    }
+    // TODO : Husk at lave assert statements hvis der er preconditions for testing.
     public static void removeEmployee(Employee employee) {
         employees.remove(employee);
         //TODO : Make this also save the employee to the file

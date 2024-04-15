@@ -11,6 +11,7 @@ public class Employee {
         this.ID = ID;
     }
 
+
     public void addActivity(Activity activity){
         activities.add(activity);
     }
@@ -26,5 +27,13 @@ public class Employee {
 
     public void deleteTimeBlock(TimeBlock timeBlock){
         timeBlocks.remove(timeBlock);
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public String getID() {
+        return ID;
     }
 }
