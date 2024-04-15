@@ -5,4 +5,11 @@ public class TimeBlock {
     Date endTime;
     Activity activity;
     Employee employee;
+
+    public TimeBlock(Date startTime, Date endTime, Activity activity, Employee employee) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.activity = activity;
+        this.employee = employee;
+    }
 }
