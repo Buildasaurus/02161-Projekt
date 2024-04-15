@@ -3,13 +3,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProjectActivity {
+public class ProjectActivity extends Activity{
     Date startTime;
     Date endTime;
     Date expectedDuration;
     List<TimeBlock> timeBlocks = new ArrayList<>();
 
-    public ProjectActivity(Date startTime, Date endTime, Date expectedDuration) {
+    public ProjectActivity(Date startTime, Date endTime, Date expectedDuration, String name) {
+        super(name);
         this.startTime = startTime;
         this.endTime = endTime;
         this.expectedDuration = expectedDuration;
