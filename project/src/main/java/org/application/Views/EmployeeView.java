@@ -12,14 +12,15 @@ import org.application.Models.Activity;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class EmployeeView extends StackPane {
+public class EmployeeView extends StackPane
+{
     EmployeeController controller;
 
     public EmployeeView()
-    {
-    }
+    {}
 
-    public void setController(EmployeeController controller) {
+    public void setController(EmployeeController controller)
+    {
         this.controller = controller;
         initialize();
     }
@@ -36,16 +37,18 @@ public class EmployeeView extends StackPane {
         System.out.println("Activities: " + activities);
 
         VBox activitiesVBox = new VBox();
-        for (Activity activity : activities) {
+        for (Activity activity : activities)
+        {
             ActivityView view = new ActivityView(activity);
             activitiesVBox.getChildren().add(view);
         }
         activitiesVBox.setAlignment(Pos.CENTER);
 
         getChildren().add(activitiesVBox);
-
     }
-    public void handleLogin(ActionEvent event){
+
+    public void handleLogin(ActionEvent event)
+    {
         System.out.println("Login successfull");
     }
 }
