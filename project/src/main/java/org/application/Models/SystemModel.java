@@ -1,7 +1,6 @@
 package org.application.Models;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class SystemModel { // should be public static class, but java is stupid
         //Loading employees
         Employee e = new Employee("404040");
         Activity activity = new ReservedActivity(new Date(1,1,1), new Date(1,1,1), "MyActivity");
+        activity.assignEmployee(e);
         e.addActivity(activity);
         employees.add(e);
 
