@@ -29,24 +29,28 @@ public class LoginView extends StackPane {
         setAlignment(title, Pos.TOP_CENTER);
         getChildren().add(title);
 
-        // input text
-        // TODO make field for login - username
+        VBox centerContainer = new VBox();
+        centerContainer.setAlignment(Pos.CENTER);
+        // TITLE2
         Text atitle = new Text("Your username");
         atitle.setFill(Color.GRAY);
-        setAlignment(atitle, Pos.CENTER);
-        getChildren().add(atitle);
+        centerContainer.getChildren().add(atitle);
 
-        Button loginButton = new Button("Login");
-        loginButton.setOnAction(e -> controller.handleLogin(e, getUsername()));
-        VBox vbox = new VBox(0.05);
-        vbox.getChildren().addAll(loginButton);
-        vbox.setStyle("-fx-alignment: center");
-        getChildren().add(vbox);
-
-        //Textbox
+        //Username input boxx
         userName = new TextField();
         userName.setPromptText("Username");
-        vbox.getChildren().add(userName);
+        centerContainer.getChildren().add(userName);
+
+        //Login button
+        Button loginButton = new Button("Login");
+        loginButton.setOnAction(e -> controller.handleLogin(e, getUsername()));
+        centerContainer.getChildren().add(loginButton);
+
+
+        //Add center container to view
+        getChildren().add(centerContainer);
+
+
     }
 
     public String getUsername() {
