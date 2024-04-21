@@ -1,18 +1,14 @@
 package org.application.Views;
 
-import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import org.application.Controllers.ActivityController;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.Activity;
-
+import org.application.Models.TimeBlock;
 import java.awt.event.ActionEvent;
-import java.util.List;
 
-public class EmployeeView extends StackPane
+public class EmployeeView extends VBox
 {
     EmployeeController controller;
 
@@ -27,24 +23,25 @@ public class EmployeeView extends StackPane
 
     private void initialize()
     {
-
-        // title
-        Text title = new Text("!Your Activities!");
-        title.setFill(Color.BLACK);
-        setAlignment(title, Pos.TOP_CENTER);
+        // Timeblocks
+        Text title = new Text("!Your Timeblocks!");
         getChildren().add(title);
-        List<Activity> activities = controller.getActivities();
-        System.out.println("Activities: " + activities);
 
-        VBox activitiesVBox = new VBox();
-        for (Activity activity : activities)
+        for (TimeBlock block : controller.getEmployee().getTimeBlocks())
         {
-            ActivityView view = new ActivityView(activity);
-            activitiesVBox.getChildren().add(view);
+            TimeBlockView timeBlockView = new TimeBlockView(block);
+            getChildren().add(timeBlockView);
         }
-        activitiesVBox.setAlignment(Pos.CENTER);
 
-        getChildren().add(activitiesVBox);
+        // All (May not be assigned to timeblock)
+        title = new Text("!All activites!");
+        getChildren().add(title);
+
+        for (Activity activity : controller.getEmployee().getActivities())
+        {
+            ActivityView activityView = new ActivityView(activity);
+            getChildren().add(activityView);
+        }
     }
 
     public void handleLogin(ActionEvent event)

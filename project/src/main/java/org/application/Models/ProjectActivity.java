@@ -4,16 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 public class ProjectActivity extends Activity{
-    Date startTime;
-    Date endTime;
-    Date expectedDuration;
+    Date startWeek;
+    Date endWeek;
+    Time expectedDuration;
     List<TimeBlock> timeBlocks = new ArrayList<>();
 
-    public ProjectActivity(Date startTime, Date endTime, Date expectedDuration, String name) {
+    public ProjectActivity(Date startWeek, Date endWeek, Time time, String name) {
         super(name);
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.expectedDuration = expectedDuration;
+        this.startWeek = startWeek;
+        this.endWeek = endWeek;
+        this.expectedDuration = time;
     }
 
     public void addTimeBlock(TimeBlock timeBlock){
@@ -32,6 +32,10 @@ public class ProjectActivity extends Activity{
 
     public void removeTimeBlock(TimeBlock timeBlock){
         timeBlocks.remove(timeBlock);
+    }
 
+    public List<TimeBlock> getTimeBlocks()
+    {
+        return timeBlocks;
     }
 }

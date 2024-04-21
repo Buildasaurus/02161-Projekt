@@ -1,11 +1,7 @@
 package org.application.Controllers;
 
 import javafx.scene.Parent;
-import org.application.Models.Activity;
 import org.application.Models.Employee;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EmployeeController implements IController {
     Parent view;
@@ -20,7 +16,7 @@ public class EmployeeController implements IController {
         return view;
     }
 
-    public List<Activity> getActivities() {
-        return employee.getActivities();
+    public Employee getEmployee() {
+        return employee;
     }
 }

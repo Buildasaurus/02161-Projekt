@@ -12,8 +12,16 @@ public class SystemModel { // should be public static class, but java is stupid
     static {
         //Loading employees
         Employee e = new Employee("404040");
-        Activity activity = new ReservedActivity(new Date(1,1,1), new Date(1,1,1), "MyActivity");
+        ReservedActivity activity = new ReservedActivity(new Date(1,4,1), new Date(1,4,1), "Holiday");
         activity.assignEmployee(e);
+
+        ProjectActivity projectActivity = new ProjectActivity(new Date(1,1,1), new Date(1,2,1), new Time(20) , "Testing");
+        projectActivity.assignEmployee(e);
+        e.createTimeBlock(projectActivity, new Date(1,1,1,8,0), new Date(1,1,1,12,0));
+
+        projectActivity = new ProjectActivity(new Date(1,3,1), new Date(1,3,1), new Time(1), "codeRefactor");
+        projectActivity.assignEmployee(e);
+
         e.addActivity(activity);
         employees.add(e);
 

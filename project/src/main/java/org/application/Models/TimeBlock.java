@@ -12,4 +12,19 @@ public class TimeBlock {
         this.activity = activity;
         this.employee = employee;
     }
+
+    public Activity getActivity()
+    {
+        return activity;
+    }
+
+    public Date getStartTime()
+    {
+        return startTime;
+    }
+
+    public Date getEndTime()
+    {
+        return endTime;
+    }
 }
