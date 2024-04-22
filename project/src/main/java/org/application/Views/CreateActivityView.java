@@ -49,7 +49,7 @@ public class CreateActivityView extends VBox
         getChildren().add(halfHours);
 
         // Choose the relevant project
-        Project chosenProject = SystemModel.projects.get(0);
+        Project chosenProject = SystemModel.getProjects().get(0);
         //TODO - Create input fields to enter relevant stuff for new activities.
 
         //Create button
