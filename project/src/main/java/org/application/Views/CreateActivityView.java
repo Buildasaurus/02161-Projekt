@@ -10,6 +10,14 @@ import javafx.scene.text.Text;
 import org.application.Controllers.ActivityController;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.Activity;
+import org.application.Models.ProjectActivity;
+import org.application.Models.Time;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class CreateActivityView extends VBox
 {
@@ -25,7 +33,7 @@ public class CreateActivityView extends VBox
     private void initialize()
     {
         // title
-        Text title = new Text("Choose name and other relevant data");
+        Text title = new Text("Choose name and other relevant data for projectactivity");
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
@@ -41,11 +49,37 @@ public class CreateActivityView extends VBox
         endDate.setPromptText("End Date");
         getChildren().add(endDate);
 
+        TextField halfHours = new TextField("expected half-hours");
+        getChildren().add(halfHours);
+
         //TODO - Create input fields to enter relevant stuff for new activities.
 
         //Create button
         Button completeButton = new Button("Complete");
-        completeButton.setOnAction(controller::handleCompleteActivity);
+        completeButton.setOnAction(e -> controller.handleCompleteActivity(e,
+                new ProjectActivity(convertDatePickerToCalender(startDate),
+                        convertDatePickerToCalender(endDate),
+                        new Time(Integer.parseInt(halfHours.getText())),
+                        name.getText())));
         getChildren().add(completeButton);
+    }
+
+    public GregorianCalendar convertDatePickerToCalender(DatePicker date)
+    {
+        // Assume datePicker is your DatePicker object
+        LocalDate localDate = date.getValue();
+
+        // Convert LocalDate to Instant
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Instant instant = localDate.atStartOfDay(defaultZoneId).toInstant();
+
+        // Convert Instant to java.util.Date
+        Date instantdate = Date.from(instant);
+
+        // Convert java.util.Date to java.util.Calendar
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(instantdate);
+        return calendar;
+
     }
 }
