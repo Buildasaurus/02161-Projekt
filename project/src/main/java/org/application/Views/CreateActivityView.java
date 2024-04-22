@@ -12,10 +12,10 @@ import org.application.Models.Activity;
 public class CreateActivityView extends VBox
 {
     EmployeeController controller;
-    Activity activity;
 
-    public CreateActivityView()
+    public CreateActivityView(EmployeeController controller)
     {
+        this.controller = controller;
         initialize();
     }
 
@@ -32,5 +32,6 @@ public class CreateActivityView extends VBox
         //Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(controller::handleCompleteActivity);
+        getChildren().add(completeButton);
     }
 }
