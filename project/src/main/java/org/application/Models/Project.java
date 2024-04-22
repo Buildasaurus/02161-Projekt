@@ -1,28 +1,28 @@
 package org.application.Models;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Project {
     String name;
     int projectID;
-    Date endWeek;
-    Date startWeek;
+    GregorianCalendar startWeek;
+    GregorianCalendar endWeek;
     String projectLeaderID;
     List<Activity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, Date endWeek, Date startWeek, String projectLeaderID) {
+    public Project(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek, String projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
 
-    public Project(int projectID, String name, Date endWeek, Date startWeek) {
+    public Project(int projectID, String name,GregorianCalendar startWeek, GregorianCalendar endWeek) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = "PROJECT LEADER NOT SET";
     }
 
-    public void initialize(int projectID, String name, Date endWeek, Date startWeek) {
+    public void initialize(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek) {
         this.projectID = projectID;
         this.name = name;
         this.endWeek = endWeek;
@@ -44,6 +44,6 @@ public class Project {
     }
 
     public void assignProjectLeader(String projectLeaderID) {
-        projectLeaderID = projectLeaderID;
+        this.projectLeaderID = projectLeaderID;
     }
 }
