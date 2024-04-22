@@ -1,12 +1,12 @@
 package org.application.Models;
-import java.util.Date;
+import java.util.GregorianCalendar;
 public class TimeBlock {
-    Date startTime;
-    Date endTime;
+    GregorianCalendar startTime;
+    GregorianCalendar endTime;
     Activity activity;
     Employee employee;
 
-    public TimeBlock(Date startTime, Date endTime, Activity activity, Employee employee) {
+    public TimeBlock(GregorianCalendar startTime, GregorianCalendar endTime, Activity activity, Employee employee) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.activity = activity;
@@ -18,12 +18,12 @@ public class TimeBlock {
         return activity;
     }
 
-    public Date getStartTime()
+    public GregorianCalendar getStartTime()
     {
         return startTime;
     }
 
-    public Date getEndTime()
+    public GregorianCalendar getEndTime()
     {
         return endTime;
     }

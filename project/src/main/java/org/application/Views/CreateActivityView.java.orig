@@ -41,13 +41,16 @@ public class CreateActivityView extends VBox {
         endDate.setPromptText("End Date");
         getChildren().add(endDate);
 
+<<<<<<< HEAD
         // TODO - Create input fields to enter relevant stuff for new activities.
+=======
         TextField halfHours = new TextField("expected half-hours");
         getChildren().add(halfHours);
 
         // Choose the relevant project
         Project chosenProject = SystemModel.getProjects().get(0);
         //TODO - Create input fields to enter relevant stuff for new activities.
+>>>>>>> 302007da51a757b28664a673131744cffee6395f
 
         // Create button
         Button completeButton = new Button("Complete");

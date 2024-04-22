@@ -1,19 +1,28 @@
 package org.application.Models;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ProjectActivity extends Activity{
-    Date startWeek;
-    Date endWeek;
+    GregorianCalendar startWeek;
+    GregorianCalendar endWeek;
     Time expectedDuration;
     List<TimeBlock> timeBlocks = new ArrayList<>();
+    Project assignedProject;
 
-    public ProjectActivity(Date startWeek, Date endWeek, Time time, String name) {
+    /**
+     * Create a new projectActivity
+     * @param startWeek The week to start in, eg week 3
+     * @param endWeek The end week, can be week 3 as well, or week 5
+     * @param time The amount of half hours that the activity is expected to take.
+     * @param name The name of the activity
+     */
+    public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, Time time, String name, Project assignedProject) {
         super(name);
         this.startWeek = startWeek;
         this.endWeek = endWeek;
         this.expectedDuration = time;
+        this.assignedProject = assignedProject;
     }
 
     public void addTimeBlock(TimeBlock timeBlock){

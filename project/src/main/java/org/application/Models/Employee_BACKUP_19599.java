@@ -29,7 +29,12 @@ public class Employee {
         }
     }
 
-    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startDate, GregorianCalendar endDate) {
+<<<<<<< HEAD
+    public void createTimeBlock(ProjectActivity activity, Date startDate, Date endDate) {
+=======
+    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startDate, GregorianCalendar endDate)
+    {
+>>>>>>> 302007da51a757b28664a673131744cffee6395f
         TimeBlock timeBlock = new TimeBlock(startDate, endDate, activity, this);
         timeBlocks.add(timeBlock);
         activity.addTimeBlock(timeBlock);

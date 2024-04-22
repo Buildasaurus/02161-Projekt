@@ -1,53 +1,65 @@
 package org.application.Models;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
-public class Employee {
+public class Employee
+{
     String ID;
     List<Activity> activities = new ArrayList<>();
     List<TimeBlock> timeBlocks = new ArrayList<>();
 
-    public Employee(String ID) {
+    public Employee(String ID)
+    {
         this.ID = ID;
     }
 
-    public void addActivity(Activity activity) {
-        if (!activities.contains(activity)) {
+
+    public void addActivity(Activity activity)
+    {
+        if (!activities.contains(activity))
+        {
             activities.add(activity);
             // ORDER is important, to avoid infinite calling
             activity.assignEmployee(ID);
         }
     }
 
-    public void removeActivity(Activity activity) {
-        if (activities.contains(activity)) {
+    public void removeActivity(Activity activity)
+    {
+        if (activities.contains(activity))
+        {
             activities.remove(activity);
             // ORDER is important, to avoid infinite calling
             activity.removeEmployee(ID);
         }
     }
 
-    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startDate, GregorianCalendar endDate) {
+    public void createTimeBlock(ProjectActivity activity, Date startDate, Date endDate)
+    {
         TimeBlock timeBlock = new TimeBlock(startDate, endDate, activity, this);
         timeBlocks.add(timeBlock);
         activity.addTimeBlock(timeBlock);
     }
 
-    public void deleteTimeBlock(TimeBlock timeBlock) {
+    public void deleteTimeBlock(TimeBlock timeBlock)
+    {
         timeBlocks.remove(timeBlock);
     }
 
-    public List<Activity> getActivities() {
+    public List<Activity> getActivities()
+    {
         return activities;
     }
 
-    public List<TimeBlock> getTimeBlocks() {
+    public List<TimeBlock> getTimeBlocks()
+    {
         return timeBlocks;
     }
 
-    public String getID() {
+    public String getID()
+    {
         return ID;
     }
 }

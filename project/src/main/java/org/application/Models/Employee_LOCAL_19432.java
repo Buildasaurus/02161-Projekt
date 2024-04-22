@@ -1,7 +1,7 @@
 package org.application.Models;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
 public class Employee {
@@ -29,7 +29,7 @@ public class Employee {
         }
     }
 
-    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startDate, GregorianCalendar endDate) {
+    public void createTimeBlock(ProjectActivity activity, Date startDate, Date endDate) {
         TimeBlock timeBlock = new TimeBlock(startDate, endDate, activity, this);
         timeBlocks.add(timeBlock);
         activity.addTimeBlock(timeBlock);

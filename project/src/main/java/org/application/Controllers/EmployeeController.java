@@ -3,6 +3,7 @@ package org.application.Controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import org.application.App;
+import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Views.CreateActivityView;
 import org.application.Views.EmployeeView;
@@ -35,8 +36,10 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleCompleteActivity(ActionEvent event) {
-        System.out.println("Handling complete activity");
+    public void handleCompleteActivity(ActionEvent event, Activity activity) {
+        System.out.println("Handling complete activity. Activity made: " + activity);
+
+        //TODO Do something with the activity.
         EmployeeView eView = new EmployeeView();
         view = eView;
         eView.setController(this);
