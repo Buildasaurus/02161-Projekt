@@ -14,8 +14,7 @@ import java.awt.color.ICC_ColorSpace;
 public class MainView extends StackPane {
     MainController controller;
 
-    public MainView()
-    {
+    public MainView() {
     }
 
     public void setController(MainController controller) {
@@ -23,8 +22,7 @@ public class MainView extends StackPane {
         initialize();
     }
 
-    private void initialize()
-    {
+    private void initialize() {
 
         // title
         Text title = new Text("!AMaZing ApPliCation!");

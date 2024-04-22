@@ -3,7 +3,8 @@ Feature: Add employee to activity
   Actors: project leader, employee
 
 Background:
-    Given an activity exists
+    Given a project exists
+    And an activity exists
     And an employee exists
     And a timeslot is selected
 

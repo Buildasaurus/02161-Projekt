@@ -11,19 +11,15 @@ import org.application.Controllers.ActivityController;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.Activity;
 
-public class CreateActivityView extends VBox
-{
+public class CreateActivityView extends VBox {
     EmployeeController controller;
 
-    public CreateActivityView(EmployeeController controller)
-    {
+    public CreateActivityView(EmployeeController controller) {
         this.controller = controller;
         initialize();
     }
 
-
-    private void initialize()
-    {
+    private void initialize() {
         // title
         Text title = new Text("Choose name and other relevant data");
         title.setFill(Color.BLACK);
@@ -41,9 +37,9 @@ public class CreateActivityView extends VBox
         endDate.setPromptText("End Date");
         getChildren().add(endDate);
 
-        //TODO - Create input fields to enter relevant stuff for new activities.
+        // TODO - Create input fields to enter relevant stuff for new activities.
 
-        //Create button
+        // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(controller::handleCompleteActivity);
         getChildren().add(completeButton);
