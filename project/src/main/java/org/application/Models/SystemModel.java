@@ -6,8 +6,8 @@ import java.util.List;
 
 public class SystemModel { // should be public static class, but java is stupid
     //STATIC class!
-    public static List<Project> projects = new ArrayList<Project>();
-    public static List<Employee> employees = new ArrayList<>();
+    private static List<Project> projects = new ArrayList<Project>();
+    private static List<Employee> employees = new ArrayList<>();
 
     static {
         //Loading employees
@@ -57,5 +57,13 @@ public class SystemModel { // should be public static class, but java is stupid
 
     public static void createNewProject(Project project) {
         projects.add(project);
+    }
+
+    public static List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public static List<Project> getProjects() {
+        return projects;
     }
 }
