@@ -8,5 +8,4 @@ public class ReservedActivity extends Activity{
         this.startDay = startDay;
         this.endDay = endDay;
     }
-
 }

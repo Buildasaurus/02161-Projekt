@@ -11,7 +11,7 @@ public class Project {
     GregorianCalendar endWeek;
     GregorianCalendar startWeek;
     String projectLeaderID;
-    List<Activity> activities = new ArrayList<>();
+    List<ProjectActivity> activities = new ArrayList<>();
 
     public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek, String projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
@@ -35,13 +35,19 @@ public class Project {
         //TODO implement this
     }
 
-    public void addActivity(Activity activity) {
+    public void addActivity(ProjectActivity activity) {
         activities.add(activity);
     }
-
-
-    public void deleteActivity(Activity activity) {
+    public void removeActivity(ProjectActivity activity)
+    {
         activities.remove(activity);
+    }
+
+    public void deleteActivity(ProjectActivity activity) {
+        if (activities.contains(activity)) {
+            removeActivity(activity);
+            activity.delete();
+        }
     }
 
     public void assignProjectLeader(String projectLeaderID) {

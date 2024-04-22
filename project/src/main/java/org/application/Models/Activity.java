@@ -5,11 +5,10 @@ import java.util.List;
 
 public abstract class Activity {
     String name;
-    List<String> assignedEmployees = new ArrayList<>();
+    List<Employee> assignedEmployees = new ArrayList<>();
 
     public Activity(String name) {
         this.name = name;
-
     }
 
     public void assignEmployee(String employeeID) {
@@ -20,8 +19,8 @@ public abstract class Activity {
     }
 
     public void assignEmployee(Employee employee) {
-        if (!assignedEmployees.contains(employee.getID())) {
-            assignedEmployees.add(employee.getID());
+        if (!assignedEmployees.contains(employee)) {
+            assignedEmployees.add(employee);
             employee.addActivity(this);
         }
     }

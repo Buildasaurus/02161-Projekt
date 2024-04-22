@@ -40,6 +40,7 @@ public class EmployeeController implements IController {
         System.out.println("Handling complete activity. Activity made: " + activity);
 
         //TODO Do something with the activity.
+        employee.addActivity(activity);
         EmployeeView eView = new EmployeeView();
         view = eView;
         eView.setController(this);
