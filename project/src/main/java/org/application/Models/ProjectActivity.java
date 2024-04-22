@@ -1,15 +1,15 @@
 package org.application.Models;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.util.List;
 
 public class ProjectActivity extends Activity{
-    GregorianCalendar startWeek;
-    GregorianCalendar endWeek;
+    Calendar startWeek;
+    Calendar endWeek;
     Time expectedDuration;
     List<TimeBlock> timeBlocks = new ArrayList<>();
 
-    public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, Time time, String name) {
+    public ProjectActivity(Calendar startWeek, Calendar endWeek, Time time, String name) {
         super(name);
         this.startWeek = startWeek;
         this.endWeek = endWeek;
