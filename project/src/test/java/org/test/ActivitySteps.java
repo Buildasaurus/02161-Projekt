@@ -1,5 +1,16 @@
 package org.test;
 
+import static org.junit.Assert.assertNotEquals;
+
+import java.util.Date;
+import java.util.List;
+
+import org.application.Models.Activity;
+import org.application.Models.Employee;
+import org.application.Models.ProjectActivity;
+import org.application.Models.SystemModel;
+import org.application.Models.Time;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,7 +21,7 @@ import io.cucumber.java.en.When;
 public class ActivitySteps {
     @Then("an activity is created")
     public void anActivityIsCreated() {
-        // Write code here that turns the phrase above into concrete actions  
+        // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
@@ -52,6 +63,12 @@ public class ActivitySteps {
 
     @Given("an activity exists")
     public void anActivityExists() {
+        /*
+        Date startWeek = new Date(30681);
+        Date endWeek = new Date(44813);
+        Time time = new Time(301);
+        ProjectActivity testActivity = new ProjectActivity(startWeek,endWeek,time,"Test-aktivitet");
+        */
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
@@ -113,8 +130,9 @@ public class ActivitySteps {
     
     @Then("the employee has the reserved activity in their schedule")
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        List<Employee> employeeList = SystemModel.getEmployees();
+        Employee testEmployee = employeeList.get(0);
+        assertNotEquals(testEmployee.getActivities().size(),0);
     }
 
     @Given("{int} activity exists")
@@ -136,8 +154,8 @@ public class ActivitySteps {
     }
 
     @Given("an employee exists")
-    public void anEmployeeExists() {    
-        // Write code here that turns the phrase above into concrete actions  
+    public void anEmployeeExists() {
+        // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 }

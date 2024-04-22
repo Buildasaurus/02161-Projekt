@@ -15,19 +15,15 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class CreateActivityView extends VBox
-{
+public class CreateActivityView extends VBox {
     EmployeeController controller;
 
-    public CreateActivityView(EmployeeController controller)
-    {
+    public CreateActivityView(EmployeeController controller) {
         this.controller = controller;
         initialize();
     }
 
-
-    private void initialize()
-    {
+    private void initialize() {
         // title
         Text title = new Text("Choose name and other relevant data for projectactivity");
         title.setFill(Color.BLACK);
@@ -53,7 +49,7 @@ public class CreateActivityView extends VBox
         Project chosenProject = SystemModel.getProjects().get(0);
         //TODO - Create input fields to enter relevant stuff for new activities.
 
-        //Create button
+        // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> controller.handleCompleteActivity(e,
                 new ProjectActivity(convertDatePickerToCalender(startDate),
