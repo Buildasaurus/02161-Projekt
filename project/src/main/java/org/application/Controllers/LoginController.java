@@ -28,9 +28,7 @@ public class LoginController implements IController {
         }
 
         System.out.println("Logging in");
-        EmployeeView newView = new EmployeeView();
-        EmployeeController controller = new EmployeeController(newView, SystemModel.getEmployee(userName));
-        newView.setController(controller);
+        EmployeeController controller = new EmployeeController(SystemModel.getEmployee(userName));
 
         App.setRoot(controller);
     }

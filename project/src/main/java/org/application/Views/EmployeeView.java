@@ -1,5 +1,6 @@
 package org.application.Views;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -23,6 +24,11 @@ public class EmployeeView extends VBox
 
     private void initialize()
     {
+        //Create activity button
+        Button createActivity = new Button("Create Activity");
+        createActivity.setOnAction(controller::handleOnCreateActivity);
+        getChildren().add(createActivity);
+
         // Timeblocks
         Text title = new Text("!Your Timeblocks!");
         getChildren().add(title);
