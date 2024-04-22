@@ -27,8 +27,7 @@ public class App extends Application {
         launch();
     }
 
-    public static void setRoot(IController newController)
-    {
+    public static void setRoot(IController newController) {
         scene.setRoot(newController.getView());
     }
 }
