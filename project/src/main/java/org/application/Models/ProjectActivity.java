@@ -9,11 +9,11 @@ public class ProjectActivity extends Activity{
     Time expectedDuration;
     List<TimeBlock> timeBlocks = new ArrayList<>();
 
-    public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, Time activityDuration, String name) {
+    public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, Time expectedDuration, String name) {
         super(name);
         this.startWeek = startWeek;
         this.endWeek = endWeek;
-        this.expectedDuration = time;
+        this.expectedDuration = expectedDuration;
     }
 
     public void addTimeBlock(TimeBlock timeBlock){
