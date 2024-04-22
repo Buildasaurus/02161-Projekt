@@ -45,7 +45,8 @@ public class CreateActivityView extends VBox
         endDate.setPromptText("End Date");
         getChildren().add(endDate);
 
-        TextField halfHours = new TextField("expected half-hours");
+        TextField halfHours = new TextField();
+        halfHours.setPromptText("expected half-hours as int eg. (2)");
         getChildren().add(halfHours);
 
         // Choose the relevant project
