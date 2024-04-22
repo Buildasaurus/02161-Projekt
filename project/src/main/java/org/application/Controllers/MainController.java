@@ -21,6 +21,11 @@ public class MainController implements IController{
         App.setRoot(controller);
     }
 
+    public void handleCreateEmployee(ActionEvent event)
+    {
+        System.out.println("CreateEmployee pressed");
+    }
+
     public Parent getView()
     {
         return view;
