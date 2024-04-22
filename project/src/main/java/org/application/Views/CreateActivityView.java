@@ -1,17 +1,13 @@
 package org.application.Views;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import org.application.Controllers.ActivityController;
 import org.application.Controllers.EmployeeController;
-import org.application.Models.Activity;
-import org.application.Models.ProjectActivity;
-import org.application.Models.Time;
+import org.application.Models.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -52,6 +48,8 @@ public class CreateActivityView extends VBox
         TextField halfHours = new TextField("expected half-hours");
         getChildren().add(halfHours);
 
+        // Choose the relevant project
+        Project chosenProject = SystemModel.projects.get(0);
         //TODO - Create input fields to enter relevant stuff for new activities.
 
         //Create button
@@ -60,7 +58,7 @@ public class CreateActivityView extends VBox
                 new ProjectActivity(convertDatePickerToCalender(startDate),
                         convertDatePickerToCalender(endDate),
                         new Time(Integer.parseInt(halfHours.getText())),
-                        name.getText())));
+                        name.getText(), chosenProject)));
         getChildren().add(completeButton);
     }
 

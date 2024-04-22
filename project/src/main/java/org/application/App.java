@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.application.Controllers.IController;
 import org.application.Controllers.MainController;
+import org.application.Models.SystemModel;
 import org.application.Views.MainView;
 
 import java.io.IOException;
