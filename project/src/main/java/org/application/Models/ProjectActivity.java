@@ -9,7 +9,7 @@ public class ProjectActivity extends Activity{
     Time expectedDuration;
     List<TimeBlock> timeBlocks = new ArrayList<>();
 
-    public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, Time time, String name) {
+    public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, Time activityDuration, String name) {
         super(name);
         this.startWeek = startWeek;
         this.endWeek = endWeek;
