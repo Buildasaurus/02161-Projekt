@@ -6,8 +6,15 @@ Feature: Deleting activities
 Background:
     Given an employee exists
 
-Scenario: Delete Activity
-    Given 1 activity exists
+Scenario: Delete Activity in project
+    Given a project exists
+    Given 1 activity exists in the project
+    When a user tries to delete an activity
+    Then the activity no longer exists
+
+Scenario: Delete Activity in employee
+    Given an employee exists
+    Given 1 activity exists in the employee
     When a user tries to delete an activity
     Then the activity no longer exists
 
