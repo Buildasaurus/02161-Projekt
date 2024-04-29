@@ -52,7 +52,7 @@ public class Project {
 
     public Activity getActivity(Activity searchActivity){
         for (Activity activity: activities){
-            if (searchActivity.name == activity.name){
+            if (searchActivity.getName() == activity.getName()){
                 return activity;
             }
         }

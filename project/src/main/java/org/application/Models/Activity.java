@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Activity {
-    String name;
-    List<Employee> assignedEmployees = new ArrayList<>();
+    protected String name;
+    protected List<Employee> assignedEmployees = new ArrayList<>();
 
     public Activity(String name) {
         this.name = name;
@@ -36,5 +36,13 @@ public abstract class Activity {
     @Override
     public String toString() {
         return name + " " + assignedEmployees;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Employee> getAssignedEmployees() {
+        return assignedEmployees;
     }
 }
