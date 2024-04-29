@@ -9,6 +9,9 @@ import org.application.Models.Buttons;
 import org.application.Models.TimeBlock;
 import java.awt.event.ActionEvent;
 
+/**
+ * A view to see and interact with data tied to a single employee
+ */
 public class EmployeeView extends VBox {
     EmployeeController controller;
 
