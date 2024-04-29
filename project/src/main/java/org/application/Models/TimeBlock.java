@@ -51,7 +51,7 @@ public class TimeBlock {
      * Calculates the duration of the current timeblock in half-hours, and returns it as an int
      * @return the duration of the timeblock in half-hours as int.
      */
-    public int getDuration(GregorianCalendar startTime, GregorianCalendar endTime)
+    public int getDuration()
     {
         long diffInMillis = endTime.getTimeInMillis() - startTime.getTimeInMillis();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
