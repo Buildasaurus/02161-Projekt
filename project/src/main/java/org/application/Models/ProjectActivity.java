@@ -64,8 +64,8 @@ public class ProjectActivity extends Activity{
         return startWeek;
     }
     
-    public GregorianCalendar getEndWeek() {
-        return endWeek;
+    public int getEndWeek() {
+        return endWeek.getWeekYear();
     }
 
     public Time getExpectedDuration() {

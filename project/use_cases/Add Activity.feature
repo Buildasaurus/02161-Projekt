@@ -6,8 +6,8 @@ Background:
     Given an employee exists
     Given a project exists
 
-Scenario: Add activity ending in week 7
-    When the employee adds an activity with an end date in week 7
+Scenario: Add activity starting in week 4 and ending in week 7
+    When the employee adds an activity with a start week 4 and end week 7
     Then an activity is created
     And the activity ends in week 7
 
