@@ -26,6 +26,8 @@ public class MainController implements IController{
     {
         System.out.println("CreateEmployee pressed");
         CreateEmployeeView newView = new CreateEmployeeView();
+        CreateEmployeeController controller = new CreateEmployeeController(newView);
+        newView.setController(controller);
         App.setRoot(newView);
     }
 
