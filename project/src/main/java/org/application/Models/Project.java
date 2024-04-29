@@ -13,17 +13,17 @@ public class Project {
     String projectLeaderID;
     List<ProjectActivity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, Date endWeek, Date startWeek, String projectLeaderID) {
+    public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek, GregorianCalendar projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
 
-    public Project(int projectID, String name, Date endWeek, Date startWeek) {
+    public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = "PROJECT LEADER NOT SET";
     }
 
-    public void initialize(int projectID, String name, Date endWeek, Date startWeek) {
+    public void initialize(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
         this.projectID = projectID;
         this.name = name;
         this.endWeek = endWeek;
