@@ -55,8 +55,14 @@ public class SystemModel { // should be public static class, but java is stupid
     }
 
     public static List<Employee> findAvailableEmployees() {
-        // TODO Implement this
-        return null;
+        List<Employee> availableEmployees = new ArrayList<>();
+        for (Employee employee : employees) {
+            if(employee.isAvailable())
+            {
+                availableEmployees.add(employee);
+            }
+        }
+        return availableEmployees;
     }
 
     public static void createNewProject(Project project) {

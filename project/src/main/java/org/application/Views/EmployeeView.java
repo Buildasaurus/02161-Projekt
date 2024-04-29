@@ -14,6 +14,8 @@ import org.application.Models.TimeBlock;
 public class EmployeeView extends VBox {
     EmployeeController controller;
 
+    //TODO implement project overview for all the projects where the employee is project leader
+
     public EmployeeView() {
     }
 

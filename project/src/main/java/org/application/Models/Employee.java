@@ -47,6 +47,12 @@ public class Employee {
         return timeBlocks;
     }
 
+    public boolean isAvailable()
+    {
+        // TODO - ask hubert if this is the right implementation?
+        return true;
+    }
+
     public String getID() {
         return ID;
     }
