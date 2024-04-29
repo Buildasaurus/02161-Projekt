@@ -6,7 +6,7 @@ import java.util.List;
 public class ProjectActivity extends Activity{
     private GregorianCalendar startWeek;
     private GregorianCalendar endWeek;
-    private int expectedDuration;
+    private Time expectedDuration;
     private List<TimeBlock> timeBlocks = new ArrayList<>();
     private Project assignedProject;
 
