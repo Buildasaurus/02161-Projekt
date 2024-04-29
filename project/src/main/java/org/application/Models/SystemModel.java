@@ -68,8 +68,6 @@ public class SystemModel { // should be public static class, but java is stupid
         return availableEmployees;
     }
 
-
-
     public static void createNewProject(Project project) {
         projects.add(project);
     }
