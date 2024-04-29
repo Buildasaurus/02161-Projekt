@@ -27,4 +27,13 @@ public class TimeBlock {
     {
         return endTime;
     }
+
+    /**
+     * Calculates the duration of the current timeblock, and returns it as an int
+     * @return the duration of the timeblock as int.
+     */
+    public int getDuration()
+    {
+
+    }
 }

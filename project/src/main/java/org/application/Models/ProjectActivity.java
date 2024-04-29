@@ -35,9 +35,11 @@ public class ProjectActivity extends Activity{
      * @return an integer of how many half-hours has passed for this activity
      */
     public int calculateCompletionTime(){
-        //Returns numbers of half hours
-        //TODO: Implement this
-        return 0;
+        int halfHours = 0;
+        for(TimeBlock timeBlock : timeBlocks){
+            halfHours += timeBlock.getDuration();
+        }
+        return halfHours;
     }
 
     public void removeTimeBlock(TimeBlock timeBlock){
