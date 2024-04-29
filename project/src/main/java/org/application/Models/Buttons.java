@@ -10,6 +10,10 @@ import org.application.Views.MainView;
  */
 public class Buttons
 {
+    /**
+     * A button that returns to the main menu.
+     * @return An instance of a button that when clicked returns to the main menu
+     */
     public static Button returnButton()
     {
         Button returnButton = new Button("Main menu");
