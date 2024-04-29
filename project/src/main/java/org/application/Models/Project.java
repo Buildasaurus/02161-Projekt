@@ -13,7 +13,7 @@ public class Project {
     String projectLeaderID;
     List<ProjectActivity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek, GregorianCalendar projectLeaderID) {
+    public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek, String projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
