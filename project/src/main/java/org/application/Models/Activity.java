@@ -7,8 +7,8 @@ import java.util.List;
 public abstract class Activity {
     protected String name;
     protected List<Employee> assignedEmployees = new ArrayList<>();
-    private GregorianCalendar startDate;
-    private GregorianCalendar endDate;
+    protected GregorianCalendar startDate;
+    protected GregorianCalendar endDate;
 
     public Activity(String name, GregorianCalendar startDate, GregorianCalendar endDate)
     {
