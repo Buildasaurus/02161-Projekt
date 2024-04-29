@@ -68,13 +68,13 @@ public class ActivitySteps {
 
     @Then("a reserved activity is created")
     public void aReservedActivityIsCreated() {
-        assertNotNull(employee.getActivity(reservedActivity));
+        assertNotNull(employee.getActivity("test-activity"));
     }
 
     @Then("the activity ends in {int}\\/{int}")
-    public void theActivityEndsIn(Integer testDay, Integer testMonth) {
-        assertEquals(reservedActivity.getStartDate(), testDay);
-        assertEquals(reservedActivity.getEndDate(), testMonth);
+    public void theActivityEndsIn(int testDay, int testMonth) {
+        assertEquals(reservedActivity.getEndDate().get(Calendar.DAY_OF_MONTH), testDay);
+        assertEquals(reservedActivity.getEndDate().get(Calendar.MONTH), testMonth);
     }
 
     @Given("an activity exists")
