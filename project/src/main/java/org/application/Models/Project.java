@@ -49,6 +49,16 @@ public class Project {
         }
     }
 
+
+    public Activity getActivity(Activity searchActivity){
+        for (Activity activity: activities){
+            if (searchActivity.name == activity.name){
+                return activity;
+            }
+        }
+        return null;
+    }
+
     public void assignProjectLeader(String projectLeaderID) {
         this.projectLeaderID = projectLeaderID;
     }

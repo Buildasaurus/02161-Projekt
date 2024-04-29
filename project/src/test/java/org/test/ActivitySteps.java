@@ -1,9 +1,13 @@
 package org.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 
+import java.time.temporal.WeekFields;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.application.Models.Activity;
 import org.application.Models.Employee;
@@ -30,23 +34,29 @@ public class ActivitySteps {
     Time expectedDuration;
     ReservedActivity sampleActivity;
     ReservedActivity reservedActivity;
+    private Locale userLocale = Locale.GERMANY;
+    private WeekFields weekNumbering = WeekFields.of(userLocale);
 
     @Then("an activity is created")
     public void anActivityIsCreated() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertNotNull(ProjectSteps.project.getActivity(projectActivity));
     }
 
     @Then("the activity ends in week {int}")
     public void theActivityEndsInWeek(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions  
-        throw new io.cucumber.java.PendingException();
+        GregorianCalendar givenend = new GregorianCalendar();
+        givenend.setWeekDate(2024, int1, 1);
+        assertEquals(givenend.getWeekYear(),projectActivity.getEndWeek());
     }
 
-    @When("the employee adds an activity with an end date in week {int}")
-    public void theEmployeeAddsAnActivityWithAnEndDateInWeek(Integer int1) {    
-        // Write code here that turns the phrase above into concrete actions  
-        throw new io.cucumber.java.PendingException();
+    @When("the employee adds an activity with a start week {int} and end week {int}")
+    public void theEmployeeAddsAnActivityWithAnEndDateInWeek(Integer start, Integer end) {
+        startWeek = new GregorianCalendar();
+        startWeek.setWeekDate(2024, start, 1);
+        endWeek = new GregorianCalendar();
+        endWeek.setWeekDate(2024, end, 1);
+        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);    
+        employee.addActivity(projectActivity);
     }
 
     @Then("the activity starts in week {int}")
