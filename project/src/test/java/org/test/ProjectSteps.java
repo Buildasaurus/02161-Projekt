@@ -82,7 +82,7 @@ public class ProjectSteps {
         // set endWeek to week 19.
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        project = new Project(1, "test-project", startWeek, endWeek);
+        // project = new Project(1, "test-project", startWeek, endWeek);
     }
 
     @Given("the project has a project leader")
