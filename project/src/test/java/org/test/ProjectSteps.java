@@ -2,7 +2,7 @@ package org.test;
 
 import java.util.List;
 
-import org.application.Models.Employee;
+//import org.application.Models.Employee;
 import org.application.Models.SystemModel;
 
 import static org.junit.Assert.*;
@@ -19,8 +19,6 @@ import io.cucumber.java.en.When;
 //TODO implement steps
 
 public class ProjectSteps {
-
-    
     @Given("a Project Leader is assigned to the project")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
         List<Project> projects = SystemModel.getProjects();

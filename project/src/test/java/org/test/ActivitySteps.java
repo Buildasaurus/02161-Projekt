@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.application.Models.Employee;
+import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 
@@ -23,7 +24,6 @@ import org.application.Models.ReservedActivity;
 //TODO implement steps
 
 public class ActivitySteps {
-    Employee employee;
     ProjectActivity projectActivity;
     ReservedActivity reservedActivity;
 
@@ -37,7 +37,8 @@ public class ActivitySteps {
     public void theActivityEndsInWeek(Integer int1) {
         GregorianCalendar givenend = new GregorianCalendar();
         givenend.setWeekDate(2024, int1, 1);
-        assertEquals(givenend.get(Calendar.WEEK_OF_YEAR),projectActivity.getEndDate().get(Calendar.WEEK_OF_YEAR));
+        ProjectActivity testActivity = SystemModel.getProjects().get(0).getActivities().get(0);
+        assertEquals(givenend.get(Calendar.WEEK_OF_YEAR),testActivity.getEndDate().get(Calendar.WEEK_OF_YEAR));
     }
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
@@ -48,8 +49,10 @@ public class ActivitySteps {
         endWeek.setWeekDate(2024, end, 1);
         // Set expected duration to 20 half hours
         int expectedDuration = 20;
-//        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);
-        employee.addActivity(projectActivity);
+        Project testProject = SystemModel.getProjects().get(0);
+        ProjectActivity testActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", testProject);
+        // Add the testActivity to the employee
+        SystemModel.getEmployees().get(0).addActivity(testActivity);
     }
 
     @Then("the activity starts in week {int}")
@@ -63,12 +66,14 @@ public class ActivitySteps {
         GregorianCalendar startDay = new GregorianCalendar(2024, month, day);
         GregorianCalendar endDay = new GregorianCalendar(2024, month, day);
         reservedActivity = new ReservedActivity(startDay, endDay, "test-activity");
-        employee.addActivity(reservedActivity);
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        testEmployee.addActivity(reservedActivity);
     }
 
     @Then("a reserved activity is created")
     public void aReservedActivityIsCreated() {
-        assertNotNull(employee.getActivity("test-activity"));
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        assertNotNull(testEmployee.getActivity("test-activity"));
     }
 
     @Then("the activity ends in {int}\\/{int}")
@@ -86,8 +91,8 @@ public class ActivitySteps {
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
         ReservedActivity sampleActivity = new ReservedActivity(startWeek, endWeek, "sample");
-        Employee myEmployee = SystemModel.getEmployees().get(0);
-        myEmployee.addActivity(sampleActivity);
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        testEmployee.addActivity(sampleActivity);
     }
 
     @Given("a project activity exists")
@@ -100,7 +105,8 @@ public class ActivitySteps {
         endWeek.setWeekDate(2024, 19, 1);
         //set expected duration to 4 half hours
         int expectedDuration = 4;
-//        projectActivity = new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity", ProjectSteps.project);
+        Project testProject = SystemModel.getProjects().get(0);
+        new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity", testProject);
     }
 
     @When("the other employee adds the employee to the project activity")
@@ -159,8 +165,7 @@ public class ActivitySteps {
 
     @Then("the employee has the reserved activity in their schedule")
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
-        List<Employee> employeeList = SystemModel.getEmployees();
-        Employee testEmployee = employeeList.get(0);
+        Employee testEmployee = SystemModel.getEmployees().get(0);
         assertNotEquals(testEmployee.getActivities().size(),0);
     }
 
@@ -191,6 +196,6 @@ public class ActivitySteps {
 
     @Given("an employee exists")
     public void anEmployeeExists() {
-        employee = new Employee("444444");
+        new Employee("444444");
     }
 }
