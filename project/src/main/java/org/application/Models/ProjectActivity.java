@@ -4,8 +4,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ProjectActivity extends Activity{
-    private GregorianCalendar startWeek;
-    private GregorianCalendar endWeek;
     private int expectedDuration;
     private List<TimeBlock> timeBlocks = new ArrayList<>();
     private Project assignedProject;
@@ -18,9 +16,7 @@ public class ProjectActivity extends Activity{
      * @param name The name of the activity
      */
     public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, int time, String name, Project assignedProject) {
-        super(name);
-        this.startWeek = startWeek;
-        this.endWeek = endWeek;
+        super(name,startWeek,endWeek);
         this.expectedDuration = time;
         this.assignedProject = assignedProject;
         assignedProject.addActivity(this);
@@ -58,14 +54,6 @@ public class ProjectActivity extends Activity{
             employee.removeActivity(this);
         }
         assignedProject.removeActivity(this);
-    }
-
-    public GregorianCalendar getStartWeek() {
-        return startWeek;
-    }
-    
-    public int getEndWeek() {
-        return endWeek.getWeekYear();
     }
 
     public int getExpectedDuration() {

@@ -42,7 +42,7 @@ public class ActivitySteps {
     public void theActivityEndsInWeek(Integer int1) {
         GregorianCalendar givenend = new GregorianCalendar();
         givenend.setWeekDate(2024, int1, 1);
-        assertEquals(givenend.getWeekYear(),projectActivity.getEndWeek());
+        assertEquals(givenend.getWeekYear(),projectActivity.getEndDate());
     }
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
@@ -76,8 +76,8 @@ public class ActivitySteps {
 
     @Then("the activity ends in {int}\\/{int}")
     public void theActivityEndsIn(Integer teststart, Integer testend) {
-        assertEquals(reservedActivity.getStartDay(), teststart);
-        assertEquals(reservedActivity.getEndDay(),testend);
+        assertEquals(reservedActivity.getStartDate(), teststart);
+        assertEquals(reservedActivity.getEndDate(),testend);
     }
 
     @Given("an activity exists")

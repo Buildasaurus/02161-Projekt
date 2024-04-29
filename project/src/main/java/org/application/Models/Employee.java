@@ -50,8 +50,23 @@ public class Employee {
 
     public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
     {
-        return 2;
+        int busyActivities = 0;
+        boolean overlaps = true;
+        for(Activity activity : activities)
+        {
+            if(doPeriodsOverlap(activity.getStartDate(),activity.getEndDate(),startTime,endTime))
+            {
+                busyActivities += 1;
+            }
+        }
+        return busyActivities;
     }
+
+
+    public boolean doPeriodsOverlap(GregorianCalendar start1, GregorianCalendar end1, GregorianCalendar start2, GregorianCalendar end2) {
+        return !start1.after(end2) && !start2.after(end1);
+    }
+
 
     public String getID() {
         return ID;
