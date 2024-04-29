@@ -34,5 +34,4 @@ public class App extends Application {
     public static void setRoot(Parent newView) {
         scene.setRoot(newView);
     }
-
 }
