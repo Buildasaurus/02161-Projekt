@@ -29,9 +29,15 @@ public class CreateActivityView extends VBox {
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
+        //Activity nae
         TextField name = new TextField();
-        name.setPromptText("Name");
+        name.setPromptText("Activity name");
         getChildren().add(name);
+
+        //Assigned employees
+        TextField assignedEmployees = new TextField(controller.getEmployee().getID());
+        assignedEmployees.setPromptText("Assgined employes, space seperated");
+        getChildren().add(assignedEmployees);
 
         DatePicker startDate = new DatePicker();
         startDate.setPromptText("Start Date");
@@ -55,7 +61,7 @@ public class CreateActivityView extends VBox {
                 new ProjectActivity(convertDatePickerToCalender(startDate),
                         convertDatePickerToCalender(endDate),
                         Integer.parseInt(halfHours.getText()),
-                        name.getText(), chosenProject)));
+                        name.getText(), chosenProject), assignedEmployees.getText().split(" ")));
         getChildren().add(completeButton);
     }
 
