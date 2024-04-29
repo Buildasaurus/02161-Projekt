@@ -17,10 +17,7 @@ import io.cucumber.java.en.When;
 
 import java.util.GregorianCalendar;
 
-import org.application.Models.Employee;
-import org.application.Models.ProjectActivity;
 import org.application.Models.ReservedActivity;
-import org.application.Models.Time;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps

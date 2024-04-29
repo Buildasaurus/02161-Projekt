@@ -5,7 +5,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Models.TimeBlock;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
