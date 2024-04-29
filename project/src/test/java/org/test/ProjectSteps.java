@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.application.Models.Employee;
 import org.application.Models.SystemModel;
+import java.util.GregorianCalendar;
+
+import org.application.Models.Project;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,6 +16,11 @@ import io.cucumber.java.en.When;
 //TODO implement steps
 
 public class ProjectSteps {
+    public static Project project;
+    private GregorianCalendar startWeek;
+    private GregorianCalendar endWeek;
+    
+
     @Given("a project exists, and a Project Leader is assigned to it.")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
         // Write code here that turns the phrase above into concrete actions
@@ -63,8 +71,12 @@ public class ProjectSteps {
 
     @Given("a project exists")
     public void aProjectExists() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        startWeek = new GregorianCalendar();
+        startWeek.setWeekDate(2024, 17, 1);
+        // set endWeek to week 19.
+        endWeek = new GregorianCalendar();
+        endWeek.setWeekDate(2024, 19, 1);
+        project = new Project(1, "test-project", startWeek, endWeek);
     }
 
     @Given("the project has a project leader")

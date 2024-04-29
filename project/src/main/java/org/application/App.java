@@ -1,6 +1,7 @@
 package org.application;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.application.Controllers.IController;
@@ -29,5 +30,8 @@ public class App extends Application {
 
     public static void setRoot(IController newController) {
         scene.setRoot(newController.getView());
+    }
+    public static void setRoot(Parent newView) {
+        scene.setRoot(newView);
     }
 }

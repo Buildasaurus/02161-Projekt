@@ -1,19 +1,18 @@
 package org.application.Models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Project {
     String name;
     int projectID;
-    GregorianCalendar endWeek;
     GregorianCalendar startWeek;
+    GregorianCalendar endWeek;
     String projectLeaderID;
-    List<Activity> activities = new ArrayList<>();
+    List<ProjectActivity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek, String projectLeaderID) {
+    public Project(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek, String projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
@@ -35,16 +34,32 @@ public class Project {
         //TODO implement this
     }
 
-    public void addActivity(Activity activity) {
+    public void addActivity(ProjectActivity activity) {
         activities.add(activity);
     }
-
-
-    public void deleteActivity(Activity activity) {
+    public void removeActivity(ProjectActivity activity)
+    {
         activities.remove(activity);
     }
 
+    public void deleteActivity(ProjectActivity activity) {
+        if (activities.contains(activity)) {
+            removeActivity(activity);
+            activity.delete();
+        }
+    }
+
+
+    public Activity getActivity(Activity searchActivity){
+        for (Activity activity: activities){
+            if (searchActivity.name == activity.name){
+                return activity;
+            }
+        }
+        return null;
+    }
+
     public void assignProjectLeader(String projectLeaderID) {
-        projectLeaderID = projectLeaderID;
+        this.projectLeaderID = projectLeaderID;
     }
 }

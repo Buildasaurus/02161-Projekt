@@ -1,14 +1,17 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.Activity;
+import org.application.Models.Buttons;
 import org.application.Models.TimeBlock;
 import java.awt.event.ActionEvent;
 
+/**
+ * A view to see and interact with data tied to a single employee
+ */
 public class EmployeeView extends VBox {
     EmployeeController controller;
 
@@ -43,9 +46,6 @@ public class EmployeeView extends VBox {
             ActivityView activityView = new ActivityView(activity);
             getChildren().add(activityView);
         }
-    }
-
-    public void handleLogin(ActionEvent event) {
-        System.out.println("Login successfull");
+        getChildren().add(Buttons.returnButton());
     }
 }

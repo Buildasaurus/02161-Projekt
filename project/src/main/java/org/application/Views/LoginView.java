@@ -8,8 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.LoginController;
+import org.application.Models.Buttons;
 
-public class LoginView extends StackPane {
+public class LoginView extends VBox {
     LoginController controller;
     TextField userName;
 
@@ -26,30 +27,25 @@ public class LoginView extends StackPane {
         // title
         Text title = new Text("!Username!");
         title.setFill(Color.BLACK);
-        setAlignment(title, Pos.TOP_CENTER);
         getChildren().add(title);
 
-        VBox centerContainer = new VBox();
-        centerContainer.setAlignment(Pos.CENTER);
         // TITLE2
         Text atitle = new Text("Your username");
         atitle.setFill(Color.GRAY);
-        centerContainer.getChildren().add(atitle);
+        getChildren().add(atitle);
 
         //Username input boxx
         userName = new TextField();
         userName.setPromptText("Username");
-        centerContainer.getChildren().add(userName);
+        getChildren().add(userName);
 
         //Login button
         Button loginButton = new Button("Login");
         loginButton.setOnAction(e -> controller.handleLogin(e, getUsername()));
-        centerContainer.getChildren().add(loginButton);
+        getChildren().add(loginButton);
 
-
-        //Add center container to view
-        getChildren().add(centerContainer);
-
+        //
+        getChildren().add(Buttons.returnButton());
 
     }
 

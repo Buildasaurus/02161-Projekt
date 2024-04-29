@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import org.application.App;
 import org.application.Models.SystemModel;
-import org.application.Views.EmployeeView;
 
 
 public class LoginController implements IController {

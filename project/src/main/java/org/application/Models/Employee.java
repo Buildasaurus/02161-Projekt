@@ -17,7 +17,7 @@ public class Employee {
         if (!activities.contains(activity)) {
             activities.add(activity);
             // ORDER is important, to avoid infinite calling
-            activity.assignEmployee(ID);
+            activity.assignEmployee(this);
         }
     }
 
@@ -49,5 +49,11 @@ public class Employee {
 
     public String getID() {
         return ID;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getID();
     }
 }
