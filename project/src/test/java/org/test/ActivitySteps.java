@@ -4,12 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.time.temporal.WeekFields;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
@@ -34,8 +30,9 @@ public class ActivitySteps {
     Time expectedDuration;
     ReservedActivity sampleActivity;
     ReservedActivity reservedActivity;
-    private Locale userLocale = Locale.GERMANY;
-    private WeekFields weekNumbering = WeekFields.of(userLocale);
+    GregorianCalendar startDay;
+    GregorianCalendar endDay;
+    
 
     @Then("an activity is created")
     public void anActivityIsCreated() {
@@ -66,21 +63,23 @@ public class ActivitySteps {
     }
 
     @When("the employee adds a reserved activity for the day {int}\\/{int}")
-    public void theEmployeeAddsAReservedActivityForTheDay(Integer int1, Integer int2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void theEmployeeAddsAReservedActivityForTheDay(Integer day, Integer month) {
+        startDay = new GregorianCalendar(2024, month, day);
+        endDay = new GregorianCalendar(2024, month, day);
+        ReservedActivity reservedActivity = new ReservedActivity(startDay, endDay, "test-activity");
+        if (reservedActivity != null) System.out.println("not null");
+        employee.addActivity(reservedActivity);
     }
 
     @Then("a reserved activity is created")
     public void aReservedActivityIsCreated() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertNotNull(employee.getActivity(reservedActivity));
     }
 
     @Then("the activity ends in {int}\\/{int}")
-    public void theActivityEndsIn(Integer int1, Integer int2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void theActivityEndsIn(Integer teststart, Integer testend) {
+        assertEquals(reservedActivity.getStartDay(), teststart);
+        assertEquals(reservedActivity.getEndDay(),testend);
     }
 
     @Given("an activity exists")
