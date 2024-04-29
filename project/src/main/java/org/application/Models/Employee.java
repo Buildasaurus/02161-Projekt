@@ -47,7 +47,7 @@ public class Employee {
         return timeBlocks;
     }
 
-    public int availabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
+    public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
     {
         return 2;
     }

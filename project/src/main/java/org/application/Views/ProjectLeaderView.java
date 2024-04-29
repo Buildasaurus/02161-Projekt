@@ -8,6 +8,6 @@ public class ProjectLeaderView extends VBox
     ProjectLeaderController controller;
     ProjectLeaderView()
     {
-        
+
     }
 }

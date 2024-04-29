@@ -54,16 +54,20 @@ public class SystemModel { // should be public static class, but java is stupid
         // TODO : consider if this should have some effect on view? perhaps tell it to update.
     }
 
-    public static List<Employee> findAvailableEmployees() {
-        List<Employee> availableEmployees = new ArrayList<>();
-        for (Employee employee : employees) {
-            if(employee.isAvailable())
-            {
-                availableEmployees.add(employee);
-            }
-        }
+    /**
+     * Finds a sorted list of the employees, based on how available they are in a given time period
+     * @param startDate The start of the period
+     * @param endDate The end of the period
+     * @return A list of sorted employees
+     */
+    public static List<Employee> findAvailableEmployees(GregorianCalendar startDate, GregorianCalendar endDate) {
+        List<Employee> availableEmployees = employees;
+        availableEmployees.sort((e1, e2) -> Double.compare(e2.getAvailabilityScore(startDate, endDate), e1.getAvailabilityScore(startDate, endDate)));
+
         return availableEmployees;
     }
+
+
 
     public static void createNewProject(Project project) {
         projects.add(project);
