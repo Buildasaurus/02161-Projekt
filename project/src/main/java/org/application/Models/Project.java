@@ -5,12 +5,12 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Project {
-    String name;
-    int projectID;
-    GregorianCalendar startWeek;
-    GregorianCalendar endWeek;
-    String projectLeaderID;
-    List<ProjectActivity> activities = new ArrayList<>();
+    private String name;
+    private int projectID;
+    private GregorianCalendar startWeek;
+    private GregorianCalendar endWeek;
+    private String projectLeaderID;
+    private List<ProjectActivity> activities = new ArrayList<>();
 
     public Project(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek, String projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
@@ -61,5 +61,25 @@ public class Project {
 
     public void assignProjectLeader(String projectLeaderID) {
         this.projectLeaderID = projectLeaderID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public GregorianCalendar getEndWeek() {
+        return endWeek;
+    }
+
+    public GregorianCalendar getStartWeek() {
+        return startWeek;
+    }
+
+    public String getProjectLeaderID() {
+        return projectLeaderID;
     }
 }
