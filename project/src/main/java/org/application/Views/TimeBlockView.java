@@ -30,7 +30,7 @@ public class TimeBlockView extends VBox {
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
-        ActivityView view = new ActivityView(block.getActivity());
+        ActivityView view = ActivityView.createActivityView(block.getActivity());
 
         getChildren().add(view);
     }
