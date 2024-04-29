@@ -24,14 +24,13 @@ import org.application.Models.ReservedActivity;
 public class ActivitySteps {
     Employee employee;
     ProjectActivity projectActivity;
-    GregorianCalendar startWeek;
     GregorianCalendar endWeek;
     int expectedDuration = 20;
     ReservedActivity sampleActivity;
     ReservedActivity reservedActivity;
     GregorianCalendar startDay;
     GregorianCalendar endDay;
-    
+
 
     @Then("an activity is created")
     public void anActivityIsCreated() {
@@ -42,16 +41,16 @@ public class ActivitySteps {
     public void theActivityEndsInWeek(Integer int1) {
         GregorianCalendar givenend = new GregorianCalendar();
         givenend.setWeekDate(2024, int1, 1);
-        assertEquals(givenend.getWeekYear(),projectActivity.getEndWeek());
+        assertEquals(givenend.getWeekYear(),projectActivity.getEndDate());
     }
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
     public void theEmployeeAddsAnActivityWithAnEndDateInWeek(Integer start, Integer end) {
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, start, 1);
         endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, end, 1);
-        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);    
+        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);
         employee.addActivity(projectActivity);
     }
 
@@ -75,15 +74,15 @@ public class ActivitySteps {
     }
 
     @Then("the activity ends in {int}\\/{int}")
-    public void theActivityEndsIn(Integer testday, Integer testmonth) {
-        assertEquals(reservedActivity.getEndDay(),testday);
-        assertEquals(reservedActivity.getEndMonth(),testmonth);
+    public void theActivityEndsIn(Integer testDay, Integer testMonth) {
+        assertEquals(reservedActivity.getStartDate(), testDay);
+        assertEquals(reservedActivity.getEndDate(), testMonth);
     }
 
     @Given("an activity exists")
     public void anActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
         endWeek = new GregorianCalendar();
@@ -94,7 +93,7 @@ public class ActivitySteps {
     @Given("a project activity exists")
     public void aProjectActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
         endWeek = new GregorianCalendar();
@@ -137,7 +136,7 @@ public class ActivitySteps {
     @Given("a reserved activity exists")
     public void aReservedActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
         endWeek = new GregorianCalendar();
@@ -157,7 +156,7 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    
+
     @Then("the employee has the reserved activity in their schedule")
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
         List<Employee> employeeList = SystemModel.getEmployees();
@@ -169,12 +168,12 @@ public class ActivitySteps {
     public void activityExists(Integer amountOfActivities) {
         for (int i = 0; i < amountOfActivities; i++){
             // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-            startWeek = new GregorianCalendar();
+            GregorianCalendar startWeek = new GregorianCalendar();
             startWeek.setWeekDate(2024, 17, 1);
             // set endWeek to week 19.
             endWeek = new GregorianCalendar();
             endWeek.setWeekDate(2024, 19, 1);
-            
+
         }
     }
 
@@ -191,8 +190,7 @@ public class ActivitySteps {
     }
 
     @Given("an employee exists")
-    public void anEmployeeExists() {    
+    public void anEmployeeExists() {
         employee = new Employee("444444");
     }
 }
-    
