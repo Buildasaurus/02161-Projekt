@@ -9,7 +9,6 @@ import java.util.List;
 import org.application.Models.Employee;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
-import org.application.Models.Time;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -27,7 +26,7 @@ public class ActivitySteps {
     ProjectActivity projectActivity;
     GregorianCalendar startWeek;
     GregorianCalendar endWeek;
-    Time expectedDuration;
+    int expectedDuration = 20;
     ReservedActivity sampleActivity;
     ReservedActivity reservedActivity;
     GregorianCalendar startDay;
@@ -66,8 +65,7 @@ public class ActivitySteps {
     public void theEmployeeAddsAReservedActivityForTheDay(Integer day, Integer month) {
         startDay = new GregorianCalendar(2024, month, day);
         endDay = new GregorianCalendar(2024, month, day);
-        ReservedActivity reservedActivity = new ReservedActivity(startDay, endDay, "test-activity");
-        if (reservedActivity != null) System.out.println("not null");
+        reservedActivity = new ReservedActivity(startDay, endDay, "test-activity");
         employee.addActivity(reservedActivity);
     }
 
@@ -102,7 +100,7 @@ public class ActivitySteps {
         endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
         //set expected duration to 4 half hours
-        expectedDuration = new Time(4);
+        expectedDuration = 4;
         projectActivity = new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity", ProjectSteps.project);
     }
 
@@ -164,7 +162,7 @@ public class ActivitySteps {
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
         List<Employee> employeeList = SystemModel.getEmployees();
         Employee testEmployee = employeeList.get(0);
-        assertNotEquals(0,testEmployee.getActivities().size());
+        assertNotEquals(testEmployee.getActivities().size(),0);
     }
 
     @Given("{int} activity exists in the project")
@@ -193,8 +191,8 @@ public class ActivitySteps {
     }
 
     @Given("an employee exists")
-    public void anEmployeeExists() {
-        Employee testEmployee = new Employee("013424");
+    public void anEmployeeExists() {    
+        employee = new Employee("444444");
     }
 }
     
