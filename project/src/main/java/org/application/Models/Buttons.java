@@ -6,7 +6,7 @@ import org.application.Controllers.MainController;
 import org.application.Views.MainView;
 
 /**
- * Static class for commenly used methods for buttons, to avoid code redundancy
+ * Static class for commonly used buttons, to avoid code redundancy
  */
 public class Buttons
 {
