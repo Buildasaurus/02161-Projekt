@@ -44,7 +44,7 @@ public class EmployeeView extends VBox {
         getChildren().add(title);
 
         for (Activity activity : controller.getEmployee().getActivities()) {
-            ActivityView activityView = new ActivityView(activity);
+            ActivityView activityView = ActivityView.createActivityView(activity);
             getChildren().add(activityView);
         }
         getChildren().add(Buttons.returnButton());

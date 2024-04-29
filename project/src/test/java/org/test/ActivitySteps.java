@@ -14,6 +14,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.application.Models.ReservedActivity;
@@ -24,13 +25,7 @@ import org.application.Models.ReservedActivity;
 public class ActivitySteps {
     Employee employee;
     ProjectActivity projectActivity;
-    GregorianCalendar startWeek;
-    GregorianCalendar endWeek;
-    int expectedDuration = 20;
-    ReservedActivity sampleActivity;
     ReservedActivity reservedActivity;
-    GregorianCalendar startDay;
-    GregorianCalendar endDay;
 
 
     @Then("an activity is created")
@@ -42,15 +37,17 @@ public class ActivitySteps {
     public void theActivityEndsInWeek(Integer int1) {
         GregorianCalendar givenend = new GregorianCalendar();
         givenend.setWeekDate(2024, int1, 1);
-        assertEquals(givenend.getWeekYear(),projectActivity.getEndDate());
+        assertEquals(givenend.get(Calendar.WEEK_OF_YEAR),projectActivity.getEndWeek());
     }
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
     public void theEmployeeAddsAnActivityWithAnEndDateInWeek(Integer start, Integer end) {
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, start, 1);
-        endWeek = new GregorianCalendar();
+        GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, end, 1);
+        // Set expected duration to 20 half hours
+        int expectedDuration = 20;
         projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);
         employee.addActivity(projectActivity);
     }
@@ -63,8 +60,8 @@ public class ActivitySteps {
 
     @When("the employee adds a reserved activity for the day {int}\\/{int}")
     public void theEmployeeAddsAReservedActivityForTheDay(Integer day, Integer month) {
-        startDay = new GregorianCalendar(2024, month, day);
-        endDay = new GregorianCalendar(2024, month, day);
+        GregorianCalendar startDay = new GregorianCalendar(2024, month, day);
+        GregorianCalendar endDay = new GregorianCalendar(2024, month, day);
         reservedActivity = new ReservedActivity(startDay, endDay, "test-activity");
         employee.addActivity(reservedActivity);
     }
@@ -83,24 +80,26 @@ public class ActivitySteps {
     @Given("an activity exists")
     public void anActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
-        endWeek = new GregorianCalendar();
+        GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        sampleActivity = new ReservedActivity(startWeek, endWeek, "sample");
+        ReservedActivity sampleActivity = new ReservedActivity(startWeek, endWeek, "sample");
+        Employee myEmployee = SystemModel.getEmployees().get(0);
+        myEmployee.addActivity(sampleActivity);
     }
 
     @Given("a project activity exists")
     public void aProjectActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
-        endWeek = new GregorianCalendar();
+        GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
         //set expected duration to 4 half hours
-        expectedDuration = 4;
+        int expectedDuration = 4;
         projectActivity = new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity", ProjectSteps.project);
     }
 
@@ -137,10 +136,10 @@ public class ActivitySteps {
     @Given("a reserved activity exists")
     public void aReservedActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
-        endWeek = new GregorianCalendar();
+        GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
         reservedActivity = new ReservedActivity(startWeek, endWeek, "reserved-activity");
     }
@@ -169,10 +168,10 @@ public class ActivitySteps {
     public void activityExists(Integer amountOfActivities) {
         for (int i = 0; i < amountOfActivities; i++){
             // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-            startWeek = new GregorianCalendar();
+            GregorianCalendar startWeek = new GregorianCalendar();
             startWeek.setWeekDate(2024, 17, 1);
             // set endWeek to week 19.
-            endWeek = new GregorianCalendar();
+            GregorianCalendar endWeek = new GregorianCalendar();
             endWeek.setWeekDate(2024, 19, 1);
 
         }

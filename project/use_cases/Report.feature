@@ -3,7 +3,8 @@ Feature: Creating reports based on a project
     Actors: Project leader
 
 Background:
-    Given a project exists, and a Project Leader is assigned to it.
+    Given a project exists
+    Given a Project Leader is assigned to the project
 
 Scenario: Project Leader generates report
     When the Project Leader generates the report.
