@@ -19,11 +19,11 @@ public class SystemModel { // should be public static class, but java is stupid
         ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,4,1), new GregorianCalendar(1,4,1), "Holiday");
         activity.assignEmployee(e);
 
-        ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), new Time(20) , "Testing", project);
+        ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), 20 , "Testing", project);
         projectActivity.assignEmployee(e);
         e.createTimeBlock(projectActivity, new GregorianCalendar(1,1,1,8,0), new GregorianCalendar(1,1,1,12,0));
 
-        projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), new Time(1), "codeRefactor", project);
+        projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), 1, "codeRefactor", project);
         projectActivity.assignEmployee(e);
 
         e.addActivity(activity);
