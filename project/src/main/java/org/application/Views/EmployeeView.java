@@ -1,5 +1,6 @@
 package org.application.Views;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -42,9 +43,10 @@ public class EmployeeView extends VBox {
         // All (May not be assigned to timeblock)
         title = new Text("!All activites!");
         getChildren().add(title);
-
+        
         for (Activity activity : controller.getEmployee().getActivities()) {
             ActivityView activityView = ActivityView.createActivityView(activity);
+            VBox.setMargin(activityView, new Insets(5.0));
             getChildren().add(activityView);
         }
         getChildren().add(Buttons.returnButton());
