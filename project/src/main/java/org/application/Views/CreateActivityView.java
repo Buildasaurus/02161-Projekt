@@ -54,7 +54,7 @@ public class CreateActivityView extends VBox {
         completeButton.setOnAction(e -> controller.handleCompleteActivity(e,
                 new ProjectActivity(convertDatePickerToCalender(startDate),
                         convertDatePickerToCalender(endDate),
-                        new Time(Integer.parseInt(halfHours.getText())),
+                        Integer.parseInt(halfHours.getText()),
                         name.getText(), chosenProject)));
         getChildren().add(completeButton);
     }
