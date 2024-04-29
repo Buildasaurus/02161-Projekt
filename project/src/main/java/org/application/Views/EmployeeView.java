@@ -5,6 +5,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.Activity;
+import org.application.Models.Buttons;
 import org.application.Models.TimeBlock;
 import java.awt.event.ActionEvent;
 
@@ -42,9 +43,6 @@ public class EmployeeView extends VBox {
             ActivityView activityView = new ActivityView(activity);
             getChildren().add(activityView);
         }
-    }
-
-    public void handleLogin(ActionEvent event) {
-        System.out.println("Login successfull");
+        getChildren().add(Buttons.returnButton());
     }
 }

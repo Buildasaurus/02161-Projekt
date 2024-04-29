@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.CreateEmployeeController;
-
+import org.application.Models.Buttons;
 
 
 public class CreateEmployeeView extends VBox {
@@ -37,5 +37,7 @@ public class CreateEmployeeView extends VBox {
             completeButton.setOnAction(e -> {controller.handleCompletePressed(e, name.getText());});
 
         getChildren().add(completeButton);
+
+        getChildren().add(Buttons.returnButton());
     }
 }
