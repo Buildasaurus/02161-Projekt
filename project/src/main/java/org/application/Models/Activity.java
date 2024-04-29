@@ -1,13 +1,19 @@
 package org.application.Models;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public abstract class Activity {
     protected String name;
     protected List<Employee> assignedEmployees = new ArrayList<>();
+    protected GregorianCalendar startDate;
+    protected GregorianCalendar endDate;
 
-    public Activity(String name) {
+    public Activity(String name, GregorianCalendar startDate, GregorianCalendar endDate)
+    {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.name = name;
     }
 
@@ -31,6 +37,13 @@ public abstract class Activity {
             Employee employee = SystemModel.getEmployee(employeeID);
             employee.removeActivity(this);
         }
+    }
+
+    public GregorianCalendar getEndDate() {
+        return endDate;
+    }
+    public GregorianCalendar getStartDate() {
+        return startDate;
     }
 
     @Override
