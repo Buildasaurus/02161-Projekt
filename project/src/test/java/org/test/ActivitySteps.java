@@ -24,7 +24,6 @@ import org.application.Models.ReservedActivity;
 public class ActivitySteps {
     Employee employee;
     ProjectActivity projectActivity;
-    GregorianCalendar startWeek;
     GregorianCalendar endWeek;
     int expectedDuration = 20;
     ReservedActivity sampleActivity;
@@ -47,7 +46,7 @@ public class ActivitySteps {
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
     public void theEmployeeAddsAnActivityWithAnEndDateInWeek(Integer start, Integer end) {
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, start, 1);
         endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, end, 1);
@@ -83,7 +82,7 @@ public class ActivitySteps {
     @Given("an activity exists")
     public void anActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
         endWeek = new GregorianCalendar();
@@ -94,7 +93,7 @@ public class ActivitySteps {
     @Given("a project activity exists")
     public void aProjectActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
         endWeek = new GregorianCalendar();
@@ -137,7 +136,7 @@ public class ActivitySteps {
     @Given("a reserved activity exists")
     public void aReservedActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        startWeek = new GregorianCalendar();
+        GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
         // set endWeek to week 19.
         endWeek = new GregorianCalendar();
@@ -169,7 +168,7 @@ public class ActivitySteps {
     public void activityExists(Integer amountOfActivities) {
         for (int i = 0; i < amountOfActivities; i++){
             // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-            startWeek = new GregorianCalendar();
+            GregorianCalendar startWeek = new GregorianCalendar();
             startWeek.setWeekDate(2024, 17, 1);
             // set endWeek to week 19.
             endWeek = new GregorianCalendar();
