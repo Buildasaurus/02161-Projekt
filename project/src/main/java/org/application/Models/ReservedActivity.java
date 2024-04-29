@@ -1,5 +1,6 @@
 package org.application.Models;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ReservedActivity extends Activity{
@@ -11,10 +12,15 @@ public class ReservedActivity extends Activity{
         this.startDay = startDay;
         this.endDay = endDay;
     }
-    public GregorianCalendar getEndDay() {
-        return endDay;
+    public Integer getStartDay(){
+        return startDay.get(Calendar.DAY_OF_MONTH);
     }
-    public GregorianCalendar getStartDay() {
-        return startDay;
+
+    public Integer getEndDay(){
+        return endDay.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public Integer getEndMonth(){
+        return endDay.get(Calendar.MONTH);
     }
 }

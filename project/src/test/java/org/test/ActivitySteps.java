@@ -75,9 +75,9 @@ public class ActivitySteps {
     }
 
     @Then("the activity ends in {int}\\/{int}")
-    public void theActivityEndsIn(Integer teststart, Integer testend) {
-        assertEquals(reservedActivity.getStartDay(), teststart);
-        assertEquals(reservedActivity.getEndDay(),testend);
+    public void theActivityEndsIn(Integer testday, Integer testmonth) {
+        assertEquals(reservedActivity.getEndDay(),testday);
+        assertEquals(reservedActivity.getEndMonth(),testmonth);
     }
 
     @Given("an activity exists")
