@@ -1,11 +1,26 @@
 package org.application.Models;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
+
 public class TimeBlock {
+    /**
+     * Start time in resolution of halfhours
+     */
     GregorianCalendar startTime;
+    /**
+     * End time in resolution of halfhours
+     */
     GregorianCalendar endTime;
     Activity activity;
     Employee employee;
 
+    /**
+     * Initializes a block to keep track of what activity has been worked on in a given time period
+     * @param startTime The start time of the working period, measured on a resolution of half-hours
+     * @param endTime The end time of the working period, measured on a resolution of half-hours
+     * @param activity The activity worked on in the period
+     * @param employee The employee working on the activity TODO: (should be several later)
+     */
     public TimeBlock(GregorianCalendar startTime, GregorianCalendar endTime, Activity activity, Employee employee) {
         this.startTime = startTime;
         this.endTime = endTime;
@@ -28,12 +43,18 @@ public class TimeBlock {
         return endTime;
     }
 
-    /**
-     * Calculates the duration of the current timeblock, and returns it as an int
-     * @return the duration of the timeblock as int.
-     */
-    public int getDuration()
-    {
 
+
+
+
+    /**
+     * Calculates the duration of the current timeblock in half-hours, and returns it as an int
+     * @return the duration of the timeblock in half-hours as int.
+     */
+    public int getDuration(GregorianCalendar startTime, GregorianCalendar endTime)
+    {
+        long diffInMillis = endTime.getTimeInMillis() - startTime.getTimeInMillis();
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
+        return (int)Math.round(minutes / 30.0);
     }
 }
