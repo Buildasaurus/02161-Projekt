@@ -3,6 +3,7 @@ package org.application.Models;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Employee {
     String ID;
@@ -44,9 +45,9 @@ public class Employee {
         return activities;
     }
 
-    public Activity getActivity(Activity searchActivity){
+    public Activity getActivity(String searchActivity){
         for (Activity activity: activities){
-            if (searchActivity.getName() == activity.getName()){
+            if (searchActivity.equals(activity.getName())){
                 return activity;
             }
         }
@@ -57,21 +58,56 @@ public class Employee {
         return timeBlocks;
     }
 
+    /**
+     * Higher number means more availability. 0 means not available at all.
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
     {
+        int total = 99999999;
+        long milliseconds1 = startTime.getTimeInMillis();
+        long milliseconds2 = endTime.getTimeInMillis();
+        long diff = milliseconds2 - milliseconds1;
+        if (diff <= 0)
+        {
+            return 0;
+        }
+        // Use Math.ceil to round up the result
+        int totalDays = (int) Math.ceil((double) diff / (24 * 60 * 60 * 1000));
+
+        int freeDayCounter = totalDays;
+
         int busyActivities = 0;
-        boolean overlaps = true;
         for(Activity activity : activities)
         {
             if(doPeriodsOverlap(activity.getStartDate(),activity.getEndDate(),startTime,endTime))
             {
-                busyActivities += 1;
+                if (activity instanceof ReservedActivity)
+                {
+                    freeDayCounter--;
+                }
+                if (activity instanceof ProjectActivity)
+                {
+                    busyActivities += 1;
+                }
             }
         }
-        return busyActivities;
+        return (int)((total - busyActivities)*((float)freeDayCounter/totalDays));
     }
 
 
+
+
+    /**
+     * Calculates if the two periods defined by [start1, end1] and [start2, end2] overlaps
+     * @param start1
+     * @param end1
+     * @param start2
+     * @param end2
+     * @return
+     */
     public boolean doPeriodsOverlap(GregorianCalendar start1, GregorianCalendar end1, GregorianCalendar start2, GregorianCalendar end2) {
         return !start1.after(end2) && !start2.after(end1);
     }
