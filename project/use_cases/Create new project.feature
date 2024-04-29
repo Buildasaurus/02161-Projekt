@@ -4,6 +4,6 @@ Feature: Create new project
 
 
 Scenario: An employee creates a project
-    Given an employee exists
-    When the employee creates a project
-    Then a project exists
+    But an employee exists
+    But the employee creates a project
+    But a project exists
