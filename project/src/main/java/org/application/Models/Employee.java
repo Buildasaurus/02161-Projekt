@@ -47,10 +47,9 @@ public class Employee {
         return timeBlocks;
     }
 
-    public boolean isAvailable()
+    public int availabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
     {
-        // TODO - ask hubert if this is the right implementation?
-        return true;
+        return 2;
     }
 
     public String getID() {
