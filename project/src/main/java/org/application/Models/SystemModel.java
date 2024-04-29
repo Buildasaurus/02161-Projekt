@@ -10,16 +10,20 @@ public class SystemModel { // should be public static class, but java is stupid
     private static List<Employee> employees = new ArrayList<>();
 
     static {
+        //Loading projects
+        Project project = new Project(40, "The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
+        projects.add(project);
+
         //Loading employees
         Employee e = new Employee("404040");
         ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,4,1), new GregorianCalendar(1,4,1), "Holiday");
         activity.assignEmployee(e);
 
-        ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), new Time(20) , "Testing");
+        ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), new Time(20) , "Testing", project);
         projectActivity.assignEmployee(e);
         e.createTimeBlock(projectActivity, new GregorianCalendar(1,1,1,8,0), new GregorianCalendar(1,1,1,12,0));
 
-        projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), new Time(1), "codeRefactor");
+        projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), new Time(1), "codeRefactor", project);
         projectActivity.assignEmployee(e);
 
         e.addActivity(activity);
