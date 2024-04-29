@@ -8,8 +8,8 @@ import java.util.List;
 public class Project {
     String name;
     int projectID;
-    GregorianCalendar endWeek;
     GregorianCalendar startWeek;
+    GregorianCalendar endWeek;
     String projectLeaderID;
     List<ProjectActivity> activities = new ArrayList<>();
 
@@ -51,6 +51,6 @@ public class Project {
     }
 
     public void assignProjectLeader(String projectLeaderID) {
-        projectLeaderID = projectLeaderID;
+        this.projectLeaderID = projectLeaderID;
     }
 }
