@@ -11,11 +11,10 @@ import org.application.Controllers.MainController;
 
 import java.awt.color.ICC_ColorSpace;
 
-public class MainView extends StackPane {
+public class MainView extends VBox {
     MainController controller;
 
-    public MainView()
-    {
+    public MainView() {
     }
 
     public void setController(MainController controller) {
@@ -23,25 +22,23 @@ public class MainView extends StackPane {
         initialize();
     }
 
-    private void initialize()
-    {
+    private void initialize() {
 
         // title
         Text title = new Text("!AMaZing ApPliCation!");
         title.setFill(Color.BLACK);
-        setAlignment(title, Pos.TOP_CENTER);
         getChildren().add(title);
 
         // buttons
+        //  - login
         Button playButton = new Button("Login");
         playButton.setOnAction(controller::handleButton);
+        getChildren().add(playButton);
 
-        // Alignment
-        VBox vbox = new VBox(0.05);
-        vbox.getChildren().addAll(playButton);
-        vbox.setStyle("-fx-alignment: center");
-        getChildren().add(vbox);
+        // - create employee
+        Button createEmployee = new Button("Create Employee");
+        createEmployee.setOnAction(controller::handleCreateEmployee);
+        getChildren().add(createEmployee);
 
     }
-
 }

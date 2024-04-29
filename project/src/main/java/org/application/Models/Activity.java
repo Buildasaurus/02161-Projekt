@@ -3,39 +3,30 @@ package org.application.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Activity
-{
+public abstract class Activity {
     String name;
-    List<String> assignedEmployees = new ArrayList<>();
+    List<Employee> assignedEmployees = new ArrayList<>();
 
-    public Activity(String name)
-    {
+    public Activity(String name) {
         this.name = name;
-
     }
 
-    public void assignEmployee(String employeeID)
-    {
+    public void assignEmployee(String employeeID) {
         Employee employee = SystemModel.getEmployee(employeeID);
-        if (employee != null)
-        {
+        if (employee != null) {
             assignEmployee(employee);
         }
     }
 
-    public void assignEmployee(Employee employee)
-    {
-        if (!assignedEmployees.contains(employee.getID()))
-        {
-            assignedEmployees.add(employee.getID());
+    public void assignEmployee(Employee employee) {
+        if (!assignedEmployees.contains(employee)) {
+            assignedEmployees.add(employee);
             employee.addActivity(this);
         }
     }
 
-    public void removeEmployee(String employeeID)
-    {
-        if(assignedEmployees.contains(employeeID))
-        {
+    public void removeEmployee(String employeeID) {
+        if (assignedEmployees.contains(employeeID)) {
             assignedEmployees.remove(employeeID);
             Employee employee = SystemModel.getEmployee(employeeID);
             employee.removeActivity(this);
@@ -43,8 +34,7 @@ public abstract class Activity
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name + " " + assignedEmployees;
     }
 }

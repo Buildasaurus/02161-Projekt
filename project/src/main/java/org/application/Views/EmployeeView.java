@@ -9,22 +9,19 @@ import org.application.Models.Activity;
 import org.application.Models.TimeBlock;
 import java.awt.event.ActionEvent;
 
-public class EmployeeView extends VBox
-{
+public class EmployeeView extends VBox {
     EmployeeController controller;
 
-    public EmployeeView()
-    {}
+    public EmployeeView() {
+    }
 
-    public void setController(EmployeeController controller)
-    {
+    public void setController(EmployeeController controller) {
         this.controller = controller;
         initialize();
     }
 
-    private void initialize()
-    {
-        //Create activity button
+    private void initialize() {
+        // Create activity button
         Button createActivity = new Button("Create Activity");
         createActivity.setOnAction(controller::handleOnCreateActivity);
         getChildren().add(createActivity);
@@ -33,8 +30,7 @@ public class EmployeeView extends VBox
         Text title = new Text("!Your Timeblocks!");
         getChildren().add(title);
 
-        for (TimeBlock block : controller.getEmployee().getTimeBlocks())
-        {
+        for (TimeBlock block : controller.getEmployee().getTimeBlocks()) {
             TimeBlockView timeBlockView = new TimeBlockView(block);
             getChildren().add(timeBlockView);
         }
@@ -43,15 +39,13 @@ public class EmployeeView extends VBox
         title = new Text("!All activites!");
         getChildren().add(title);
 
-        for (Activity activity : controller.getEmployee().getActivities())
-        {
+        for (Activity activity : controller.getEmployee().getActivities()) {
             ActivityView activityView = new ActivityView(activity);
             getChildren().add(activityView);
         }
     }
 
-    public void handleLogin(ActionEvent event)
-    {
+    public void handleLogin(ActionEvent event) {
         System.out.println("Login successfull");
     }
 }

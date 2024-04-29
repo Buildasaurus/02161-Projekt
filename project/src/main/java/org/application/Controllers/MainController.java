@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import org.application.App;
+import org.application.Views.CreateEmployeeView;
 import org.application.Views.LoginView;
 
 
@@ -19,6 +20,13 @@ public class MainController implements IController{
         LoginController controller = new LoginController(newView);
         newView.setController(controller);
         App.setRoot(controller);
+    }
+
+    public void handleCreateEmployee(ActionEvent event)
+    {
+        System.out.println("CreateEmployee pressed");
+        CreateEmployeeView newView = new CreateEmployeeView();
+        App.setRoot(newView);
     }
 
     public Parent getView()

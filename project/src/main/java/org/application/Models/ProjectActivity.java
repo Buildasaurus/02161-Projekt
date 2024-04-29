@@ -23,6 +23,7 @@ public class ProjectActivity extends Activity{
         this.endWeek = endWeek;
         this.expectedDuration = time;
         this.assignedProject = assignedProject;
+        assignedProject.addActivity(this);
     }
 
     public void addTimeBlock(TimeBlock timeBlock){
@@ -46,5 +47,14 @@ public class ProjectActivity extends Activity{
     public List<TimeBlock> getTimeBlocks()
     {
         return timeBlocks;
+    }
+
+    public void delete()
+    {
+        for (Employee employee : assignedEmployees)
+        {
+            employee.removeActivity(this);
+        }
+        assignedProject.removeActivity(this);
     }
 }

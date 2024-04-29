@@ -8,20 +8,16 @@ import org.application.Controllers.ActivityController;
 
 import org.application.Models.Activity;
 
-
 public class ActivityView extends StackPane {
     ActivityController controller;
     Activity activity;
 
-    public ActivityView(Activity activity)
-    {
+    public ActivityView(Activity activity) {
         this.activity = activity;
         initialize();
     }
 
-
-    private void initialize()
-    {
+    private void initialize() {
 
         // title
 
