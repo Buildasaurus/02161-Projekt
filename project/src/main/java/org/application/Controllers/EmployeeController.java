@@ -5,8 +5,11 @@ import javafx.scene.Parent;
 import org.application.App;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
+import org.application.Models.SystemModel;
 import org.application.Views.CreateActivityView;
 import org.application.Views.EmployeeView;
+
+import java.util.List;
 
 public class EmployeeController implements IController {
     Parent view;
@@ -36,11 +39,15 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleCompleteActivity(ActionEvent event, Activity activity) {
+    public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs) {
         System.out.println("Handling complete activity. Activity made: " + activity);
 
-        //TODO Do something with the activity.
-        employee.addActivity(activity);
+        for(String employeeID : assignedEmployeeIDs) {
+            Employee emp = SystemModel.getEmployee(employeeID);
+            if (emp != null) {
+                emp.addActivity(activity);
+            }
+        }
         EmployeeView eView = new EmployeeView();
         view = eView;
         eView.setController(this);
