@@ -11,6 +11,7 @@ public class Employee {
 
     public Employee(String ID) {
         this.ID = ID;
+        SystemModel.addEmployee(this);
     }
 
     public void addActivity(Activity activity) {
