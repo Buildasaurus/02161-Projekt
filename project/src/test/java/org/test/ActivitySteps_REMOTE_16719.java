@@ -164,7 +164,7 @@ public class ActivitySteps {
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
         List<Employee> employeeList = SystemModel.getEmployees();
         Employee testEmployee = employeeList.get(0);
-        assertNotEquals(0,testEmployee.getActivities().size());
+        assertNotEquals(testEmployee.getActivities().size(),0);
     }
 
     @Given("{int} activity exists in the project")
@@ -193,8 +193,8 @@ public class ActivitySteps {
     }
 
     @Given("an employee exists")
-    public void anEmployeeExists() {
-        Employee testEmployee = new Employee("013424");
+    public void anEmployeeExists() {    
+        employee = new Employee("444444");
     }
 }
     

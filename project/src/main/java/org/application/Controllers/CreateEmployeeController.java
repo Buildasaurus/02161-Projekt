@@ -21,7 +21,6 @@ public class CreateEmployeeController implements IController{
 
     public void handleCompletePressed(ActionEvent event, String name) {
         Employee newEmployee = new Employee(name);
-        SystemModel.addEmployee(newEmployee);
         MainView newView = new MainView();
         MainController controller = new MainController(newView);
         newView.setController(controller);

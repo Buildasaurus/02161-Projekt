@@ -77,9 +77,18 @@ public class ActivitySteps {
     }
 
     @Then("the activity ends in {int}\\/{int}")
+<<<<<<< HEAD
+    public void theActivityEndsIn(Integer int1, Integer int2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+
+//        ReservedActivity testActivity = (ReservedActivity) testEmployee.getActivities().get(0);
+//        testActivity.getEndDay().get(Calendar.WEEK_OF_YEAR);
+=======
     public void theActivityEndsIn(Integer teststart, Integer testend) {
         assertEquals(reservedActivity.getStartDay(), teststart);
         assertEquals(reservedActivity.getEndDay(),testend);
+>>>>>>> 2d47d942b86c4af30aea931129b925ff19f186bf
     }
 
     @Given("an activity exists")
