@@ -41,7 +41,7 @@ public class CreateEmployeeView extends VBox {
         // Create button
         Button completeButton = new Button("Complete");
             completeButton.setOnAction(e -> {MainView newView = new MainView();
-            MainController controller = new M   ainController(newView);
+            MainController controller = new MainController(newView);
             newView.setController(controller);
             App.setRoot(controller);});
 
