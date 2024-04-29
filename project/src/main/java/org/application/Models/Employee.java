@@ -11,6 +11,7 @@ public class Employee {
 
     public Employee(String ID) {
         this.ID = ID;
+        SystemModel.addEmployee(this);
     }
 
     public void addActivity(Activity activity) {
@@ -54,6 +55,11 @@ public class Employee {
 
     public List<TimeBlock> getTimeBlocks() {
         return timeBlocks;
+    }
+
+    public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
+    {
+        return 2;
     }
 
     public String getID() {
