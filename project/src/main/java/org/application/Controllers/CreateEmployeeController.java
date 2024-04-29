@@ -4,7 +4,6 @@ import javafx.scene.Parent;
 import org.application.App;
 import org.application.Models.Employee;
 import javafx.event.ActionEvent;
-import org.application.Models.SystemModel;
 import org.application.Views.MainView;
 
 

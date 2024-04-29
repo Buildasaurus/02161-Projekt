@@ -31,7 +31,7 @@ public class ActivitySteps {
     ReservedActivity reservedActivity;
     GregorianCalendar startDay;
     GregorianCalendar endDay;
-    
+
 
     @Then("an activity is created")
     public void anActivityIsCreated() {
@@ -51,7 +51,7 @@ public class ActivitySteps {
         startWeek.setWeekDate(2024, start, 1);
         endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, end, 1);
-        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);    
+        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);
         employee.addActivity(projectActivity);
     }
 
@@ -75,9 +75,9 @@ public class ActivitySteps {
     }
 
     @Then("the activity ends in {int}\\/{int}")
-    public void theActivityEndsIn(Integer teststart, Integer testend) {
-        assertEquals(reservedActivity.getStartDate(), teststart);
-        assertEquals(reservedActivity.getEndDate(),testend);
+    public void theActivityEndsIn(Integer testDay, Integer testMonth) {
+        assertEquals(reservedActivity.getStartDate(), testDay);
+        assertEquals(reservedActivity.getEndDate(),testMonth);
     }
 
     @Given("an activity exists")
@@ -157,7 +157,7 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    
+
     @Then("the employee has the reserved activity in their schedule")
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
         List<Employee> employeeList = SystemModel.getEmployees();
@@ -174,7 +174,7 @@ public class ActivitySteps {
             // set endWeek to week 19.
             endWeek = new GregorianCalendar();
             endWeek.setWeekDate(2024, 19, 1);
-            
+
         }
     }
 
@@ -191,8 +191,7 @@ public class ActivitySteps {
     }
 
     @Given("an employee exists")
-    public void anEmployeeExists() {    
+    public void anEmployeeExists() {
         employee = new Employee("444444");
     }
 }
-    

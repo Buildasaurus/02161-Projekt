@@ -44,6 +44,15 @@ public class Employee {
         return activities;
     }
 
+    public Activity getActivity(Activity searchActivity){
+        for (Activity activity: activities){
+            if (searchActivity.getName() == activity.getName()){
+                return activity;
+            }
+        }
+        return null;
+    }
+
     public List<TimeBlock> getTimeBlocks() {
         return timeBlocks;
     }
