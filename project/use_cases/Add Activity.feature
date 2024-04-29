@@ -4,6 +4,7 @@ Feature: Adding / creating activities
 
 Background:
     Given an employee exists
+    Given a project exists
 
 Scenario: Add activity ending in week 7
     When the employee adds an activity with an end date in week 7
