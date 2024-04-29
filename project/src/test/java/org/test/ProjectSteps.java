@@ -12,7 +12,10 @@ import io.cucumber.java.en.When;
 //TODO implement steps
 
 public class ProjectSteps {
-    public Project project;
+    public static Project project;
+    private GregorianCalendar startWeek;
+    private GregorianCalendar endWeek;
+    
 
     @Given("a project exists, and a Project Leader is assigned to it.")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
@@ -69,7 +72,7 @@ public class ProjectSteps {
         // set endWeek to week 19.
         endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        project = new Project("000001", "test-project", null, null)
+        project = new Project(1, "test-project", startWeek, endWeek);
     }
 
     @Given("the project has a project leader")

@@ -3,5 +3,6 @@ Feature: Simple test
   Actors: employee
 
 Scenario: Adding employee to project activity
+    Given a project exists
     Given a project activity exists
 

@@ -17,10 +17,7 @@ import io.cucumber.java.en.When;
 
 import java.util.GregorianCalendar;
 
-import org.application.Models.Employee;
-import org.application.Models.ProjectActivity;
 import org.application.Models.ReservedActivity;
-import org.application.Models.Time;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
@@ -97,7 +94,7 @@ public class ActivitySteps {
         endWeek.setWeekDate(2024, 19, 1);
         //set expected duration to 4 half hours
         expectedDuration = new Time(4);
-        projectActivity = new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity");
+        projectActivity = new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity", ProjectSteps.project);
     }
 
     @When("the other employee adds the employee to the project activity")

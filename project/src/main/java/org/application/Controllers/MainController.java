@@ -2,7 +2,6 @@ package org.application.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import org.application.App;
 import org.application.Views.CreateEmployeeView;
 import org.application.Views.LoginView;

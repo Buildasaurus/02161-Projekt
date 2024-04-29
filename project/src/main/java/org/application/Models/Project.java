@@ -1,7 +1,6 @@
 package org.application.Models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Project {
     String projectLeaderID;
     List<ProjectActivity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek, String projectLeaderID) {
+    public Project(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek, String projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
