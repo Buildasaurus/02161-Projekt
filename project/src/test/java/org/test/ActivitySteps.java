@@ -2,12 +2,15 @@ package org.test;
 
 import static org.junit.Assert.assertNotEquals;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.ProjectActivity;
+import org.application.Models.ReservedActivity;
 import org.application.Models.SystemModel;
 import org.application.Models.Time;
 
@@ -21,8 +24,13 @@ import io.cucumber.java.en.When;
 public class ActivitySteps {
     @Then("an activity is created")
     public void anActivityIsCreated() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+        List<Employee> employeeList = SystemModel.getEmployees();
+        Employee testEmployee = employeeList.get(0);
+//        ReservedActivity testActivity = new ReservedActivity(null, null, null)
+        assertNotEquals(0,testEmployee.getActivities().size());
+
     }
 
     @Then("the activity ends in week {int}")
@@ -32,9 +40,15 @@ public class ActivitySteps {
     }
 
     @When("the employee adds an activity with an end date in week {int}")
-    public void theEmployeeAddsAnActivityWithAnEndDateInWeek(Integer int1) {    
-        // Write code here that turns the phrase above into concrete actions  
-        throw new io.cucumber.java.PendingException();
+    public void theEmployeeAddsAnActivityWithAnEndDateInWeek(Integer weekDay) {
+        List<Employee> employeeList = SystemModel.getEmployees();
+        Employee testEmployee = employeeList.get(0);
+        GregorianCalendar startDay = new GregorianCalendar();
+        startDay.set(Calendar.WEEK_OF_YEAR, weekDay);
+        GregorianCalendar endDay = new GregorianCalendar();
+        endDay.set(Calendar.WEEK_OF_YEAR, weekDay);
+        ReservedActivity testActivity = new ReservedActivity(startDay,endDay,"testActivity");
+        testEmployee.addActivity(testActivity);
     }
 
     @Then("the activity starts in week {int}")
@@ -59,6 +73,9 @@ public class ActivitySteps {
     public void theActivityEndsIn(Integer int1, Integer int2) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
+
+//        ReservedActivity testActivity = (ReservedActivity) testEmployee.getActivities().get(0);
+//        testActivity.getEndDay().get(Calendar.WEEK_OF_YEAR);
     }
 
     @Given("an activity exists")
@@ -132,7 +149,7 @@ public class ActivitySteps {
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
         List<Employee> employeeList = SystemModel.getEmployees();
         Employee testEmployee = employeeList.get(0);
-        assertNotEquals(testEmployee.getActivities().size(),0);
+        assertNotEquals(0,testEmployee.getActivities().size());
     }
 
     @Given("{int} activity exists")
@@ -155,8 +172,8 @@ public class ActivitySteps {
 
     @Given("an employee exists")
     public void anEmployeeExists() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Employee testEmployee = new Employee("013424");
+        SystemModel.addEmployee(testEmployee);
     }
 }
     

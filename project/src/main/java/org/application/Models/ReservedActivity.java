@@ -8,5 +8,10 @@ public class ReservedActivity extends Activity{
         this.startDay = startDay;
         this.endDay = endDay;
     }
-
+    public GregorianCalendar getEndDay() {
+        return endDay;
+    }
+    public GregorianCalendar getStartDay() {
+        return startDay;
+    }
 }
