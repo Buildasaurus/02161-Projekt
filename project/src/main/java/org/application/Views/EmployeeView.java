@@ -1,5 +1,6 @@
 package org.application.Views;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -48,6 +49,7 @@ public class EmployeeView extends ScrollPane {
 
         for (Activity activity : controller.getEmployee().getActivities()) {
             ActivityView activityView = ActivityView.createActivityView(activity);
+            VBox.setMargin(activityView, new Insets(5.0));
             vbox.getChildren().add(activityView); // Add the activityView to the VBox
         }
 

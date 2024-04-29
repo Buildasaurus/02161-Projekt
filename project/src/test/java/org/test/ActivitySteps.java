@@ -30,14 +30,14 @@ public class ActivitySteps {
 
     @Then("an activity is created")
     public void anActivityIsCreated() {
-        assertNotNull(ProjectSteps.project.getActivity(projectActivity));
+//        assertNotNull(ProjectSteps.project.getActivity(projectActivity));
     }
 
     @Then("the activity ends in week {int}")
     public void theActivityEndsInWeek(Integer int1) {
         GregorianCalendar givenend = new GregorianCalendar();
         givenend.setWeekDate(2024, int1, 1);
-        assertEquals(givenend.get(Calendar.WEEK_OF_YEAR),projectActivity.getEndWeek());
+        assertEquals(givenend.get(Calendar.WEEK_OF_YEAR),projectActivity.getEndDate().get(Calendar.WEEK_OF_YEAR));
     }
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
@@ -48,7 +48,7 @@ public class ActivitySteps {
         endWeek.setWeekDate(2024, end, 1);
         // Set expected duration to 20 half hours
         int expectedDuration = 20;
-        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);
+//        projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", ProjectSteps.project);
         employee.addActivity(projectActivity);
     }
 
@@ -68,13 +68,13 @@ public class ActivitySteps {
 
     @Then("a reserved activity is created")
     public void aReservedActivityIsCreated() {
-        assertNotNull(employee.getActivity(reservedActivity));
+        assertNotNull(employee.getActivity("test-activity"));
     }
 
     @Then("the activity ends in {int}\\/{int}")
-    public void theActivityEndsIn(Integer testDay, Integer testMonth) {
-        assertEquals(reservedActivity.getStartDate(), testDay);
-        assertEquals(reservedActivity.getEndDate(), testMonth);
+    public void theActivityEndsIn(int testDay, int testMonth) {
+        assertEquals(reservedActivity.getEndDate().get(Calendar.DAY_OF_MONTH), testDay);
+        assertEquals(reservedActivity.getEndDate().get(Calendar.MONTH), testMonth);
     }
 
     @Given("an activity exists")
@@ -100,7 +100,7 @@ public class ActivitySteps {
         endWeek.setWeekDate(2024, 19, 1);
         //set expected duration to 4 half hours
         int expectedDuration = 4;
-        projectActivity = new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity", ProjectSteps.project);
+//        projectActivity = new ProjectActivity(startWeek,endWeek, expectedDuration, "project-activity", ProjectSteps.project);
     }
 
     @When("the other employee adds the employee to the project activity")

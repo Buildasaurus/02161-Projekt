@@ -1,7 +1,13 @@
 package org.application.Views;
 
+import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -32,7 +38,10 @@ public abstract class ActivityView extends StackPane {
     }
 
     protected void defaultInitialize() {
-        Background bg = new Background(new BackgroundFill(Color.LIGHTGREY, null, null));
+        this.setPadding(new Insets(5.0));
+        Background bg = new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5.0), null));
         this.setBackground(bg);
+        Border border = new Border(new BorderStroke(Color.DIMGREY, BorderStrokeStyle.SOLID, new CornerRadii(5.0), new BorderWidths(2.0)));
+        this.setBorder(border);
     }
 }
