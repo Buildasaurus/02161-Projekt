@@ -50,13 +50,8 @@ public class Project {
     }
 
 
-    public Activity getActivity(Activity searchActivity){
-        for (Activity activity: activities){
-            if (searchActivity.getName() == activity.getName()){
-                return activity;
-            }
-        }
-        return null;
+    public List<ProjectActivity> getActivities(){
+        return activities;
     }
 
     public void assignProjectLeader(String projectLeaderID) {
