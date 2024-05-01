@@ -1,6 +1,5 @@
 package org.application.Views;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.application.Models.Employee;
@@ -9,6 +8,8 @@ import org.application.Models.ReservedActivity;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import java.text.SimpleDateFormat;
+
 
 public class ReservedActivityView extends ActivityView {
     private ReservedActivity activity;
@@ -20,6 +21,7 @@ public class ReservedActivityView extends ActivityView {
     }
 
     private void initialize() {
+
         VBox mainBox = new VBox();
         mainBox.setSpacing(VBoxSpacing);
         getChildren().add(mainBox);
@@ -29,12 +31,12 @@ public class ReservedActivityView extends ActivityView {
         nameText.setFont(titleFont);
         mainBox.getChildren().add(nameText);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
         GregorianCalendar cal = activity.getStartDate();
-        String startTime = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
-        startTime += Integer.toString(cal.get(Calendar.MONTH));
+        String startTime = sdf.format(cal.getTime());
         cal = activity.getEndDate();
-        String endTime = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
-        endTime += Integer.toString(cal.get(Calendar.MONTH));
+        String endTime = sdf.format(cal.getTime());
 
         Text startText = new Text("From:");
         Text startTimeText = new Text(startTime);
@@ -55,5 +57,6 @@ public class ReservedActivityView extends ActivityView {
         employeeBox.setSpacing(5.0);
         employeeBox.getChildren().addAll(employeeText, employeeNameText);
         mainBox.getChildren().add(employeeBox);
+
     }
 }
