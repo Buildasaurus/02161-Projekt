@@ -24,7 +24,7 @@ Scenario: User deletes an activity in a project with multiple activities
     Then the activity no longer exists
 
 Scenario: Activity with registered hours is deleted
-    Given 1 activity exists
+    Given a project activity exists
     And a user has spent time on the activity
     When a user tries to delete an activity
     Then the user is warned that someone has spent time on the activity
@@ -32,7 +32,7 @@ Scenario: Activity with registered hours is deleted
     Then the activity no longer axists
 
 Scenario: Activity with registered hours is not deleted
-    Given 1 activity exists
+    Given a project activity exists
     And a user has spent time on the activity
     When a user tries to delete an activity
     Then the user is warned that someone has spent time on the activity

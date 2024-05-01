@@ -88,19 +88,6 @@ public class ActivitySteps {
         assertEquals(reservedActivity.getEndDate().get(Calendar.MONTH), testMonth);
     }
 
-    @Given("an activity exists")
-    public void anActivityExists() {
-        // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        GregorianCalendar startWeek = new GregorianCalendar();
-        startWeek.setWeekDate(2024, 17, 1);
-        // set endWeek to week 19.
-        GregorianCalendar endWeek = new GregorianCalendar();
-        endWeek.setWeekDate(2024, 19, 1);
-        ReservedActivity sampleActivity = new ReservedActivity(startWeek, endWeek, "sample");
-        Employee testEmployee = SystemModel.getEmployees().get(0);
-        testEmployee.addActivity(sampleActivity);
-    }
-
     @Given("a project activity exists")
     public void aProjectActivityExists() {
         // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
@@ -153,7 +140,9 @@ public class ActivitySteps {
         // set endWeek to week 19.
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        reservedActivity = new ReservedActivity(startWeek, endWeek, "reserved-activity");
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        ReservedActivity sampleActivity = new ReservedActivity(startWeek, endWeek, "sample",testEmployee);
+        testEmployee.addActivity(sampleActivity);;
     }
 
     @When("the employee adds themselves to the reserved activity")
