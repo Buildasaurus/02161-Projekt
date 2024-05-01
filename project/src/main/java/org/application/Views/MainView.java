@@ -31,10 +31,17 @@ public class MainView extends VBox {
         playButton.setOnAction(controller::handleButton);
         getChildren().add(playButton);
 
+        //Create Project button
+        Button createProject = new Button("Create Project");
+        createProject.setOnAction(controller::handleCreateProject);
+        getChildren().add(createProject);
+
         // - create employee
         Button createEmployee = new Button("Create Employee");
         createEmployee.setOnAction(controller::handleCreateEmployee);
         getChildren().add(createEmployee);
+
+
 
     }
 }

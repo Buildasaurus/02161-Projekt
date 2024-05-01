@@ -17,10 +17,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SystemModel.createDefaultEmployees();
-        MainView view = new MainView();
-        MainController controller = new MainController(view);
-        view.setController(controller);
-        scene = new Scene(controller.getView(), 300, 300);
+        goToMainMenu();
         stage.setScene(scene);
         stage.show();
     }
@@ -34,5 +31,19 @@ public class App extends Application {
     }
     public static void setRoot(Parent newView) {
         scene.setRoot(newView);
+    }
+
+    public static void goToMainMenu()
+    {
+        MainView view = new MainView();
+        MainController controller = new MainController(view);
+        view.setController(controller);
+        if (scene == null)
+        {
+            scene = new Scene(controller.getView(), 300, 300);
+        }
+        else {
+            scene.setRoot(controller.getView());
+        }
     }
 }

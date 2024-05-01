@@ -42,14 +42,6 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleCreateProject(ActionEvent event)
-    {
-        CreateProjectView view = new CreateProjectView();
-        CreateProjectController controller = new CreateProjectController(view);
-        view.setController(controller);
-        App.setRoot(controller);
-    }
-
     public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs) {
         System.out.println("Handling complete activity. Activity made: " + activity);
 

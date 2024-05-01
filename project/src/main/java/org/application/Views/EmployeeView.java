@@ -33,11 +33,6 @@ public class EmployeeView extends ScrollPane {
         createActivity.setOnAction(controller::handleOnCreateActivity);
         vbox.getChildren().add(createActivity);
 
-        //Create Project button
-        Button createProject = new Button("Create Project");
-        createProject.setOnAction(controller::handleCreateProject);
-        vbox.getChildren().add(createProject);
-
         // Timeblocks
         Text title = new Text("!Your Timeblocks!");
         vbox.getChildren().add(title);
