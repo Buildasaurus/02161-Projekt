@@ -30,7 +30,8 @@ public class ActivitySteps {
 
     @Then("an activity is created")
     public void anActivityIsCreated() {
-//        assertNotNull(ProjectSteps.project.getActivity(projectActivity));
+        Project project = SystemModel.getProjects().get(0);
+        assertNotNull(project.getActivities());
     }
 
     @Then("the activity ends in week {int}")
@@ -39,6 +40,15 @@ public class ActivitySteps {
         givenend.setWeekDate(2024, int1, 1);
         ProjectActivity testActivity = SystemModel.getProjects().get(0).getActivities().get(0);
         assertEquals(givenend.get(Calendar.WEEK_OF_YEAR),testActivity.getEndDate().get(Calendar.WEEK_OF_YEAR));
+    }
+
+    @Then("the activity starts in week {int}")
+    public void theActivityStartsInWeek(Integer int1) {
+        GregorianCalendar givenstart = new GregorianCalendar();
+        givenstart.setWeekDate(2024, int1, 1);
+        ProjectActivity testActivity = SystemModel.getProjects().get(0).getActivities().get(0);
+        System.out.println(testActivity.getName());
+        assertEquals(givenstart.get(Calendar.WEEK_OF_YEAR),testActivity.getEndDate().get(Calendar.WEEK_OF_YEAR));
     }
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
@@ -53,12 +63,6 @@ public class ActivitySteps {
         ProjectActivity testActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity", testProject);
         // Add the testActivity to the employee
         SystemModel.getEmployees().get(0).addActivity(testActivity);
-    }
-
-    @Then("the activity starts in week {int}")
-    public void theActivityStartsInWeek(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
     }
 
     @When("the employee adds a reserved activity for the day {int}\\/{int}")
@@ -196,6 +200,7 @@ public class ActivitySteps {
 
     @Given("an employee exists")
     public void anEmployeeExists() {
-        new Employee("444444");
+        Employee employee = new Employee("444444");
+        SystemModel.addEmployee(employee);
     }
 }

@@ -9,6 +9,7 @@ Background:
 Scenario: Add activity starting in week 4 and ending in week 7
     When the employee adds an activity with a start week 4 and end week 7
     Then an activity is created
+    And the activity starts in week 4
     And the activity ends in week 7
 
 
