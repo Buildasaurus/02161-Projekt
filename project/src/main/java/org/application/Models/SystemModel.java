@@ -1,6 +1,7 @@
 package org.application.Models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -8,10 +9,11 @@ public class SystemModel { // should be public static class, but java is stupid
     //STATIC class!
     private static List<Project> projects = new ArrayList<Project>();
     private static List<Employee> employees = new ArrayList<>();
+    private static int currentRunNumber = 0;
 
     public static void createDefaultEmployees() {
         //Loading projects
-        Project project = new Project(40, "The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
+        Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
         projects.add(project);
 
         //Loading employees
@@ -51,6 +53,11 @@ public class SystemModel { // should be public static class, but java is stupid
         employees.remove(employee);
         //TODO : Make this also save the employee to the file
         // TODO : consider if this should have some effect on view? perhaps tell it to update.
+    }
+
+    static public String getNextProjectID()
+    {
+        return new GregorianCalendar().get(Calendar.YEAR) + "" + currentRunNumber++;
     }
 
     /**

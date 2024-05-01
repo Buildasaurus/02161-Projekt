@@ -6,25 +6,25 @@ import java.util.List;
 
 public class Project {
     private String name;
-    private int projectID;
+    private String projectID;
     private GregorianCalendar startWeek;
     private GregorianCalendar endWeek;
     private String projectLeaderID;
     private List<ProjectActivity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek,
+    public Project(String name, GregorianCalendar startWeek, GregorianCalendar endWeek,
             String projectLeaderID) {
-        initialize(projectID, name, endWeek, startWeek);
+        initialize(name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
 
-    public Project(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
-        initialize(projectID, name, endWeek, startWeek);
+    public Project(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
+        initialize(name, endWeek, startWeek);
         this.projectLeaderID = "PROJECT LEADER NOT SET";
     }
 
-    public void initialize(int projectID, String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
-        this.projectID = projectID;
+    public void initialize(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
+        this.projectID = SystemModel.getNextProjectID();
         this.name = name;
         this.endWeek = endWeek;
         this.startWeek = startWeek;
@@ -43,13 +43,6 @@ public class Project {
         activities.remove(activity);
     }
 
-    public void deleteActivity(ProjectActivity activity) {
-        if (activities.contains(activity)) {
-            removeActivity(activity);
-            activity.delete();
-        }
-    }
-
 
     public List<ProjectActivity> getActivities() {
         return activities;
@@ -63,7 +56,7 @@ public class Project {
         return name;
     }
 
-    public int getProjectID() {
+    public String getProjectID() {
         return projectID;
     }
 
