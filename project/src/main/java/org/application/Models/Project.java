@@ -55,8 +55,10 @@ public class Project {
         return activities;
     }
 
-    public void assignProjectLeader(String projectLeaderID) {
-        this.projectLeaderID = projectLeaderID;
+    public void assignProjectLeader(String newprojectLeaderID) {
+        if (projectLeaderID.equals("PROJECT LEADER NOT SET")) {
+            this.projectLeaderID = newprojectLeaderID;
+        }
     }
 
     public String getName() {
@@ -79,7 +81,7 @@ public class Project {
         return projectLeaderID;
     }
 
-    public void setProjectLeaderID(String projectLeaderID){
-        this.projectLeaderID = projectLeaderID;
+    public void noProjectLeader(){
+        this.projectLeaderID = "PROJECT LEADER NOT SET";
     }
 }
