@@ -1,9 +1,6 @@
 package org.application.Views;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -16,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class CreateActivityView extends VBox {
     EmployeeController controller;
@@ -57,9 +55,13 @@ public class CreateActivityView extends VBox {
 
 
         // Choose the relevant project
-        Project chosenProject = SystemModel.getProjects().get(0);
-        //TODO - Create input fields to enter relevant stuff for new activities.
+        ComboBox<String> comboBox = new ComboBox<>();
 
+        List<Project> projects = SystemModel.getProjects();
+        for (Project project : projects) {
+            comboBox.getItems().add(project.getName());
+        }
+        getChildren().add(comboBox);
 
         //Search - sorted list of most available employees
         Text text = new Text("Most available employees in chosen time period");
@@ -86,7 +88,7 @@ public class CreateActivityView extends VBox {
                 new ProjectActivity(GeneralMethods.convertDatePickerToCalender(startDate),
                         GeneralMethods.convertDatePickerToCalender(endDate),
                         Integer.parseInt(halfHours.getText()),
-                        name.getText(), chosenProject), assignedEmployees.getText().split(" ")));
+                        name.getText(), SystemModel.getProjectByName(comboBox.getSelectionModel().getSelectedItem())), assignedEmployees.getText().split(" ")));
         getChildren().add(completeButton);
     }
 }

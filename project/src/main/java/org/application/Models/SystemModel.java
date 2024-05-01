@@ -64,6 +64,16 @@ public class SystemModel { // should be public static class, but java is stupid
         // TODO : consider if this should have some effect on view? perhaps tell it to update.
     }
 
+    public static Project getProjectByName(String projectName)
+    {
+        for (Project project : projects) {
+            if (project.getName().equals(projectName)) {
+                return project;
+            }
+        }
+        return null;
+    }
+
     static public String getNextProjectID()
     {
         return new GregorianCalendar().get(Calendar.YEAR) + "" + currentRunNumber++;
