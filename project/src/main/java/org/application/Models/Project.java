@@ -77,4 +77,8 @@ public class Project {
     public String getProjectLeaderID() {
         return projectLeaderID;
     }
+
+    public void setProjectLeaderID(String projectLeaderID){
+        this.projectLeaderID = projectLeaderID;
+    }
 }

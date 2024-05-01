@@ -29,8 +29,8 @@ public class ProjectSteps {
 
     @Given("the project has no project leader")
     public void theProjectHasNoProjectLeader(){
-        List<Project> projects = SystemModel.getProjects();
-        assertEquals(projects.get(0).getProjectLeaderID(),"PROJECT LEADER NOT SET");
+        Project project = SystemModel.getProjects().get(0);
+        project.setProjectLeaderID("PROJECT LEADER NOT SET");
     }
 
     @When("the Project Leader generates the report.")
@@ -91,8 +91,16 @@ public class ProjectSteps {
 
     @When("the employee is assigned as project leader")
     public void theEmployeeIsAssignedAsProjectLeader() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Employee employee = SystemModel.getEmployees().get(0);
+        Project project = SystemModel.getProjects().get(0);
+        project.assignProjectLeader(employee.getID());
+    }
+
+    @Then("the assignment is successful")
+    public void theAssignmentIsSuccessful() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        Project project = SystemModel.getProjects().get(0);
+        assertEquals(employee.getID(),project.getProjectLeaderID());
     }
 
     @Then("the assignment fails")
