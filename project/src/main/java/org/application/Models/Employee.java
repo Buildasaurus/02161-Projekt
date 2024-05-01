@@ -3,7 +3,6 @@ package org.application.Models;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Employee {
     String ID;
@@ -22,7 +21,6 @@ public class Employee {
             activity.assignEmployee(this);
         }
     }
-
     public void removeActivity(Activity activity) {
         if (activities.contains(activity)) {
             activities.remove(activity);
