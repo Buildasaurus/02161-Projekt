@@ -179,7 +179,6 @@ public class ActivitySteps {
     @Given("{int} activity exists in the project")
     public void activityExists(Integer amountOfActivities) {
         Project project = SystemModel.getProjects().get(0);
-        System.out.println(SystemModel.getProjects());
         for (int i = 0; i < amountOfActivities; i++){
             // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
             GregorianCalendar startWeek = new GregorianCalendar();
@@ -193,21 +192,41 @@ public class ActivitySteps {
         }
     }
 
-    @When("an employee tries to delete an activity")
-    public void anEmployeeTriesToDeleteAnActivity() {
+    @Given("{int} activity exists in the employee")
+    public void activityExistsInTheEmployee(Integer amountOfActivities) {
+        Employee employee = SystemModel.getEmployees().get(0);
+        for (int i = 0; i < amountOfActivities; i++){
+            GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
+            GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
+            ReservedActivity reservedActivity = new ReservedActivity(startDay, endDay,"sample-activity" + (i + 1),employee); 
+        }  
+    }
+
+    @When("an employee tries to delete a project activity")
+    public void anEmployeeTriesToDeleteAProjectActivity() {
         Project project = SystemModel.getProjects().get(0);
-        List<Project> projecets = SystemModel.getProjects();
         ProjectActivity projectActivity = project.getActivities().get(0);
-        System.out.println(project.getActivities());
         project.removeActivity(projectActivity);
-        System.out.println(project.getActivities());
+    }
+
+    @When("an employee tries to delete a reserved activity")
+    public void anEmployeeTriesToDeleteAReservedActivity() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        ReservedActivity reservedActivity = (ReservedActivity) employee.getActivities().get(0);
+        employee.removeActivity(reservedActivity);
     }
 
 
-    @Then("the activity no longer exists")
-    public void theActivityNoLongerExists() {
+    @Then("the project activity no longer exists")
+    public void theProjectActivityNoLongerExists() {
         Project project = SystemModel.getProjects().get(0);
         assertTrue(project.getActivities().isEmpty());
+    }
+
+    @Then("the reserved activity no longer exists")
+    public void theReservedActivityNoLongerExists() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        assertTrue(employee.getActivities().isEmpty());
     }
 
     @When("the employee adds used time to the activity")
