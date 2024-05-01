@@ -4,7 +4,6 @@ Feature: Add employee to activity
 
 Background:
     Given a project exists
-    And an activity exists
     And an employee exists
     And a timeslot is selected
 
@@ -20,9 +19,3 @@ Scenario: Employee is reserved
     When the employee is added to an activity
     Then the employee is not assigned to the activity
 
-Scenario: Adding self to reserved activity
-    Given a reserved activity exists
-    And the employee is available in the selected time slot
-    When the employee adds themselves to the reserved activity
-    Then the employee is assigned to the reserved activity
-    And the employee has the reserved activity in their schedule

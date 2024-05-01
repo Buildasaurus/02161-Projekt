@@ -4,8 +4,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ReservedActivity extends Activity{
-    public ReservedActivity(GregorianCalendar startDay, GregorianCalendar endDay, String name) {
+    public ReservedActivity(GregorianCalendar startDay, GregorianCalendar endDay, String name, Employee employee) {
         super(name, startDay, endDay);
+        employee.activities.add(this);
     }
     public int getStartDay(){
         return getStartDate().get(Calendar.DAY_OF_MONTH);
