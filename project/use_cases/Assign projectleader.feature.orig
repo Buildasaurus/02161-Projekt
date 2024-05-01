@@ -1,0 +1,26 @@
+Feature: Assign project leader
+    Description: A project leader is assigned to a project
+    Actors: User
+
+Background:
+    Given an employee exists
+
+<<<<<<< HEAD
+Scenario: Assigning project leader
+    When a project is created
+=======
+Scenario: Assigning project leader in unassigned project
+>>>>>>> 68d5c86be50e4a0b983f1ed6debcff9e01f3fa0d
+    Given the project has no project leader
+    When the employee is assigned as project leader
+    Then the assignment is successful
+
+<<<<<<< HEAD
+Scenario: Project already has a project leader
+    When a project is created
+=======
+Scenario: Changing project leader
+>>>>>>> 68d5c86be50e4a0b983f1ed6debcff9e01f3fa0d
+    Given the project has a project leader
+    When the employee is assigned as project leader
+    Then the assignment is successful

@@ -1,8 +1,6 @@
 package org.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -174,6 +172,8 @@ public class ActivitySteps {
 
     @Given("{int} activity exists in the project")
     public void activityExists(Integer amountOfActivities) {
+        Project project = SystemModel.getProjects().get(0);
+        System.out.println(SystemModel.getProjects());
         for (int i = 0; i < amountOfActivities; i++){
             // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
             GregorianCalendar startWeek = new GregorianCalendar();
@@ -181,8 +181,27 @@ public class ActivitySteps {
             // set endWeek to week 19.
             GregorianCalendar endWeek = new GregorianCalendar();
             endWeek.setWeekDate(2024, 19, 1);
-
+            // expected duration is 20 half hours
+            int expectedDuration = 20;
+            ProjectActivity projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity" + (i + 1), project);        
         }
+    }
+
+    @When("an employee tries to delete an activity")
+    public void anEmployeeTriesToDeleteAnActivity() {
+        Project project = SystemModel.getProjects().get(0);
+        List<Project> projecets = SystemModel.getProjects();
+        ProjectActivity projectActivity = project.getActivities().get(0);
+        System.out.println(project.getActivities());
+        project.removeActivity(projectActivity);
+        System.out.println(project.getActivities());
+    }
+
+
+    @Then("the activity no longer exists")
+    public void theActivityNoLongerExists() {
+        Project project = SystemModel.getProjects().get(0);
+        assertTrue(project.getActivities().isEmpty());
     }
 
     @When("the employee adds used time to the activity")
