@@ -102,10 +102,4 @@ public class ProjectSteps {
         assertEquals(employee.getID(),project.getProjectLeaderID());
     }
 
-    @Then("the assignment fails")
-    public void theAssignmentFails() {
-        Employee employee = SystemModel.getEmployees().get(0);
-        Project project = SystemModel.getProjects().get(0);
-        assertNotEquals(employee.getID(),project.getProjectLeaderID());
-    }
 }
