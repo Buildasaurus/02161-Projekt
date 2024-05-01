@@ -43,13 +43,6 @@ public class Project {
         activities.remove(activity);
     }
 
-    public void deleteActivity(ProjectActivity activity) {
-        if (activities.contains(activity)) {
-            removeActivity(activity);
-            activity.delete();
-        }
-    }
-
 
     public List<ProjectActivity> getActivities() {
         return activities;
