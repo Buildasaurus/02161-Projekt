@@ -3,6 +3,7 @@ package org.application.Controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.App;
 import org.application.Models.Activity;
@@ -65,7 +66,12 @@ public class EmployeeController implements IController {
         }
         List<Employee> sortedEmployees = SystemModel.findAvailableEmployees(start, end);
         for (Employee employee : sortedEmployees) {
-            searchBox.getChildren().add(new Text(employee.getID()));
+            Text text = new Text(employee.getID());
+            if(employee.getAvailabilityScore(start,end) <= 0)
+            {
+                text.setFill(Color.RED);
+            }
+            searchBox.getChildren().add(text);
         }
     }
 
