@@ -9,7 +9,7 @@ public class ProjectActivity extends Activity{
     private Project assignedProject;
 
     /**
-     * Create a new projectActivity
+     * Creates a new projectActivity. Also adds the project activity to the given project, when constructed
      * @param startWeek The week to start in, eg week 3
      * @param endWeek The end week, can be week 3 as well, or week 5
      * @param time The amount of half hours that the activity is expected to take.

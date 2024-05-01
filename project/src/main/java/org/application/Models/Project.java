@@ -35,6 +35,11 @@ public class Project {
         // TODO implement this
     }
 
+    /**
+     * Adds an activity to the project. Remember that Project activities pr default are added to
+     * the project, in the constructor.
+     * @param activity
+     */
     public void addActivity(ProjectActivity activity) {
         activities.add(activity);
     }

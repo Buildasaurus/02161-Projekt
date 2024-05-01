@@ -8,10 +8,7 @@ import org.application.App;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.SystemModel;
-import org.application.Views.ActivityView;
-import org.application.Views.CreateActivityView;
-import org.application.Views.EmployeeView;
-import org.application.Views.ProjectActivityView;
+import org.application.Views.*;
 
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -25,8 +22,9 @@ public class EmployeeController implements IController {
         view = eView;
         this.employee = employee;
         eView.setController(this);
-
     }
+
+
 
     @Override
     public Parent getView() {
@@ -42,6 +40,14 @@ public class EmployeeController implements IController {
         CreateActivityView view = new CreateActivityView(this);
         this.view = view;
         App.setRoot(this);
+    }
+
+    public void handleCreateProject(ActionEvent event)
+    {
+        CreateProjectView view = new CreateProjectView();
+        CreateProjectController controller = new CreateProjectController(view);
+        view.setController(controller);
+        App.setRoot(controller);
     }
 
     public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs) {
@@ -70,4 +76,6 @@ public class EmployeeController implements IController {
             searchBox.getChildren().add(new Text(employee.getID()));
         }
     }
+
+
 }

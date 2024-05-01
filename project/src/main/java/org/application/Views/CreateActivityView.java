@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.*;
+import org.application.Utils.GeneralMethods;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -73,8 +74,8 @@ public class CreateActivityView extends VBox {
         names.getChildren().add(new Text("Please search"));
         updateSearch.setOnAction(e -> {
             controller.handleUpdateSearch(e, names,
-                convertDatePickerToCalender(startDate),
-                convertDatePickerToCalender(endDate));
+                    GeneralMethods.convertDatePickerToCalender(startDate),
+                    GeneralMethods.convertDatePickerToCalender(endDate));
         });
         pane.setContent(names);
         getChildren().add(pane);
@@ -82,34 +83,10 @@ public class CreateActivityView extends VBox {
         // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> controller.handleCompleteActivity(e,
-                new ProjectActivity(convertDatePickerToCalender(startDate),
-                        convertDatePickerToCalender(endDate),
+                new ProjectActivity(GeneralMethods.convertDatePickerToCalender(startDate),
+                        GeneralMethods.convertDatePickerToCalender(endDate),
                         Integer.parseInt(halfHours.getText()),
                         name.getText(), chosenProject), assignedEmployees.getText().split(" ")));
         getChildren().add(completeButton);
-    }
-
-    public GregorianCalendar convertDatePickerToCalender(DatePicker date)
-    {
-        // Assume datePicker is your DatePicker object
-        LocalDate localDate = date.getValue();
-        if(localDate == null)
-        {
-            return null;
-        }
-
-
-        // Convert LocalDate to Instant
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        Instant instant = localDate.atStartOfDay(defaultZoneId).toInstant();
-
-        // Convert Instant to java.util.Date
-        Date instantdate = Date.from(instant);
-
-        // Convert java.util.Date to java.util.Calendar
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(instantdate);
-        return calendar;
-
     }
 }
