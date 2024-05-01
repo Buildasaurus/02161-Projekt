@@ -29,7 +29,7 @@ public class CreateActivityView extends VBox {
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
-        //Activity nae
+        //Activity name
         TextField name = new TextField();
         name.setPromptText("Activity name");
         getChildren().add(name);
