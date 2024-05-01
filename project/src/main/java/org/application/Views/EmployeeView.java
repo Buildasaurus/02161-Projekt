@@ -33,6 +33,11 @@ public class EmployeeView extends ScrollPane {
         createActivity.setOnAction(controller::handleOnCreateActivity);
         vbox.getChildren().add(createActivity);
 
+        // Create reserved activity button
+        Button createReservedActivity = new Button("Create Holiday Activity");
+        createReservedActivity.setOnAction(controller::handleOnCreateReservedActivity);
+        vbox.getChildren().add(createReservedActivity);
+
         // Timeblocks
         Text title = new Text("!Your Timeblocks!");
         vbox.getChildren().add(title);

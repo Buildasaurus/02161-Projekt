@@ -43,6 +43,13 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
+    public void handleOnCreateReservedActivity(ActionEvent event) {
+        System.out.println("Handling event");
+        CreateReservedActivityView view = new CreateReservedActivityView(this);
+        this.view = view;
+        App.setRoot(this);
+    }
+
     public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs) {
         System.out.println("Handling complete activity. Activity made: " + activity);
 
@@ -52,6 +59,14 @@ public class EmployeeController implements IController {
                 emp.addActivity(activity);
             }
         }
+        EmployeeView eView = new EmployeeView();
+        view = eView;
+        eView.setController(this);
+        App.setRoot(this);
+    }
+
+    public void handleCompleteReservedActivity(Activity activity) {
+        employee.addActivity(activity);
         EmployeeView eView = new EmployeeView();
         view = eView;
         eView.setController(this);
