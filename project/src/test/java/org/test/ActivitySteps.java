@@ -48,7 +48,7 @@ public class ActivitySteps {
         givenstart.setWeekDate(2024, int1, 1);
         ProjectActivity testActivity = SystemModel.getProjects().get(0).getActivities().get(0);
         System.out.println(testActivity.getName());
-        assertEquals(givenstart.get(Calendar.WEEK_OF_YEAR),testActivity.getEndDate().get(Calendar.WEEK_OF_YEAR));
+        assertEquals(givenstart.get(Calendar.WEEK_OF_YEAR),testActivity.getStartDate().get(Calendar.WEEK_OF_YEAR));
     }
 
     @When("the employee adds an activity with a start week {int} and end week {int}")
