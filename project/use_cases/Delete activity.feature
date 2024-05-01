@@ -18,8 +18,9 @@ Scenario: Delete Activity in employee
     Then the reserved activity no longer exists
 
 Scenario: User deletes an activity in a project with multiple activities
-    Given 2 activity exists
-    When a user tries to delete an activity
+    Given a project exists
+    Given 2 project activity exists in the project
+    When a employee tries to delete an activity
     Then the activity no longer exists
 
 Scenario: Activity with registered hours is deleted
