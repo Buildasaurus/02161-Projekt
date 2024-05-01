@@ -11,6 +11,15 @@ public class SystemModel { // should be public static class, but java is stupid
     private static List<Employee> employees = new ArrayList<>();
     private static int currentRunNumber = 0;
 
+    /**
+     * Method for resetting everything. Deleting all saves employees and projects.
+     */
+    public static void reset() {
+        currentRunNumber = 0;
+        projects.clear();
+        employees.clear();
+    }
+
     public static void createDefaultEmployees() {
         //Loading projects
         Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));

@@ -17,14 +17,20 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.application.Models.ReservedActivity;
+import org.junit.After;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
 
 public class ActivitySteps {
+
     ProjectActivity projectActivity;
     ReservedActivity reservedActivity;
 
+    @After
+    public void tearDown() {
+        SystemModel.reset();
+    }
 
     @Then("an activity is created")
     public void anActivityIsCreated() {

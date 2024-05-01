@@ -14,11 +14,17 @@ import org.application.Models.Project;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.After;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
 
 public class ProjectSteps {
+    @After
+    public void tearDown() {
+        SystemModel.reset();
+    }
+
     @Given("a Project Leader is assigned to the project")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
         List<Project> projects = SystemModel.getProjects();
