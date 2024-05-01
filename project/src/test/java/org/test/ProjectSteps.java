@@ -19,8 +19,6 @@ import io.cucumber.java.en.When;
 //TODO implement steps
 
 public class ProjectSteps {
-
-    
     @Given("a Project Leader is assigned to the project")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
         List<Project> projects = SystemModel.getProjects();
@@ -72,7 +70,7 @@ public class ProjectSteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Given("a project exists")
+    @When("a project is created")
     public void aProjectExists() {
         GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
