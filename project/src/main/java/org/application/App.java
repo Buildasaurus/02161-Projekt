@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.application.Controllers.IController;
 import org.application.Controllers.MainController;
+import org.application.Models.SystemModel;
 import org.application.Views.MainView;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        SystemModel.createDefaultEmployees();
         MainView view = new MainView();
         MainController controller = new MainController(view);
         view.setController(controller);

@@ -9,7 +9,7 @@ public class SystemModel { // should be public static class, but java is stupid
     private static List<Project> projects = new ArrayList<Project>();
     private static List<Employee> employees = new ArrayList<>();
 
-    static {
+    public static void createDefaultEmployees() {
         //Loading projects
         Project project = new Project(40, "The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
         projects.add(project);
