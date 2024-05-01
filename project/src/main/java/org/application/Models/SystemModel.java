@@ -79,4 +79,9 @@ public class SystemModel { // should be public static class, but java is stupid
     public static List<Project> getProjects() {
         return projects;
     }
+
+    public static Activity getActivity(String activityName) {
+        //TODO implement
+        return new ProjectActivity(null, null, 0, activityName, null);
+    }
 }

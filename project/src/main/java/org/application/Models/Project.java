@@ -12,7 +12,8 @@ public class Project {
     private String projectLeaderID;
     private List<ProjectActivity> activities = new ArrayList<>();
 
-    public Project(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek, String projectLeaderID) {
+    public Project(int projectID, String name, GregorianCalendar startWeek, GregorianCalendar endWeek,
+            String projectLeaderID) {
         initialize(projectID, name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
@@ -31,14 +32,14 @@ public class Project {
 
     public Report createReport() {
         return null;
-        //TODO implement this
+        // TODO implement this
     }
 
     public void addActivity(ProjectActivity activity) {
         activities.add(activity);
     }
-    public void removeActivity(ProjectActivity activity)
-    {
+
+    public void removeActivity(ProjectActivity activity) {
         activities.remove(activity);
     }
 
@@ -50,13 +51,8 @@ public class Project {
     }
 
 
-    public Activity getActivity(Activity searchActivity){
-        for (Activity activity: activities){
-            if (searchActivity.getName() == activity.getName()){
-                return activity;
-            }
-        }
-        return null;
+    public List<ProjectActivity> getActivities() {
+        return activities;
     }
 
     public void assignProjectLeader(String projectLeaderID) {
@@ -81,5 +77,9 @@ public class Project {
 
     public String getProjectLeaderID() {
         return projectLeaderID;
+    }
+
+    public void setProjectLeaderID(String projectLeaderID){
+        this.projectLeaderID = projectLeaderID;
     }
 }
