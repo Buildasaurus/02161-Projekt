@@ -72,7 +72,7 @@ public class Employee {
      */
     public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
     {
-        int total = 99999999;
+        long total = 9999999;
         long milliseconds1 = startTime.getTimeInMillis();
         long milliseconds2 = endTime.getTimeInMillis();
         long diff = milliseconds2 - milliseconds1;
@@ -100,7 +100,7 @@ public class Employee {
                 }
             }
         }
-        return (int)((total - busyActivities)*((float)freeDayCounter/totalDays));
+        return (int)((total - busyActivities)*freeDayCounter/totalDays);
     }
 
 
