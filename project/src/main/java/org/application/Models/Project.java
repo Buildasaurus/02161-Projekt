@@ -50,14 +50,6 @@ public class Project {
         }
     }
 
-    public Activity getActivity(Activity searchActivity) {
-        for (Activity activity : activities) {
-            if (searchActivity.getName() == activity.getName()) {
-                return activity;
-            }
-        }
-        return null;
-    }
 
     public List<ProjectActivity> getActivities() {
         return activities;
@@ -85,5 +77,9 @@ public class Project {
 
     public String getProjectLeaderID() {
         return projectLeaderID;
+    }
+
+    public void setProjectLeaderID(String projectLeaderID){
+        this.projectLeaderID = projectLeaderID;
     }
 }

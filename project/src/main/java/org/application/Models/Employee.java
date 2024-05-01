@@ -31,8 +31,14 @@ public class Employee {
         }
     }
 
-    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startDate, GregorianCalendar endDate) {
-        TimeBlock timeBlock = new TimeBlock(startDate, endDate, activity, this);
+    /**
+     * Creates a timeblock with the current employee assigned
+     * @param activity The activity worked on in the timeblock
+     * @param startHalfHour The start time of the timeblock, at a resolution down to half-hours
+     * @param endHalfHour The end time of the timeblock, at a resolution down to half-hours
+     */
+    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startHalfHour, GregorianCalendar endHalfHour) {
+        TimeBlock timeBlock = new TimeBlock(startHalfHour, endHalfHour, activity, this);
         timeBlocks.add(timeBlock);
         activity.addTimeBlock(timeBlock);
     }

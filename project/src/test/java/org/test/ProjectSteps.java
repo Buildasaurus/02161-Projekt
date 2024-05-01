@@ -2,7 +2,7 @@ package org.test;
 
 import java.util.List;
 
-//import org.application.Models.Employee;
+import org.application.Models.Employee;
 import org.application.Models.SystemModel;
 
 import static org.junit.Assert.*;
@@ -19,22 +19,22 @@ import io.cucumber.java.en.When;
 //TODO implement steps
 
 public class ProjectSteps {
+
+    
     @Given("a Project Leader is assigned to the project")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
         List<Project> projects = SystemModel.getProjects();
-        projects.get(0).getProjectLeaderID().equals("PROJECT LEADER NOT SET");
+        assertNotEquals(projects.get(0).getProjectLeaderID(),"PROJECT LEADER NOT SET");
     }
 
     @Given("the project has no project leader")
     public void theProjectHasNoProjectLeader(){
-        List<Project> projects = SystemModel.getProjects();
-        assertEquals(projects.get(0).getProjectLeaderID(),"PROJECT LEADER NOT SET");
+        Project project = SystemModel.getProjects().get(0);
+        project.setProjectLeaderID("PROJECT LEADER NOT SET");
     }
 
     @When("the Project Leader generates the report.")
     public void theProjectLeaderGeneratesTheReport() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
     }
 
     @Then("the Project Leader is prompted to choose a location to save the report")
@@ -57,8 +57,7 @@ public class ProjectSteps {
 
     @Given("a project leader exists.")
     public void aProjectLeaderExists() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        
     }
 
     @When("the project leader checks the overview")
@@ -80,7 +79,8 @@ public class ProjectSteps {
         // set endWeek to week 19.
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        // project = new Project(1, "test-project", startWeek, endWeek);
+        Project project = new Project(1, "test-project", startWeek, endWeek);
+        SystemModel.createNewProject(project);
     }
 
     @Given("the project has a project leader")
@@ -91,8 +91,16 @@ public class ProjectSteps {
 
     @When("the employee is assigned as project leader")
     public void theEmployeeIsAssignedAsProjectLeader() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Employee employee = SystemModel.getEmployees().get(0);
+        Project project = SystemModel.getProjects().get(0);
+        project.assignProjectLeader(employee.getID());
+    }
+
+    @Then("the assignment is successful")
+    public void theAssignmentIsSuccessful() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        Project project = SystemModel.getProjects().get(0);
+        assertEquals(employee.getID(),project.getProjectLeaderID());
     }
 
     @Then("the assignment fails")
