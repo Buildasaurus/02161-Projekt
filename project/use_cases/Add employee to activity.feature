@@ -4,7 +4,6 @@ Feature: Add employee to activity
 
 Background:
     Given a project exists
-    And an activity exists
     And an employee exists
     And a timeslot is selected
 
