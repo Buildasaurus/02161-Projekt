@@ -27,8 +27,7 @@ public class SystemModel { // should be public static class, but java is stupid
 
         //Loading employees
         Employee e = new Employee("404040");
-        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,10,1), new GregorianCalendar(1,10,1), "Holiday");
-        activity.assignEmployee(e);
+        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,10,1), new GregorianCalendar(1,10,1), "Holiday", e);
 
         ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), 20 , "Testing", project);
         projectActivity.assignEmployee(e);
@@ -36,8 +35,6 @@ public class SystemModel { // should be public static class, but java is stupid
 
         projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), 1, "codeRefactor", project);
         projectActivity.assignEmployee(e);
-
-        e.addActivity(activity);
 
         // TODO : make this read employees from a file
         //  - This is though an extra feature. Not high priority
