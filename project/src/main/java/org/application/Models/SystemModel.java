@@ -61,7 +61,10 @@ public class SystemModel { // should be public static class, but java is stupid
      */
     public static List<Employee> findAvailableEmployees(GregorianCalendar startDate, GregorianCalendar endDate) {
         List<Employee> availableEmployees = employees;
-        //TODO : figure out if  this sorts on correctly or backwards.
+        //TODO : figure out if this sorts on correctly or backwards.
+        for (Employee employee : employees) {
+            System.out.println(employee + " " +   employee.getAvailabilityScore(startDate, endDate));
+        }
         availableEmployees.sort((e1, e2) -> Double.compare(e2.getAvailabilityScore(startDate, endDate), e1.getAvailabilityScore(startDate, endDate)));
 
         return availableEmployees;
