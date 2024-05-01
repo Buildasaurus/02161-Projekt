@@ -2,13 +2,18 @@ package org.application.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.application.App;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.SystemModel;
+import org.application.Views.ActivityView;
 import org.application.Views.CreateActivityView;
 import org.application.Views.EmployeeView;
+import org.application.Views.ProjectActivityView;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class EmployeeController implements IController {
@@ -52,5 +57,17 @@ public class EmployeeController implements IController {
         view = eView;
         eView.setController(this);
         App.setRoot(this);
+    }
+
+    public void handleUpdateSearch(ActionEvent event, VBox searchBox, GregorianCalendar start, GregorianCalendar end) {
+        searchBox.getChildren().clear();
+        if (start == null || end == null) {
+            searchBox.getChildren().add(new Text("start or end date missing"));
+            return;
+        }
+        List<Employee> sortedEmployees = SystemModel.findAvailableEmployees(start, end);
+        for (Employee employee : sortedEmployees) {
+            searchBox.getChildren().add(new Text(employee.getID()));
+        }
     }
 }

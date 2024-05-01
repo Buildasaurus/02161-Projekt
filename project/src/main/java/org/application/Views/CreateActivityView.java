@@ -2,6 +2,7 @@ package org.application.Views;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -29,10 +30,12 @@ public class CreateActivityView extends VBox {
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
+
         //Activity name
         TextField name = new TextField();
         name.setPromptText("Activity name");
         getChildren().add(name);
+
 
         //Assigned employees
         TextField assignedEmployees = new TextField(controller.getEmployee().getID());
@@ -51,9 +54,30 @@ public class CreateActivityView extends VBox {
         halfHours.setPromptText("expected half-hours as int eg. (2)");
         getChildren().add(halfHours);
 
+
         // Choose the relevant project
         Project chosenProject = SystemModel.getProjects().get(0);
         //TODO - Create input fields to enter relevant stuff for new activities.
+
+
+        //Search - sorted list of most available employees
+        Text text = new Text("Most available employees in chosen time period");
+        text.setFill(Color.BLACK);
+        getChildren().add(text);
+
+        Button updateSearch = new Button("Search");
+        getChildren().add(updateSearch);
+
+        ScrollPane pane = new ScrollPane();
+        VBox names = new VBox();
+        names.getChildren().add(new Text("Please search"));
+        updateSearch.setOnAction(e -> {
+            controller.handleUpdateSearch(e, names,
+                convertDatePickerToCalender(startDate),
+                convertDatePickerToCalender(endDate));
+        });
+        pane.setContent(names);
+        getChildren().add(pane);
 
         // Create button
         Button completeButton = new Button("Complete");
@@ -69,6 +93,11 @@ public class CreateActivityView extends VBox {
     {
         // Assume datePicker is your DatePicker object
         LocalDate localDate = date.getValue();
+        if(localDate == null)
+        {
+            return null;
+        }
+
 
         // Convert LocalDate to Instant
         ZoneId defaultZoneId = ZoneId.systemDefault();

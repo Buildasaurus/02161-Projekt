@@ -105,7 +105,6 @@ public class Employee {
 
 
 
-
     /**
      * Calculates if the two periods defined by [start1, end1] and [start2, end2] overlaps
      * @param start1

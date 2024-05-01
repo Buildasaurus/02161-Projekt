@@ -1,6 +1,7 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -30,7 +31,6 @@ public class CreateEmployeeView extends VBox {
         TextField name = new TextField();
         name.setPromptText("ID");
         getChildren().add(name);
-
 
         // Create button
         Button completeButton = new Button("Complete");
