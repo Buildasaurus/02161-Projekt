@@ -47,7 +47,6 @@ public class ActivitySteps {
         GregorianCalendar givenstart = new GregorianCalendar();
         givenstart.setWeekDate(2024, int1, 1);
         ProjectActivity testActivity = SystemModel.getProjects().get(0).getActivities().get(0);
-        System.out.println(testActivity.getName());
         assertEquals(givenstart.get(Calendar.WEEK_OF_YEAR),testActivity.getStartDate().get(Calendar.WEEK_OF_YEAR));
     }
 

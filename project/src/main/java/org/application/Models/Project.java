@@ -79,7 +79,7 @@ public class Project {
         return projectLeaderID;
     }
 
-    public void setProjectLeaderID(String projectLeaderID){
-        this.projectLeaderID = projectLeaderID;
+    public void noProjectLeader(){
+        this.projectLeaderID = "PROJECT LEADER NOT SET";
     }
 }

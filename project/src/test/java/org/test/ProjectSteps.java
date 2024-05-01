@@ -19,8 +19,6 @@ import io.cucumber.java.en.When;
 //TODO implement steps
 
 public class ProjectSteps {
-
-    
     @Given("a Project Leader is assigned to the project")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
         List<Project> projects = SystemModel.getProjects();
@@ -30,7 +28,7 @@ public class ProjectSteps {
     @Given("the project has no project leader")
     public void theProjectHasNoProjectLeader(){
         Project project = SystemModel.getProjects().get(0);
-        project.setProjectLeaderID("PROJECT LEADER NOT SET");
+        project.noProjectLeader();
     }
 
     @When("the Project Leader generates the report.")
@@ -72,7 +70,7 @@ public class ProjectSteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Given("a project exists")
+    @When("a project is created")
     public void aProjectExists() {
         GregorianCalendar startWeek = new GregorianCalendar();
         startWeek.setWeekDate(2024, 17, 1);
@@ -85,8 +83,9 @@ public class ProjectSteps {
 
     @Given("the project has a project leader")
     public void theProjectHasAProjectLeader() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Project project = SystemModel.getProjects().get(0);
+        Employee dummyEmployee = new Employee("111111");
+        project.assignProjectLeader(dummyEmployee.getID());
     }
 
     @When("the employee is assigned as project leader")
@@ -103,9 +102,4 @@ public class ProjectSteps {
         assertEquals(employee.getID(),project.getProjectLeaderID());
     }
 
-    @Then("the assignment fails")
-    public void theAssignmentFails() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 }
