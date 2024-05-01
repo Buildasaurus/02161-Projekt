@@ -77,7 +77,7 @@ public class ProjectSteps {
         // set endWeek to week 19.
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        Project project = new Project(1, "test-project", startWeek, endWeek);
+        Project project = new Project("test-project", startWeek, endWeek);
         SystemModel.createNewProject(project);
     }
 
