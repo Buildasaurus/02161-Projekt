@@ -27,7 +27,6 @@ public class SystemModel { // should be public static class, but java is stupid
         projectActivity.assignEmployee(e);
 
         e.addActivity(activity);
-        employees.add(e);
 
         // TODO : make this read employees from a file
         //  - This is though an extra feature. Not high priority
