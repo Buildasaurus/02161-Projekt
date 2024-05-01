@@ -16,7 +16,7 @@ public class SystemModel { // should be public static class, but java is stupid
 
         //Loading employees
         Employee e = new Employee("404040");
-        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,4,1), new GregorianCalendar(1,4,1), "Holiday");
+        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,10,1), new GregorianCalendar(1,10,1), "Holiday");
         activity.assignEmployee(e);
 
         ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), 20 , "Testing", project);
