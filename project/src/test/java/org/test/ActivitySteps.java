@@ -70,11 +70,10 @@ public class ActivitySteps {
 
     @When("the employee adds a reserved activity for the day {int}\\/{int}")
     public void theEmployeeAddsAReservedActivityForTheDay(Integer day, Integer month) {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
         GregorianCalendar startDay = new GregorianCalendar(2024, month, day);
         GregorianCalendar endDay = new GregorianCalendar(2024, month, day);
-        reservedActivity = new ReservedActivity(startDay, endDay, "test-activity");
-        Employee testEmployee = SystemModel.getEmployees().get(0);
-        testEmployee.addActivity(reservedActivity);
+        reservedActivity = new ReservedActivity(startDay, endDay, "test-activity",testEmployee);
     }
 
     @Then("a reserved activity is created")
