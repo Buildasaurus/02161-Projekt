@@ -32,9 +32,9 @@ public abstract class Activity {
     }
 
     public void removeEmployee(String employeeID) {
-        if (assignedEmployees.contains(employeeID)) {
-            assignedEmployees.remove(employeeID);
-            Employee employee = SystemModel.getEmployee(employeeID);
+        Employee employee = SystemModel.getEmployee(employeeID);
+        if (assignedEmployees.contains(employee)) {
+            assignedEmployees.remove(employee);
             employee.removeActivity(this);
         }
     }

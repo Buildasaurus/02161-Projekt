@@ -28,7 +28,7 @@ public class ProjectSteps {
     @Given("the project has no project leader")
     public void theProjectHasNoProjectLeader(){
         Project project = SystemModel.getProjects().get(0);
-        project.setProjectLeaderID("PROJECT LEADER NOT SET");
+        project.noProjectLeader();
     }
 
     @When("the Project Leader generates the report.")
@@ -83,8 +83,9 @@ public class ProjectSteps {
 
     @Given("the project has a project leader")
     public void theProjectHasAProjectLeader() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Project project = SystemModel.getProjects().get(0);
+        Employee dummyEmployee = new Employee("111111");
+        project.assignProjectLeader(dummyEmployee.getID());
     }
 
     @When("the employee is assigned as project leader")
@@ -103,7 +104,8 @@ public class ProjectSteps {
 
     @Then("the assignment fails")
     public void theAssignmentFails() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Employee employee = SystemModel.getEmployees().get(0);
+        Project project = SystemModel.getProjects().get(0);
+        assertNotEquals(employee.getID(),project.getProjectLeaderID());
     }
 }
