@@ -27,7 +27,7 @@ public class ActivitySteps {
     ProjectActivity projectActivity;
     ReservedActivity reservedActivity;
 
-    @After
+    @io.cucumber.java.After
     public void tearDown() {
         SystemModel.reset();
     }

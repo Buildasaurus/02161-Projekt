@@ -20,7 +20,7 @@ import org.junit.After;
 //TODO implement steps
 
 public class ProjectSteps {
-    @After
+    @io.cucumber.java.After
     public void tearDown() {
         SystemModel.reset();
     }
