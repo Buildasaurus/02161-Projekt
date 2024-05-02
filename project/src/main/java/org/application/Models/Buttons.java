@@ -17,11 +17,7 @@ public class Buttons
     public static Button returnButton()
     {
         Button returnButton = new Button("Main menu");
-        returnButton.setOnAction(e -> {
-            MainView view = new MainView();
-            MainController controller = new MainController(view);
-            view.setController(controller);
-            App.setRoot(controller);});
+        returnButton.setOnAction(e -> App.goToMainMenu());
         return  returnButton;
     }
 }

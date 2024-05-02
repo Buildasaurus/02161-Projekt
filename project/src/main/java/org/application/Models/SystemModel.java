@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.HashMap;
 
 public class SystemModel { // should be public static class, but java is stupid
-    //TODO STATIC class!
+    // STATIC class!
     private static List<Project> projects = new ArrayList<>();
     private static List<Employee> employees = new ArrayList<>();
     private static int currentRunNumber = 0;
@@ -42,17 +42,23 @@ public class SystemModel { // should be public static class, but java is stupid
         activities.addAll(getProjectActivities());
         activities.addAll(getReservedActivites());
         return activities;
+    /**
+     * Method for resetting everything. Deleting all saves employees and projects.
+     */
+    public static void reset() {
+        currentRunNumber = 0;
+        projects.clear();
+        employees.clear();
     }
 
     public static void createDefaultEmployees() {
-        //Loading projects
+        // Loading projects
         Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
         projects.add(project);
 
-        //Loading employees
+        // Loading employees
         Employee e = new Employee("404040");
-        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,10,1), new GregorianCalendar(1,10,1), "Holiday");
-        activity.assignEmployee(e);
+        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,10,1), new GregorianCalendar(1,10,1), "Holiday", e);
 
         ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), 20 , "Testing", project);
         projectActivity.assignEmployee(e);
@@ -60,8 +66,6 @@ public class SystemModel { // should be public static class, but java is stupid
 
         projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), 1, "codeRefactor", project);
         projectActivity.assignEmployee(e);
-
-        e.addActivity(activity);
 
         // TODO : make this read employees from a file
         //  - This is though an extra feature. Not high priority
@@ -88,6 +92,15 @@ public class SystemModel { // should be public static class, but java is stupid
         // TODO : consider if this should have some effect on view? perhaps tell it to update.
     }
 
+    public static Project getProjectByName(String projectName) {
+        for (Project project : projects) {
+            if (project.getName().equals(projectName)) {
+                return project;
+            }
+        }
+        return null;
+    }
+
     static public String getNextProjectID()
     {
         return new GregorianCalendar().get(Calendar.YEAR) + "" + currentRunNumber++;
@@ -110,7 +123,7 @@ public class SystemModel { // should be public static class, but java is stupid
         return availableEmployees;
     }
 
-    public static void createNewProject(Project project) {
+    public static void addProject(Project project) {
         projects.add(project);
     }
 

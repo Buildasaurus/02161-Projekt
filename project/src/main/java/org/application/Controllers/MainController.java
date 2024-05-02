@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import org.application.App;
 import org.application.Views.CreateEmployeeView;
+import org.application.Views.CreateProjectView;
 import org.application.Views.LoginView;
 
 
@@ -28,6 +29,14 @@ public class MainController implements IController{
         CreateEmployeeController controller = new CreateEmployeeController(newView);
         newView.setController(controller);
         App.setRoot(newView);
+    }
+
+    public void handleCreateProject(ActionEvent event)
+    {
+        CreateProjectView view = new CreateProjectView();
+        CreateProjectController controller = new CreateProjectController(view);
+        view.setController(controller);
+        App.setRoot(controller);
     }
 
     public Parent getView()

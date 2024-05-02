@@ -1,8 +1,6 @@
 package org.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -20,14 +18,20 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.application.Models.ReservedActivity;
+import org.junit.After;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
 
 public class ActivitySteps {
+
     ProjectActivity projectActivity;
     ReservedActivity reservedActivity;
 
+    @io.cucumber.java.After
+    public void tearDown() {
+        SystemModel.reset();
+    }
 
     @Then("{int} activities exist")
     public void activitiesExist(int amountOfActivitiesExpected) {
@@ -71,11 +75,10 @@ public class ActivitySteps {
 
     @When("the employee adds a reserved activity for the day {int}\\/{int}")
     public void theEmployeeAddsAReservedActivityForTheDay(Integer day, Integer month) {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
         GregorianCalendar startDay = new GregorianCalendar(2024, month, day);
         GregorianCalendar endDay = new GregorianCalendar(2024, month, day);
-        reservedActivity = new ReservedActivity(startDay, endDay, "test-activity");
-        Employee testEmployee = SystemModel.getEmployees().get(0);
-        testEmployee.addActivity(reservedActivity);
+        reservedActivity = new ReservedActivity(startDay, endDay, "test-activity",testEmployee);
     }
 
     @Then("a reserved activity is created")
@@ -88,19 +91,6 @@ public class ActivitySteps {
     public void theActivityEndsIn(int testDay, int testMonth) {
         assertEquals(reservedActivity.getEndDate().get(Calendar.DAY_OF_MONTH), testDay);
         assertEquals(reservedActivity.getEndDate().get(Calendar.MONTH), testMonth);
-    }
-
-    @Given("an activity exists")
-    public void anActivityExists() {
-        // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
-        GregorianCalendar startWeek = new GregorianCalendar();
-        startWeek.setWeekDate(2024, 17, 1);
-        // set endWeek to week 19.
-        GregorianCalendar endWeek = new GregorianCalendar();
-        endWeek.setWeekDate(2024, 19, 1);
-        ReservedActivity sampleActivity = new ReservedActivity(startWeek, endWeek, "sample");
-        Employee testEmployee = SystemModel.getEmployees().get(0);
-        testEmployee.addActivity(sampleActivity);
     }
 
     @Given("a project activity exists")
@@ -155,7 +145,9 @@ public class ActivitySteps {
         // set endWeek to week 19.
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        reservedActivity = new ReservedActivity(startWeek, endWeek, "reserved-activity");
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        ReservedActivity sampleActivity = new ReservedActivity(startWeek, endWeek, "sample",testEmployee);
+        testEmployee.addActivity(sampleActivity);;
     }
 
     @When("the employee adds themselves to the reserved activity")
@@ -179,6 +171,7 @@ public class ActivitySteps {
 
     @Given("{int} activities exists in the project")
     public void activityExists(Integer amountOfActivities) {
+        Project project = SystemModel.getProjects().get(0);
         for (int i = 0; i < amountOfActivities; i++){
             // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
             GregorianCalendar startWeek = new GregorianCalendar();
@@ -186,8 +179,47 @@ public class ActivitySteps {
             // set endWeek to week 19.
             GregorianCalendar endWeek = new GregorianCalendar();
             endWeek.setWeekDate(2024, 19, 1);
-
+            // expected duration is 20 half hours
+            int expectedDuration = 20;
+            ProjectActivity projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity" + (i + 1), project);        
         }
+    }
+
+    @Given("{int} activity exists in the employee")
+    public void activityExistsInTheEmployee(Integer amountOfActivities) {
+        Employee employee = SystemModel.getEmployees().get(0);
+        for (int i = 0; i < amountOfActivities; i++){
+            GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
+            GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
+            ReservedActivity reservedActivity = new ReservedActivity(startDay, endDay,"sample-activity" + (i + 1),employee); 
+        }  
+    }
+
+    @When("an employee tries to delete a project activity")
+    public void anEmployeeTriesToDeleteAProjectActivity() {
+        Project project = SystemModel.getProjects().get(0);
+        ProjectActivity projectActivity = project.getActivities().get(0);
+        project.removeActivity(projectActivity);
+    }
+
+    @When("an employee tries to delete a reserved activity")
+    public void anEmployeeTriesToDeleteAReservedActivity() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        ReservedActivity reservedActivity = (ReservedActivity) employee.getActivities().get(0);
+        employee.removeActivity(reservedActivity);
+    }
+
+
+    @Then("the project activity no longer exists")
+    public void theProjectActivityNoLongerExists() {
+        Project project = SystemModel.getProjects().get(0);
+        assertTrue(project.getActivities().isEmpty());
+    }
+
+    @Then("the reserved activity no longer exists")
+    public void theReservedActivityNoLongerExists() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        assertTrue(employee.getActivities().isEmpty());
     }
 
     @When("the employee adds used time to the activity")

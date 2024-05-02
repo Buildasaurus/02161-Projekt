@@ -3,15 +3,14 @@ package org.application.Controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.App;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
+import org.application.Models.Project;
 import org.application.Models.SystemModel;
-import org.application.Views.ActivityView;
-import org.application.Views.CreateActivityView;
-import org.application.Views.EmployeeView;
-import org.application.Views.ProjectActivityView;
+import org.application.Views.*;
 
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -25,8 +24,9 @@ public class EmployeeController implements IController {
         view = eView;
         this.employee = employee;
         eView.setController(this);
-
     }
+
+
 
     @Override
     public Parent getView() {
@@ -40,6 +40,13 @@ public class EmployeeController implements IController {
     public void handleOnCreateActivity(ActionEvent event) {
         System.out.println("Handling event");
         CreateActivityView view = new CreateActivityView(this);
+        this.view = view;
+        App.setRoot(this);
+    }
+
+    public void handleOnCreateReservedActivity(ActionEvent event) {
+        System.out.println("Handling event");
+        CreateReservedActivityView view = new CreateReservedActivityView(this);
         this.view = view;
         App.setRoot(this);
     }
@@ -59,6 +66,14 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
+    public void handleCompleteReservedActivity(Activity activity) {
+        employee.addActivity(activity);
+        EmployeeView eView = new EmployeeView();
+        view = eView;
+        eView.setController(this);
+        App.setRoot(this);
+    }
+
     public void handleUpdateSearch(ActionEvent event, VBox searchBox, GregorianCalendar start, GregorianCalendar end) {
         searchBox.getChildren().clear();
         if (start == null || end == null) {
@@ -67,7 +82,28 @@ public class EmployeeController implements IController {
         }
         List<Employee> sortedEmployees = SystemModel.findAvailableEmployees(start, end);
         for (Employee employee : sortedEmployees) {
-            searchBox.getChildren().add(new Text(employee.getID()));
+            Text text = new Text(employee.getID());
+            if(employee.getAvailabilityScore(start,end) <= 0)
+            {
+                text.setFill(Color.RED);
+            }
+            searchBox.getChildren().add(text);
         }
     }
+
+    public void handleSeeOverview(Project project)
+    {
+        ProjectOverviewView view = new ProjectOverviewView(this, project);
+        this.view = view;
+        App.setRoot(this);
+    }
+
+    public void handleOKButton(ActionEvent event) {
+        EmployeeView eView = new EmployeeView();
+        view = eView;
+        eView.setController(this);
+        App.setRoot(this);
+    }
+
+
 }

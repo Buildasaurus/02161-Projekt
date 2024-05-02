@@ -34,7 +34,7 @@ public class LoginView extends VBox {
         atitle.setFill(Color.GRAY);
         getChildren().add(atitle);
 
-        //Username input boxx
+        //Username input box
         userName = new TextField();
         userName.setPromptText("Username");
         getChildren().add(userName);
