@@ -1,7 +1,5 @@
 package org.application.Views;
-
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.Buttons;
@@ -29,10 +27,20 @@ public class ProjectOverviewView extends VBox {
 
         this.getChildren().addAll(nameLabel, idLabel, startWeekLabel, endWeekLabel, leaderLabel);
 
+        // Calculate total spent time and expected duration for all activities
+        int totalSpentTime = 0;
+        int totalExpectedDuration = 0;
         for (ProjectActivity activity : project.getActivities()) {
-            Label activityLabel = new Label("Activity: " + activity.toString()); // Assuming ProjectActivity has a toString method
-            this.getChildren().add(activityLabel);
+            totalSpentTime += activity.calculateSpentTime();
+            totalExpectedDuration += activity.getExpectedDuration();
         }
+
+        // Calculate overall progress
+        double overallProgress = (double) totalSpentTime / totalExpectedDuration;
+
+        ProgressBar overallProgressBar = new ProgressBar(overallProgress);
+        this.getChildren().add(new Label("Overall Progress"));
+        this.getChildren().add(overallProgressBar);
 
         Button OKButton = new Button("OK");
         OKButton.setOnAction(controller::handleOKButton);
