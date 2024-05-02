@@ -51,17 +51,6 @@ public class CreateActivityView extends VBox {
         endWeek.setPromptText("End week (eg. 10)");
         getChildren().add(endWeek);
 
-        // Day variation
-        /*
-        DatePicker startDate = new DatePicker();
-        startDate.setPromptText("Start Date");
-        getChildren().add(startDate);
-
-        DatePicker endDate = new DatePicker();
-        endDate.setPromptText("End Date");
-        getChildren().add(endDate);
-        */
-
         //Expected duration
         TextField halfHours = new TextField();
         halfHours.setPromptText("expected half-hours as int eg. (2)");
