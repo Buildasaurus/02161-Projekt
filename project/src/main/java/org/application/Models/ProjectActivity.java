@@ -4,6 +4,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ProjectActivity extends Activity{
+    /**
+     * Expected duration of the given activity, measured in half-hours
+     */
     private int expectedDuration;
     private List<TimeBlock> timeBlocks = new ArrayList<>();
     private Project assignedProject;
@@ -28,7 +31,7 @@ public class ProjectActivity extends Activity{
 
     /**
      *
-     * @return an integer of how many half-hours has passed for this activity
+     * @return an integer of how many half-hours has been spent on this activity
      */
     public int calculateSpentTime(){
         int halfHours = 0;
