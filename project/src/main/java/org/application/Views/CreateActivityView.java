@@ -41,6 +41,18 @@ public class CreateActivityView extends VBox {
         assignedEmployees.setPromptText("Assgined employes, space seperated");
         getChildren().add(assignedEmployees);
 
+        //Week picking
+
+        TextField startWeek = new TextField();
+        startWeek.setPromptText("Start week (eg. 5)");
+        getChildren().add(startWeek);
+
+        TextField endWeek = new TextField();
+        endWeek.setPromptText("End week (eg. 10)");
+        getChildren().add(endWeek);
+
+        // Day variation
+        /*
         DatePicker startDate = new DatePicker();
         startDate.setPromptText("Start Date");
         getChildren().add(startDate);
@@ -48,7 +60,9 @@ public class CreateActivityView extends VBox {
         DatePicker endDate = new DatePicker();
         endDate.setPromptText("End Date");
         getChildren().add(endDate);
+        */
 
+        //Expected duration
         TextField halfHours = new TextField();
         halfHours.setPromptText("expected half-hours as int eg. (2)");
         getChildren().add(halfHours);
@@ -76,8 +90,8 @@ public class CreateActivityView extends VBox {
         names.getChildren().add(new Text("Please search"));
         updateSearch.setOnAction(e -> {
             controller.handleUpdateSearch(e, names,
-                    GeneralMethods.convertDatePickerToCalender(startDate),
-                    GeneralMethods.convertDatePickerToCalender(endDate));
+                    GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
+                    GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())));
         });
         pane.setContent(names);
         getChildren().add(pane);
@@ -85,8 +99,9 @@ public class CreateActivityView extends VBox {
         // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> controller.handleCompleteActivity(e,
-                new ProjectActivity(GeneralMethods.convertDatePickerToCalender(startDate),
-                        GeneralMethods.convertDatePickerToCalender(endDate),
+                new ProjectActivity(
+                        GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
+                        GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())),
                         Integer.parseInt(halfHours.getText()),
                         name.getText(), SystemModel.getProjectByName(comboBox.getSelectionModel().getSelectedItem())), assignedEmployees.getText().split(" ")));
         getChildren().add(completeButton);
