@@ -1,15 +1,22 @@
 package org.application.Views;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.application.Controllers.EmployeeController;
+import org.application.Models.Buttons;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
+import org.application.Models.SystemModel;
+import org.application.Utils.GeneralMethods;
 
 public class ProjectOverviewView extends VBox {
     private Project project;
+    EmployeeController controller;
 
-    public ProjectOverviewView(Project project) {
+    public ProjectOverviewView(EmployeeController controller, Project project) {
         this.project = project;
+        this.controller = controller;
         initView();
     }
 
@@ -26,5 +33,9 @@ public class ProjectOverviewView extends VBox {
             Label activityLabel = new Label("Activity: " + activity.toString()); // Assuming ProjectActivity has a toString method
             this.getChildren().add(activityLabel);
         }
+
+        Button OKButton = new Button("OK");
+        OKButton.setOnAction(controller::handleOKButton);
+        getChildren().add(OKButton);
     }
 }

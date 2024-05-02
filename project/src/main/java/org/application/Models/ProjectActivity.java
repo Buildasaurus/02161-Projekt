@@ -30,7 +30,7 @@ public class ProjectActivity extends Activity{
      *
      * @return an integer of how many half-hours has passed for this activity
      */
-    public int calculateCompletionTime(){
+    public int calculateSpentTime(){
         int halfHours = 0;
         for(TimeBlock timeBlock : timeBlocks){
             halfHours += timeBlock.getDuration();

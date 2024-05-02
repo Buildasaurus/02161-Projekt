@@ -2,13 +2,15 @@ package org.application.Views;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
-import org.application.Models.Activity;
-import org.application.Models.Buttons;
-import org.application.Models.TimeBlock;
+import org.application.Models.*;
+
+import java.util.List;
 
 /**
  * A view to see and interact with data tied to a single employee
@@ -37,6 +39,23 @@ public class EmployeeView extends ScrollPane {
         Button createReservedActivity = new Button("Create Holiday Activity");
         createReservedActivity.setOnAction(controller::handleOnCreateReservedActivity);
         vbox.getChildren().add(createReservedActivity);
+
+
+        // Project Selection Section
+        vbox.getChildren().add(new Label("Project overview"));
+        ComboBox<String> comboBox = new ComboBox<>();
+        List<Project> projects = SystemModel.getProjects();
+        for (Project project : projects) {
+            comboBox.getItems().add(project.getName());
+        }
+        vbox.getChildren().add(comboBox);
+
+        Button seeOverviewButton = new Button("See overview");
+        seeOverviewButton.setOnAction(e -> controller.handleSeeOverview(
+                SystemModel.getProjectByName(
+                        comboBox.getSelectionModel().getSelectedItem())));
+        vbox.getChildren().add(seeOverviewButton);
+
 
         // Timeblocks
         Text title = new Text("!Your Timeblocks!");

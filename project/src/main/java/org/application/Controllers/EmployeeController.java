@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import org.application.App;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
+import org.application.Models.Project;
 import org.application.Models.SystemModel;
 import org.application.Views.*;
 
@@ -88,6 +89,20 @@ public class EmployeeController implements IController {
             }
             searchBox.getChildren().add(text);
         }
+    }
+
+    public void handleSeeOverview(Project project)
+    {
+        ProjectOverviewView view = new ProjectOverviewView(this, project);
+        this.view = view;
+        App.setRoot(this);
+    }
+
+    public void handleOKButton(ActionEvent event) {
+        EmployeeView eView = new EmployeeView();
+        view = eView;
+        eView.setController(this);
+        App.setRoot(this);
     }
 
 
