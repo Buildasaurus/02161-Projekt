@@ -91,12 +91,16 @@ public class CreateActivityView extends VBox {
 
         // Completion Section
         Button completeButton = new Button("Complete");
-        completeButton.setOnAction(e -> controller.handleCompleteActivity(e,
+        completeButton.setOnAction(e -> controller.handleCompleteActivity(
+                e,
                 new ProjectActivity(
                         GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
                         GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())),
                         Integer.parseInt(halfHours.getText()),
-                        name.getText(), SystemModel.getProjectByName(comboBox.getSelectionModel().getSelectedItem())), assignedEmployees.getText().split(" ")));
+                        name.getText(),
+                        SystemModel.getProjectByName(comboBox.getSelectionModel().getSelectedItem())),
+                assignedEmployees.getText().split(" ")
+                ));
         getChildren().add(completeButton);
     }
 }
