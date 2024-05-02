@@ -3,18 +3,16 @@ Feature: Adding / creating activities
     Actors: Project leader or User
 
 Background:
-    Given an employee exists
+    When 1 employees are created
+    And 1 projects are created
 
 Scenario: Add activity starting in week 4 and ending in week 7
-    When a project is created
-    And the employee adds an activity with a start week 4 and end week 7
-    Then an activity is created
+    When the employee adds an activity with a start week 4 and end week 7
+    Then 1 activities exist
     And the activity starts in week 4
     And the activity ends in week 7
 
-
 Scenario: Add reserved activity for 16/9
-    When a project is created
-    And the employee adds a reserved activity for the day 16/9
-    Then a reserved activity is created
-    And the activity ends in 16/9
+    When the employee adds a reserved activity for the day 16/9
+    Then 1 reserved activities exist
+    And the activity ends at 16/9

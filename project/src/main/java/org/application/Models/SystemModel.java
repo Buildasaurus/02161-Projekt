@@ -4,12 +4,45 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.HashMap;
 
 public class SystemModel { // should be public static class, but java is stupid
-    //STATIC class!
-    private static List<Project> projects = new ArrayList<Project>();
+    //TODO STATIC class!
+    private static List<Project> projects = new ArrayList<>();
     private static List<Employee> employees = new ArrayList<>();
     private static int currentRunNumber = 0;
+
+    public static List<ReservedActivity> getReservedActivites() {
+        HashMap<ReservedActivity, ReservedActivity> reservedActivitiesMap = new HashMap<ReservedActivity, ReservedActivity>();
+        for (Employee employee : employees) {
+            for (Activity employeeActivity : employee.getActivities()) {
+                if (employeeActivity instanceof ReservedActivity) {
+                    reservedActivitiesMap.put((ReservedActivity) employeeActivity, (ReservedActivity) employeeActivity);
+                }
+            }
+        }
+
+        ArrayList<ReservedActivity> reservedActivitiesList = new ArrayList<>(reservedActivitiesMap.values());
+        return reservedActivitiesList;
+    }
+
+    public static List<ProjectActivity> getProjectActivities() {
+        HashMap<ProjectActivity, ProjectActivity> projectActivitiesMap = new HashMap<ProjectActivity, ProjectActivity>();
+        for (Project project : projects) {
+            for (ProjectActivity projectActivity : project.getActivities()) {
+                projectActivitiesMap.put(projectActivity, projectActivity);
+            }
+        }
+        ArrayList<ProjectActivity> projectActivitiesList = new ArrayList<>(projectActivitiesMap.values());
+        return projectActivitiesList;
+    }
+
+    public static List<Activity> getActivities() {
+        List<Activity> activities = new ArrayList<Activity>();
+        activities.addAll(getProjectActivities());
+        activities.addAll(getReservedActivites());
+        return activities;
+    }
 
     public static void createDefaultEmployees() {
         //Loading projects

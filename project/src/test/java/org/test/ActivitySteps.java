@@ -10,6 +10,7 @@ import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
+import org.hamcrest.core.IsInstanceOf;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -28,10 +29,14 @@ public class ActivitySteps {
     ReservedActivity reservedActivity;
 
 
-    @Then("an activity is created")
-    public void anActivityIsCreated() {
-        Project project = SystemModel.getProjects().get(0);
-        assertNotNull(project.getActivities());
+    @Then("{int} activities exist")
+    public void activitiesExist(int amountOfActivitiesExpected) {
+        assertEquals(amountOfActivitiesExpected,SystemModel.getProjects().size());
+    }
+
+    @Then("{int} reserved activities exist")
+    public void reservedActivitiesExist(int amountOfActivitiesExpected) {
+        assertEquals(amountOfActivitiesExpected,SystemModel.getReservedActivites().size());
     }
 
     @Then("the activity ends in week {int}")
@@ -79,7 +84,7 @@ public class ActivitySteps {
         assertNotNull(testEmployee.getActivity("test-activity"));
     }
 
-    @Then("the activity ends in {int}\\/{int}")
+    @Then("the activity ends at {int}\\/{int}")
     public void theActivityEndsIn(int testDay, int testMonth) {
         assertEquals(reservedActivity.getEndDate().get(Calendar.DAY_OF_MONTH), testDay);
         assertEquals(reservedActivity.getEndDate().get(Calendar.MONTH), testMonth);
@@ -172,7 +177,7 @@ public class ActivitySteps {
         assertNotEquals(testEmployee.getActivities().size(),0);
     }
 
-    @Given("{int} activity exists in the project")
+    @Given("{int} activities exists in the project")
     public void activityExists(Integer amountOfActivities) {
         for (int i = 0; i < amountOfActivities; i++){
             // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
@@ -197,9 +202,4 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Given("an employee exists")
-    public void anEmployeeExists() {
-        Employee employee = new Employee("444444");
-        SystemModel.addEmployee(employee);
-    }
 }

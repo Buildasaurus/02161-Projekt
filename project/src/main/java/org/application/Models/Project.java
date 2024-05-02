@@ -28,6 +28,7 @@ public class Project {
         this.name = name;
         this.endWeek = endWeek;
         this.startWeek = startWeek;
+        SystemModel.createNewProject(this);
     }
 
     public Report createReport() {
