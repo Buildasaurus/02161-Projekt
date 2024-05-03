@@ -10,6 +10,7 @@ import org.application.Utils.GeneralMethods;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CreateActivityView extends VBox {
     EmployeeController controller;
@@ -117,7 +118,9 @@ public class CreateActivityView extends VBox {
             name.setText(activity.getName());
             startWeek.setText("" + activity.getStartDate().get(Calendar.WEEK_OF_YEAR));
             endWeek.setText("" + activity.getEndDate().get(Calendar.WEEK_OF_YEAR));
-            assignedEmployees.setText("" + activity.getAssignedEmployees());
+            assignedEmployees.setText(activity.getAssignedEmployees().stream()
+                    .map(Employee::toString)  // assuming Employee has a toString method
+                    .collect(Collectors.joining(" ")));
             halfHours.setText("" + ((ProjectActivity)activity).getExpectedDuration());
             projectSelectionCombobox.getSelectionModel().select(
                     ((ProjectActivity) activity).getAssignedProject().getName());

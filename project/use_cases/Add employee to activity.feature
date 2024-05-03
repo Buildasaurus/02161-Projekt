@@ -19,7 +19,7 @@ Scenario: Removing employee from activity
 
 Scenario: Assign employee with name
   When an employee named "testEmployee" is created
-  And the employee named "testEmployee" is added to the project activity
+  And the employee named "testEmployee" is assigned to the project activity
   Then the employee is assigned to the activity
 
 Scenario: Assign same employee twice to activity
