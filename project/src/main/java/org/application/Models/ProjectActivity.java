@@ -56,9 +56,10 @@ public class ProjectActivity extends Activity {
 
     public void delete() {
         for (Employee employee : assignedEmployees) {
-            employee.removeActivity(this);
+            removeEmployee(employee);
         }
         assignedProject.removeActivity(this);
+        assignedProject = null;
     }
 
     public int getExpectedDuration() {
@@ -68,4 +69,5 @@ public class ProjectActivity extends Activity {
     public Project getAssignedProject() {
         return assignedProject;
     }
+
 }
