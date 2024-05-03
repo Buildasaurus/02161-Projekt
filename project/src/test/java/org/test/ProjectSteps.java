@@ -10,9 +10,7 @@ import static org.junit.Assert.*;
 import java.util.GregorianCalendar;
 
 import org.application.Models.Project;
-
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
+import org.application.Models.Report;port io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 //import org.junit.After;
 
@@ -39,6 +37,8 @@ public class ProjectSteps {
 
     @When("the Project Leader generates the report.")
     public void theProjectLeaderGeneratesTheReport() {
+        Project project = SystemModel.getProjects().get(0);
+        Report report = project.createReport();
     }
 
     @Then("the Project Leader is prompted to choose a location to save the report")
