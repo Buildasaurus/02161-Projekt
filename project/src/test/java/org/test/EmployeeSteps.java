@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 
 import org.application.Models.Activity;
 import org.application.Models.Employee;
+import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 import org.application.Models.TimeBlock;
 
@@ -30,10 +31,10 @@ public class EmployeeSteps {
     @When("the employee spends time on the activity")
     public void spendTimeOnActivity() {
         Employee testEmployee = SystemModel.getEmployees().get(0);
-        Activity testActivity = SystemModel.getActivities().get(0);
+        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(0);
         GregorianCalendar startTime = new GregorianCalendar(1,1,1);
         GregorianCalendar endTime = new GregorianCalendar(1,1,1);
-        new TimeBlock(startTime, endTime, testActivity, testEmployee);
+        testEmployee.createTimeBlock(testActivity, startTime, endTime);
     }
 
     @Then("the employee has {int} timeblocks attached")
