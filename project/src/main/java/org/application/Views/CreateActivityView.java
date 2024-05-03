@@ -114,8 +114,8 @@ public class CreateActivityView extends VBox {
             halfHours.setText("" + ((ProjectActivity)activity).getExpectedDuration());
             projectSelectionCombobox.getSelectionModel().select(
                     ((ProjectActivity) activity).getAssignedProject().getName());
+            activity.delete();
         }
         
-        activity.delete();
     }
 }
