@@ -121,8 +121,7 @@ public class ActivitySteps {
 
     @Then("the employee is assigned to the activity")
     public void theEmployeeIsAssignedToTheActivity() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(1,SystemModel.getActivities().get(0).getAssignedEmployees().size());
     }
 
     @Given("the employee is assigned to a reserved activity in the selected time slot")
@@ -205,10 +204,10 @@ public class ActivitySteps {
         }  
     }
 
-    @When("an employee tries to delete a project activity")
+    @When("an employee deletes a project activity")
     public void anEmployeeTriesToDeleteAProjectActivity() {
-//        ProjectActivity projectActivity = project.getActivities().get(0);
-//        project.removeActivity(projectActivity);
+        ProjectActivity projectActivity = SystemModel.getProjectActivities().get(0);
+        projectActivity.delete();
     }
 
     @When("an employee tries to delete a reserved activity")
@@ -255,5 +254,4 @@ public class ActivitySteps {
         ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
         testActivity.removeEmployee(testEmployee);
     }
-
 }
