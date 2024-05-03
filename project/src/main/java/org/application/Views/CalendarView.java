@@ -182,11 +182,14 @@ public class CalendarView extends GridPane {
     private EventHandler<ActionEvent> submitTimeBlock() {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                GregorianCalendar[] calendars = toCalendarList(startSelect.getValue(), endSelect.getValue());
-                ProjectActivity activity = (ProjectActivity) SystemModel.getActivity(activityField.getText());
-                employee.createTimeBlock(activity, calendars[0], calendars[1]);
-                updateTimeBlocks();
-                clearData();
+                if (startSelect.getValue() != null && endSelect.getValue() != null) {
+                    GregorianCalendar[] calendars = toCalendarList(startSelect.getValue(), endSelect.getValue());
+                    ProjectActivity activity = (ProjectActivity) SystemModel.getActivity(activityField.getText());
+                    if (activity != null) {
+                        employee.createTimeBlock(activity, calendars[0], calendars[1]);
+                        updateTimeBlocks();
+                    }
+                }
             }
         };
         return event;
