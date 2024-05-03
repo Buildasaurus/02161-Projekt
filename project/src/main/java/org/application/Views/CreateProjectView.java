@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.CreateProjectController;
+import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
 
 public class CreateProjectView extends VBox
@@ -47,9 +48,16 @@ public class CreateProjectView extends VBox
 
         // Create button
         Button completeButton = new Button("Complete");
-        completeButton.setOnAction(e -> controller.handleCreateProject(name.getText(),
-                projectLeader.getText(), GeneralMethods.convertDatePickerToCalender(startDate),
-                GeneralMethods.convertDatePickerToCalender(endDate)));
+        completeButton.setOnAction(e -> {
+            if (SystemModel.getProjectByName(name.getText()) == null)
+            {
+                controller.handleCreateProject(
+                        name.getText(),
+                        projectLeader.getText(),
+                        GeneralMethods.convertDatePickerToCalender(startDate),
+                        GeneralMethods.convertDatePickerToCalender(endDate));
+            }
+        });
         getChildren().add(completeButton);
     }
 }
