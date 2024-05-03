@@ -20,4 +20,9 @@ public class ReservedActivity extends Activity{
         return getEndDate().get(Calendar.MONTH);
     }
 
+    public void delete() {
+        for (Employee employee : assignedEmployees) {
+            removeEmployee(employee);
+        }
+    }
 }

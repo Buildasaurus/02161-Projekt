@@ -65,4 +65,6 @@ public abstract class Activity {
     public List<Employee> getAssignedEmployees() {
         return assignedEmployees;
     }
+
+    public abstract void delete();
 }

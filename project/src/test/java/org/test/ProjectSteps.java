@@ -1,7 +1,9 @@
 package org.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -28,8 +30,9 @@ public class ProjectSteps {
 
     @Given("a Project Leader is assigned to the project")
     public void aProjectExistsAndAProjectLeaderIsAssignedToIt() {
-        List<Project> projects = SystemModel.getProjects();
-        assertNotEquals(projects.get(0).getProjectLeaderID(),"PROJECT LEADER NOT SET");
+        Employee projectLeader = new Employee("555555");
+        Project project = SystemModel.getProjects().get(0);
+        project.assignProjectLeader(projectLeader.getID());
     }
 
     @Given("the project has no project leader")
@@ -44,23 +47,13 @@ public class ProjectSteps {
         Report report = project.createReport();
     }
 
-    @Then("the Project Leader is prompted to choose a location to save the report")
-    public void theProjectLeaderIsPromptedToChooseALocationToSaveTheReport() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Then("a report is saved in our default folder")
+    public void theReportIsSavedInOurDefaultFolder(){
+        File f = new File("report.csv");
+        assertTrue(f.exists());
     }
 
-    @Then("a csv file is created and saved to the disk with the project data")
-    public void aCsvFileIsCreatedAndSavedToTheDiskWithTheProjectData() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
-    @Then("the Project Leader gets a notification that the report is generated")
-    public void theProjectLeaderGetsANotificationThatTheReportIsGenerated() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
     @Given("a project leader exists.")
     public void aProjectLeaderExists() {
@@ -113,7 +106,7 @@ public class ProjectSteps {
         assertEquals(employee.getID(),project.getProjectLeaderID());
     }
 
-    @When("{int} projects exist")
+    @Then("{int} projects exist")
     public void projectsExist(int numberOfExpectedProjects) {
         assertEquals(numberOfExpectedProjects,SystemModel.getProjects().size());
     }

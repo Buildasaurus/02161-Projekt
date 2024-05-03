@@ -8,22 +8,26 @@ import org.application.Controllers.EmployeeController;
 import org.application.Models.*;
 import org.application.Utils.GeneralMethods;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.util.List;
 
 public class CreateActivityView extends VBox {
     EmployeeController controller;
+    Activity activity;
 
     public CreateActivityView(EmployeeController controller) {
         this.controller = controller;
         initialize();
     }
 
+    public CreateActivityView(EmployeeController controller, Activity activity) {
+        this.controller = controller;
+        this.activity = activity;
+        initialize();
+    }
+
     private void initialize() {
+        boolean loadingActivity = activity != null;
         // Title
         Text title = new Text("You are creating a Project Activity");
         title.setFill(Color.BLACK);
@@ -46,7 +50,6 @@ public class CreateActivityView extends VBox {
         TextField endWeek = new TextField();
         endWeek.setPromptText("End week (e.g., 10)");
         getChildren().add(endWeek);
-
 
         // Employee Availability Section
         getChildren().add(new Label("Sorted list of most available employees"));
@@ -71,7 +74,6 @@ public class CreateActivityView extends VBox {
         assignedEmployees.setPromptText("Assigned employees, space separated");
         getChildren().add(assignedEmployees);
 
-
         // Expected Duration Section
         getChildren().add(new Label("Expected Duration"));
         TextField halfHours = new TextField();
@@ -81,12 +83,12 @@ public class CreateActivityView extends VBox {
 
         // Project Selection Section
         getChildren().add(new Label("Project Selection"));
-        ComboBox<String> comboBox = new ComboBox<>();
+        ComboBox<String> projectSelectionCombobox = new ComboBox<>();
         List<Project> projects = SystemModel.getProjects();
         for (Project project : projects) {
-            comboBox.getItems().add(project.getName());
+            projectSelectionCombobox.getItems().add(project.getName());
         }
-        getChildren().add(comboBox);
+        getChildren().add(projectSelectionCombobox);
 
 
         // Completion Section
@@ -98,9 +100,20 @@ public class CreateActivityView extends VBox {
                         GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())),
                         Integer.parseInt(halfHours.getText()),
                         name.getText(),
-                        SystemModel.getProjectByName(comboBox.getSelectionModel().getSelectedItem())),
+                        SystemModel.getProjectByName(projectSelectionCombobox.getSelectionModel().getSelectedItem())),
                 assignedEmployees.getText().split(" ")
                 ));
         getChildren().add(completeButton);
+
+        if (loadingActivity) {
+            name.setText(activity.getName());
+            startWeek.setText("" + activity.getStartDate().get(Calendar.WEEK_OF_YEAR));
+            endWeek.setText("" + activity.getEndDate().get(Calendar.WEEK_OF_YEAR));
+            assignedEmployees.setText("" + activity.getAssignedEmployees());
+            halfHours.setText("" + ((ProjectActivity)activity).getExpectedDuration());
+            projectSelectionCombobox.getSelectionModel().select(
+                    ((ProjectActivity) activity).getAssignedProject().getName());
+        }
+
     }
 }

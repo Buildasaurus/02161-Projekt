@@ -41,6 +41,22 @@ public class EmployeeView extends ScrollPane {
         vbox.getChildren().add(createReservedActivity);
 
 
+        // Activity Selection Section
+        vbox.getChildren().add(new Label("Select Activity for editing"));
+        ComboBox<String> activityComboBox = new ComboBox<>();
+        List<Activity> activities = SystemModel.getActivities();
+        for (Activity activity : activities) {
+            activityComboBox.getItems().add(activity.getName());
+        }
+        vbox.getChildren().add(activityComboBox);
+
+        // - edit activity
+        Button editActivityButton = new Button("Edit activity");
+        editActivityButton.setOnAction(e -> controller.handleEditActivityOverview(e,
+                SystemModel.getActivity(
+                        activityComboBox.getSelectionModel().getSelectedItem())));
+        vbox.getChildren().add(editActivityButton);
+
         // Project Selection Section
         vbox.getChildren().add(new Label("Project overview"));
         ComboBox<String> comboBox = new ComboBox<>();

@@ -139,7 +139,14 @@ public class SystemModel { // should be public static class, but java is stupid
     }
 
     public static Activity getActivity(String activityName) {
-        //TODO implement
-        return new ProjectActivity(null, null, 0, activityName, null);
+        List<Activity> activities = getActivities();
+        for (Activity activity : activities)
+        {
+            if (activity.getName().equals(activityName))
+            {
+                return activity;
+            }
+        }
+        return null;
     }
 }
