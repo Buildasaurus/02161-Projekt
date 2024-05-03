@@ -1,14 +1,15 @@
 package org.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 
 import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
-import org.hamcrest.core.IsInstanceOf;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -236,6 +237,26 @@ public class ActivitySteps {
     public void theActivityHasTheUsedTimeSetByTheEmployee() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
+    }
+
+    @When("the employee is added to the project activity")
+    public void addEmployeeToProjectActivity() {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
+        testActivity.assignEmployee(testEmployee);
+    }
+
+    @Then("{int} employees have been added to the project activity")
+    public void employeeHasBeenAddedToProjectActivity(int expectedNumberOfEmployeesAdded) {
+        ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
+        assertEquals(expectedNumberOfEmployeesAdded,testActivity.getAssignedEmployees().size());
+    }
+
+    @When("the employee is removed from the project activity")
+    public void removeEmployeeFromProjectActivity() {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
+        testActivity.removeEmployee(testEmployee);
     }
 
 }
