@@ -4,3 +4,4 @@ Man skal kunne assigne flere folk senere, til activites
 Man skal kunne slette activities
 Man skal kunne fjerne folk fra activities
 Man skal kunne sætte en projektleder senere, til aktiviteten.
+se brugernavn
