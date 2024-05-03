@@ -238,4 +238,24 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
+    @When("the employee is added to the project activity")
+    public void addEmployeeToProjectActivity() {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
+        testActivity.assignEmployee(testEmployee);
+    }
+
+    @Then("{int} employees have been added to the project activity")
+    public void employeeHasBeenAddedToProjectActivity(int expectedNumberOfEmployeesAdded) {
+        ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
+        assertEquals(expectedNumberOfEmployeesAdded,testActivity.getAssignedEmployees().size());
+    }
+
+    @When("the employee is removed from the project activity")
+    public void removeEmployeeFromProjectActivity() {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
+        testActivity.removeEmployee(testEmployee);
+    }
+
 }

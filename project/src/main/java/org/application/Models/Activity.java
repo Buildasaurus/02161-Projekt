@@ -39,6 +39,13 @@ public abstract class Activity {
         }
     }
 
+    public void removeEmployee(Employee employee) {
+        if (assignedEmployees.contains(employee)) {
+            assignedEmployees.remove(employee);
+            employee.removeActivity(this);
+        }
+    }
+
     public GregorianCalendar getEndDate() {
         return endDate;
     }

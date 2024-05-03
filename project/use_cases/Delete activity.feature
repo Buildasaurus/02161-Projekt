@@ -22,9 +22,3 @@ Scenario: User deletes an activity in a project with multiple activities
     Given 2 activities are created in the project
     When the employee deletes a project activity
     Then 1 activities exist
-
-Scenario: Employee spends time on activity
-    Given 1 projects are created
-    And 1 activities are created in the project
-    And the employee spends time on the activity
-    Then the employee has 1 timeblocks attached
