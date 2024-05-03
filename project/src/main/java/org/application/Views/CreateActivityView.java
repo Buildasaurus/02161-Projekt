@@ -98,9 +98,8 @@ public class CreateActivityView extends VBox {
         completeButton.setOnAction(e ->
         {
             if (startWeek.getText() != null || endWeek.getText() != null || halfHours.getText() != null ||
-                name.getText() != null || projectSelectionCombobox.getSelectionModel().getSelectedItem() != null ||
-                assignedEmployees.getText() != null) {
-
+                    name.getText() != null || projectSelectionCombobox.getSelectionModel().getSelectedItem() != null ||
+                    assignedEmployees.getText() != null) {
                 controller.handleCompleteActivity(
                         e,
                         new ProjectActivity(
@@ -126,6 +125,6 @@ public class CreateActivityView extends VBox {
                     ((ProjectActivity) activity).getAssignedProject().getName());
             activity.delete();
         }
-        
+
     }
 }
