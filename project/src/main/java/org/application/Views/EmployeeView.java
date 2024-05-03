@@ -57,6 +57,20 @@ public class EmployeeView extends ScrollPane {
                         activityComboBox.getSelectionModel().getSelectedItem())));
         vbox.getChildren().add(editActivityButton);
 
+        // - delete activity
+        Button deleteActivityButton = new Button("Delete activity");
+        deleteActivityButton.setOnAction(e ->
+                {
+                        if(SystemModel.getActivity(
+                                activityComboBox.getSelectionModel().getSelectedItem()) != null)
+                        {
+                            SystemModel.getActivity(
+                                    activityComboBox.getSelectionModel().getSelectedItem()).delete();
+
+                        }
+                });
+        vbox.getChildren().add(deleteActivityButton);
+
         // Project Selection Section
         vbox.getChildren().add(new Label("Project overview"));
         ComboBox<String> comboBox = new ComboBox<>();
