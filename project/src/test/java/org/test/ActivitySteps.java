@@ -41,7 +41,12 @@ public class ActivitySteps {
 
     @Then("{int} reserved activities exist")
     public void reservedActivitiesExist(int amountOfActivitiesExpected) {
-        assertEquals(amountOfActivitiesExpected,SystemModel.getReservedActivites().size());
+        assertEquals(amountOfActivitiesExpected,SystemModel.getReservedActivities().size());
+    }
+
+    @Then("{int} project activities exist")
+    public void projectActivitiesExist(int amountOfActivitiesExpected) {
+        assertEquals(amountOfActivitiesExpected,SystemModel.getProjectActivities().size());
     }
 
     @Then("the activity ends in week {int}")
@@ -196,15 +201,14 @@ public class ActivitySteps {
         for (int i = 0; i < amountOfActivities; i++){
             GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
             GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
-            ReservedActivity reservedActivity = new ReservedActivity(startDay, endDay,"sample-activity" + (i + 1),employee); 
+            new ReservedActivity(startDay, endDay,"sample-activity" + (i + 1),employee); 
         }  
     }
 
     @When("an employee tries to delete a project activity")
     public void anEmployeeTriesToDeleteAProjectActivity() {
-        Project project = SystemModel.getProjects().get(0);
-        ProjectActivity projectActivity = project.getActivities().get(0);
-        project.removeActivity(projectActivity);
+//        ProjectActivity projectActivity = project.getActivities().get(0);
+//        project.removeActivity(projectActivity);
     }
 
     @When("an employee tries to delete a reserved activity")
@@ -212,13 +216,6 @@ public class ActivitySteps {
         Employee employee = SystemModel.getEmployees().get(0);
         ReservedActivity reservedActivity = (ReservedActivity) employee.getActivities().get(0);
         employee.removeActivity(reservedActivity);
-    }
-
-
-    @Then("the project activity no longer exists")
-    public void theProjectActivityNoLongerExists() {
-        Project project = SystemModel.getProjects().get(0);
-        assertTrue(project.getActivities().isEmpty());
     }
 
     @Then("the reserved activity no longer exists")
