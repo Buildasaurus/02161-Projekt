@@ -1,14 +1,15 @@
 package org.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 
 import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
-import org.hamcrest.core.IsInstanceOf;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
