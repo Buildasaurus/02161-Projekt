@@ -47,19 +47,17 @@ public class CalendarView extends GridPane {
         ObservableList<String> freeHalfHourStrings = toStringList(freeHalfHours);
         for (int i = 0; i < 49; i++) {
             Text text = new Text(freeHalfHourStrings.get(i));
+            Rectangle rect = new Rectangle(50,2);
             this.add(text, 0, i * 2);
+            this.add(rect, 1, i * 2);
             GridPane.setMargin(text, new Insets(5.0));
+            GridPane.setMargin(rect, new Insets(5.0));
         }
 
         // check for any existing timeblocks or reserved activities
         updateFreeHalfHours();
         updateTimeBlocks();
         freeHalfHourStrings = toStringList(freeHalfHours);
-        for (int i : freeHalfHours) {
-            Rectangle rect = new Rectangle(50,2);
-            this.add(rect, 1, i * 2);
-            GridPane.setMargin(rect, new Insets(5.0));
-        }
 
         // create default comboboxes with all options
         startSelect = new ComboBox<>(freeHalfHourStrings);
@@ -195,7 +193,7 @@ public class CalendarView extends GridPane {
             // format
             int hours = halfHour / 2;
             String timeStr = "";
-            if (hours > 10) {
+            if (hours >= 10) {
                 timeStr += hours;
             } else {
                 timeStr += 0;
