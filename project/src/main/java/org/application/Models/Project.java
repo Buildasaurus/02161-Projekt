@@ -32,8 +32,17 @@ public class Project {
     }
 
     public Report createReport() {
-        return null;
-        // TODO implement this
+        StringBuilder reportText = new StringBuilder();
+        reportText.append("Project Name: ").append(this.name).append("\n");
+        reportText.append("Project ID: ").append(this.projectID).append("\n");
+        reportText.append("Start Week: ").append(this.startWeek.getTime()).append("\n");
+        reportText.append("End Week: ").append(this.endWeek.getTime()).append("\n");
+        reportText.append("Project Leader ID: ").append(this.projectLeaderID).append("\n");
+        reportText.append("Activities: \n");
+        for (ProjectActivity activity : this.activities) {
+            reportText.append(activity.toString()).append("\n"); // assuming toString method in ProjectActivity class provides relevant details
+        }
+        return new Report(reportText.toString());
     }
 
     /**
@@ -81,4 +90,6 @@ public class Project {
     public void noProjectLeader(){
         this.projectLeaderID = "PROJECT LEADER NOT SET";
     }
+
+
 }
