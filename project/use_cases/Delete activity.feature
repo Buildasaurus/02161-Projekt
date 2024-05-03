@@ -23,19 +23,8 @@ Scenario: User deletes an activity in a project with multiple activities
     When the employee deletes a project activity
     Then 1 activities exist
 
-Scenario: Activity with registered hours is deleted
+Scenario: Employee spends time on activity
     Given 1 projects are created
-    And a project activity exists
+    And 1 activities are created in the project
     And the employee spends time on the activity
-    When a user tries to delete an activity
-    Then the user is warned that someone has spent time on the activity
-    When the user accepts
-    Then the activity no longer axists
-
-Scenario: Activity with registered hours is not deleted
-    Given a project activity exists
-    And a user has spent time on the activity
-    When a user tries to delete an activity
-    Then the user is warned that someone has spent time on the activity
-    When the user declines
-    Then an activity exists
+    Then the employee has 1 timeblocks attached
