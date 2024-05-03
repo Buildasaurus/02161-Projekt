@@ -47,7 +47,7 @@ public class EmployeeSteps {
         new Employee(employeeString);
     }
 
-    @When("the employee named {string} is added to the project activity")
+    @When("the employee named {string} is assigned to the project activity")
     public void addNamedEmployeeToActivity(String employeeString) {
         SystemModel.getProjectActivities().get(0).assignEmployee(employeeString);
     }

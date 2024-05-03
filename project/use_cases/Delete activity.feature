@@ -8,6 +8,7 @@ Background:
 Scenario: Delete Activity in project
     When 1 projects are created
     And 1 activities are created in the project
+    And the employee gets added to the project activity
     When an employee deletes a project activity
     Then 0 activities exist
     And 0 activities are assigned to employees

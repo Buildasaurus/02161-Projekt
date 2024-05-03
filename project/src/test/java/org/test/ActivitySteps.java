@@ -61,6 +61,8 @@ public class ActivitySteps {
             }
         }
         assertEquals(expectedProjects,activitiesMap.size());
+        // TODO remove this
+        assertEquals(expectedProjects,SystemModel.getEmployees().get(0).getActivities().size());
     }
 
 /*
@@ -283,5 +285,11 @@ public class ActivitySteps {
         Employee testEmployee = SystemModel.getEmployees().get(0);
         ProjectActivity testActivity = SystemModel.getProjectActivities().get(0);
         testActivity.removeEmployee(testEmployee);
+    }
+
+    @When("the employee gets added to the project activity")
+    public void addEmployeeToActivity() {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        SystemModel.getProjectActivities().get(0).assignEmployee(testEmployee);
     }
 }
