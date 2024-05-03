@@ -54,6 +54,11 @@ public class Project {
         activities.add(activity);
     }
 
+    /**
+     * Removes the connection between the activity, and the project.
+     * DOES NOT delete the activity
+     * @param activity
+     */
     public void removeActivity(ProjectActivity activity) {
         activities.remove(activity);
     }

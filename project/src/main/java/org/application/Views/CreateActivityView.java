@@ -8,12 +8,7 @@ import org.application.Controllers.EmployeeController;
 import org.application.Models.*;
 import org.application.Utils.GeneralMethods;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CreateActivityView extends VBox {
@@ -119,5 +114,6 @@ public class CreateActivityView extends VBox {
             projectSelectionCombobox.getSelectionModel().select(
                     ((ProjectActivity) activity).getAssignedProject().getName());
         }
+
     }
 }
