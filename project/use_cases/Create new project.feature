@@ -5,4 +5,4 @@ Feature: Create new project
 Scenario: An employee creates a project
     When 1 employees are created
     And 1 projects are created
-    Then 1 projects is created
+    Then 1 projects exist

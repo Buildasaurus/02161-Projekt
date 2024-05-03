@@ -87,10 +87,8 @@ public class EmployeeView extends ScrollPane {
         Text title = new Text("!Your Timeblocks!");
         vbox.getChildren().add(title);
 
-        for (TimeBlock block : controller.getEmployee().getTimeBlocks()) {
-            TimeBlockView timeBlockView = new TimeBlockView(block);
-            vbox.getChildren().add(timeBlockView);
-        }
+        CalendarView calendarView = new CalendarView(controller.getEmployee());
+        vbox.getChildren().add(calendarView);
 
         // All (May not be assigned to timeblock)
         title = new Text("!All activites!");

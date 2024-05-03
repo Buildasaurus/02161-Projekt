@@ -12,7 +12,7 @@ public class SystemModel { // should be public static class, but java is stupid
     private static List<Employee> employees = new ArrayList<>();
     private static int currentRunNumber = 0;
 
-    public static List<ReservedActivity> getReservedActivites() {
+    public static List<ReservedActivity> getReservedActivities() {
         HashMap<ReservedActivity, ReservedActivity> reservedActivitiesMap = new HashMap<ReservedActivity, ReservedActivity>();
         for (Employee employee : employees) {
             for (Activity employeeActivity : employee.getActivities()) {
@@ -40,7 +40,7 @@ public class SystemModel { // should be public static class, but java is stupid
     public static List<Activity> getActivities() {
         List<Activity> activities = new ArrayList<Activity>();
         activities.addAll(getProjectActivities());
-        activities.addAll(getReservedActivites());
+        activities.addAll(getReservedActivities());
         return activities;
     }
     
@@ -63,7 +63,11 @@ public class SystemModel { // should be public static class, but java is stupid
 
         ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), 20 , "Testing", project);
         projectActivity.assignEmployee(e);
-        e.createTimeBlock(projectActivity, new GregorianCalendar(1,1,1,8,0), new GregorianCalendar(1,1,1,12,0));
+        GregorianCalendar currentTime = new GregorianCalendar();
+        e.createTimeBlock(projectActivity, new GregorianCalendar(currentTime.get(Calendar.YEAR),
+            currentTime.get(Calendar.MONTH),currentTime.get(Calendar.DAY_OF_MONTH),8,0), 
+            new GregorianCalendar(currentTime.get(Calendar.YEAR),currentTime.get(Calendar.MONTH),
+            currentTime.get(Calendar.DAY_OF_MONTH),12,0));
 
         projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), 1, "codeRefactor", project);
         projectActivity.assignEmployee(e);

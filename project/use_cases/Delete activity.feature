@@ -2,15 +2,14 @@ Feature: Deleting activities
     Description: An employee is deleting activities
     Actor: Employee
 
-
 Background:
     Given 1 employees are created
 
 Scenario: Delete Activity in project
     When 1 projects are created
     And 1 activities are created in the project
-    When an employee tries to delete a project activity
-    Then the project activity no longer exists
+    When an employee deletes a project activity
+    Then 0 project activities exist
 
 Scenario: Delete Activity in employee
     Given 1 activity are created in the employee

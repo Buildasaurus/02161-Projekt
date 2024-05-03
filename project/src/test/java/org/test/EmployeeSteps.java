@@ -10,8 +10,6 @@ import org.application.Models.SystemModel;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import static org.junit.Assert.*;
-
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
@@ -42,5 +40,15 @@ public class EmployeeSteps {
     public void employeeHasTimeBlockAttached(int expectedTimeBlocks) {
         Employee testEmployee = SystemModel.getEmployees().get(0);
         assertEquals(expectedTimeBlocks,testEmployee.getTimeBlocks().size());
+    }
+
+    @When("an employee named {string} is created")
+    public void createEmployeeWithName(String employeeString) {
+        new Employee(employeeString);
+    }
+
+    @When("the employee named {string} is added to the project activity")
+    public void addNamedEmployeeToActivity(String employeeString) {
+        SystemModel.getProjectActivities().get(0).assignEmployee(employeeString);
     }
 }
