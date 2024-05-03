@@ -3,16 +3,16 @@ Feature: Assign project leader
     Actors: User
 
 Background:
-    Given an employee exists
+    When 1 employees are created
 
 Scenario: Assigning project leader in unassigned project
-    When a project is created
-    Given the project has no project leader
-    When the employee is assigned as project leader
+    When 1 projects are created
+    And the project has no project leader
+    And the employee is assigned as project leader
     Then the assignment is successful
 
 Scenario: Changing project leader
-    When a project is created
+    When 1 projects are created
     Given the project has a project leader
     When the employee is assigned as project leader
     Then the assignment is successful

@@ -40,7 +40,7 @@ public class App extends Application {
         view.setController(controller);
         if (scene == null)
         {
-            scene = new Scene(controller.getView(), 300, 300);
+            scene = new Scene(controller.getView(), 400, 500);
         }
         else {
             scene.setRoot(controller.getView());

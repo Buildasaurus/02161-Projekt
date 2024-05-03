@@ -4,13 +4,46 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.HashMap;
 
 public class SystemModel { // should be public static class, but java is stupid
-    //STATIC class!
-    private static List<Project> projects = new ArrayList<Project>();
+    // STATIC class!
+    private static List<Project> projects = new ArrayList<>();
     private static List<Employee> employees = new ArrayList<>();
     private static int currentRunNumber = 0;
 
+    public static List<ReservedActivity> getReservedActivites() {
+        HashMap<ReservedActivity, ReservedActivity> reservedActivitiesMap = new HashMap<ReservedActivity, ReservedActivity>();
+        for (Employee employee : employees) {
+            for (Activity employeeActivity : employee.getActivities()) {
+                if (employeeActivity instanceof ReservedActivity) {
+                    reservedActivitiesMap.put((ReservedActivity) employeeActivity, (ReservedActivity) employeeActivity);
+                }
+            }
+        }
+
+        ArrayList<ReservedActivity> reservedActivitiesList = new ArrayList<>(reservedActivitiesMap.values());
+        return reservedActivitiesList;
+    }
+
+    public static List<ProjectActivity> getProjectActivities() {
+        HashMap<ProjectActivity, ProjectActivity> projectActivitiesMap = new HashMap<ProjectActivity, ProjectActivity>();
+        for (Project project : projects) {
+            for (ProjectActivity projectActivity : project.getActivities()) {
+                projectActivitiesMap.put(projectActivity, projectActivity);
+            }
+        }
+        ArrayList<ProjectActivity> projectActivitiesList = new ArrayList<>(projectActivitiesMap.values());
+        return projectActivitiesList;
+    }
+
+    public static List<Activity> getActivities() {
+        List<Activity> activities = new ArrayList<Activity>();
+        activities.addAll(getProjectActivities());
+        activities.addAll(getReservedActivites());
+        return activities;
+    }
+    
     /**
      * Method for resetting everything. Deleting all saves employees and projects.
      */
@@ -21,11 +54,11 @@ public class SystemModel { // should be public static class, but java is stupid
     }
 
     public static void createDefaultEmployees() {
-        //Loading projects
+        // Loading projects
         Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
         projects.add(project);
 
-        //Loading employees
+        // Loading employees
         Employee e = new Employee("404040");
         ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,10,1), new GregorianCalendar(1,10,1), "Holiday", e);
 
@@ -61,8 +94,7 @@ public class SystemModel { // should be public static class, but java is stupid
         // TODO : consider if this should have some effect on view? perhaps tell it to update.
     }
 
-    public static Project getProjectByName(String projectName)
-    {
+    public static Project getProjectByName(String projectName) {
         for (Project project : projects) {
             if (project.getName().equals(projectName)) {
                 return project;

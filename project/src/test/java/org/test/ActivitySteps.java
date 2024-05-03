@@ -8,6 +8,7 @@ import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
+import org.hamcrest.core.IsInstanceOf;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -32,10 +33,14 @@ public class ActivitySteps {
         SystemModel.reset();
     }
 
-    @Then("an activity is created")
-    public void anActivityIsCreated() {
-        Project project = SystemModel.getProjects().get(0);
-        assertNotNull(project.getActivities());
+    @Then("{int} activities exist")
+    public void activitiesExist(int amountOfActivitiesExpected) {
+        assertEquals(amountOfActivitiesExpected,SystemModel.getActivities().size());
+    }
+
+    @Then("{int} reserved activities exist")
+    public void reservedActivitiesExist(int amountOfActivitiesExpected) {
+        assertEquals(amountOfActivitiesExpected,SystemModel.getReservedActivites().size());
     }
 
     @Then("the activity ends in week {int}")
@@ -82,7 +87,7 @@ public class ActivitySteps {
         assertNotNull(testEmployee.getActivity("test-activity"));
     }
 
-    @Then("the activity ends in {int}\\/{int}")
+    @Then("the activity ends at {int}\\/{int}")
     public void theActivityEndsIn(int testDay, int testMonth) {
         assertEquals(reservedActivity.getEndDate().get(Calendar.DAY_OF_MONTH), testDay);
         assertEquals(reservedActivity.getEndDate().get(Calendar.MONTH), testMonth);
@@ -157,6 +162,10 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
+    @When("{int} activities exists in the project")
+    public void activitiesExistInProject(int numberOfExpectedActivities) {
+        assertEquals(numberOfExpectedActivities,SystemModel.getProjects().get(0).getActivities().size());
+    }
 
     @Then("the employee has the reserved activity in their schedule")
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
@@ -164,7 +173,7 @@ public class ActivitySteps {
         assertNotEquals(testEmployee.getActivities().size(),0);
     }
 
-    @Given("{int} activity exists in the project")
+    @Given("{int} activities are created in the project")
     public void activityExists(Integer amountOfActivities) {
         Project project = SystemModel.getProjects().get(0);
         for (int i = 0; i < amountOfActivities; i++){
@@ -176,11 +185,11 @@ public class ActivitySteps {
             endWeek.setWeekDate(2024, 19, 1);
             // expected duration is 20 half hours
             int expectedDuration = 20;
-            ProjectActivity projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity" + (i + 1), project);        
+            new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity" + (i + 1), project);        
         }
     }
 
-    @Given("{int} activity exists in the employee")
+    @Given("{int} activity are created in the employee")
     public void activityExistsInTheEmployee(Integer amountOfActivities) {
         Employee employee = SystemModel.getEmployees().get(0);
         for (int i = 0; i < amountOfActivities; i++){
@@ -229,9 +238,4 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Given("an employee exists")
-    public void anEmployeeExists() {
-        Employee employee = new Employee("444444");
-        SystemModel.addEmployee(employee);
-    }
 }

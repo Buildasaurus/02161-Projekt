@@ -14,7 +14,7 @@ import org.application.Models.Project;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.After;
+//import org.junit.After;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
@@ -61,7 +61,8 @@ public class ProjectSteps {
 
     @Given("a project leader exists.")
     public void aProjectLeaderExists() {
-        
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();        
     }
 
     @When("the project leader checks the overview")
@@ -76,15 +77,16 @@ public class ProjectSteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @When("a project is created")
-    public void aProjectExists() {
-        GregorianCalendar startWeek = new GregorianCalendar();
-        startWeek.setWeekDate(2024, 17, 1);
-        // set endWeek to week 19.
-        GregorianCalendar endWeek = new GregorianCalendar();
-        endWeek.setWeekDate(2024, 19, 1);
-        Project project = new Project("test-project", startWeek, endWeek);
-        SystemModel.addProject(project);
+    @When("{int} projects are created")
+    public void createProjects(int numberOfProjectsToCreate) {
+        for (int i = 0; i < numberOfProjectsToCreate; i++) {
+            GregorianCalendar startWeek = new GregorianCalendar();
+            startWeek.setWeekDate(2024, 17, 1);
+            // set endWeek to week 19.
+            GregorianCalendar endWeek = new GregorianCalendar();
+            endWeek.setWeekDate(2024, 19, 1);
+            new Project(Integer.toString(i), startWeek, endWeek);
+        }
     }
 
     @Given("the project has a project leader")
@@ -106,6 +108,11 @@ public class ProjectSteps {
         Employee employee = SystemModel.getEmployees().get(0);
         Project project = SystemModel.getProjects().get(0);
         assertEquals(employee.getID(),project.getProjectLeaderID());
+    }
+
+    @When("{int} projects exist")
+    public void projectsExist(int numberOfExpectedProjects) {
+        assertEquals(numberOfExpectedProjects,SystemModel.getProjects().size());
     }
 
 }
