@@ -97,13 +97,17 @@ public class CalendarView extends GridPane {
                         tempList.add(halfHour);
                     }
                 }
-                int counter = 0;
-                for (int halfHour : tempList) {
-                    freeHalfHours.remove(halfHour - counter);
-                    counter++;
+
+                for (int i = freeHalfHours.size() - 1; i >= 0; i--) {
+                    for (int halfHour : tempList) {
+                        if (halfHour == freeHalfHours.get(i)) {
+                            freeHalfHours.remove(i);
+                        }
+                    }
                 }
+                
                 // create timeblock UI element
-                boolean small = endHalfHour - startHalfHour == 1;
+                boolean small = endHalfHour - startHalfHour < 3;
                 TimeBlockView TimeBlockUI = new TimeBlockView(timeBlock, small);
                 this.getChildren().add(TimeBlockUI);
                 GridPane.setColumnIndex(TimeBlockUI, 1);
@@ -182,6 +186,7 @@ public class CalendarView extends GridPane {
                 ProjectActivity activity = (ProjectActivity) SystemModel.getActivity(activityField.getText());
                 employee.createTimeBlock(activity, calendars[0], calendars[1]);
                 updateTimeBlocks();
+                clearData();
             }
         };
         return event;
