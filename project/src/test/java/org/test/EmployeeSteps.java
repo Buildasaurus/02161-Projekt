@@ -36,6 +36,15 @@ public class EmployeeSteps {
         testEmployee.createTimeBlock(testActivity, startTime, endTime);
     }
 
+    @When("the employee spends {int} half-hours on the activity")
+    public void spendExactTimeOnActivity(int halfHoursToSpend) {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(0);
+        GregorianCalendar startTime = new GregorianCalendar(1,1,1,0,0);
+        GregorianCalendar endTime = new GregorianCalendar(1,1,1, halfHoursToSpend / 2, (halfHoursToSpend % 2) * 30);
+        testEmployee.createTimeBlock(testActivity, startTime, endTime);
+    }
+
     @Then("the employee has {int} timeblocks attached")
     public void employeeHasTimeBlockAttached(int expectedTimeBlocks) {
         Employee testEmployee = SystemModel.getEmployees().get(0);
