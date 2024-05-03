@@ -105,11 +105,12 @@ public class CalendarView extends GridPane {
                     counter++;
                 }
                 // create timeblock UI element
-                TimeBlockView TimeBlockUI = new TimeBlockView(timeBlock);
+                boolean small = endHalfHour - startHalfHour == 1;
+                TimeBlockView TimeBlockUI = new TimeBlockView(timeBlock, small);
                 this.getChildren().add(TimeBlockUI);
                 GridPane.setColumnIndex(TimeBlockUI, 1);
                 GridPane.setRowIndex(TimeBlockUI, (startHalfHour * 2) + 1);
-                GridPane.setRowSpan(TimeBlockUI, (endHalfHour - startHalfHour) * 2);
+                GridPane.setRowSpan(TimeBlockUI, (endHalfHour - startHalfHour) * 2 - 1);
             }
         }
     }
