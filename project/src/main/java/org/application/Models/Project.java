@@ -42,6 +42,15 @@ public class Project {
         for (ProjectActivity activity : this.activities) {
             reportText.append(activity.toString()).append("\n"); // assuming toString method in ProjectActivity class provides relevant details
         }
+        int totalSpentTime = 0;
+        int totalExpectedDuration = 0;
+        for (ProjectActivity activity : activities) {
+            totalSpentTime += activity.calculateSpentTime();
+            totalExpectedDuration += activity.getExpectedDuration();
+        }
+        double progress = (double) totalSpentTime / totalExpectedDuration * 100;
+        String progressstring = String.format("%.2f", progress);
+        reportText.append("Project progress: ").append(progressstring).append("% \n");
         return new Report(reportText.toString());
     }
 
