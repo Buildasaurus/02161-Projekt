@@ -55,8 +55,8 @@ public class ProjectActivity extends Activity {
     }
 
     public void delete() {
-        for (Employee employee : assignedEmployees) {
-            removeEmployee(employee);
+        for (int i = assignedEmployees.size()-1; i > 0; i--) {
+            removeEmployee(assignedEmployees.get(i));
         }
         assignedProject.removeActivity(this);
         assignedProject = null;
