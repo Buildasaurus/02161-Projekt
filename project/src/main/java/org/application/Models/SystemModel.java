@@ -56,7 +56,6 @@ public class SystemModel { // should be public static class, but java is stupid
     public static void createDefaultEmployees() {
         // Loading projects
         Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
-        projects.add(project);
 
         // Loading employees
         Employee e = new Employee("404040");
@@ -126,7 +125,9 @@ public class SystemModel { // should be public static class, but java is stupid
     }
 
     public static void addProject(Project project) {
-        projects.add(project);
+        if (! projects.contains(project)) {
+            projects.add(project);
+        }
     }
 
     public static List<Employee> getEmployees() {
