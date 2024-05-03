@@ -63,7 +63,11 @@ public class SystemModel { // should be public static class, but java is stupid
 
         ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), 20 , "Testing", project);
         projectActivity.assignEmployee(e);
-        e.createTimeBlock(projectActivity, new GregorianCalendar(1,1,1,8,0), new GregorianCalendar(1,1,1,12,0));
+        GregorianCalendar currentTime = new GregorianCalendar();
+        e.createTimeBlock(projectActivity, new GregorianCalendar(currentTime.get(Calendar.YEAR),
+            currentTime.get(Calendar.MONTH),currentTime.get(Calendar.DAY_OF_MONTH),8,0), 
+            new GregorianCalendar(currentTime.get(Calendar.YEAR),currentTime.get(Calendar.MONTH),
+            currentTime.get(Calendar.DAY_OF_MONTH),12,0));
 
         projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), 1, "codeRefactor", project);
         projectActivity.assignEmployee(e);
