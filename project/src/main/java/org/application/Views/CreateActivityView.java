@@ -91,6 +91,7 @@ public class CreateActivityView extends VBox {
         getChildren().add(projectSelectionCombobox);
 
 
+
         // Completion Section
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> controller.handleCompleteActivity(
@@ -114,6 +115,7 @@ public class CreateActivityView extends VBox {
             projectSelectionCombobox.getSelectionModel().select(
                     ((ProjectActivity) activity).getAssignedProject().getName());
         }
-
+        
+        activity.delete();
     }
 }
