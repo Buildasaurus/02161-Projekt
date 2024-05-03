@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-
+import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
@@ -15,8 +15,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import org.application.Models.ReservedActivity;
 import org.junit.After;
@@ -39,6 +41,7 @@ public class ActivitySteps {
         assertEquals(amountOfActivitiesExpected,SystemModel.getActivities().size());
     }
 
+
     @Then("{int} reserved activities exist")
     public void reservedActivitiesExist(int amountOfActivitiesExpected) {
         assertEquals(amountOfActivitiesExpected,SystemModel.getReservedActivities().size());
@@ -48,6 +51,33 @@ public class ActivitySteps {
     public void projectActivitiesExist(int amountOfActivitiesExpected) {
         assertEquals(amountOfActivitiesExpected,SystemModel.getProjectActivities().size());
     }
+
+    @Then("{int} activities are assigned to employees")
+    public void numberOfActivitiesAssignedToEmployees(int expectedProjects) {
+        HashMap<Activity, Activity> activitiesMap = new HashMap<Activity, Activity>();
+        for (Employee employee : SystemModel.getEmployees()) {
+            for (Activity employeeActivity : employee.getActivities()) {
+                activitiesMap.put(employeeActivity, employeeActivity);
+            }
+        }
+        assertEquals(expectedProjects,activitiesMap.size());
+    }
+
+/*
+    @Then("{int} project activities are assigned to employees")
+    public void numberOfActivitiesAssignedToEmployees(int expectedProjects) {
+        HashMap<Activity, Activity> reservedActivitiesMap = new HashMap<Activity, Activity>();
+        for (Employee employee : SystemModel.getEmployees()) {
+            for (Activity employeeActivity : employee.getActivities()) {
+                if (employeeActivity instanceof ProjectActivity) {
+                    reservedActivitiesMap.put(employeeActivity, employeeActivity);
+                }
+            }
+        }
+        assertEquals(expectedProjects,reservedActivitiesMap.size());
+    }
+
+ */
 
     @Then("the activity ends in week {int}")
     public void theActivityEndsInWeek(Integer int1) {
