@@ -15,6 +15,7 @@ public class TimeBlock {
     Employee employee;
 
     /**
+     * A timeblock should never be created by itself. Instead use employee.createTimeblock()
      * Initializes a block to keep track of what activity has been worked on in a given time period
      * @param startTime The start time of the working period, measured on a resolution of half-hours
      * @param endTime The end time of the working period, measured on a resolution of half-hours

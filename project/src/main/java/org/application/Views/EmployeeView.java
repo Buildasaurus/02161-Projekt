@@ -50,11 +50,21 @@ public class EmployeeView extends ScrollPane {
         }
         vbox.getChildren().add(comboBox);
 
+        // - see overview
         Button seeOverviewButton = new Button("See overview");
         seeOverviewButton.setOnAction(e -> controller.handleSeeOverview(
                 SystemModel.getProjectByName(
                         comboBox.getSelectionModel().getSelectedItem())));
         vbox.getChildren().add(seeOverviewButton);
+
+        // - generate report
+        Button generateReport = new Button("Generate report");
+        generateReport.setOnAction(e -> {
+            Report report = SystemModel.getProjectByName(
+                    comboBox.getSelectionModel().getSelectedItem()).createReport();
+            report.saveToDisk("");
+        });
+        vbox.getChildren().add(generateReport);
 
 
         // Timeblocks

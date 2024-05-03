@@ -3,14 +3,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.GregorianCalendar;
 
-import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
-import org.application.Models.TimeBlock;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import static org.junit.Assert.*;
+
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
