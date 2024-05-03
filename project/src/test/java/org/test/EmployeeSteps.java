@@ -41,4 +41,14 @@ public class EmployeeSteps {
         Employee testEmployee = SystemModel.getEmployees().get(0);
         assertEquals(expectedTimeBlocks,testEmployee.getTimeBlocks().size());
     }
+
+    @When("an employee named {string} is created")
+    public void createEmployeeWithName(String employeeString) {
+        new Employee(employeeString);
+    }
+
+    @When("the employee named {string} is added to the project activity")
+    public void addNamedEmployeeToActivity(String employeeString) {
+        SystemModel.getProjectActivities().get(0).assignEmployee(employeeString);
+    }
 }
