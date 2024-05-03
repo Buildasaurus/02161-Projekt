@@ -1,26 +1,9 @@
 package org.test;
+import org.application.Models.Activity;
 import org.application.Models.Employee;
-import io.cucumber.java.en.When;
-
-/*
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.List;
-
-import org.application.Models.Project;
-import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import org.application.Models.ReservedActivity;
-*/
+import io.cucumber.java.en.When;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
@@ -31,6 +14,18 @@ public class EmployeeSteps {
         for(int i = 0; i < numberOfEmployeesToCreate; i++) {
             new Employee(Integer.toString(i));
         }
+    }
+
+    @When("the employee deletes a project activity")
+    public void deleteAnActivity() {
+        SystemModel.getProjectActivities().get(0).delete();
+    }
+
+    @When("the employee spends time on the activity")
+    public void spendTimeOnActivity() {
+//        Employee testEmployee = SystemModel.getEmployees().get(0);
+//        Activity testActivity = SystemModel.getActivities().get(0);
+//        testActivity.
     }
 
 }

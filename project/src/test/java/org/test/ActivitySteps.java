@@ -35,7 +35,7 @@ public class ActivitySteps {
 
     @Then("{int} activities exist")
     public void activitiesExist(int amountOfActivitiesExpected) {
-        assertEquals(amountOfActivitiesExpected,SystemModel.getProjects().size());
+        assertEquals(amountOfActivitiesExpected,SystemModel.getActivities().size());
     }
 
     @Then("{int} reserved activities exist")
@@ -162,6 +162,10 @@ public class ActivitySteps {
         throw new io.cucumber.java.PendingException();
     }
 
+    @When("{int} activities exists in the project")
+    public void activitiesExistInProject(int numberOfExpectedActivities) {
+        assertEquals(numberOfExpectedActivities,SystemModel.getProjects().get(0).getActivities().size());
+    }
 
     @Then("the employee has the reserved activity in their schedule")
     public void theEmployeeHasTheReservedActivityInTheirSchedule() {
@@ -169,7 +173,7 @@ public class ActivitySteps {
         assertNotEquals(testEmployee.getActivities().size(),0);
     }
 
-    @Given("{int} activities exists in the project")
+    @Given("{int} activities are created in the project")
     public void activityExists(Integer amountOfActivities) {
         Project project = SystemModel.getProjects().get(0);
         for (int i = 0; i < amountOfActivities; i++){
@@ -181,11 +185,11 @@ public class ActivitySteps {
             endWeek.setWeekDate(2024, 19, 1);
             // expected duration is 20 half hours
             int expectedDuration = 20;
-            ProjectActivity projectActivity = new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity" + (i + 1), project);        
+            new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity" + (i + 1), project);        
         }
     }
 
-    @Given("{int} activity exists in the employee")
+    @Given("{int} activity are created in the employee")
     public void activityExistsInTheEmployee(Integer amountOfActivities) {
         Employee employee = SystemModel.getEmployees().get(0);
         for (int i = 0; i < amountOfActivities; i++){
