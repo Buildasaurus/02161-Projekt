@@ -74,9 +74,9 @@ public class Employee {
         long milliseconds1 = startTime.getTimeInMillis();
         long milliseconds2 = endTime.getTimeInMillis();
         long diff = milliseconds2 - milliseconds1;
-        if (diff <= 0)
+        if (diff <= 0) // 1
         {
-            return 0;
+            return 0; // 2
         }
         // Use Math.ceil to round up the result
         int totalDays = (int) Math.ceil((double) diff / (24 * 60 * 60 * 1000));
@@ -84,21 +84,21 @@ public class Employee {
         int freeDayCounter = totalDays;
 
         int busyActivities = 0;
-        for(Activity activity : activities)
+        for(Activity activity : activities) // 3
         {
-            if(doPeriodsOverlap(activity.getStartDate(),activity.getEndDate(),startTime,endTime))
+            if(doPeriodsOverlap(activity.getStartDate(),activity.getEndDate(),startTime,endTime)) // 4
             {
-                if (activity instanceof ReservedActivity)
+                if (activity instanceof ReservedActivity) // 5
                 {
-                    freeDayCounter--;
+                    freeDayCounter--; // 6
                 }
-                if (activity instanceof ProjectActivity)
+                else if (activity instanceof ProjectActivity) // 7
                 {
-                    busyActivities += 1;
+                    busyActivities += 1; // 8
                 }
             }
         }
-        return (int)((total - busyActivities)*freeDayCounter/totalDays);
+        return (int)((total - busyActivities)*freeDayCounter/totalDays); // 9
     }
 
 
