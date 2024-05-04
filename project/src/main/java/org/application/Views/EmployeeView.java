@@ -61,13 +61,14 @@ public class EmployeeView extends ScrollPane {
         Button deleteActivityButton = new Button("Delete activity");
         deleteActivityButton.setOnAction(e ->
                 {
-                        if(SystemModel.getActivity(
-                                activityComboBox.getSelectionModel().getSelectedItem()) != null)
-                        {
-                            SystemModel.getActivity(
-                                    activityComboBox.getSelectionModel().getSelectedItem()).delete();
+                    if(SystemModel.getActivity(
+                            activityComboBox.getSelectionModel().getSelectedItem()) != null)
+                    {
+                        SystemModel.getActivity(
+                                activityComboBox.getSelectionModel().getSelectedItem()).delete();
 
-                        }
+                    }
+                    refreshView();
                 });
         vbox.getChildren().add(deleteActivityButton);
 
@@ -119,5 +120,11 @@ public class EmployeeView extends ScrollPane {
         vbox.getChildren().add(Buttons.returnButton());
 
         setContent(vbox);
+    }
+
+    public void refreshView()
+    {
+        setContent(null);
+        initialize();
     }
 }
