@@ -53,7 +53,7 @@ public class App extends Application {
         setNewActiveController(controller);
         if (scene == null)
         {
-            scene = new Scene(controller.getView(), 400, 500);
+            scene = new Scene(controller.getView(), 500, 500);
         }
         else {
             scene.setRoot(controller.getView());
