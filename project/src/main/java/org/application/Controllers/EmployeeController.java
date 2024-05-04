@@ -79,6 +79,10 @@ public class EmployeeController implements IController {
 
     public void handleSeeOverview(Project project)
     {
+        if(project == null)
+        {
+            return;
+        }
         ProjectOverviewView view = new ProjectOverviewView(this, project);
         this.view = view;
         App.setRoot(this);

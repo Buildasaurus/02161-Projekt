@@ -92,9 +92,13 @@ public class EmployeeView extends ScrollPane implements IRefreshable{
         // - generate report
         Button generateReport = new Button("Generate report");
         generateReport.setOnAction(e -> {
-            Report report = SystemModel.getProjectByName(
-                    projectComboBox.getSelectionModel().getSelectedItem()).createReport();
-            report.saveToDisk("");
+            Project p = SystemModel.getProjectByName(
+                    projectComboBox.getSelectionModel().getSelectedItem());
+            if(p != null)
+            {
+                Report report = p.createReport();
+                report.saveToDisk("");
+            }
         });
         vbox.getChildren().add(generateReport);
 
