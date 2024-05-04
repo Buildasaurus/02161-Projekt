@@ -110,6 +110,13 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                         projectComboBox.getSelectionModel().getSelectedItem())));
         vbox.getChildren().add(editProjectButton);
 
+        // - Create Project
+        Button createProject = new Button("Create project");
+        // passing null along, means you are "editing" a nonexisting project, thus creating a new
+        createProject.setOnAction(e -> controller.handleEditProject(null));
+        vbox.getChildren().add(createProject);
+
+
         // - Delete project
         Button deleteProjectButton = new Button("Delete project");
         deleteProjectButton.setOnAction(e ->
