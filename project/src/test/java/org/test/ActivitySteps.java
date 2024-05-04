@@ -35,6 +35,10 @@ public class ActivitySteps {
     public void tearDown() {
         SystemModel.reset();
     }
+    @io.cucumber.java.Before
+    public void start() {
+        SystemModel.reset();
+    }
 
     @Then("{int} activities exist")
     public void activitiesExist(int amountOfActivitiesExpected) {
