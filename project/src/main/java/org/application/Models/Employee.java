@@ -5,9 +5,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Employee {
-    private String ID;
-    private List<Activity> activities = new ArrayList<>();
-    private List<TimeBlock> timeBlocks = new ArrayList<>();
+    private final String ID;
+    private final List<Activity> activities = new ArrayList<>();
+    private final List<TimeBlock> timeBlocks = new ArrayList<>();
 
     public Employee(String ID) {
         this.ID = ID;
