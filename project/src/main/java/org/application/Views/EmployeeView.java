@@ -144,7 +144,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
             vbox.getChildren().add(calendarView);
         }
         else {
-            Label reservedActivityLabel = new Label("You cannot work today, because of the activity" + overlappingReservedActivity.getName());
+            Label reservedActivityLabel = new Label("You cannot work today, because of the activity: " + overlappingReservedActivity.getName());
             vbox.getChildren().add(reservedActivityLabel);
         }
 
