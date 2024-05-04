@@ -52,15 +52,6 @@ public class Employee {
         return activities;
     }
 
-    public Activity getActivity(String searchActivity){
-        for (Activity activity: activities){
-            if (searchActivity.equals(activity.getName())){
-                return activity;
-            }
-        }
-        return null;
-    }
-
     public List<TimeBlock> getTimeBlocks() {
         return timeBlocks;
     }
