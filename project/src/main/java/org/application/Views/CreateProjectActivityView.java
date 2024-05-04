@@ -61,6 +61,7 @@ public class CreateProjectActivityView extends VBox {
         VBox names = new VBox();
         names.getChildren().add(new Text("Please search"));
         updateSearch.setOnAction(e -> {
+            if(!(startWeek.getText().isEmpty() || endWeek.getText().isEmpty()))
             controller.handleUpdateSearch(e, names,
                     GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
                     GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())));
