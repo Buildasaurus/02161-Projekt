@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
@@ -21,8 +22,6 @@ import java.util.List;
 public class EmployeeView extends ScrollPane implements IRefreshable {
     EmployeeController controller;
 
-    //TODO implement project overview for all the projects where the employee is project leader
-
     public EmployeeView() {
     }
 
@@ -32,20 +31,26 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
     }
 
     private void initialize() {
-        VBox vbox = new VBox();
-        // Create activity button
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(15));
+
+        // Activity Controls Section
+        Label activityLabel = new Label("Activity Controls");
+        activityLabel.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        vbox.getChildren().add(activityLabel);
+
+        HBox activityButtons = new HBox(5);
+
         Button createActivity = new Button("Create Activity");
         createActivity.setOnAction(controller::handleOnCreateActivity);
-        vbox.getChildren().add(createActivity);
-
-        // Create reserved activity button
         Button createReservedActivity = new Button("Create Holiday Activity");
         createReservedActivity.setOnAction(controller::handleOnCreateReservedActivity);
-        vbox.getChildren().add(createReservedActivity);
-
+        activityButtons.getChildren().addAll(createActivity, createReservedActivity);
+        vbox.getChildren().add(activityButtons);
 
         // Activity Selection Section
-        vbox.getChildren().add(new Label("Select Activity for editing"));
+        Label selectActivityLabel = new Label("Select Activity for Editing:");
+        vbox.getChildren().add(selectActivityLabel);
         ComboBox<String> activityComboBox = new ComboBox<>();
         List<Activity> activities = SystemModel.getActivities();
         for (Activity activity : activities) {
@@ -53,30 +58,28 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
         }
         vbox.getChildren().add(activityComboBox);
 
-        // - edit activity
-        Button editActivityButton = new Button("Edit activity");
+        HBox editActivityButtons = new HBox(5);
+        Button editActivityButton = new Button("Edit Activity");
         editActivityButton.setOnAction(e -> controller.handleEditActivityOverview(e,
                 SystemModel.getActivity(
                         activityComboBox.getSelectionModel().getSelectedItem())));
-        vbox.getChildren().add(editActivityButton);
-
-        // - delete activity
-        Button deleteActivityButton = new Button("Delete activity");
-        deleteActivityButton.setOnAction(e ->
-        {
+        Button deleteActivityButton = new Button("Delete Activity");
+        deleteActivityButton.setOnAction(e -> {
             if (SystemModel.getActivity(
                     activityComboBox.getSelectionModel().getSelectedItem()) != null) {
                 SystemModel.getActivity(
                         activityComboBox.getSelectionModel().getSelectedItem()).delete();
-
             }
             refreshView();
         });
-        vbox.getChildren().add(deleteActivityButton);
+        editActivityButtons.getChildren().addAll(editActivityButton, deleteActivityButton);
+        vbox.getChildren().add(editActivityButtons);
 
+        // Project Controls Section
+        Label projectLabel = new Label("Project Controls");
+        projectLabel.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        vbox.getChildren().add(projectLabel);
 
-        // Project Selection Section
-        vbox.getChildren().add(new Label("Project controls"));
         ComboBox<String> projectComboBox = new ComboBox<>();
         List<Project> projects = SystemModel.getProjects();
         for (Project project : projects) {
@@ -84,15 +87,12 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
         }
         vbox.getChildren().add(projectComboBox);
 
-        // - see overview
-        Button seeOverviewButton = new Button("See overview");
+        HBox projectButtons = new HBox(5);
+        Button seeOverviewButton = new Button("See Overview");
         seeOverviewButton.setOnAction(e -> controller.handleSeeOverview(
                 SystemModel.getProjectByName(
                         projectComboBox.getSelectionModel().getSelectedItem())));
-        vbox.getChildren().add(seeOverviewButton);
-
-        // - generate report
-        Button generateReport = new Button("Generate report");
+        Button generateReport = new Button("Generate Report");
         generateReport.setOnAction(e -> {
             Project p = SystemModel.getProjectByName(
                     projectComboBox.getSelectionModel().getSelectedItem());
@@ -101,26 +101,14 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                 report.saveToDisk("");
             }
         });
-        vbox.getChildren().add(generateReport);
-
-        // - edit project
-        Button editProjectButton = new Button("Edit project");
+        Button editProjectButton = new Button("Edit Project");
         editProjectButton.setOnAction(e -> controller.handleEditProject(
                 SystemModel.getProjectByName(
                         projectComboBox.getSelectionModel().getSelectedItem())));
-        vbox.getChildren().add(editProjectButton);
-
-        // - Create Project
-        Button createProject = new Button("Create project");
-        // passing null along, means you are "editing" a nonexisting project, thus creating a new
+        Button createProject = new Button("Create Project");
         createProject.setOnAction(e -> controller.handleEditProject(null));
-        vbox.getChildren().add(createProject);
-
-
-        // - Delete project
-        Button deleteProjectButton = new Button("Delete project");
-        deleteProjectButton.setOnAction(e ->
-        {
+        Button deleteProjectButton = new Button("Delete Project");
+        deleteProjectButton.setOnAction(e -> {
             if (SystemModel.getProjectByName(
                     projectComboBox.getSelectionModel().getSelectedItem()) != null) {
                 SystemModel.getProjectByName(
@@ -128,28 +116,27 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
             }
             refreshView();
         });
-        vbox.getChildren().add(deleteProjectButton);
+        projectButtons.getChildren().addAll(seeOverviewButton, generateReport, editProjectButton, createProject, deleteProjectButton);
+        vbox.getChildren().add(projectButtons);
 
-
-        // Timeblocks
-        Text title = new Text("!Your Timeblocks!");
-        vbox.getChildren().add(title);
-
+        // Timeblocks Section
+        Text timeblocksTitle = new Text("Calender");
+        timeblocksTitle.setStyle("-fx-font-weight: bold;");
+        vbox.getChildren().add(timeblocksTitle);
         CalendarView calendarView = new CalendarView(controller.getEmployee());
         vbox.getChildren().add(calendarView);
 
-        // All (May not be assigned to timeblock)
-        title = new Text("!All activites!");
-        vbox.getChildren().add(title);
-
-
+        // Activities Section
+        Text activitiesTitle = new Text("All Activities");
+        activitiesTitle.setStyle("-fx-font-weight: bold;");
+        vbox.getChildren().add(activitiesTitle);
         for (Activity activity : controller.getEmployee().getActivities()) {
             ActivityView activityView = ActivityView.createActivityView(activity);
             VBox.setMargin(activityView, new Insets(5.0));
-            vbox.getChildren().add(activityView); // Add the activityView to the VBox
+            vbox.getChildren().add(activityView);
         }
 
-
+        // Return Button
         vbox.getChildren().add(Buttons.returnButton());
 
         setContent(vbox);
