@@ -25,6 +25,10 @@ public class ProjectActivity extends Activity {
     public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, int time, String name,
             Project assignedProject) {
         super(name, startWeek, endWeek);
+        if(startWeek.after(endWeek))
+        {
+            throw new IllegalArgumentException("start week should be before end week");
+        }
         this.expectedDuration = time;
         this.assignedProject = assignedProject;
         assignedProject.addActivity(this);
@@ -35,6 +39,10 @@ public class ProjectActivity extends Activity {
         super(name, startWeek, endWeek);
         this.expectedDuration = time;
         this.assignedProject = assignedProject;
+        if(startWeek.after(endWeek))
+        {
+            throw new IllegalArgumentException("start week should be before end week");
+        }
         for(String employeeID : assignedEmployeeIDs)
         {
             assignEmployee(employeeID);

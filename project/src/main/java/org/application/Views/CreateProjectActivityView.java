@@ -98,9 +98,9 @@ public class CreateProjectActivityView extends VBox {
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e ->
         {
-            if (startWeek.getText() != null || endWeek.getText() != null || halfHours.getText() != null ||
-                    name.getText() != null || projectSelectionCombobox.getSelectionModel().getSelectedItem() != null ||
-                    assignedEmployees.getText() != null) {
+            if (!(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || halfHours.getText().isEmpty() ||
+                    name.getText().isEmpty() || projectSelectionCombobox.getSelectionModel().getSelectedItem() == null ||
+                    assignedEmployees.getText() == null) && Integer.parseInt(startWeek.getText()) <= Integer.parseInt(endWeek.getText())) {
                 controller.handleCompleteProjectActivity(
                         new ProjectActivity(
                                 GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
