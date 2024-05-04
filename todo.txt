@@ -3,6 +3,30 @@ Tests
 Man skal kunne assigne flere folk senere, til activites
 Man skal kunne fjerne folk fra activities
 Man skal kunne sætte en projektleder senere, på projektet.
+- Tests der mangler coverage (alle sammen siden 04.05 13:43)
+
+Der skal laves test til ReservedActivity.delete
+
+employee.getactivity (0%)
+
+employee.deleteTimeBlock (0%)
+
+Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%)
+
+Createreport - de specifikke tilæflde hvor der ikke er nogle activities (80% er dækket)
+
+ProjectActivity.calculateSpentTime (0% - ok (måske lidt simpel) til White box test)
+alt i Report udover constructor - Det er måske svært at teste dog (20%)
+
+SystemModel.getemployee - det specifikke tilfælde hvor man prøver at finde nogen som ikke er der, så burde den returnere null (60%)
+
+SystemModel.getProjectbyname (0%)
+
+SystemModel.findAvailableEmployees - den er måske lidt svær, fordi den returnere en rangering(0%)
+
+SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%) 
+
+Timeblock.getDuration (0%)
 
 UI
 Man skal kunne assigne flere folk senere, til activites (done)
@@ -10,5 +34,5 @@ Man skal kunne slette activities (done)
 Man skal kunne fjerne folk fra activities (done)
 Man skal kunne sætte en projektleder senere, til projektet.
 
-Raport
+Rapport
 Find på specifikke ting der mangler i rapporten, og skriv dem her. (ja, det er en todo)
