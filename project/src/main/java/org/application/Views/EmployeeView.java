@@ -8,14 +8,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
-import org.application.Models.*;
+import org.application.Models.Activity;
+import org.application.Models.Project;
+import org.application.Models.Report;
+import org.application.Models.SystemModel;
 
 import java.util.List;
 
 /**
  * A view to see and interact with data tied to a single employee
  */
-public class EmployeeView extends ScrollPane implements IRefreshable{
+public class EmployeeView extends ScrollPane implements IRefreshable {
     EmployeeController controller;
 
     //TODO implement project overview for all the projects where the employee is project leader
@@ -60,16 +63,15 @@ public class EmployeeView extends ScrollPane implements IRefreshable{
         // - delete activity
         Button deleteActivityButton = new Button("Delete activity");
         deleteActivityButton.setOnAction(e ->
-                {
-                    if(SystemModel.getActivity(
-                            activityComboBox.getSelectionModel().getSelectedItem()) != null)
-                    {
-                        SystemModel.getActivity(
-                                activityComboBox.getSelectionModel().getSelectedItem()).delete();
+        {
+            if (SystemModel.getActivity(
+                    activityComboBox.getSelectionModel().getSelectedItem()) != null) {
+                SystemModel.getActivity(
+                        activityComboBox.getSelectionModel().getSelectedItem()).delete();
 
-                    }
-                    refreshView();
-                });
+            }
+            refreshView();
+        });
         vbox.getChildren().add(deleteActivityButton);
 
 
@@ -94,8 +96,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable{
         generateReport.setOnAction(e -> {
             Project p = SystemModel.getProjectByName(
                     projectComboBox.getSelectionModel().getSelectedItem());
-            if(p != null)
-            {
+            if (p != null) {
                 Report report = p.createReport();
                 report.saveToDisk("");
             }
@@ -113,9 +114,8 @@ public class EmployeeView extends ScrollPane implements IRefreshable{
         Button deleteProjectButton = new Button("Delete project");
         deleteProjectButton.setOnAction(e ->
         {
-            if(SystemModel.getProjectByName(
-                    projectComboBox.getSelectionModel().getSelectedItem()) != null)
-            {
+            if (SystemModel.getProjectByName(
+                    projectComboBox.getSelectionModel().getSelectedItem()) != null) {
                 SystemModel.getProjectByName(
                         projectComboBox.getSelectionModel().getSelectedItem()).delete();
             }
@@ -148,8 +148,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable{
         setContent(vbox);
     }
 
-    public void refreshView()
-    {
+    public void refreshView() {
         setContent(null);
         initialize();
     }

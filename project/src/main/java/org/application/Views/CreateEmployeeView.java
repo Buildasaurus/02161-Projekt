@@ -11,12 +11,12 @@ import org.application.Controllers.CreateEmployeeController;
 public class CreateEmployeeView extends VBox {
 
     CreateEmployeeController controller;
+
     public CreateEmployeeView() {
         initialize();
     }
 
-    public void setController(CreateEmployeeController controller)
-    {
+    public void setController(CreateEmployeeController controller) {
         this.controller = controller;
     }
 
@@ -32,7 +32,9 @@ public class CreateEmployeeView extends VBox {
 
         // Create button
         Button completeButton = new Button("Complete");
-            completeButton.setOnAction(e -> {controller.handleCompletePressed(e, name.getText());});
+        completeButton.setOnAction(e -> {
+            controller.handleCompletePressed(e, name.getText());
+        });
 
         getChildren().add(completeButton);
 

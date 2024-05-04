@@ -42,6 +42,5 @@ public class MainView extends VBox {
         getChildren().add(createEmployee);
 
 
-
     }
 }

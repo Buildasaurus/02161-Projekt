@@ -9,14 +9,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class GeneralMethods
-{
-    public static GregorianCalendar convertDatePickerToCalender(DatePicker date)
-    {
+public class GeneralMethods {
+    public static GregorianCalendar convertDatePickerToCalender(DatePicker date) {
         // Assume datePicker is your DatePicker object
         LocalDate localDate = date.getValue();
-        if(localDate == null)
-        {
+        if (localDate == null) {
             return null;
         }
 

@@ -6,7 +6,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
-import org.application.Models.*;
+import org.application.Models.Employee;
+import org.application.Models.Project;
+import org.application.Models.ProjectActivity;
+import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
 
 import java.util.Calendar;
@@ -81,10 +84,12 @@ public class CreateProjectActivityView extends VBox {
         VBox names = new VBox();
         names.getChildren().add(new Text("Please search"));
         updateSearch.setOnAction(e -> {
-            if(!(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || startYear.getText().isEmpty() || endYear.getText().isEmpty()))
-            controller.handleUpdateSearch(e, names,
-                    GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText()), Integer.parseInt(startYear.getText())),
-                    GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText()), Integer.parseInt(endYear.getText())));
+            if (!(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || startYear.getText().isEmpty() || endYear.getText().isEmpty()))
+                controller.handleUpdateSearch(e, names,
+                        GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText()),
+                                Integer.parseInt(startYear.getText())),
+                        GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText()),
+                                Integer.parseInt(endYear.getText())));
         });
         pane.setContent(names);
         getChildren().add(pane);
@@ -113,20 +118,20 @@ public class CreateProjectActivityView extends VBox {
         getChildren().add(projectSelectionCombobox);
 
 
-
         // Completion Section
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e ->
         {
-            if (isValidData(startWeek, endWeek, halfHours, name, projectSelectionCombobox, assignedEmployees, startYear, endYear))
-            {
+            if (isValidData(startWeek, endWeek, halfHours, name, projectSelectionCombobox, assignedEmployees, startYear,
+                    endYear)) {
                 controller.handleCompleteProjectActivity(
                         new ProjectActivity(
                                 GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
                                 GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())),
                                 Integer.parseInt(halfHours.getText()),
                                 name.getText(),
-                                SystemModel.getProjectByName(projectSelectionCombobox.getSelectionModel().getSelectedItem()),
+                                SystemModel.getProjectByName(
+                                        projectSelectionCombobox.getSelectionModel().getSelectedItem()),
                                 assignedEmployees.getText().split(" ")
                         ),
                         activity
@@ -145,17 +150,20 @@ public class CreateProjectActivityView extends VBox {
             assignedEmployees.setText(activity.getAssignedEmployees().stream()
                     .map(Employee::toString)  // assuming Employee has a toString method
                     .collect(Collectors.joining(" ")));
-            halfHours.setText("" + ((ProjectActivity)activity).getExpectedDuration());
+            halfHours.setText("" + activity.getExpectedDuration());
             projectSelectionCombobox.getSelectionModel().select(
-                    ((ProjectActivity) activity).getAssignedProject().getName());
+                    activity.getAssignedProject().getName());
         }
         Button backButton = new Button("Back");
-        backButton.setOnAction(e -> {controller.goToEmployeeView();});
+        backButton.setOnAction(e -> {
+            controller.goToEmployeeView();
+        });
         getChildren().add(backButton);
     }
 
-    private boolean isValidData(TextField startWeek, TextField endWeek, TextField halfHours, TextField name, ComboBox<String> projectSelectionCombobox, TextField assignedEmployees, TextField startYear, TextField endYear)
-    {
+    private boolean isValidData(TextField startWeek, TextField endWeek, TextField halfHours, TextField name,
+                                ComboBox<String> projectSelectionCombobox, TextField assignedEmployees,
+                                TextField startYear, TextField endYear) {
         return !(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || halfHours.getText().isEmpty() ||
                 name.getText().isEmpty() || projectSelectionCombobox.getSelectionModel().getSelectedItem() == null ||
                 assignedEmployees.getText() == null || endYear.getText().isEmpty() || startYear.getText().isEmpty()) &&

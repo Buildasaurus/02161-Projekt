@@ -10,26 +10,22 @@ import org.application.Controllers.EmployeeController;
 import org.application.Models.ReservedActivity;
 import org.application.Utils.GeneralMethods;
 
-public class CreateReservedActivityView extends GridPane
-{
+public class CreateReservedActivityView extends GridPane {
     EmployeeController controller;
     ReservedActivity editedReservedActivity;
 
-    public CreateReservedActivityView(EmployeeController controller)
-    {
+    public CreateReservedActivityView(EmployeeController controller) {
         this.controller = controller;
         initialize();
     }
 
-    public CreateReservedActivityView(EmployeeController controller, ReservedActivity oldReservedActivity)
-    {
+    public CreateReservedActivityView(EmployeeController controller, ReservedActivity oldReservedActivity) {
         this.controller = controller;
         this.editedReservedActivity = oldReservedActivity;
         initialize();
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         setPadding(new Insets(10, 10, 10, 10));
         setVgap(5);
         setHgap(5);
@@ -57,8 +53,7 @@ public class CreateReservedActivityView extends GridPane
         // OK button
         Button OKButton = new Button("OK");
         OKButton.setOnAction(e -> {
-            if(!(startDatePicker.getValue() == null || endDatePicker.getValue() == null))
-            {
+            if (!(startDatePicker.getValue() == null || endDatePicker.getValue() == null)) {
                 controller.handleCompleteProjectActivity(
                         new ReservedActivity(
                                 GeneralMethods.convertDatePickerToCalender(startDatePicker),
@@ -72,8 +67,7 @@ public class CreateReservedActivityView extends GridPane
         });
         add(OKButton, 0, 3);
 
-        if(editedReservedActivity != null)
-        {
+        if (editedReservedActivity != null) {
             nameField.setText(editedReservedActivity.getName());
             startDatePicker.setValue(GeneralMethods.convertCalendarToLocalDate(editedReservedActivity.getStartDate()));
             endDatePicker.setValue(GeneralMethods.convertCalendarToLocalDate(editedReservedActivity.getEndDate()));
@@ -83,7 +77,9 @@ public class CreateReservedActivityView extends GridPane
         add(returnButton, 1, 3);
 
         Button backButton = new Button("Back");
-        backButton.setOnAction(e -> {controller.goToEmployeeView();});
-        add(backButton, 2,3);
+        backButton.setOnAction(e -> {
+            controller.goToEmployeeView();
+        });
+        add(backButton, 2, 3);
     }
 }

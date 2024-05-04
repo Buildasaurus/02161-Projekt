@@ -1,13 +1,16 @@
 package org.application.Views;
-import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 
 public class ProjectOverviewView extends VBox {
-    private Project project;
     EmployeeController controller;
+    private final Project project;
 
     public ProjectOverviewView(EmployeeController controller, Project project) {
         this.project = project;

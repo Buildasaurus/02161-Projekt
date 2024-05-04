@@ -1,18 +1,17 @@
 package org.application.Views;
 
-import java.util.GregorianCalendar;
-
-import org.application.Models.Employee;
-import org.application.Models.ReservedActivity;
-
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.application.Models.Employee;
+import org.application.Models.ReservedActivity;
+
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 
 public class ReservedActivityView extends ActivityView {
-    private ReservedActivity activity;
+    private final ReservedActivity activity;
 
     public ReservedActivityView(ReservedActivity activity) {
         this.activity = activity;

@@ -1,7 +1,6 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -12,19 +11,18 @@ import org.application.Models.Project;
 import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
 
-public class CreateProjectView extends VBox
-{
+public class CreateProjectView extends VBox {
     CreateProjectController controller;
     Project loadedProject = null;
 
     public CreateProjectView() {
     }
+
     public CreateProjectView(Project loadedProject) {
         this.loadedProject = loadedProject;
     }
 
-    public void setController(CreateProjectController controller)
-    {
+    public void setController(CreateProjectController controller) {
         this.controller = controller;
         initialize();
     }
@@ -59,7 +57,8 @@ public class CreateProjectView extends VBox
         // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> {
-            if (SystemModel.getProjectByName(name.getText()) == null || editingProject) // only create project, if a project with the same name doesn't exist
+            if (SystemModel.getProjectByName(
+                    name.getText()) == null || editingProject) // only create project, if a project with the same name doesn't exist
             {
                 controller.handleCreateProject(
                         name.getText(),
@@ -68,7 +67,7 @@ public class CreateProjectView extends VBox
                         GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
             }
         });
-        if(editingProject) {
+        if (editingProject) {
             name.setText(loadedProject.getName());
             projectLeader.setText(loadedProject.getProjectLeaderID());
 
