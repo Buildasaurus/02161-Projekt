@@ -17,6 +17,7 @@ import org.application.Models.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 public class CalendarView extends GridPane {
@@ -179,6 +180,7 @@ public class CalendarView extends GridPane {
                             hit = true;
                         }
                     }
+                    Collections.reverse(res);
                     startSelect.setItems(toStringList(res));
                 }
             }
