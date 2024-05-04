@@ -30,7 +30,7 @@ public class CreateProjectView extends VBox
     }
 
     private void initialize() {
-        boolean loadingProject = loadedProject != null;
+        boolean editingProject = loadedProject != null;
 
         // Title
         Text title = new Text("Choose name and other relevant data for Project");
@@ -57,7 +57,7 @@ public class CreateProjectView extends VBox
         // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> {
-            if (SystemModel.getProjectByName(name.getText()) == null)
+            if (SystemModel.getProjectByName(name.getText()) == null || editingProject) // only create project, if a project with the same name doesn't exist
             {
                 controller.handleCreateProject(
                         name.getText(),
@@ -66,7 +66,7 @@ public class CreateProjectView extends VBox
                         GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
             }
         });
-        if(loadingProject) {
+        if(editingProject) {
             name.setText(loadedProject.getName());
             projectLeader.setText(loadedProject.getProjectLeaderID());
 
