@@ -9,3 +9,6 @@ Man skal kunne assigne flere folk senere, til activites (done)
 Man skal kunne slette activities (done)
 Man skal kunne fjerne folk fra activities (done)
 Man skal kunne sætte en projektleder senere, til projektet.
+
+Raport
+Find på specifikke ting der mangler i rapporten, og skriv dem her. (ja, det er en todo)
