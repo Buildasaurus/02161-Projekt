@@ -81,16 +81,12 @@ public class Employee {
         int freeDayCounter = totalDays;
 
         int busyActivities = 0;
-        for (Activity activity : activities) // 3
-        {
-            if (doPeriodsOverlap(activity.getStartDate(), activity.getEndDate(), startTime, endTime)) // 4
-            {
-                if (activity instanceof ReservedActivity) // 5
-                {
+        for (Activity activity : activities) { // 3
+            if (doPeriodsOverlap(activity.getStartDate(), activity.getEndDate(), startTime, endTime)) { // 4
+                if (activity instanceof ReservedActivity) { // 5
                     freeDayCounter--; // 6
                 }
-                else if (activity instanceof ProjectActivity) // 7
-                {
+                else if (activity instanceof ProjectActivity) {// 7
                     busyActivities += 1; // 8
                 }
             }
@@ -98,6 +94,14 @@ public class Employee {
         return (int) ((total - busyActivities) * freeDayCounter / totalDays); // 9
     }
 
+    public Activity getActivity(String searchActivity){
+        for (Activity activity: activities){
+            if (searchActivity.equals(activity.getName())){
+                return activity;
+            }
+        }
+        return null;
+    }
 
     /**
      * Calculates if the two periods defined by [start1, end1] and [start2, end2] overlaps
