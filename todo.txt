@@ -13,6 +13,8 @@ employee.deleteTimeBlock (0%)
 
 Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%)
 
+Project.delete() (0%)
+
 Createreport - de specifikke tilæflde hvor der ikke er nogle activities (80% er dækket)
 
 ProjectActivity.calculateSpentTime (0% - ok (måske lidt simpel) til White box test)
