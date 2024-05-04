@@ -44,12 +44,14 @@ public class CreateReservedActivityView extends GridPane
         Label startDateLabel = new Label("Start-dato:");
         add(startDateLabel, 0, 1);
         DatePicker startDatePicker = new DatePicker();
+        startDatePicker.setEditable(false);
         add(startDatePicker, 1, 1);
 
         // End date field
         Label endDateLabel = new Label("Slut-dato:");
         add(endDateLabel, 0, 2);
         DatePicker endDatePicker = new DatePicker();
+        endDatePicker.setEditable(false);
         add(endDatePicker, 1, 2);
 
         // OK button

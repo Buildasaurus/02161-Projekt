@@ -47,10 +47,12 @@ public class CreateProjectView extends VBox
         getChildren().add(projectLeader);
 
         DatePicker startDate = new DatePicker();
+        startDate.setEditable(false);
         startDate.setPromptText("Start Date");
         getChildren().add(startDate);
 
         DatePicker endDate = new DatePicker();
+        endDate.setEditable(false);
         endDate.setPromptText("End Date");
         getChildren().add(endDate);
 
