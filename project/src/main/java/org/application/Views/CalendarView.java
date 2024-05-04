@@ -75,7 +75,11 @@ public class CalendarView extends GridPane {
         this.add(selectionBox, 1, 97);
 
         Button clearButton = new Button("Clear");
-        clearButton.setOnAction(this.clearData());
+        clearButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                clearData();
+            }
+        });
         this.add(clearButton, 0, 97);
     }
 
@@ -188,6 +192,7 @@ public class CalendarView extends GridPane {
                     if (activity != null) {
                         employee.createTimeBlock(activity, calendars[0], calendars[1]);
                         updateTimeBlocks();
+                        clearData();
                     }
                 }
             }
@@ -256,17 +261,12 @@ public class CalendarView extends GridPane {
         return res;
     }
 
-    private EventHandler<ActionEvent> clearData() {
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                ObservableList<String> strList = toStringList(freeHalfHours);
-                startSelect.setValue(null);
-                endSelect.setValue(null);
-                startSelect.setItems(strList);
-                endSelect.setItems(strList);
-                activityField.setText("");
-            }
-        };
-        return event;
+    private void clearData() {
+        ObservableList<String> strList = toStringList(freeHalfHours);
+        startSelect.setValue(null);
+        endSelect.setValue(null);
+        startSelect.setItems(strList);
+        endSelect.setItems(strList);
+        activityField.setText("");
     }
 }
