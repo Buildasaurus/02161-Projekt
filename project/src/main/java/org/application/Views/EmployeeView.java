@@ -9,11 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
-import org.application.Models.Activity;
-import org.application.Models.Project;
-import org.application.Models.Report;
-import org.application.Models.SystemModel;
+import org.application.Models.*;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -120,11 +118,35 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
         vbox.getChildren().add(projectButtons);
 
         // Timeblocks Section
-        Text timeblocksTitle = new Text("Calender");
+        Text timeblocksTitle = new Text("Calendar");
         timeblocksTitle.setStyle("-fx-font-weight: bold;");
         vbox.getChildren().add(timeblocksTitle);
-        CalendarView calendarView = new CalendarView(controller.getEmployee());
-        vbox.getChildren().add(calendarView);
+
+        // Check if there's a reserved activity for today
+        boolean hasReservedActivityToday = false;
+        ReservedActivity overlappingReservedActivity = null;
+        GregorianCalendar today = new GregorianCalendar();
+        for (Activity activity : controller.getEmployee().getActivities()) {
+            if (activity instanceof ReservedActivity) {
+                GregorianCalendar activityStart = activity.getStartDate();
+                GregorianCalendar activityEnd = activity.getEndDate();
+                if (!today.before(activityStart) && !today.after(activityEnd)) {
+                    hasReservedActivityToday = true;
+                    overlappingReservedActivity = (ReservedActivity) activity;
+                    break;
+                }
+            }
+        }
+
+        // Only create the calendar view if there's no reserved activity for today
+        if (!hasReservedActivityToday) {
+            CalendarView calendarView = new CalendarView(controller.getEmployee());
+            vbox.getChildren().add(calendarView);
+        }
+        else {
+            Label reservedActivityLabel = new Label("You cannot work today, because of the activity" + overlappingReservedActivity.getName());
+            vbox.getChildren().add(reservedActivityLabel);
+        }
 
         // Activities Section
         Text activitiesTitle = new Text("All Activities");
