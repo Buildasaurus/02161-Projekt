@@ -42,6 +42,12 @@ public class ProjectOverviewView extends VBox {
         this.getChildren().add(new Label("Overall Progress"));
         this.getChildren().add(overallProgressBar);
 
+        // Display each activity with its progress
+        for (ProjectActivity activity : project.getActivities()) {
+            ActivityProgressView activityProgressView = new ActivityProgressView(activity);
+            this.getChildren().add(activityProgressView);
+        }
+
         Button OKButton = new Button("OK");
         OKButton.setOnAction(controller::handleOKButton);
         getChildren().add(OKButton);

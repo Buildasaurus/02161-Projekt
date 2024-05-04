@@ -105,6 +105,26 @@ public class ProjectActivity extends Activity {
         this.expectedDuration = ((ProjectActivity) activity).getExpectedDuration();
     }
 
+    /**
+     * Calculates how many hours has been spent, compared to the expected duration
+     * @return The value as a double between 0 and 1 where 1 means more time has been spent, that was expected
+     */
+    public double getProgress() {
+        int spentTime = calculateSpentTime();
+        int expectedDuration = getExpectedDuration();
+
+        // Guard clause to prevent division by zero
+        if (expectedDuration <= 0) {
+            return 0;
+        }
+
+        // Calculate the progress as a value between 0.0 and 1.0
+        double progress = (double) spentTime / expectedDuration;
+
+        // Ensure the progress does not exceed 1.0
+        return Math.min(progress, 1.0);
+    }
+
     public int getExpectedDuration() {
         return expectedDuration;
     }
