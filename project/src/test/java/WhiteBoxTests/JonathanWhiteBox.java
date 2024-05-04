@@ -52,7 +52,7 @@ public class JonathanWhiteBox {
     public void testGetAvailabilityScoreD() {
         Employee e = new Employee("empl");
         Project p = new Project("TestProject",
-                new GregorianCalendar(2024, GregorianCalendar.APRIL, 07),
+                new GregorianCalendar(2024, GregorianCalendar.APRIL, 7),
                 new GregorianCalendar(2024, GregorianCalendar.APRIL, 14));
         ProjectActivity a = new ProjectActivity(
                 new GregorianCalendar(2024, GregorianCalendar.APRIL, 11),
