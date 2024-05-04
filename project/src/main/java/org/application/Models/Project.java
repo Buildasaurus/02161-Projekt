@@ -10,6 +10,7 @@ public class Project {
     private GregorianCalendar startWeek;
     private GregorianCalendar endWeek;
     private String projectLeaderID;
+    private final List<ProjectActivity> activities = new ArrayList<>();
 
     public Project(String name, GregorianCalendar startWeek, GregorianCalendar endWeek,
                    String projectLeaderID) {
