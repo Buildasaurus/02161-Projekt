@@ -15,11 +15,14 @@ public class Employee {
     }
 
     public void addActivity(Activity activity) {
-        if (!activities.contains(activity)) {
-            activities.add(activity);
+        assert activity != null;
+        assert activities != null;
+        if (!activities.contains(activity)) { // 1
+            activities.add(activity); // 2
             // ORDER is important, to avoid infinite calling
-            activity.assignEmployee(this);
-        }
+            activity.assignEmployee(this); // 3
+        } // 4
+        assert activities.contains(activity);
     }
     public void removeActivity(Activity activity) {
         if (activities.contains(activity)) {
