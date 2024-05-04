@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -49,6 +50,10 @@ public class CalendarView extends GridPane {
             GridPane.setMargin(rect, new Insets(5.0));
         }
 
+        Label text = new Label("Create new timeblock");
+        text.setStyle("-fx-font-weight: bold;");
+        this.add(text, 0, 97, 2,1);
+
         // check for any existing timeblocks or reserved activities
         updateFreeHalfHours();
         updateTimeBlocks();
@@ -62,12 +67,13 @@ public class CalendarView extends GridPane {
         endSelect.setOnAction(this.endSelection());
 
         activityField = new TextField();
+        activityField.setPromptText("Please enter an existing activity");
 
-        Button submitButton = new Button("Submit");
+        Button submitButton = new Button("Create timeblock");
         submitButton.setOnAction(this.submitTimeBlock());
 
         HBox selectionBox = new HBox(startSelect, endSelect, activityField, submitButton);
-        this.add(selectionBox, 1, 97);
+        this.add(selectionBox, 1, 98);
 
         Button clearButton = new Button("Clear");
         clearButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -75,7 +81,7 @@ public class CalendarView extends GridPane {
                 clearData();
             }
         });
-        this.add(clearButton, 0, 97);
+        this.add(clearButton, 0, 98);
     }
 
     private void getCurrentTime() {
