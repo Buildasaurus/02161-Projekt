@@ -6,10 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.App;
-import org.application.Models.Activity;
-import org.application.Models.Employee;
-import org.application.Models.Project;
-import org.application.Models.SystemModel;
+import org.application.Models.*;
 import org.application.Views.*;
 
 import java.util.GregorianCalendar;
@@ -39,7 +36,7 @@ public class EmployeeController implements IController {
 
     public void handleOnCreateActivity(ActionEvent event) {
         System.out.println("Handling event");
-        CreateActivityView view = new CreateActivityView(this);
+        CreateProjectActivityView view = new CreateProjectActivityView(this);
         this.view = view;
         App.setRoot(this);
     }
@@ -51,13 +48,22 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs) {
+    public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs, Activity oldActivity) {
         System.out.println("Handling complete activity. Activity made: " + activity);
 
+        if(oldActivity != null)
+        {
+            oldActivity.updateValues(activity);
+            activity.delete(); // It was simply used for reference
+        }
+        else
+        {
+            oldActivity = activity;
+        }
         for(String employeeID : assignedEmployeeIDs) {
             Employee emp = SystemModel.getEmployee(employeeID);
             if (emp != null) {
-                emp.addActivity(activity);
+                emp.addActivity(oldActivity);
             }
         }
         goToEmployeeView();
@@ -109,8 +115,14 @@ public class EmployeeController implements IController {
 
     public void handleEditActivityOverview(ActionEvent event, Activity activity)
     {
-        CreateActivityView view = new CreateActivityView(this, activity);
-        this.view = view;
+        if (activity instanceof ProjectActivity)
+        {
+            this.view = new CreateProjectActivityView(this,(ProjectActivity) activity);
+        }
+        else if (activity instanceof ReservedActivity)
+        {
+            this.view= new CreateReservedActivityView(this, (ReservedActivity)activity);
+        }
         App.setRoot(this);
     }
 

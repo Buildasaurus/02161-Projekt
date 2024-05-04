@@ -12,16 +12,16 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CreateActivityView extends VBox {
+public class CreateProjectActivityView extends VBox {
     EmployeeController controller;
-    Activity activity;
+    ProjectActivity activity;
 
-    public CreateActivityView(EmployeeController controller) {
+    public CreateProjectActivityView(EmployeeController controller) {
         this.controller = controller;
         initialize();
     }
 
-    public CreateActivityView(EmployeeController controller, Activity activity) {
+    public CreateProjectActivityView(EmployeeController controller, ProjectActivity activity) {
         this.controller = controller;
         this.activity = activity;
         initialize();
@@ -108,7 +108,10 @@ public class CreateActivityView extends VBox {
                                 Integer.parseInt(halfHours.getText()),
                                 name.getText(),
                                 SystemModel.getProjectByName(projectSelectionCombobox.getSelectionModel().getSelectedItem())),
-                        assignedEmployees.getText().split(" "));
+                        assignedEmployees.getText().split(" "),
+                        activity
+
+                );
             }
         });
         getChildren().add(completeButton);
@@ -123,7 +126,6 @@ public class CreateActivityView extends VBox {
             halfHours.setText("" + ((ProjectActivity)activity).getExpectedDuration());
             projectSelectionCombobox.getSelectionModel().select(
                     ((ProjectActivity) activity).getAssignedProject().getName());
-            activity.delete();
         }
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {controller.goToEmployeeView();});

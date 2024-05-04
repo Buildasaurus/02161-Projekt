@@ -13,9 +13,18 @@ import org.application.Utils.GeneralMethods;
 public class CreateReservedActivityView extends GridPane
 {
     EmployeeController controller;
+    ReservedActivity editedReservedActivity;
+
     public CreateReservedActivityView(EmployeeController controller)
     {
         this.controller = controller;
+        initialize();
+    }
+
+    public CreateReservedActivityView(EmployeeController controller, ReservedActivity oldReservedActivity)
+    {
+        this.controller = controller;
+        this.editedReservedActivity = oldReservedActivity;
         initialize();
     }
 

@@ -65,6 +65,33 @@ public class ProjectActivity extends Activity {
         assignedProject = null;
     }
 
+    /**
+     * Updates all values, and importantly doesn't edit the timeblocks saved in it.
+     * @param activity
+     */
+    public void updateValues(Activity activity)
+    {
+        if(!(activity instanceof ProjectActivity))
+        {
+            throw new IllegalArgumentException("Given activity should be of instance ProjectActivity");
+        }
+        this.name = activity.getName();
+        this.startDate = activity.getStartDate();
+        this.endDate = activity.getEndDate();
+        // Update all connections to match the new employees
+        for (int i = assignedEmployees.size()-1; i >= 0; i--)
+        {
+            this.removeEmployee(assignedEmployees.get(i));
+        }
+        for (int i = activity.getAssignedEmployees().size()-1; i >= 0; i--)
+        {
+            this.assignEmployee(activity.getAssignedEmployees().get(i));
+        }
+
+        this.assignedProject = ((ProjectActivity) activity).getAssignedProject();
+        this.expectedDuration = ((ProjectActivity) activity).getExpectedDuration();
+    }
+
     public int getExpectedDuration() {
         return expectedDuration;
     }

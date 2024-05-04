@@ -46,6 +46,8 @@ public abstract class Activity {
         }
     }
 
+    public abstract void updateValues(Activity activity);
+
     public GregorianCalendar getEndDate() {
         return endDate;
     }
