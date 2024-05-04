@@ -11,7 +11,7 @@ Scenario: Employee spends time on activity
     And the employee spends time on the activity
     Then the employee has 1 timeblocks attached
 
-//Scenario: Two employees spend time on activity
-//    When an employee named "testEmployee1" is created
-//    And an employee named "testEmployee2" is created
-//    And the employee named "testEmployee1" spends 30 minutes on the activity
+#//Scenario: Two employees spend time on activity
+#//    When an employee named "testEmployee1" is created
+#//    And an employee named "testEmployee2" is created
+#//    And the employee named "testEmployee1" spends 30 minutes on the activity
