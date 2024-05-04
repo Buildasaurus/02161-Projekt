@@ -54,6 +54,9 @@ public class ProjectActivity extends Activity {
         return timeBlocks;
     }
 
+    /**
+     * Deletes all references to assigned employees and the assigned project.
+     */
     public void delete() {
         for (int i = assignedEmployees.size()-1; i >= 0; i--) {
             removeEmployee(assignedEmployees.get(i));

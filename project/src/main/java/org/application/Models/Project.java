@@ -65,8 +65,9 @@ public class Project {
 
     /**
      * Removes the connection between the activity, and the project.
+     * should NEVER be used casually, as it will only remove the reference one way.
      * DOES NOT delete the activity
-     * @param activity
+     * @param activity the activity to remove.
      */
     public void removeActivity(ProjectActivity activity) {
         activities.remove(activity);
@@ -103,6 +104,18 @@ public class Project {
 
     public void noProjectLeader(){
         this.projectLeaderID = "PROJECT LEADER NOT SET";
+    }
+
+    /**
+     * Deletes the current project, and all activities connected to it
+     */
+    public void delete()
+    {
+        for (int i = getActivities().size()-1; i >= 0; i--)
+        {
+            activities.get(i).delete();
+        }
+        SystemModel.removeProject(this);
     }
 
 

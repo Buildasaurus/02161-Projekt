@@ -142,6 +142,19 @@ public class SystemModel { // should be public static class, but java is stupid
         return projects;
     }
 
+    /**
+     * removes a project from the projects list, and deletes it.
+     * @param project
+     */
+    public static void removeProject(Project project)
+    {
+        if(projects.remove(project))
+        {
+            project.delete();
+        }
+
+    }
+
     public static Activity getActivity(String activityName) {
         List<Activity> activities = getActivities();
         for (Activity activity : activities)
@@ -153,4 +166,6 @@ public class SystemModel { // should be public static class, but java is stupid
         }
         return null;
     }
+
+
 }

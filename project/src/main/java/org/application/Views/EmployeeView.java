@@ -72,30 +72,52 @@ public class EmployeeView extends ScrollPane {
                 });
         vbox.getChildren().add(deleteActivityButton);
 
+
         // Project Selection Section
-        vbox.getChildren().add(new Label("Project overview"));
-        ComboBox<String> comboBox = new ComboBox<>();
+        vbox.getChildren().add(new Label("Project controls"));
+        ComboBox<String> projectComboBox = new ComboBox<>();
         List<Project> projects = SystemModel.getProjects();
         for (Project project : projects) {
-            comboBox.getItems().add(project.getName());
+            projectComboBox.getItems().add(project.getName());
         }
-        vbox.getChildren().add(comboBox);
+        vbox.getChildren().add(projectComboBox);
 
         // - see overview
         Button seeOverviewButton = new Button("See overview");
         seeOverviewButton.setOnAction(e -> controller.handleSeeOverview(
                 SystemModel.getProjectByName(
-                        comboBox.getSelectionModel().getSelectedItem())));
+                        projectComboBox.getSelectionModel().getSelectedItem())));
         vbox.getChildren().add(seeOverviewButton);
 
         // - generate report
         Button generateReport = new Button("Generate report");
         generateReport.setOnAction(e -> {
             Report report = SystemModel.getProjectByName(
-                    comboBox.getSelectionModel().getSelectedItem()).createReport();
+                    projectComboBox.getSelectionModel().getSelectedItem()).createReport();
             report.saveToDisk("");
         });
         vbox.getChildren().add(generateReport);
+
+        // - edit project
+        Button editProjectButton = new Button("Edit project");
+        editProjectButton.setOnAction(e -> controller.handleEditProject(
+                SystemModel.getProjectByName(
+                        projectComboBox.getSelectionModel().getSelectedItem())));
+        vbox.getChildren().add(editProjectButton);
+
+        // - Delete project
+        Button deleteProjectButton = new Button("Delete project");
+        deleteProjectButton.setOnAction(e ->
+        {
+            if(SystemModel.getProjectByName(
+                    projectComboBox.getSelectionModel().getSelectedItem()) != null)
+            {
+                SystemModel.getProjectByName(
+                        projectComboBox.getSelectionModel().getSelectedItem()).delete();
+            }
+            refreshView();
+        });
+        vbox.getChildren().add(deleteProjectButton);
 
 
         // Timeblocks
