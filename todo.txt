@@ -34,9 +34,10 @@ UI
 Man skal kunne assigne flere folk senere, til activites (done)
 Man skal kunne slette activities (done)
 Man skal kunne fjerne folk fra activities (done)
-Man skal kunne sætte en projektleder senere, til projektet.
+Man skal kunne sætte en projektleder senere, til projektet. (done)
 Det betyder, at projektlederen
 let skal kunne se, hvordan timeforbruget udvikler sig per aktivitet og for hele projektet
+bugfinding - den skal ikke crashe hele tiden.
 
 Rapport
 Find på specifikke ting der mangler i rapporten, og skriv dem her. (ja, det er en todo)
