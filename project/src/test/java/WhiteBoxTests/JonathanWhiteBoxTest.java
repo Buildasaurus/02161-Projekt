@@ -8,7 +8,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.GregorianCalendar;
 
-public class JonathanWhiteBox {
+public class JonathanWhiteBoxTest
+{
 
     // Test case A: End date is before start date
     @Test
