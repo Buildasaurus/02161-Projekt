@@ -48,7 +48,7 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs, Activity oldActivity) {
+    public void handleCompleteProjectActivity(Activity activity, Activity oldActivity) {
         System.out.println("Handling complete activity. Activity made: " + activity);
 
         if(oldActivity != null)
@@ -56,21 +56,7 @@ public class EmployeeController implements IController {
             oldActivity.updateValues(activity);
             activity.delete(); // It was simply used for reference
         }
-        else
-        {
-            oldActivity = activity;
-        }
-        for(String employeeID : assignedEmployeeIDs) {
-            Employee emp = SystemModel.getEmployee(employeeID);
-            if (emp != null) {
-                emp.addActivity(oldActivity);
-            }
-        }
-        goToEmployeeView();
-    }
 
-    public void handleCompleteReservedActivity(Activity activity) {
-        employee.addActivity(activity);
         goToEmployeeView();
     }
 

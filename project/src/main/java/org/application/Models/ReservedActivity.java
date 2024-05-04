@@ -34,8 +34,9 @@ public class ReservedActivity extends Activity{
     }
 
     public void delete() {
-        for (Employee employee : assignedEmployees) {
-            removeEmployee(employee);
+        for (int i = assignedEmployees.size()-1; i >= 0; i--)
+        {
+            assignedEmployees.get(i).removeActivity(this);
         }
     }
 }

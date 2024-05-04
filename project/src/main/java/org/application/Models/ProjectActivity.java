@@ -30,6 +30,18 @@ public class ProjectActivity extends Activity {
         assignedProject.addActivity(this);
     }
 
+    public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, int time, String name,
+                           Project assignedProject, String[] assignedEmployeeIDs) {
+        super(name, startWeek, endWeek);
+        this.expectedDuration = time;
+        this.assignedProject = assignedProject;
+        for(String employeeID : assignedEmployeeIDs)
+        {
+            assignEmployee(employeeID);
+        }
+        assignedProject.addActivity(this);
+    }
+
     public void addTimeBlock(TimeBlock timeBlock) {
         timeBlocks.add(timeBlock);
     }

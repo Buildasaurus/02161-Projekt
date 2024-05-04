@@ -100,15 +100,15 @@ public class CreateProjectActivityView extends VBox {
             if (startWeek.getText() != null || endWeek.getText() != null || halfHours.getText() != null ||
                     name.getText() != null || projectSelectionCombobox.getSelectionModel().getSelectedItem() != null ||
                     assignedEmployees.getText() != null) {
-                controller.handleCompleteActivity(
-                        e,
+                controller.handleCompleteProjectActivity(
                         new ProjectActivity(
                                 GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
                                 GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())),
                                 Integer.parseInt(halfHours.getText()),
                                 name.getText(),
-                                SystemModel.getProjectByName(projectSelectionCombobox.getSelectionModel().getSelectedItem())),
-                        assignedEmployees.getText().split(" "),
+                                SystemModel.getProjectByName(projectSelectionCombobox.getSelectionModel().getSelectedItem()),
+                                assignedEmployees.getText().split(" ")
+                        ),
                         activity
 
                 );
