@@ -1,13 +1,11 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.CreateEmployeeController;
-import org.application.Models.Buttons;
 
 
 public class CreateEmployeeView extends VBox {

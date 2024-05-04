@@ -1,4 +1,4 @@
-package org.application.Models;
+package org.application.Views;
 
 import javafx.scene.control.Button;
 import org.application.App;
