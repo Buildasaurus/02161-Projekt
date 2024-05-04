@@ -107,7 +107,7 @@ public class EmployeeController implements IController {
 
     public void handleEditProject(Project project)
     {
-        CreateProjectView view = new CreateProjectView();
+        CreateProjectView view = new CreateProjectView(project);
         CreateProjectController controller = new CreateProjectController(view);
         view.setController(controller);
         App.setRoot(controller);

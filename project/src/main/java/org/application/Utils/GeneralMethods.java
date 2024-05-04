@@ -50,4 +50,11 @@ public class GeneralMethods
         return calendar;
     }
 
+    public static LocalDate convertCalendarToLocalDate(GregorianCalendar calendar) {
+        if (calendar == null) {
+            return null;
+        }
+        return LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
+    }
+
 }

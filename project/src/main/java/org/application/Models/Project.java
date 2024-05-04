@@ -20,7 +20,7 @@ public class Project {
 
     public Project(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
         initialize(name, endWeek, startWeek);
-        this.projectLeaderID = "PROJECT LEADER NOT SET";
+        removeProjectLeader();
     }
 
     public void initialize(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
@@ -102,8 +102,22 @@ public class Project {
         return projectLeaderID;
     }
 
-    public void noProjectLeader(){
+    public void removeProjectLeader(){
         this.projectLeaderID = "PROJECT LEADER NOT SET";
+    }
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setStartWeek(GregorianCalendar startWeek)
+    {
+        this.startWeek = startWeek;
+    }
+
+    public void setEndWeek(GregorianCalendar endWeek)
+    {
+        this.endWeek = endWeek;
     }
 
     /**

@@ -1,20 +1,26 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.CreateProjectController;
+import org.application.Models.Project;
 import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
 
 public class CreateProjectView extends VBox
 {
     CreateProjectController controller;
+    Project loadedProject = null;
 
     public CreateProjectView() {
+    }
+    public CreateProjectView(Project loadedProject) {
+        this.loadedProject = loadedProject;
     }
 
     public void setController(CreateProjectController controller)
@@ -24,6 +30,8 @@ public class CreateProjectView extends VBox
     }
 
     private void initialize() {
+        boolean loadingProject = loadedProject != null;
+
         // Title
         Text title = new Text("Choose name and other relevant data for Project");
         title.setFill(Color.BLACK);
@@ -55,9 +63,21 @@ public class CreateProjectView extends VBox
                         name.getText(),
                         projectLeader.getText(),
                         GeneralMethods.convertDatePickerToCalender(startDate),
-                        GeneralMethods.convertDatePickerToCalender(endDate));
+                        GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
             }
         });
+        if(loadingProject) {
+            name.setText(loadedProject.getName());
+            projectLeader.setText(loadedProject.getProjectLeaderID());
+
+            // Set start date to the saved project's start date
+            startDate.setValue(GeneralMethods.convertCalendarToLocalDate(loadedProject.getStartWeek()));
+
+            // Set end date to the saved project's end date
+            endDate.setValue(GeneralMethods.convertCalendarToLocalDate(loadedProject.getEndWeek()));
+        }
+
         getChildren().add(completeButton);
+        getChildren().add(Buttons.backButton());
     }
 }

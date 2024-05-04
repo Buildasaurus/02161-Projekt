@@ -21,16 +21,26 @@ public class CreateProjectController implements IController
         return view;
     }
 
-    public void handleCreateProject(String name, String projectLeader, GregorianCalendar start, GregorianCalendar end)
+    public void handleCreateProject(String name, String projectLeader, GregorianCalendar start, GregorianCalendar end, Project loadedProject)
     {
-        Project project;
-        if (projectLeader == null)        {
-            project = new Project(name, start, end);
+
+        if(loadedProject != null)
+        {
+            loadedProject.assignProjectLeader(projectLeader);
+            loadedProject.setName(name);
+            loadedProject.setStartWeek(start);
+            loadedProject.setEndWeek(end);
+            App.goToLastView();
         }
         else {
-            project = new Project(name, start, end, projectLeader);
+            Project project;
+            if (projectLeader == null)        {
+                project = new Project(name, start, end);
+            }
+            else {
+                project = new Project(name, start, end, projectLeader);
+            }
+            App.goToMainMenu();
         }
-        SystemModel.addProject(project);
-        App.goToMainMenu();
     }
 }

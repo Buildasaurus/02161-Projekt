@@ -20,4 +20,11 @@ public class Buttons
         returnButton.setOnAction(e -> App.goToMainMenu());
         return  returnButton;
     }
+
+    public static Button backButton()
+    {
+        Button returnButton = new Button("Back");
+        returnButton.setOnAction(e -> App.goToLastView());
+        return  returnButton;
+    }
 }

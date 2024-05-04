@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.application.Models.Employee;
 import org.application.Models.SystemModel;
@@ -38,7 +37,7 @@ public class ProjectSteps {
     @Given("the project has no project leader")
     public void theProjectHasNoProjectLeader(){
         Project project = SystemModel.getProjects().get(0);
-        project.noProjectLeader();
+        project.removeProjectLeader();
     }
 
     @When("the Project Leader generates the report.")

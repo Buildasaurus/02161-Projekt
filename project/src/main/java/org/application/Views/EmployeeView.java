@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * A view to see and interact with data tied to a single employee
  */
-public class EmployeeView extends ScrollPane {
+public class EmployeeView extends ScrollPane implements IRefreshable{
     EmployeeController controller;
 
     //TODO implement project overview for all the projects where the employee is project leader
