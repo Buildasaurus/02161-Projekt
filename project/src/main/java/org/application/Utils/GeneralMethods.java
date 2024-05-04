@@ -50,6 +50,20 @@ public class GeneralMethods
         return calendar;
     }
 
+    public static GregorianCalendar intToCalendar(int weekNumber, int yearNumber) {
+        // Create a new GregorianCalendar object
+        GregorianCalendar calendar = new GregorianCalendar();
+
+        // Set the year and week number
+        calendar.set(Calendar.YEAR, yearNumber);
+        calendar.set(Calendar.WEEK_OF_YEAR, weekNumber);
+
+        // Set the day of week to Monday (which is 2 in GregorianCalendar)
+        calendar.set(Calendar.DAY_OF_WEEK, 2);
+
+        return calendar;
+    }
+
     public static LocalDate convertCalendarToLocalDate(GregorianCalendar calendar) {
         if (calendar == null) {
             return null;
