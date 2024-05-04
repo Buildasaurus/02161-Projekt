@@ -60,18 +60,12 @@ public class EmployeeController implements IController {
                 emp.addActivity(activity);
             }
         }
-        EmployeeView eView = new EmployeeView();
-        view = eView;
-        eView.setController(this);
-        App.setRoot(this);
+        goToEmployeeView();
     }
 
     public void handleCompleteReservedActivity(Activity activity) {
         employee.addActivity(activity);
-        EmployeeView eView = new EmployeeView();
-        view = eView;
-        eView.setController(this);
-        App.setRoot(this);
+        goToEmployeeView();
     }
 
     public void handleUpdateSearch(ActionEvent event, VBox searchBox, GregorianCalendar start, GregorianCalendar end) {
@@ -120,5 +114,12 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
+    public void goToEmployeeView()
+    {
+        EmployeeView eView = new EmployeeView();
+        view = eView;
+        eView.setController(this);
+        App.setRoot(this);
+    }
 
 }

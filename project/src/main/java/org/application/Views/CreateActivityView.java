@@ -125,6 +125,8 @@ public class CreateActivityView extends VBox {
                     ((ProjectActivity) activity).getAssignedProject().getName());
             activity.delete();
         }
-
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {controller.goToEmployeeView();});
+        getChildren().add(backButton);
     }
 }

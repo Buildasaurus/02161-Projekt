@@ -44,8 +44,8 @@ public class CreateReservedActivityView extends GridPane
         add(endDatePicker, 1, 2);
 
         // OK button
-        Button okButton = new Button("OK");
-        okButton.setOnAction(e -> {
+        Button OKButton = new Button("OK");
+        OKButton.setOnAction(e -> {
             controller.handleCompleteReservedActivity(
                     new ReservedActivity(
                             GeneralMethods.convertDatePickerToCalender(startDatePicker),
@@ -55,9 +55,13 @@ public class CreateReservedActivityView extends GridPane
                     )
             );
         });
-        add(okButton, 0, 3);
+        add(OKButton, 0, 3);
 
-        Button nejButton = Buttons.returnButton();
-        add(nejButton, 1, 3);
+        Button returnButton = Buttons.returnButton();
+        add(returnButton, 1, 3);
+
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {controller.goToEmployeeView();});
+        getChildren().add(backButton);
     }
 }

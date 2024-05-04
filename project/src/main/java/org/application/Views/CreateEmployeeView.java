@@ -37,5 +37,6 @@ public class CreateEmployeeView extends VBox {
         getChildren().add(completeButton);
 
         getChildren().add(Buttons.returnButton());
+        getChildren().add(Buttons.backButton());
     }
 }
