@@ -3,9 +3,10 @@ package org.application.Controllers;
 import javafx.scene.Parent;
 import org.application.Models.Activity;
 
-public class ActivityController implements IController{
+public class ActivityController implements IController {
     Parent view;
     Activity activity;
+
     public ActivityController(Parent view, Activity activity) {
         this.view = view;
         this.activity = activity;
@@ -16,8 +17,7 @@ public class ActivityController implements IController{
         return view;
     }
 
-    public Activity getActivity()
-    {
+    public Activity getActivity() {
         return activity;
     }
 }

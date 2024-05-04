@@ -24,6 +24,7 @@ public class Employee {
         } // 4
         assert activities.contains(activity);
     }
+
     public void removeActivity(Activity activity) {
         if (activities.contains(activity)) {
             activities.remove(activity);
@@ -34,11 +35,13 @@ public class Employee {
 
     /**
      * Creates a timeblock with the current employee assigned
-     * @param activity The activity worked on in the timeblock
+     *
+     * @param activity      The activity worked on in the timeblock
      * @param startHalfHour The start time of the timeblock, at a resolution down to half-hours
-     * @param endHalfHour The end time of the timeblock, at a resolution down to half-hours
+     * @param endHalfHour   The end time of the timeblock, at a resolution down to half-hours
      */
-    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startHalfHour, GregorianCalendar endHalfHour) {
+    public void createTimeBlock(ProjectActivity activity, GregorianCalendar startHalfHour,
+                                GregorianCalendar endHalfHour) {
         TimeBlock timeBlock = new TimeBlock(startHalfHour, endHalfHour, activity, this);
         timeBlocks.add(timeBlock);
         activity.addTimeBlock(timeBlock);
@@ -58,12 +61,12 @@ public class Employee {
 
     /**
      * Higher number means more availability. 0 means not available at all.
+     *
      * @param startTime
      * @param endTime
      * @return
      */
-    public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime)
-    {
+    public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime) {
         long total = 9999999;
         long milliseconds1 = startTime.getTimeInMillis();
         long milliseconds2 = endTime.getTimeInMillis();
@@ -78,9 +81,9 @@ public class Employee {
         int freeDayCounter = totalDays;
 
         int busyActivities = 0;
-        for(Activity activity : activities) // 3
+        for (Activity activity : activities) // 3
         {
-            if(doPeriodsOverlap(activity.getStartDate(),activity.getEndDate(),startTime,endTime)) // 4
+            if (doPeriodsOverlap(activity.getStartDate(), activity.getEndDate(), startTime, endTime)) // 4
             {
                 if (activity instanceof ReservedActivity) // 5
                 {
@@ -92,20 +95,21 @@ public class Employee {
                 }
             }
         }
-        return (int)((total - busyActivities)*freeDayCounter/totalDays); // 9
+        return (int) ((total - busyActivities) * freeDayCounter / totalDays); // 9
     }
-
 
 
     /**
      * Calculates if the two periods defined by [start1, end1] and [start2, end2] overlaps
+     *
      * @param start1
      * @param end1
      * @param start2
      * @param end2
      * @return
      */
-    public boolean doPeriodsOverlap(GregorianCalendar start1, GregorianCalendar end1, GregorianCalendar start2, GregorianCalendar end2) {
+    public boolean doPeriodsOverlap(GregorianCalendar start1, GregorianCalendar end1, GregorianCalendar start2,
+                                    GregorianCalendar end2) {
         return !start1.after(end2) && !start2.after(end1);
     }
 
@@ -115,8 +119,7 @@ public class Employee {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getID();
     }
 }

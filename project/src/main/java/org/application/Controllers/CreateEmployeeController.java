@@ -1,14 +1,15 @@
 package org.application.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import org.application.App;
 import org.application.Models.Employee;
-import javafx.event.ActionEvent;
 import org.application.Views.MainView;
 
 
-public class CreateEmployeeController implements IController{
+public class CreateEmployeeController implements IController {
     Parent view;
+
     public CreateEmployeeController(Parent view) {
         this.view = view;
     }

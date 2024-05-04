@@ -1,15 +1,11 @@
 package org.application.Models;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.HashMap;
+import java.util.*;
 
 public class SystemModel { // should be public static class, but java is stupid
     // STATIC class!
-    private static List<Project> projects = new ArrayList<>();
-    private static List<Employee> employees = new ArrayList<>();
+    private static final List<Project> projects = new ArrayList<>();
+    private static final List<Employee> employees = new ArrayList<>();
     private static int currentRunNumber = 0;
 
     public static List<ReservedActivity> getReservedActivities() {
@@ -43,7 +39,7 @@ public class SystemModel { // should be public static class, but java is stupid
         activities.addAll(getReservedActivities());
         return activities;
     }
-    
+
     /**
      * Method for resetting everything. Deleting all saves employees and projects.
      */
@@ -55,21 +51,24 @@ public class SystemModel { // should be public static class, but java is stupid
 
     public static void createDefaultEmployees() {
         // Loading projects
-        Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1,10,2));
+        Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1, 10, 2));
 
         // Loading employees
         Employee e = new Employee("404040");
-        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1,10,1), new GregorianCalendar(1,10,1), "Holiday", e);
+        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1, 10, 1),
+                new GregorianCalendar(1, 10, 1), "Holiday", e);
 
-        ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1,1,1), new GregorianCalendar(1,2,1), 20 , "Testing", project);
+        ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1, 1, 1),
+                new GregorianCalendar(1, 2, 1), 20, "Testing", project);
         projectActivity.assignEmployee(e);
         GregorianCalendar currentTime = new GregorianCalendar();
         e.createTimeBlock(projectActivity, new GregorianCalendar(currentTime.get(Calendar.YEAR),
-            currentTime.get(Calendar.MONTH),currentTime.get(Calendar.DAY_OF_MONTH),8,0), 
-            new GregorianCalendar(currentTime.get(Calendar.YEAR),currentTime.get(Calendar.MONTH),
-            currentTime.get(Calendar.DAY_OF_MONTH),12,0));
+                        currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), 8, 0),
+                new GregorianCalendar(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH),
+                        currentTime.get(Calendar.DAY_OF_MONTH), 12, 0));
 
-        projectActivity = new ProjectActivity(new GregorianCalendar(1,3,1), new GregorianCalendar(1,3,1), 1, "codeRefactor", project);
+        projectActivity = new ProjectActivity(new GregorianCalendar(1, 3, 1), new GregorianCalendar(1, 3, 1), 1,
+                "codeRefactor", project);
         projectActivity.assignEmployee(e);
 
         // TODO : make this read employees from a file
@@ -90,6 +89,7 @@ public class SystemModel { // should be public static class, but java is stupid
         }
         return null;
     }
+
     // TODO : Husk at lave assert statements hvis der er preconditions for testing.
     public static void removeEmployee(Employee employee) {
         employees.remove(employee);
@@ -106,30 +106,31 @@ public class SystemModel { // should be public static class, but java is stupid
         return null;
     }
 
-    static public String getNextProjectID()
-    {
+    static public String getNextProjectID() {
         return new GregorianCalendar().get(Calendar.YEAR) + "" + currentRunNumber++;
     }
 
     /**
      * Finds a sorted list of the employees, based on how available they are in a given time period
+     *
      * @param startDate The start of the period
-     * @param endDate The end of the period
+     * @param endDate   The end of the period
      * @return A list of sorted employees
      */
     public static List<Employee> findAvailableEmployees(GregorianCalendar startDate, GregorianCalendar endDate) {
         List<Employee> availableEmployees = employees;
         //TODO : figure out if this sorts on correctly or backwards.
         for (Employee employee : employees) {
-            System.out.println(employee + " " +   employee.getAvailabilityScore(startDate, endDate));
+            System.out.println(employee + " " + employee.getAvailabilityScore(startDate, endDate));
         }
-        availableEmployees.sort((e1, e2) -> Double.compare(e2.getAvailabilityScore(startDate, endDate), e1.getAvailabilityScore(startDate, endDate)));
+        availableEmployees.sort((e1, e2) -> Double.compare(e2.getAvailabilityScore(startDate, endDate),
+                e1.getAvailabilityScore(startDate, endDate)));
 
         return availableEmployees;
     }
 
     public static void addProject(Project project) {
-        if (! projects.contains(project)) {
+        if (!projects.contains(project)) {
             projects.add(project);
         }
     }
@@ -144,12 +145,11 @@ public class SystemModel { // should be public static class, but java is stupid
 
     /**
      * removes a project from the projects list, and deletes it.
+     *
      * @param project
      */
-    public static void removeProject(Project project)
-    {
-        if(projects.remove(project))
-        {
+    public static void removeProject(Project project) {
+        if (projects.remove(project)) {
             project.delete();
         }
 
@@ -157,10 +157,8 @@ public class SystemModel { // should be public static class, but java is stupid
 
     public static Activity getActivity(String activityName) {
         List<Activity> activities = getActivities();
-        for (Activity activity : activities)
-        {
-            if (activity.getName().equals(activityName))
-            {
+        for (Activity activity : activities) {
+            if (activity.getName().equals(activityName)) {
                 return activity;
             }
         }

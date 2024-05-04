@@ -2,7 +2,6 @@ package org.application.Controllers;
 
 import javafx.scene.Parent;
 
-public interface IController
-{
+public interface IController {
     Parent getView();
 }

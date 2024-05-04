@@ -17,42 +17,31 @@ public class App extends Application {
     private static IController lastController;
     private static IController activeController;
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        SystemModel.createDefaultEmployees();
-        goToMainMenu();
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public static void main(String[] args) {
         launch();
     }
 
     public static void setRoot(IController newController) {
-        if(newController.getView() instanceof IRefreshable)
-        {
+        if (newController.getView() instanceof IRefreshable) {
             ((IRefreshable) newController.getView()).refreshView();
         }
         scene.setRoot(newController.getView());
         setNewActiveController(newController);
     }
+
     public static void setRoot(Parent newView) {
-        if(newView instanceof IRefreshable)
-        {
+        if (newView instanceof IRefreshable) {
             ((IRefreshable) newView).refreshView();
         }
         scene.setRoot(newView);
     }
 
-    public static void goToMainMenu()
-    {
+    public static void goToMainMenu() {
         MainView view = new MainView();
         MainController controller = new MainController(view);
         view.setController(controller);
         setNewActiveController(controller);
-        if (scene == null)
-        {
+        if (scene == null) {
             scene = new Scene(controller.getView(), 500, 500);
         }
         else {
@@ -60,16 +49,23 @@ public class App extends Application {
         }
     }
 
-    private static void setNewActiveController(IController newController)
-    {
+    private static void setNewActiveController(IController newController) {
         lastController = activeController;
         activeController = newController;
     }
+
     /**
      * Will return to the last view, if there was such one.
      */
-    public static void goToLastView()
-    {
+    public static void goToLastView() {
         setRoot(lastController);
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        SystemModel.createDefaultEmployees();
+        goToMainMenu();
+        stage.setScene(scene);
+        stage.show();
     }
 }

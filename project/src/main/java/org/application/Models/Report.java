@@ -1,6 +1,7 @@
 package org.application.Models;
-import java.io.File;
+
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -15,20 +16,21 @@ public class Report implements CSVConvertable {
         File csvFile = new File("report.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
             writer.write(this.text);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         return csvFile;
     }
 
     @Override
-    public void saveToDisk(String path)
-    {
+    public void saveToDisk(String path) {
         File csvFile = this.toCSV();
         File newFile = new File(path + "/" + csvFile.getName());
         if (csvFile.renameTo(newFile)) {
             System.out.println("Report saved to " + newFile.getAbsolutePath());
-        } else {
+        }
+        else {
             System.out.println("Failed to save report to " + path);
         }
     }

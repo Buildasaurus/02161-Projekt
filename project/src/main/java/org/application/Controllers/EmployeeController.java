@@ -24,7 +24,6 @@ public class EmployeeController implements IController {
     }
 
 
-
     @Override
     public Parent getView() {
         return view;
@@ -51,8 +50,7 @@ public class EmployeeController implements IController {
     public void handleCompleteProjectActivity(Activity activity, Activity oldActivity) {
         System.out.println("Handling complete activity. Activity made: " + activity);
 
-        if(oldActivity != null)
-        {
+        if (oldActivity != null) {
             oldActivity.updateValues(activity);
             activity.delete(); // It was simply used for reference
         }
@@ -69,18 +67,15 @@ public class EmployeeController implements IController {
         List<Employee> sortedEmployees = SystemModel.findAvailableEmployees(start, end);
         for (Employee employee : sortedEmployees) {
             Text text = new Text(employee.getID());
-            if(employee.getAvailabilityScore(start,end) <= 0)
-            {
+            if (employee.getAvailabilityScore(start, end) <= 0) {
                 text.setFill(Color.RED);
             }
             searchBox.getChildren().add(text);
         }
     }
 
-    public void handleSeeOverview(Project project)
-    {
-        if(project == null)
-        {
+    public void handleSeeOverview(Project project) {
+        if (project == null) {
             return;
         }
         ProjectOverviewView view = new ProjectOverviewView(this, project);
@@ -95,29 +90,24 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleEditProject(Project project)
-    {
+    public void handleEditProject(Project project) {
         CreateProjectView view = new CreateProjectView(project);
         CreateProjectController controller = new CreateProjectController(view);
         view.setController(controller);
         App.setRoot(controller);
     }
 
-    public void handleEditActivityOverview(ActionEvent event, Activity activity)
-    {
-        if (activity instanceof ProjectActivity)
-        {
-            this.view = new CreateProjectActivityView(this,(ProjectActivity) activity);
+    public void handleEditActivityOverview(ActionEvent event, Activity activity) {
+        if (activity instanceof ProjectActivity) {
+            this.view = new CreateProjectActivityView(this, (ProjectActivity) activity);
         }
-        else if (activity instanceof ReservedActivity)
-        {
-            this.view= new CreateReservedActivityView(this, (ReservedActivity)activity);
+        else if (activity instanceof ReservedActivity) {
+            this.view = new CreateReservedActivityView(this, (ReservedActivity) activity);
         }
         App.setRoot(this);
     }
 
-    public void goToEmployeeView()
-    {
+    public void goToEmployeeView() {
         EmployeeView eView = new EmployeeView();
         view = eView;
         eView.setController(this);

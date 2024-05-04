@@ -9,8 +9,8 @@ import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 
 public class ProjectOverviewView extends VBox {
-    EmployeeController controller;
     private final Project project;
+    EmployeeController controller;
 
     public ProjectOverviewView(EmployeeController controller, Project project) {
         this.project = project;
