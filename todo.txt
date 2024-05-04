@@ -31,12 +31,12 @@ SystemModel.getactivity(String activityName) (Er måske fin til White box test) 
 Timeblock.getDuration (0%)
 
 UI
-Man skal kunne assigne flere folk senere, til activites (done)
-Man skal kunne slette activities (done)
-Man skal kunne fjerne folk fra activities (done)
-Man skal kunne sætte en projektleder senere, til projektet. (done)
-Det betyder, at projektlederen let skal kunne se, hvordan timeforbruget udvikler sig per aktivitet og for hele projektet
-bugfinding - den skal ikke crashe hele tiden. (done)
+x Man skal kunne assigne flere folk senere, til activites
+x Man skal kunne slette activities
+x Man skal kunne fjerne folk fra activities
+x Man skal kunne sætte en projektleder senere, til projektet.
+x Det betyder, at projektlederen let skal kunne se, hvordan timeforbruget udvikler sig per aktivitet og for hele projektet
+x bugfinding - den skal ikke crashe hele tiden.
 
 Rapport
 Find på specifikke ting der mangler i rapporten, og skriv dem her. (ja, det er en todo)
