@@ -29,3 +29,5 @@ replay_pid*
 
 mvnw.cmd
 /project/target
+project/report.csv
+*.csv

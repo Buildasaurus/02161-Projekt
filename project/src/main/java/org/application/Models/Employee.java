@@ -67,19 +67,24 @@ public class Employee {
      * @return
      */
     public int getAvailabilityScore(GregorianCalendar startTime, GregorianCalendar endTime) {
+        assert startTime != null;
+        assert endTime != null;
+        assert activities != null;
+        for (Activity a : activities) {
+            assert a.getStartDate() != null;
+            assert a.getEndDate() != null;
+        }
+
         long total = 9999999;
         long milliseconds1 = startTime.getTimeInMillis();
         long milliseconds2 = endTime.getTimeInMillis();
         long diff = milliseconds2 - milliseconds1;
-        if (diff <= 0) // 1
-        {
+        if (diff <= 0) { // 1
             return 0; // 2
         }
-        // Use Math.ceil to round up the result
         int totalDays = (int) Math.ceil((double) diff / (24 * 60 * 60 * 1000));
 
         int freeDayCounter = totalDays;
-
         int busyActivities = 0;
         for (Activity activity : activities) { // 3
             if (doPeriodsOverlap(activity.getStartDate(), activity.getEndDate(), startTime, endTime)) { // 4
@@ -91,8 +96,24 @@ public class Employee {
                 }
             }
         }
-        return (int) ((total - busyActivities) * freeDayCounter / totalDays); // 9
+        int result = (int) ((total - busyActivities) * freeDayCounter / totalDays);
+
+        assert result == (int) (
+                (total - activities.stream()
+                        .filter(a -> doPeriodsOverlap(a.getStartDate(), a.getEndDate(), startTime, endTime))
+                        .filter(a -> a instanceof  ProjectActivity)
+                        .count()) *
+                (totalDays - (int) activities.stream()
+                        .filter(a -> doPeriodsOverlap(a.getStartDate(), a.getEndDate(), startTime, endTime))
+                        .filter(a -> a instanceof ReservedActivity)
+                        .count()) /
+                totalDays);
+
+        return result;
     }
+
+
+
 
     /**
      * Calculates if the two periods defined by [start1, end1] and [start2, end2] overlaps
