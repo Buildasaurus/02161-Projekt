@@ -110,4 +110,10 @@ public class ProjectSteps {
         assertEquals(numberOfExpectedProjects,SystemModel.getProjects().size());
     }
 
+    @When("the project is deleted")
+    public void theProjectIsDeleted() {
+        Project testProject = SystemModel.getProjects().get(0);
+        testProject.delete();
+    }
+
 }
