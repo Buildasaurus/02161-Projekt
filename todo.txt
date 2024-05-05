@@ -1,8 +1,13 @@
+FÅ PROGRAMMET TIL AT CRASHE ELLER GIVE FEJLBESKEDER
+
+
 todo:
 Tests
-- Tests der mangler coverage (alle sammen siden 04.05 17:47)
+- Tests der mangler coverage (alle sammen siden 04.05 13:43)
 
-Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%) 
+employee.deleteTimeBlock (0%)
+
+Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%)
 
 ProjectActivity.calculateSpentTime (0% - ok (måske lidt simpel) til White box test)
 alt i Report udover constructor - Det er måske svært at teste dog (20%)
@@ -21,13 +26,10 @@ SystemModel.findAvailableEmployees - den er måske lidt svær, fordi den returne
 SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%)
 
 
-UI
-x Man skal kunne assigne flere folk senere, til activites
-x Man skal kunne slette activities
-x Man skal kunne fjerne folk fra activities
-x Man skal kunne sætte en projektleder senere, til projektet.
-x Det betyder, at projektlederen let skal kunne se, hvordan timeforbruget udvikler sig per aktivitet og for hele projektet
-x bugfinding - den skal ikke crashe hele tiden.
 
 Rapport
 Find på specifikke ting der mangler i rapporten, og skriv dem her. (ja, det er en todo)
+
+
+"Det er ogs˚a vigtig at jeg kan se i rapporten og kildekoden at
+hver projektmedlemmer har brugt alle teknikerne og har bidraget til koden."
