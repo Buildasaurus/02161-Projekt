@@ -16,6 +16,8 @@ alt i Report udover constructor - Det er måske svært at teste dog (20%)
 ProjectActivity.updateValues - Måden vi assigner projekt leader. man sætter en
 gammel aktivitet lig en ny, og den burde have samme data. (0%)
 
+Project activity - constructor med en liste af employees (0%)
+
 ReservedActivity.updateValues - man sætter en gammel aktivitet lig en ny, og den burde have samme data. (0%)
 
 SystemModel.getemployee - det specifikke tilfælde hvor man prøver at finde nogen som ikke er der, så burde den returnere null (60%)
