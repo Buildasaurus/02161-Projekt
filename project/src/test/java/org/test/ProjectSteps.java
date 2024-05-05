@@ -180,4 +180,12 @@ public class ProjectSteps {
         //check if calculation equal to expected
         assertEquals(progressExpected, overallProgress);
     }
+
+    @Then("the project activity no longer exists")
+    public void theProjectActivityNoLongerExists() {
+        Project project = SystemModel.getProjects().get(0);
+        assertTrue(project.getActivities().isEmpty());
+    }
+
+
 }
