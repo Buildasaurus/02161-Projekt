@@ -80,7 +80,7 @@ public class CalendarView extends GridPane {
         });
 
         activityField = Buttons.chooseProjectActivityComboBox();
-        activityField.setPromptText("Please enter an existing activity");
+        activityField.setPromptText("Choose activity");
 
         Button submitButton = new Button("Create timeblock");
         submitButton.setOnAction(this.submitTimeBlock());
