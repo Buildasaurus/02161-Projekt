@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en_old.Ac;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.Project;
@@ -90,7 +91,7 @@ public class ActivitySteps {
     public void theActivityEndsInWeek(Integer int1) {
         GregorianCalendar givenend = new GregorianCalendar();
         givenend.setWeekDate(2024, int1, 1);
-        ProjectActivity testActivity = SystemModel.getProjects().get(0).getActivities().get(0);
+        Activity testActivity = SystemModel.getActivities().get(0);
         assertEquals(givenend.get(Calendar.WEEK_OF_YEAR),testActivity.getEndDate().get(Calendar.WEEK_OF_YEAR));
     }
 
@@ -98,7 +99,7 @@ public class ActivitySteps {
     public void theActivityStartsInWeek(Integer int1) {
         GregorianCalendar givenstart = new GregorianCalendar();
         givenstart.setWeekDate(2024, int1, 1);
-        ProjectActivity testActivity = SystemModel.getProjects().get(0).getActivities().get(0);
+        Activity testActivity = SystemModel.getActivities().get(0);
         assertEquals(givenstart.get(Calendar.WEEK_OF_YEAR),testActivity.getStartDate().get(Calendar.WEEK_OF_YEAR));
     }
 
@@ -346,7 +347,6 @@ public class ActivitySteps {
 
     @Given("a project activity called {string} is created with the employee {string} assigned")
     public void aProjectActivityCalledIsCreatedWithTheEmployeeAssigned(String name, String employeeString) {
-        //        Employee testEmployee = SystemModel.getEmployees().get(0);
         Project testProject = SystemModel.getProjects().get(0);
         GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
         GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
@@ -359,5 +359,17 @@ public class ActivitySteps {
     @Then("the name of the project activity is {string}")
     public void theNameOfTheProjectActivityIs(String name) {
         assert SystemModel.getActivities().get(0).getName().equals(name);
+    }
+
+    @When("the user changes the reserved activity to start in week {int}, ends in week {int}")
+    public void theUserChangesTheReservedActivityToStartInWeekEndsInWeek(int startWeek, int endWeek) {
+        ReservedActivity oldactivity = (ReservedActivity) SystemModel.getActivities().get(0);
+        GregorianCalendar startDay = new GregorianCalendar(2024,startWeek,1);
+        startDay.setWeekDate(2024, startWeek, 1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,endWeek,1);
+        endDay.setWeekDate(2024, endWeek, 1);
+        ReservedActivity a = new ReservedActivity(startDay,endDay, oldactivity.getName(), oldactivity.getAssignedEmployees().get(0));
+        SystemModel.getActivities().get(0).updateValues(a);
+        a.delete();
     }
 }

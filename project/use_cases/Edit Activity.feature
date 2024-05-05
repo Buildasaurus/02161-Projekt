@@ -13,3 +13,9 @@ Feature: Edit Activity
     And the activity starts in week 2
     And the activity ends in week 3
 
+  Scenario: Editing an existing Reserved activity
+    Given a reserved activity exists
+    When the user changes the reserved activity to start in week 2, ends in week 3
+    Then the name of the project activity is "sample"
+    And the activity starts in week 2
+    And the activity ends in week 3
