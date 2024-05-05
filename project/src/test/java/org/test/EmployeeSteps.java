@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.GregorianCalendar;
 
 import org.application.Models.Employee;
+import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 
@@ -36,10 +37,10 @@ public class EmployeeSteps {
         testEmployee.createTimeBlock(testActivity, startTime, endTime);
     }
 
-    @When("the employee spends {int} half-hours on the activity")
-    public void spendExactTimeOnActivity(int halfHoursToSpend) {
+    @When("the employee spends {int} half-hours on activity {int}")
+    public void spendExactTimeOnActivity(int halfHoursToSpend, int activityidx) {
         Employee testEmployee = SystemModel.getEmployees().get(0);
-        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(0);
+        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(activityidx - 1);
         GregorianCalendar startTime = new GregorianCalendar(1,1,1,0,0);
         GregorianCalendar endTime = new GregorianCalendar(1,1,1, halfHoursToSpend / 2, (halfHoursToSpend % 2) * 30);
         testEmployee.createTimeBlock(testActivity, startTime, endTime);
@@ -66,4 +67,11 @@ public class EmployeeSteps {
     public void addNamedEmployeeToActivity(String employeeString) {
         SystemModel.getProjectActivities().get(0).assignEmployee(employeeString);
     }
+
+    @When("an employee picks a project")
+    public void anEmployeePicksAProject() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        Project pickedProject = SystemModel.getProjectByName("0");
+    }
+
 }

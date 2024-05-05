@@ -8,4 +8,4 @@ Background:
 
 Scenario: Project Leader generates report
     When the Project Leader generates the report.
-    Then a report is saved in our default folder
+    Then a non-empty report is saved in our default folder

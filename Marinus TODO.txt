@@ -1,0 +1,4 @@
+Lav white box test på en metode
+Lav 1 sequence diagram til rapport 1, og stjæl en af lucias
+Fiks timeblock fra 10-12 + timeblock fra 12-14 medfører man stadig kan vælge at starte kl 12
+Fiks at program ikke gider lave en timeblock fra eg. 10 til 24, fordi den crasher
