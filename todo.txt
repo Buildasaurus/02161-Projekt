@@ -22,8 +22,6 @@ SystemModel.findAvailableEmployees - den er måske lidt svær, fordi den returne
 
 SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%) 
 
-Timeblock.getDuration (0%)
-
 UI
 x Man skal kunne assigne flere folk senere, til activites
 x Man skal kunne slette activities
