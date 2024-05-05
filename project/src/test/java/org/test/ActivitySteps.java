@@ -1,3 +1,5 @@
+// Written by Martin, Lucia and Jonathan
+
 package org.test;
 
 import static org.junit.Assert.assertEquals;
