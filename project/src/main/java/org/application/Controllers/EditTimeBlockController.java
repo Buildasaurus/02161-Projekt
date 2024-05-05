@@ -3,8 +3,10 @@ package org.application.Controllers;
 import java.util.GregorianCalendar;
 
 import org.application.App;
+import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.ProjectActivity;
+import org.application.Models.SystemModel;
 import org.application.Models.TimeBlock;
 import org.application.Utils.GeneralMethods;
 import org.application.Views.EditTimeBlockView;
@@ -24,12 +26,15 @@ public class EditTimeBlockController implements IController {
         return view;
     }
 
-    public void handleEditTimeBlock(TimeBlock timeBlock, String startString, String endString) {
-        ProjectActivity activity = (ProjectActivity) timeBlock.getActivity();
-        GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startString, endString);
+    public void handleEditTimeBlock(TimeBlock timeBlock, String activityName, String startString, String endString) {
+        Activity activity = SystemModel.getActivity(activityName);
+        if (activity instanceof ProjectActivity) {
+            ProjectActivity projectActivity = (ProjectActivity) activity;
+            GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startString, endString);
 
-        employee.deleteTimeBlock(timeBlock);
-        employee.createTimeBlock(activity, calendars[0], calendars[1]);
+            employee.deleteTimeBlock(timeBlock);
+            employee.createTimeBlock(projectActivity, calendars[0], calendars[1]);
+        }
 
         App.goToLastView();
     }

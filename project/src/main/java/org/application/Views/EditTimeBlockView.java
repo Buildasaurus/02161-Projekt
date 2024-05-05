@@ -3,7 +3,6 @@ package org.application.Views;
 import java.util.ArrayList;
 
 import org.application.Controllers.EditTimeBlockController;
-import org.application.Models.Employee;
 import org.application.Models.TimeBlock;
 import org.application.Utils.GeneralMethods;
 
@@ -14,7 +13,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class EditTimeBlockView extends StackPane {
     private TimeBlock timeBlock;
@@ -34,8 +32,10 @@ public class EditTimeBlockView extends StackPane {
 
         mainBox.setSpacing(5.0);
 
-        Text name = new Text(timeBlock.getActivity().getName());
-        mainBox.getChildren().add(name);
+        ComboBox<String> activity = Buttons.chooseProjectActivityComboBox();
+        mainBox.getChildren().add(activity);
+
+        activity.setValue(timeBlock.getActivity().getName());
 
         HBox timeBox = new HBox();
         mainBox.getChildren().add(timeBox);
@@ -75,7 +75,7 @@ public class EditTimeBlockView extends StackPane {
 
         finish.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                controller.handleEditTimeBlock(timeBlock, startSelect.getValue(), endSelect.getValue());
+                controller.handleEditTimeBlock(timeBlock, activity.getValue(), startSelect.getValue(), endSelect.getValue());
             }
         });
 
