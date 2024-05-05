@@ -25,9 +25,16 @@ Scenario: User deletes an activity in a project with multiple activities
     Then 1 activities exist
 
 Scenario: Activity with registered hours is deleted
+     When 1 projects are created
+     And 1 activities are created in the project
+     And the employee spends time on the activity
+     When an employee deletes a project activity
+     Then the project activity no longer exists
+     And the time spent is no longer registered
+
+Scenario: Delete timeblock
     When 1 projects are created
     And 1 activities are created in the project
-    And a user spends time on the activity
-    When an employee deletes a project activity
-    Then the project activity no longer exists
-    And the time spent is no longer registered
+    And the employee spends time on the activity
+    When the employee deletes the timeblock
+    Then the timeblock no longer exists
