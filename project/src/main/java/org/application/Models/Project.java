@@ -32,8 +32,7 @@ public class Project {
     }
 
 
-    public double getOverallProgress()
-    {
+    public double getOverallProgress() {
         // Calculate total spent time and expected duration for all activities
         int totalSpentTime = 0;
         int totalExpectedDuration = 0;
