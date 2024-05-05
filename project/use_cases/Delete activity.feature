@@ -25,8 +25,9 @@ Scenario: User deletes an activity in a project with multiple activities
     Then 1 activities exist
 
 Scenario: Activity with registered hours is deleted
-    Given a project activity exists
-    And a user has spent time on the activity
+    When 1 projects are created
+    And 1 activities are created in the project
+    And a user spends time on the activity
     When an employee deletes a project activity
     Then the project activity no longer exists
     And the time spent is no longer registered

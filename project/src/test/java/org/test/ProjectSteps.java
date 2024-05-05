@@ -1,6 +1,7 @@
 package org.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -116,4 +117,18 @@ public class ProjectSteps {
         testProject.delete();
     }
 
+    @When("a project with the name {string} is created")
+    public void createProjectWithName(String projectName) {
+        GregorianCalendar startWeek = new GregorianCalendar();
+        startWeek.setWeekDate(2024, 17, 1);
+        GregorianCalendar endWeek = new GregorianCalendar();
+        endWeek.setWeekDate(2024, 19, 1);
+        Project testProject = new Project(projectName, startWeek, endWeek);
+        SystemModel.addProject(testProject);
+    }
+
+    @Then("a project with the name {string} exists")
+    public void namedProjectExists(String expectedName) {
+        assertNotNull(SystemModel.getProjectByName(expectedName));
+    }
 }
