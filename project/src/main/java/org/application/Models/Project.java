@@ -43,7 +43,7 @@ public class Project {
         }
 
         // Calculate overall progress
-        return (double) totalSpentTime / totalExpectedDuration;
+        return totalExpectedDuration == 0 ? 0 : (double) totalSpentTime / totalExpectedDuration;
     }
     /**
      * Adds an activity to the project. Remember that Project activities pr default are added to
