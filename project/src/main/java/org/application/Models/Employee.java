@@ -1,5 +1,7 @@
-package org.application.Models;
+// 70% Jonathan 15% Lucia 15% Martin
 
+
+package org.application.Models;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;

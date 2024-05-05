@@ -1,5 +1,5 @@
 package org.application.Models;
-
+// 50% Martin 40% Jonathan 10% Marinus
 import java.util.*;
 
 public class SystemModel { // should be public static class, but java is stupid

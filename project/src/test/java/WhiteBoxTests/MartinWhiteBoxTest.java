@@ -6,6 +6,7 @@ import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.ReservedActivity;
 import org.application.Models.SystemModel;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,6 +14,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class MartinWhiteBoxTest {
+    //reset after every test
+    @Before
+    public void start() {
+        SystemModel.reset();
+    }
 /*
     public static Activity findActivityWithName(String activityName) {
         assert activityName != null;
