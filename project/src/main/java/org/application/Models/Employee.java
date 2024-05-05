@@ -28,7 +28,7 @@ public class Employee {
     /**
      * Removes a connection between an employee and the activity
      * For reserved activities, this essentially deletes it.
-     * Prerably use activity.delete()
+     * Consider if you should use activity.delete()
      * @param activity The activity to remove from the employee
      */
     public void removeActivity(Activity activity) {
@@ -136,6 +136,14 @@ public class Employee {
     }
 
 
+    public void delete()
+    {
+        for (int i = getActivities().size()-1; i >= 0; i--)
+        {
+            removeActivity(getActivities().get(i));
+        }
+
+    }
     public String getID() {
         return ID;
     }

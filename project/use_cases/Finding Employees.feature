@@ -6,6 +6,6 @@ Feature: Finding employees
     Given 1 projects are created
     Given an employee named "TestEmployee" is created
     And the employee adds an activity with a start week 3 and end week 6
-    When the employee spends 3 half-hours on activity 1
+    When the employee spends 3 half-hours on activity 0
     And an employee named "TestEmployee2" is created
     Then the most available employee from week 4 to 5 is "TestEmployee2"

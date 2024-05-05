@@ -92,11 +92,9 @@ public class SystemModel { // should be public static class, but java is stupid
         return null;
     }
 
-    // TODO : Husk at lave assert statements hvis der er preconditions for testing.
     public static void removeEmployee(Employee employee) {
         employees.remove(employee);
-        //TODO : Make this also save the employee to the file
-        // TODO : consider if this should have some effect on view? perhaps tell it to update.
+        employee.delete();
     }
 
     public static Project getProjectByName(String projectName) {
@@ -166,6 +164,4 @@ public class SystemModel { // should be public static class, but java is stupid
         }
         return null;
     }
-
-
 }

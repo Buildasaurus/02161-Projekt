@@ -41,6 +41,11 @@ public class MainView extends VBox {
         createEmployee.setOnAction(controller::handleCreateEmployee);
         getChildren().add(createEmployee);
 
+        // - delete employee
+        Button deleteEmployee = new Button("Delete Employee");
+        deleteEmployee.setOnAction(controller::handleDeleteEmployee);
+        getChildren().add(deleteEmployee);
+
 
     }
 }
