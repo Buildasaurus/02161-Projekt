@@ -54,7 +54,8 @@ public class CreateReservedActivityView extends GridPane {
         // OK button
         Button OKButton = new Button("OK");
         OKButton.setOnAction(e -> {
-            if (!(startDatePicker.getValue() == null || endDatePicker.getValue() == null)) {
+            if (!(startDatePicker.getValue() == null || endDatePicker.getValue() == null) &&
+                    GeneralMethods.convertDatePickerToCalender(startDatePicker).before(GeneralMethods.convertDatePickerToCalender(endDatePicker))) {
                 controller.handleCompleteProjectActivity(
                         new ReservedActivity(
                                 GeneralMethods.convertDatePickerToCalender(startDatePicker),
