@@ -21,8 +21,6 @@ ReservedActivity.updateValues - man sætter en gammel aktivitet lig en ny, og de
 
 SystemModel.getemployee - det specifikke tilfælde hvor man prøver at finde nogen som ikke er der, så burde den returnere null (60%)
 
-SystemModel.findAvailableEmployees - den er måske lidt svær, fordi den returnere en rangering, men skal implementeres. evt bare lav to employees, giv den ene en timeblock, og test at rækkefølgen er at den anden så er øverst.(0%)
-
 SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%)
 
 
