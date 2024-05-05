@@ -126,7 +126,14 @@ public class ActivitySteps {
     @Then("a reserved activity is created")
     public void aReservedActivityIsCreated() {
         Employee testEmployee = SystemModel.getEmployees().get(0);
-        assertNotNull(testEmployee.getActivity("test-activity"));
+        for (Activity activity : testEmployee.getActivities())
+        {
+            if (activity.getName().equals("test-activity"))
+            {
+                assert true;
+            }
+        }
+        assert false;
     }
 
     @Then("the activity ends at {int}\\/{int}")

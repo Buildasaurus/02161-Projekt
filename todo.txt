@@ -6,8 +6,6 @@ Man skal kunne sætte en projektleder senere, på projektet.
 
 Der skal laves test til ReservedActivity.delete
 
-employee.getactivity (0%)
-
 employee.deleteTimeBlock (0%)
 
 Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%)
