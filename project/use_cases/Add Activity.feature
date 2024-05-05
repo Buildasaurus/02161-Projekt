@@ -1,3 +1,5 @@
+# Probably written by Martin and Lucia
+
 Feature: Adding / creating activities
     Description: A user is adding activities.
     Actors: Project leader or User

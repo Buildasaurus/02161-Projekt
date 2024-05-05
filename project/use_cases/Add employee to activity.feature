@@ -1,3 +1,5 @@
+# Probably written by Martin and Lucia
+
 Feature: Add employee to activity
   Description: A project leader adds an employee to an activity, or an employee adds themselves to an activity
   Actors: project leader, employee
