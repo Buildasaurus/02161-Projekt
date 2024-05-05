@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import io.cucumber.java.en.And;
 import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
@@ -44,7 +45,7 @@ public class EmployeeSteps {
     @When("the employee spends {int} half-hours on activity {int}")
     public void spendExactTimeOnActivity(int halfHoursToSpend, int activityidx) {
         Employee testEmployee = SystemModel.getEmployees().get(0);
-        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(activityidx - 1);
+        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(activityidx);
         GregorianCalendar startTime = new GregorianCalendar(1,1,1,0,0);
         GregorianCalendar endTime = new GregorianCalendar(1,1,1, halfHoursToSpend / 2, (halfHoursToSpend % 2) * 30);
         testEmployee.createTimeBlock(testActivity, startTime, endTime);
@@ -95,4 +96,23 @@ public class EmployeeSteps {
         assertTrue(employee.getTimeBlocks().isEmpty());
     }
 
+    @Then("the most available employee from week {int} to {int} is {string}")
+    public void theMostAvailableEmployeeIs(int start, int end, String testEmployeeID) {
+        GregorianCalendar startWeek = new GregorianCalendar();
+        startWeek.setWeekDate(2024, start, 1);
+        // set endWeek to week 19.
+        GregorianCalendar endWeek = new GregorianCalendar();
+        endWeek.setWeekDate(2024, end, 1);
+        assertEquals(SystemModel.findAvailableEmployees(startWeek, endWeek).get(0).getID(), testEmployeeID);
+    }
+
+    @When("the employee named {string} is deleted")
+    public void theEmployeeNamedIsDeleted(String arg0) {
+        SystemModel.removeEmployee(SystemModel.getEmployee(arg0));
+    }
+
+    @And("{int} employees exist")
+    public void employeesExist(int arg0) {
+        assertEquals(SystemModel.getEmployees().size(), 0);
+    }
 }

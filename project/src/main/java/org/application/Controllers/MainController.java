@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import org.application.App;
 import org.application.Views.CreateEmployeeView;
 import org.application.Views.CreateProjectView;
+import org.application.Views.DeleteEmployeeView;
 import org.application.Views.LoginView;
 
 
@@ -24,9 +25,15 @@ public class MainController implements IController {
     }
 
     public void handleCreateEmployee(ActionEvent event) {
-        System.out.println("CreateEmployee pressed");
         CreateEmployeeView newView = new CreateEmployeeView();
         CreateEmployeeController controller = new CreateEmployeeController(newView);
+        newView.setController(controller);
+        App.setRoot(newView);
+    }
+
+    public void handleDeleteEmployee(ActionEvent event) {
+        DeleteEmployeeView newView = new DeleteEmployeeView();
+        DeleteEmployeeController controller = new DeleteEmployeeController(newView);
         newView.setController(controller);
         App.setRoot(newView);
     }

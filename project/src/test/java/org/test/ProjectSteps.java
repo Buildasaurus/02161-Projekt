@@ -1,15 +1,19 @@
 package org.test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Scanner;
 
 import org.application.Models.Employee;
 import org.application.Models.SystemModel;
@@ -146,7 +150,6 @@ public class ProjectSteps {
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
         Project testProject = new Project(projectName, startWeek, endWeek);
-        SystemModel.addProject(testProject);
     }
 
     @Then("a project with the name {string} exists")
@@ -187,5 +190,49 @@ public class ProjectSteps {
         assertTrue(project.getActivities().isEmpty());
     }
 
+    @Then("the report has listed activities")
+    public void theReportHasListedActivities() throws FileNotFoundException{
+        File reportFile = new File("report.csv");
+        //reading from file
+        Scanner sc = new Scanner(reportFile);
+        String penultimateline = "";
+        String lastline = "";
+        while(sc.hasNextLine()){
+            penultimateline  = lastline;
+            lastline = sc.nextLine();
+        }
+        sc.close();
+        //check last line
+        assertFalse(penultimateline.contains("No Activities"));
+    }
 
+    @Then("the report does not have listed activities")
+    public void theReportDoesNotHaveListedActivities() throws FileNotFoundException{
+        File reportFile = new File("report.csv");
+        //reading from file
+        Scanner sc = new Scanner(reportFile);
+        String penultimateline = "";
+        String lastline = "";
+        while(sc.hasNextLine()){
+            penultimateline  = lastline;
+            lastline = sc.nextLine();
+        }
+        sc.close();
+        //check last line
+        assertTrue(penultimateline.contains("No Activities"));
+    }
+
+    @When("A project with a project leader named {string} is created")
+    public void aProjectWithAProjectLeaderNamedIsCreated(String name) {
+        GregorianCalendar startWeek = new GregorianCalendar();
+        startWeek.setWeekDate(2024, 17, 1);
+        GregorianCalendar endWeek = new GregorianCalendar();
+        endWeek.setWeekDate(2024, 19, 1);
+        Project testProject = new Project("project", startWeek, endWeek, name);
+    }
+
+    @Then("the project leader of the project is {string}")
+    public void theProjectLeaderOfTheProjectIs(String arg0) {
+        assert SystemModel.getProjects().get(0).getProjectLeaderID().equals(arg0);
+    }
 }

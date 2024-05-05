@@ -12,7 +12,7 @@ public class TimeBlock {
      * End time in resolution of halfhours
      */
     private GregorianCalendar endTime;
-    private Activity activity;
+    private ProjectActivity activity;
     private Employee employee;
 
     /**
@@ -24,7 +24,7 @@ public class TimeBlock {
      * @param activity  The activity worked on in the period
      * @param employee  The employee working on the activity TODO: (should be several later)
      */
-    public TimeBlock(GregorianCalendar startTime, GregorianCalendar endTime, Activity activity, Employee employee) {
+    public TimeBlock(GregorianCalendar startTime, GregorianCalendar endTime, ProjectActivity activity, Employee employee) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.activity = activity;
@@ -55,11 +55,9 @@ public class TimeBlock {
         return (int) Math.round(minutes / 30.0);
     }
 
-    public void setStartTime(GregorianCalendar startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(GregorianCalendar endTime) {
-        this.endTime = endTime;
+    public void delete()
+    {
+        employee.deleteTimeBlock(this);
+        activity.removeTimeBlock(this);
     }
 }

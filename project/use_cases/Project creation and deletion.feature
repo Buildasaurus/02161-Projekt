@@ -15,3 +15,7 @@ Scenario: An employee deletes a project
 Scenario: Project with specific name is created
     When a project with the name "testProject" is created
     Then a project with the name "testProject" exists
+
+Scenario: An employee is created with a known project leader
+    When A project with a project leader named "leader" is created
+    Then the project leader of the project is "leader"
