@@ -1,3 +1,6 @@
+FÅ PROGRAMMET TIL AT CRASHE ELLER GIVE FEJLBESKEDER
+
+
 todo:
 Tests
 - Tests der mangler coverage (alle sammen siden 04.05 13:43)
