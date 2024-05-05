@@ -1,0 +1,42 @@
+package org.application.Controllers;
+
+import java.util.GregorianCalendar;
+
+import org.application.App;
+import org.application.Models.Employee;
+import org.application.Models.ProjectActivity;
+import org.application.Models.TimeBlock;
+import org.application.Utils.GeneralMethods;
+import org.application.Views.EditTimeBlockView;
+
+import javafx.scene.Parent;
+
+public class EditTimeBlockController implements IController {
+    EditTimeBlockView view;
+    Employee employee;
+
+    public EditTimeBlockController(EditTimeBlockView view, Employee employee) {
+        this.view = view;
+        this.employee = employee;
+    }
+
+    public Parent getView() {
+        return view;
+    }
+
+    public void handleEditTimeBlock(TimeBlock timeBlock, String startString, String endString) {
+        ProjectActivity activity = (ProjectActivity) timeBlock.getActivity();
+        GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startString, endString);
+
+        employee.deleteTimeBlock(timeBlock);
+        employee.createTimeBlock(activity, calendars[0], calendars[1]);
+
+        App.goToLastView();
+    }
+
+    public void handleDeleteTimeBlock(TimeBlock timeBlock) {
+        employee.deleteTimeBlock(timeBlock);
+
+        App.goToLastView();
+    }
+}
