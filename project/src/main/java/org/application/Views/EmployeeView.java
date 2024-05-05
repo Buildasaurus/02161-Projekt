@@ -140,7 +140,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
 
         // Only create the calendar view if there's no reserved activity for today
         if (!hasReservedActivityToday) {
-            CalendarView calendarView = new CalendarView(controller.getEmployee());
+            CalendarView calendarView = new CalendarView(controller.getEmployee(), controller);
             vbox.getChildren().add(calendarView);
         }
         else {

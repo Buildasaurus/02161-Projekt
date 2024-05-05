@@ -9,6 +9,7 @@ import org.application.App;
 import org.application.Models.*;
 import org.application.Views.*;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -114,4 +115,10 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
+    public void handleEditTimeBlock(ActionEvent event, TimeBlock timeBlock, ArrayList<Integer> freeHalfHours, String startString, String endString) {
+        EditTimeBlockView view = new EditTimeBlockView(timeBlock, freeHalfHours, startString, endString);
+        EditTimeBlockController controller = new EditTimeBlockController(view, employee);
+        view.setController(controller);
+        App.setRoot(controller);
+    }
 }

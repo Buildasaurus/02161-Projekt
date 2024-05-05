@@ -1,6 +1,5 @@
 package org.application.Views;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,27 +12,33 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+
+import org.application.Controllers.EmployeeController;
 import org.application.Models.*;
+import org.application.Utils.GeneralMethods;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.GregorianCalendar;
 
 public class CalendarView extends GridPane {
     private final Employee employee;
+    private EmployeeController controller;
     private ArrayList<Integer> freeHalfHours;
     private GregorianCalendar currentTime;
     private ComboBox<String> startSelect;
     private ComboBox<String> endSelect;
     private TextField activityField;
+    private ArrayList<TimeBlockView> timeBlocks;
 
-    public CalendarView(Employee employee) {
+    public CalendarView(Employee employee, EmployeeController controller) {
         this.employee = employee;
+        this.controller = controller;
         initialize();
     }
 
     private void initialize() {
+        timeBlocks = new ArrayList<>();
 
         // create whole 24 hour day
         freeHalfHours = new ArrayList<>();
@@ -41,7 +46,7 @@ public class CalendarView extends GridPane {
             freeHalfHours.add(i);
         }
 
-        ObservableList<String> freeHalfHourStrings = toStringList(freeHalfHours);
+        ObservableList<String> freeHalfHourStrings = GeneralMethods.halfHourListToStringList(freeHalfHours);
         for (int i = 0; i < 49; i++) {
             Text text = new Text(freeHalfHourStrings.get(i));
             Rectangle rect = new Rectangle(50, 2);
@@ -55,17 +60,24 @@ public class CalendarView extends GridPane {
         text.setStyle("-fx-font-weight: bold;");
         this.add(text, 0, 97, 2,1);
 
-        // check for any existing timeblocks or reserved activities
-        updateFreeHalfHours();
+        // check for any existing timeblocks
         updateTimeBlocks();
-        freeHalfHourStrings = toStringList(freeHalfHours);
+        freeHalfHourStrings = GeneralMethods.halfHourListToStringList(freeHalfHours);
 
         // create default comboboxes with all options
         startSelect = new ComboBox<>(freeHalfHourStrings);
         endSelect = new ComboBox<>(freeHalfHourStrings);
 
-        startSelect.setOnAction(this.startSelection());
-        endSelect.setOnAction(this.endSelection());
+        startSelect.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                GeneralMethods.startSelection(startSelect, endSelect, freeHalfHours);
+            }
+        });
+        endSelect.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                GeneralMethods.endSelection(startSelect, endSelect, freeHalfHours);
+            }
+        });
 
         activityField = new TextField();
         activityField.setPromptText("Please enter an existing activity");
@@ -90,113 +102,64 @@ public class CalendarView extends GridPane {
     }
 
     private void updateTimeBlocks() {
+        getCurrentTime();
         for (TimeBlock timeBlock : employee.getTimeBlocks()) {
             if (timeBlock.getStartTime().get(Calendar.DAY_OF_YEAR) == currentTime.get(Calendar.DAY_OF_YEAR)) {
                 int startHalfHour = timeBlock.getStartTime().get(Calendar.HOUR_OF_DAY) * 2;
                 int endHalfHour = timeBlock.getEndTime().get(Calendar.HOUR_OF_DAY) * 2;
+                if (timeBlock.getEndTime().get(Calendar.DAY_OF_YEAR) != currentTime.get(Calendar.DAY_OF_YEAR)) {
+                    endHalfHour = 24 * 2;
+                }
                 startHalfHour += timeBlock.getStartTime().get(Calendar.MINUTE) >= 30 ? 1 : 0;
                 endHalfHour += timeBlock.getEndTime().get(Calendar.MINUTE) >= 30 ? 1 : 0;
-                // remove overlapping time
+
+                // create timeblock UI element
                 ArrayList<Integer> tempList = new ArrayList<>();
+                tempList.add(startHalfHour);
+                tempList.add(endHalfHour);
+                ObservableList<String> strings = GeneralMethods.halfHourListToStringList(tempList);
+                boolean small = endHalfHour - startHalfHour < 3;
+                TimeBlockView TimeBlockUI = new TimeBlockView(timeBlock, controller, small, strings.get(0), strings.get(1), new ArrayList<>(freeHalfHours));
+                this.getChildren().add(TimeBlockUI);
+                GridPane.setColumnIndex(TimeBlockUI, 1);
+                GridPane.setRowIndex(TimeBlockUI, (startHalfHour * 2) + 1);
+                GridPane.setRowSpan(TimeBlockUI, (endHalfHour - startHalfHour) * 2 - 1);
+                
+
+                // remove overlapping time
+                tempList.clear();
                 for (int halfHour : freeHalfHours) {
                     if (startHalfHour < halfHour && endHalfHour > halfHour) {
                         tempList.add(halfHour);
                     }
                 }
-
                 for (int i = freeHalfHours.size() - 1; i >= 0; i--) {
                     for (int halfHour : tempList) {
                         if (halfHour == freeHalfHours.get(i)) {
+                            int val = freeHalfHours.get(i);
                             freeHalfHours.remove(i);
+                            for (TimeBlockView block : timeBlocks) {
+                                block.removeFromList(val);
+                            }
                         }
                     }
                 }
-
-                // create timeblock UI element
-                boolean small = endHalfHour - startHalfHour < 3;
-                TimeBlockView TimeBlockUI = new TimeBlockView(timeBlock, small);
-                this.getChildren().add(TimeBlockUI);
-                GridPane.setColumnIndex(TimeBlockUI, 1);
-                GridPane.setRowIndex(TimeBlockUI, (startHalfHour * 2) + 1);
-                GridPane.setRowSpan(TimeBlockUI, (endHalfHour - startHalfHour) * 2 - 1);
+                timeBlocks.add(TimeBlockUI);           
             }
         }
-    }
-
-    private void updateFreeHalfHours() {
-        getCurrentTime();
-        // see if there is a reserved activity today
-        for (Activity activity : employee.getActivities()) {
-            if (activity.getStartDate().get(Calendar.DAY_OF_YEAR) <= currentTime.get(Calendar.DAY_OF_YEAR) &&
-                    activity.getEndDate().get(Calendar.DAY_OF_YEAR) >= currentTime.get(Calendar.DAY_OF_YEAR)) {
-                freeHalfHours.clear();
-                return;
-            }
-        }
-    }
-
-    private EventHandler<ActionEvent> startSelection() {
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                if (startSelect.getValue() != null) {
-                    ArrayList<Integer> res = new ArrayList<>();
-                    boolean hit = false;
-                    for (int i = 0; i < freeHalfHours.size(); i++) {
-                        if (hit) {
-                            if (freeHalfHours.get(i) - 1 == freeHalfHours.get(i - 1)) {
-                                res.add(freeHalfHours.get(i));
-                            }
-                            else {
-                                break;
-                            }
-                        }
-                        if (freeHalfHours.get(i) == fromString(startSelect.getValue())) {
-                            hit = true;
-                        }
-                    }
-                    endSelect.setItems(toStringList(res));
-                }
-            }
-        };
-        return event;
-    }
-
-    private EventHandler<ActionEvent> endSelection() {
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                if (endSelect.getValue() != null) {
-                    ArrayList<Integer> res = new ArrayList<>();
-                    boolean hit = false;
-                    for (int i = freeHalfHours.size() - 1; i >= 0; i--) {
-                        if (hit) {
-                            if (freeHalfHours.get(i) + 1 == freeHalfHours.get(i + 1)) {
-                                res.add(freeHalfHours.get(i));
-                            }
-                            else {
-                                break;
-                            }
-                        }
-                        if (freeHalfHours.get(i) == fromString(endSelect.getValue())) {
-                            hit = true;
-                        }
-                    }
-                    Collections.reverse(res);
-                    startSelect.setItems(toStringList(res));
-                }
-            }
-        };
-        return event;
     }
 
     private EventHandler<ActionEvent> submitTimeBlock() {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if (startSelect.getValue() != null && endSelect.getValue() != null) {
-                    GregorianCalendar[] calendars = toCalendarList(startSelect.getValue(), endSelect.getValue());
-                    ProjectActivity activity = (ProjectActivity) SystemModel.getActivity(activityField.getText());
-                    if (activity != null) {
-                        employee.createTimeBlock(activity, calendars[0], calendars[1]);
+                    Activity activity = SystemModel.getActivity(activityField.getText());
+                    if (activity != null && activity instanceof ProjectActivity) {
+                        GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startSelect.getValue(), endSelect.getValue());
+                        ProjectActivity projectActivity = (ProjectActivity) activity;
+                        employee.createTimeBlock(projectActivity, calendars[0], calendars[1]);
                         updateTimeBlocks();
+                        pruneFreeHalfHours();
                         clearData();
                     }
                 }
@@ -205,77 +168,38 @@ public class CalendarView extends GridPane {
         return event;
     }
 
-    private ObservableList<String> toStringList(ArrayList<Integer> halfHourList) {
-        ObservableList<String> res = FXCollections.observableArrayList(new ArrayList<>());
-        for (Integer halfHour : halfHourList) {
-            // format
-            int hours = halfHour / 2;
-            String timeStr = "";
-            if (hours >= 10) {
-                timeStr += hours;
-            }
-            else {
-                timeStr += 0;
-                timeStr += hours;
-            }
-            if (halfHour % 2 == 1) {
-                timeStr += ":30";
-            }
-            else {
-                timeStr += ":00";
-            }
-            res.add(timeStr);
-        }
-        return res;
-    }
-
-    private int fromString(String time) {
-        int halfHours = 0;
-        if (time.startsWith("0")) {
-            halfHours += Integer.parseInt(time.substring(1, 2)) * 2;
-        }
-        else {
-            halfHours += Integer.parseInt(time.substring(0, 2)) * 2;
-        }
-        if (time.charAt(3) == '3') {
-            halfHours += 1;
-        }
-        return halfHours;
-    }
-
-    private GregorianCalendar[] toCalendarList(String startTime, String endTime) {
-        GregorianCalendar[] calendars = new GregorianCalendar[2];
-        int[] startTimes = toHoursAndMinutes(startTime);
-        int[] endTimes = toHoursAndMinutes(endTime);
-        GregorianCalendar startDate = new GregorianCalendar(currentTime.get(Calendar.YEAR),
-                currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), startTimes[0], startTimes[1]);
-        GregorianCalendar endDate = new GregorianCalendar(currentTime.get(Calendar.YEAR),
-                currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), endTimes[0], endTimes[1]);
-        calendars[0] = startDate;
-        calendars[1] = endDate;
-        return calendars;
-    }
-
-    private int[] toHoursAndMinutes(String time) {
-        int[] res = new int[2];
-        int hours = 0;
-        if (time.startsWith("0")) {
-            hours = Integer.parseInt(time.substring(1, 2));
-        }
-        else {
-            hours = Integer.parseInt(time.substring(0, 2));
-        }
-        res[0] = hours;
-        res[1] = Integer.parseInt(time.substring(3, 5));
-        return res;
-    }
-
     private void clearData() {
-        ObservableList<String> strList = toStringList(freeHalfHours);
+        ObservableList<String> strList = GeneralMethods.halfHourListToStringList(freeHalfHours);
         startSelect.setValue(null);
         endSelect.setValue(null);
         startSelect.setItems(strList);
         endSelect.setItems(strList);
         activityField.setText("");
+    }
+
+    /**
+     * Removes "dead space" time slots that cannot generate any timeblock as neither start time nor end time
+     */
+    private void pruneFreeHalfHours() {
+        ArrayList<Integer> tempList = new ArrayList<>();
+        for (int i = 0; i < freeHalfHours.size(); i++) {
+            if (i  == 0) {
+                if (freeHalfHours.get(i) + 1 != freeHalfHours.get(i + 1)) {
+                    tempList.add(freeHalfHours.get(i));
+                }
+            }
+            else if (freeHalfHours.get(i) - 1 != freeHalfHours.get(i - 1)) {
+                if (i == freeHalfHours.size() - 1) {
+                    tempList.add(freeHalfHours.get(i));
+                }
+                else if (freeHalfHours.get(i) + 1 != freeHalfHours.get(i + 1)) {
+                    tempList.add(freeHalfHours.get(i));
+                }
+            }
+        }
+        for (int val : tempList) {
+            int index = freeHalfHours.indexOf(val);
+            freeHalfHours.remove(index);
+        }
     }
 }
