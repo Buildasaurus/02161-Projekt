@@ -50,7 +50,7 @@ public class ProjectSteps {
     public void theProjectLeaderGeneratesTheReport() {
         Project project = SystemModel.getProjects().get(0);
         Report report = new Report(project);
-        report.saveToDisk("");
+        report.saveToDisk();
     }
 
     @Then("a non-empty report is saved in our default folder")

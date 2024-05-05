@@ -96,7 +96,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                     projectComboBox.getSelectionModel().getSelectedItem());
             if (p != null) {
                 Report report = new Report(p);
-                report.saveToDisk("");
+                report.saveToDisk();
             }
         });
         Button editProjectButton = new Button("Edit Project");

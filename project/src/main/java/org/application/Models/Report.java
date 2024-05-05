@@ -28,7 +28,8 @@ public class Report implements CSVConvertable {
         text = reportText.toString();
     }
 
-    private File toCSV() {
+
+    public void saveToDisk() {
         File csvFile = new File("report.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
             writer.write(this.text);
@@ -36,13 +37,6 @@ public class Report implements CSVConvertable {
         catch (IOException e) {
             e.printStackTrace();
         }
-        return csvFile;
-    }
-
-    @Override
-    public void saveToDisk(String path) {
-        File csvFile = this.toCSV();
-        File newFile = new File(path + "/" + csvFile.getName());
     }
 }
 
