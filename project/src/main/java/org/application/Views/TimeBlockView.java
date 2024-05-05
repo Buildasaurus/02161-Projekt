@@ -24,9 +24,7 @@ import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.TimeBlock;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class TimeBlockView extends StackPane {
     private EmployeeController controller;
@@ -46,16 +44,8 @@ public class TimeBlockView extends StackPane {
     }
 
     public void initialize(boolean small) {
-        Calendar startTime = block.getStartTime();
-        Calendar endTime = block.getEndTime();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-
-        String formattedStartTime = sdf.format(startTime.getTime());
-        String formattedEndTime = sdf.format(endTime.getTime());
-
         Text title = new Text(block.getActivity().getName());
-        Text time = new Text(String.format("%s to %s", formattedStartTime, formattedEndTime));
+        Text time = new Text(String.format("%s to %s", startString, endString));
 
         Font titleFont = Font.font("arial", FontWeight.BOLD, FontPosture.REGULAR, 11);
         Font timeFont = Font.font("arial", FontWeight.NORMAL, FontPosture.REGULAR, 11);

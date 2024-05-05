@@ -107,6 +107,9 @@ public class CalendarView extends GridPane {
             if (timeBlock.getStartTime().get(Calendar.DAY_OF_YEAR) == currentTime.get(Calendar.DAY_OF_YEAR)) {
                 int startHalfHour = timeBlock.getStartTime().get(Calendar.HOUR_OF_DAY) * 2;
                 int endHalfHour = timeBlock.getEndTime().get(Calendar.HOUR_OF_DAY) * 2;
+                if (timeBlock.getEndTime().get(Calendar.DAY_OF_YEAR) != currentTime.get(Calendar.DAY_OF_YEAR)) {
+                    endHalfHour = 24 * 2;
+                }
                 startHalfHour += timeBlock.getStartTime().get(Calendar.MINUTE) >= 30 ? 1 : 0;
                 endHalfHour += timeBlock.getEndTime().get(Calendar.MINUTE) >= 30 ? 1 : 0;
 
