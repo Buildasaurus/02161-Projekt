@@ -1,6 +1,7 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -40,9 +41,8 @@ public class CreateProjectView extends VBox {
         name.setPromptText("Project Name");
         getChildren().add(name);
 
-        TextField projectLeader = new TextField();
-        projectLeader.setPromptText("(optional) Project leaderID");
-        getChildren().add(projectLeader);
+        ComboBox<String> projectLeaderComboBox = Buttons.chooseEmployeeIDComboBox();
+        getChildren().add(projectLeaderComboBox);
 
         DatePicker startDate = new DatePicker();
         startDate.setEditable(false);
@@ -62,14 +62,14 @@ public class CreateProjectView extends VBox {
             {
                 controller.handleCreateProject(
                         name.getText(),
-                        projectLeader.getText(),
+                        projectLeaderComboBox.getSelectionModel().getSelectedItem(),
                         GeneralMethods.convertDatePickerToCalender(startDate),
                         GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
             }
         });
         if (editingProject) {
             name.setText(loadedProject.getName());
-            projectLeader.setText(loadedProject.getProjectLeaderID());
+            projectLeaderComboBox.setValue(loadedProject.getProjectLeaderID());
 
             // Set start date to the saved project's start date
             startDate.setValue(GeneralMethods.convertCalendarToLocalDate(loadedProject.getStartWeek()));

@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import org.application.App;
+import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
@@ -37,6 +38,16 @@ public class Buttons {
         List<ProjectActivity> projects = SystemModel.getProjectActivities();
         for (ProjectActivity project : projects) {
             chooseActivityComboBox.getItems().add(project.getName());
+        }
+        return  chooseActivityComboBox;
+    }
+
+    public static ComboBox<String> chooseEmployeeIDComboBox()
+    {
+        ComboBox<String> chooseActivityComboBox = new ComboBox<>();
+        List<Employee> projects = SystemModel.getEmployees();
+        for (Employee employee : projects) {
+            chooseActivityComboBox.getItems().add(employee.getID());
         }
         return  chooseActivityComboBox;
     }
