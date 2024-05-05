@@ -27,7 +27,7 @@ Scenario: User deletes an activity in a project with multiple activities
 Scenario: Activity with registered hours is deleted
      When 1 projects are created
      And 1 activities are created in the project
-     And the employee spends time on the activity
+     And the employee spends 6 half-hours on the activity
      When an employee deletes a project activity
      Then the project activity no longer exists
      And the time spent is no longer registered
@@ -35,6 +35,6 @@ Scenario: Activity with registered hours is deleted
 Scenario: Delete timeblock
     When 1 projects are created
     And 1 activities are created in the project
-    And the employee spends time on the activity
+    And the employee spends 4 half-hours on the activity
     When the employee deletes the timeblock
     Then the timeblock no longer exists

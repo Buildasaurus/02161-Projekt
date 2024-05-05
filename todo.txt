@@ -1,15 +1,8 @@
-FÅ PROGRAMMET TIL AT CRASHE ELLER GIVE FEJLBESKEDER
-
-
 todo:
 Tests
-- Tests der mangler coverage (alle sammen siden 04.05 13:43)
+- Tests der mangler coverage (alle sammen siden 04.05 17:47)
 
-Der skal laves test til ReservedActivity.delete
-
-employee.deleteTimeBlock (0%)
-
-Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%)
+Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%) 
 
 Createreport - de specifikke tilæflde hvor der ikke er nogle activities (80% er dækket)
 

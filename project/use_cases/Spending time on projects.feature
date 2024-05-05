@@ -8,7 +8,7 @@ Background:
 Scenario: Employee spends time on activity
     Given 1 projects are created
     And 1 activities are created in the project
-    And the employee spends time on the activity
+    And the employee spends 4 half-hours on the activity
     Then the employee has 1 timeblocks attached
 
 #Scenario: Two employees spend time on activity

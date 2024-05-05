@@ -2,6 +2,7 @@ package org.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.application.Models.Employee;
@@ -11,6 +12,7 @@ import org.application.Models.SystemModel;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Given;
 
 
 //TODO look for duplicate steps that could be consolidated
@@ -29,12 +31,13 @@ public class EmployeeSteps {
         SystemModel.getProjectActivities().get(0).delete();
     }
 
-    @When("the employee spends time on the activity")
-    public void spendTimeOnActivity() {
+    @Given("the employee spends {int} half-hours on the activity")
+    public void theEmployeeSpendsHalfHoursOnTheActivity(Integer timeSpent) {
         Employee testEmployee = SystemModel.getEmployees().get(0);
         ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(0);
         GregorianCalendar startTime = new GregorianCalendar(1,1,1);
         GregorianCalendar endTime = new GregorianCalendar(1,1,1);
+        endTime.add(Calendar.MINUTE, timeSpent * 30);
         testEmployee.createTimeBlock(testActivity, startTime, endTime);
     }
 
@@ -67,12 +70,6 @@ public class EmployeeSteps {
     @When("the employee named {string} is assigned to the project activity")
     public void addNamedEmployeeToActivity(String employeeString) {
         SystemModel.getProjectActivities().get(0).assignEmployee(employeeString);
-    }
-
-    @When("an employee picks a project")
-    public void anEmployeePicksAProject() {
-        Employee employee = SystemModel.getEmployees().get(0);
-        Project pickedProject = SystemModel.getProjectByName("0");
     }
 
 
