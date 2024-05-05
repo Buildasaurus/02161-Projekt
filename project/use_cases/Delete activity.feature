@@ -1,3 +1,5 @@
+# Probably written by Martin and Lucia
+
 Feature: Deleting activities
     Description: An employee is deleting activities
     Actor: Employee

@@ -1,3 +1,5 @@
+// Written by Martin, Lucia and Jonathan
+
 package org.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -14,10 +16,6 @@ import org.application.Models.SystemModel;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
-
-
-//TODO look for duplicate steps that could be consolidated
-//TODO implement steps
 
 public class EmployeeSteps {
     @When("{int} employees are created")
