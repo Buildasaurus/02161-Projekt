@@ -1,3 +1,5 @@
+// 90% Jonathan 10% Marinus
+
 package org.application.Views;
 
 import javafx.scene.control.*;

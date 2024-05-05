@@ -1,4 +1,3 @@
-# Created by jonat at 05/05/2024
 Feature: Edit Activity
   # Enter feature description here
   

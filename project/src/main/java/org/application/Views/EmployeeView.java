@@ -1,3 +1,4 @@
+//80% jonathan 10% martin 10% marinus
 package org.application.Views;
 
 import javafx.geometry.Insets;
