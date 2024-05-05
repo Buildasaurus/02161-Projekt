@@ -1,24 +1,22 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.CreateEmployeeController;
-import org.application.Models.Buttons;
 
 
 public class CreateEmployeeView extends VBox {
 
     CreateEmployeeController controller;
+
     public CreateEmployeeView() {
         initialize();
     }
 
-    public void setController(CreateEmployeeController controller)
-    {
+    public void setController(CreateEmployeeController controller) {
         this.controller = controller;
     }
 
@@ -34,10 +32,13 @@ public class CreateEmployeeView extends VBox {
 
         // Create button
         Button completeButton = new Button("Complete");
-            completeButton.setOnAction(e -> {controller.handleCompletePressed(e, name.getText());});
+        completeButton.setOnAction(e -> {
+            controller.handleCompletePressed(e, name.getText());
+        });
 
         getChildren().add(completeButton);
 
         getChildren().add(Buttons.returnButton());
+        getChildren().add(Buttons.backButton());
     }
 }

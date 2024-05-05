@@ -10,17 +10,17 @@ public class Project {
     private GregorianCalendar startWeek;
     private GregorianCalendar endWeek;
     private String projectLeaderID;
-    private List<ProjectActivity> activities = new ArrayList<>();
+    private final List<ProjectActivity> activities = new ArrayList<>();
 
     public Project(String name, GregorianCalendar startWeek, GregorianCalendar endWeek,
-            String projectLeaderID) {
+                   String projectLeaderID) {
         initialize(name, endWeek, startWeek);
         this.projectLeaderID = projectLeaderID;
     }
 
     public Project(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
         initialize(name, endWeek, startWeek);
-        this.projectLeaderID = "PROJECT LEADER NOT SET";
+        removeProjectLeader();
     }
 
     public void initialize(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
@@ -40,7 +40,8 @@ public class Project {
         reportText.append("Project Leader ID: ").append(this.projectLeaderID).append("\n");
         reportText.append("Activities: \n");
         for (ProjectActivity activity : this.activities) {
-            reportText.append(activity.toString()).append("\n"); // assuming toString method in ProjectActivity class provides relevant details
+            reportText.append(activity.toString()).append(
+                    "\n"); // assuming toString method in ProjectActivity class provides relevant details
         }
         int totalSpentTime = 0;
         int totalExpectedDuration = 0;
@@ -57,6 +58,7 @@ public class Project {
     /**
      * Adds an activity to the project. Remember that Project activities pr default are added to
      * the project, in the constructor.
+     *
      * @param activity
      */
     public void addActivity(ProjectActivity activity) {
@@ -65,8 +67,10 @@ public class Project {
 
     /**
      * Removes the connection between the activity, and the project.
+     * should NEVER be used casually, as it will only remove the reference one way.
      * DOES NOT delete the activity
-     * @param activity
+     *
+     * @param activity the activity to remove.
      */
     public void removeActivity(ProjectActivity activity) {
         activities.remove(activity);
@@ -85,6 +89,10 @@ public class Project {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getProjectID() {
         return projectID;
     }
@@ -93,16 +101,34 @@ public class Project {
         return endWeek;
     }
 
+    public void setEndWeek(GregorianCalendar endWeek) {
+        this.endWeek = endWeek;
+    }
+
     public GregorianCalendar getStartWeek() {
         return startWeek;
+    }
+
+    public void setStartWeek(GregorianCalendar startWeek) {
+        this.startWeek = startWeek;
     }
 
     public String getProjectLeaderID() {
         return projectLeaderID;
     }
 
-    public void noProjectLeader(){
+    public void removeProjectLeader() {
         this.projectLeaderID = "PROJECT LEADER NOT SET";
+    }
+
+    /**
+     * Deletes the current project, and all activities connected to it
+     */
+    public void delete() {
+        for (int i = getActivities().size() - 1; i >= 0; i--) {
+            activities.get(i).delete();
+        }
+        SystemModel.removeProject(this);
     }
 
 

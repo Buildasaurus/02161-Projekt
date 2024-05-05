@@ -1,17 +1,16 @@
 package org.application.Views;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import org.application.Models.Employee;
-import org.application.Models.ProjectActivity;
-
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.application.Models.Employee;
+import org.application.Models.ProjectActivity;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ProjectActivityView extends ActivityView {
-    private ProjectActivity activity;
+    private final ProjectActivity activity;
 
     public ProjectActivityView(ProjectActivity activity) {
         this.activity = activity;

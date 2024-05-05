@@ -6,10 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.App;
-import org.application.Models.Activity;
-import org.application.Models.Employee;
-import org.application.Models.Project;
-import org.application.Models.SystemModel;
+import org.application.Models.*;
 import org.application.Views.*;
 
 import java.util.GregorianCalendar;
@@ -27,7 +24,6 @@ public class EmployeeController implements IController {
     }
 
 
-
     @Override
     public Parent getView() {
         return view;
@@ -39,7 +35,7 @@ public class EmployeeController implements IController {
 
     public void handleOnCreateActivity(ActionEvent event) {
         System.out.println("Handling event");
-        CreateActivityView view = new CreateActivityView(this);
+        CreateProjectActivityView view = new CreateProjectActivityView(this);
         this.view = view;
         App.setRoot(this);
     }
@@ -51,27 +47,15 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleCompleteActivity(ActionEvent event, Activity activity, String[] assignedEmployeeIDs) {
+    public void handleCompleteProjectActivity(Activity activity, Activity oldActivity) {
         System.out.println("Handling complete activity. Activity made: " + activity);
 
-        for(String employeeID : assignedEmployeeIDs) {
-            Employee emp = SystemModel.getEmployee(employeeID);
-            if (emp != null) {
-                emp.addActivity(activity);
-            }
+        if (oldActivity != null) {
+            oldActivity.updateValues(activity);
+            activity.delete(); // It was simply used for reference
         }
-        EmployeeView eView = new EmployeeView();
-        view = eView;
-        eView.setController(this);
-        App.setRoot(this);
-    }
 
-    public void handleCompleteReservedActivity(Activity activity) {
-        employee.addActivity(activity);
-        EmployeeView eView = new EmployeeView();
-        view = eView;
-        eView.setController(this);
-        App.setRoot(this);
+        goToEmployeeView();
     }
 
     public void handleUpdateSearch(ActionEvent event, VBox searchBox, GregorianCalendar start, GregorianCalendar end) {
@@ -83,16 +67,17 @@ public class EmployeeController implements IController {
         List<Employee> sortedEmployees = SystemModel.findAvailableEmployees(start, end);
         for (Employee employee : sortedEmployees) {
             Text text = new Text(employee.getID());
-            if(employee.getAvailabilityScore(start,end) <= 0)
-            {
+            if (employee.getAvailabilityScore(start, end) <= 0) {
                 text.setFill(Color.RED);
             }
             searchBox.getChildren().add(text);
         }
     }
 
-    public void handleSeeOverview(Project project)
-    {
+    public void handleSeeOverview(Project project) {
+        if (project == null) {
+            return;
+        }
         ProjectOverviewView view = new ProjectOverviewView(this, project);
         this.view = view;
         App.setRoot(this);
@@ -105,12 +90,28 @@ public class EmployeeController implements IController {
         App.setRoot(this);
     }
 
-    public void handleEditActivityOverview(ActionEvent event, Activity activity)
-    {
-        CreateActivityView view = new CreateActivityView(this, activity);
-        this.view = view;
+    public void handleEditProject(Project project) {
+        CreateProjectView view = new CreateProjectView(project);
+        CreateProjectController controller = new CreateProjectController(view);
+        view.setController(controller);
+        App.setRoot(controller);
+    }
+
+    public void handleEditActivityOverview(ActionEvent event, Activity activity) {
+        if (activity instanceof ProjectActivity) {
+            this.view = new CreateProjectActivityView(this, (ProjectActivity) activity);
+        }
+        else if (activity instanceof ReservedActivity) {
+            this.view = new CreateReservedActivityView(this, (ReservedActivity) activity);
+        }
         App.setRoot(this);
     }
 
+    public void goToEmployeeView() {
+        EmployeeView eView = new EmployeeView();
+        view = eView;
+        eView.setController(this);
+        App.setRoot(this);
+    }
 
 }

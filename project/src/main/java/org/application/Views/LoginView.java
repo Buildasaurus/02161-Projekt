@@ -1,14 +1,11 @@
 package org.application.Views;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.LoginController;
-import org.application.Models.Buttons;
 
 public class LoginView extends VBox {
     LoginController controller;

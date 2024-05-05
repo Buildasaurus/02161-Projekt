@@ -10,8 +10,7 @@ public abstract class Activity {
     protected GregorianCalendar startDate;
     protected GregorianCalendar endDate;
 
-    public Activity(String name, GregorianCalendar startDate, GregorianCalendar endDate)
-    {
+    public Activity(String name, GregorianCalendar startDate, GregorianCalendar endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.name = name;
@@ -46,9 +45,12 @@ public abstract class Activity {
         }
     }
 
+    public abstract void updateValues(Activity activity);
+
     public GregorianCalendar getEndDate() {
         return endDate;
     }
+
     public GregorianCalendar getStartDate() {
         return startDate;
     }

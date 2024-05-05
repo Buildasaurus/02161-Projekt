@@ -8,13 +8,14 @@ import org.application.Views.CreateProjectView;
 import org.application.Views.LoginView;
 
 
-public class MainController implements IController{
+public class MainController implements IController {
     Parent view;
+
     public MainController(Parent view) {
         this.view = view;
     }
-    public void handleButton(ActionEvent event)
-    {
+
+    public void handleButton(ActionEvent event) {
         System.out.println("Button pressed");
         LoginView newView = new LoginView();
         LoginController controller = new LoginController(newView);
@@ -22,8 +23,7 @@ public class MainController implements IController{
         App.setRoot(controller);
     }
 
-    public void handleCreateEmployee(ActionEvent event)
-    {
+    public void handleCreateEmployee(ActionEvent event) {
         System.out.println("CreateEmployee pressed");
         CreateEmployeeView newView = new CreateEmployeeView();
         CreateEmployeeController controller = new CreateEmployeeController(newView);
@@ -31,16 +31,14 @@ public class MainController implements IController{
         App.setRoot(newView);
     }
 
-    public void handleCreateProject(ActionEvent event)
-    {
+    public void handleCreateProject(ActionEvent event) {
         CreateProjectView view = new CreateProjectView();
         CreateProjectController controller = new CreateProjectController(view);
         view.setController(controller);
         App.setRoot(controller);
     }
 
-    public Parent getView()
-    {
+    public Parent getView() {
         return view;
     }
 }

@@ -1,15 +1,5 @@
 package org.application.Views;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import org.application.Models.Activity;
-import org.application.Models.Employee;
-import org.application.Models.ProjectActivity;
-import org.application.Models.SystemModel;
-import org.application.Models.TimeBlock;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,14 +7,21 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import org.application.Models.*;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 
 public class CalendarView extends GridPane {
-    private Employee employee;
+    private final Employee employee;
     private ArrayList<Integer> freeHalfHours;
     private GregorianCalendar currentTime;
     private ComboBox<String> startSelect;
@@ -47,12 +44,16 @@ public class CalendarView extends GridPane {
         ObservableList<String> freeHalfHourStrings = toStringList(freeHalfHours);
         for (int i = 0; i < 49; i++) {
             Text text = new Text(freeHalfHourStrings.get(i));
-            Rectangle rect = new Rectangle(50,2);
+            Rectangle rect = new Rectangle(50, 2);
             this.add(text, 0, i * 2);
             this.add(rect, 1, i * 2);
             GridPane.setMargin(text, new Insets(5.0));
             GridPane.setMargin(rect, new Insets(5.0));
         }
+
+        Label text = new Label("Create new timeblock");
+        text.setStyle("-fx-font-weight: bold;");
+        this.add(text, 0, 97, 2,1);
 
         // check for any existing timeblocks or reserved activities
         updateFreeHalfHours();
@@ -67,16 +68,21 @@ public class CalendarView extends GridPane {
         endSelect.setOnAction(this.endSelection());
 
         activityField = new TextField();
+        activityField.setPromptText("Please enter an existing activity");
 
-        Button submitButton = new Button("Submit");
+        Button submitButton = new Button("Create timeblock");
         submitButton.setOnAction(this.submitTimeBlock());
 
         HBox selectionBox = new HBox(startSelect, endSelect, activityField, submitButton);
-        this.add(selectionBox, 1, 97);
+        this.add(selectionBox, 1, 98);
 
         Button clearButton = new Button("Clear");
-        clearButton.setOnAction(this.clearData());
-        this.add(clearButton, 0, 97);
+        clearButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                clearData();
+            }
+        });
+        this.add(clearButton, 0, 98);
     }
 
     private void getCurrentTime() {
@@ -105,7 +111,7 @@ public class CalendarView extends GridPane {
                         }
                     }
                 }
-                
+
                 // create timeblock UI element
                 boolean small = endHalfHour - startHalfHour < 3;
                 TimeBlockView TimeBlockUI = new TimeBlockView(timeBlock, small);
@@ -139,7 +145,8 @@ public class CalendarView extends GridPane {
                         if (hit) {
                             if (freeHalfHours.get(i) - 1 == freeHalfHours.get(i - 1)) {
                                 res.add(freeHalfHours.get(i));
-                            } else {
+                            }
+                            else {
                                 break;
                             }
                         }
@@ -164,14 +171,16 @@ public class CalendarView extends GridPane {
                         if (hit) {
                             if (freeHalfHours.get(i) + 1 == freeHalfHours.get(i + 1)) {
                                 res.add(freeHalfHours.get(i));
-                        } else {
-                            break;
-                        }
+                            }
+                            else {
+                                break;
+                            }
                         }
                         if (freeHalfHours.get(i) == fromString(endSelect.getValue())) {
                             hit = true;
                         }
                     }
+                    Collections.reverse(res);
                     startSelect.setItems(toStringList(res));
                 }
             }
@@ -188,6 +197,7 @@ public class CalendarView extends GridPane {
                     if (activity != null) {
                         employee.createTimeBlock(activity, calendars[0], calendars[1]);
                         updateTimeBlocks();
+                        clearData();
                     }
                 }
             }
@@ -203,13 +213,15 @@ public class CalendarView extends GridPane {
             String timeStr = "";
             if (hours >= 10) {
                 timeStr += hours;
-            } else {
+            }
+            else {
                 timeStr += 0;
                 timeStr += hours;
             }
             if (halfHour % 2 == 1) {
                 timeStr += ":30";
-            } else {
+            }
+            else {
                 timeStr += ":00";
             }
             res.add(timeStr);
@@ -221,7 +233,8 @@ public class CalendarView extends GridPane {
         int halfHours = 0;
         if (time.startsWith("0")) {
             halfHours += Integer.parseInt(time.substring(1, 2)) * 2;
-        } else {
+        }
+        else {
             halfHours += Integer.parseInt(time.substring(0, 2)) * 2;
         }
         if (time.charAt(3) == '3') {
@@ -234,10 +247,10 @@ public class CalendarView extends GridPane {
         GregorianCalendar[] calendars = new GregorianCalendar[2];
         int[] startTimes = toHoursAndMinutes(startTime);
         int[] endTimes = toHoursAndMinutes(endTime);
-        GregorianCalendar startDate = new GregorianCalendar(currentTime.get(Calendar.YEAR), 
-            currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), startTimes[0], startTimes[1]);
+        GregorianCalendar startDate = new GregorianCalendar(currentTime.get(Calendar.YEAR),
+                currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), startTimes[0], startTimes[1]);
         GregorianCalendar endDate = new GregorianCalendar(currentTime.get(Calendar.YEAR),
-            currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), endTimes[0], endTimes[1]);
+                currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), endTimes[0], endTimes[1]);
         calendars[0] = startDate;
         calendars[1] = endDate;
         return calendars;
@@ -248,7 +261,8 @@ public class CalendarView extends GridPane {
         int hours = 0;
         if (time.startsWith("0")) {
             hours = Integer.parseInt(time.substring(1, 2));
-        } else {
+        }
+        else {
             hours = Integer.parseInt(time.substring(0, 2));
         }
         res[0] = hours;
@@ -256,17 +270,12 @@ public class CalendarView extends GridPane {
         return res;
     }
 
-    private EventHandler<ActionEvent> clearData() {
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                ObservableList<String> strList = toStringList(freeHalfHours);
-                startSelect.setValue(null);
-                endSelect.setValue(null);
-                startSelect.setItems(strList);
-                endSelect.setItems(strList);
-                activityField.setText("");
-            }
-        };
-        return event;
+    private void clearData() {
+        ObservableList<String> strList = toStringList(freeHalfHours);
+        startSelect.setValue(null);
+        endSelect.setValue(null);
+        startSelect.setItems(strList);
+        endSelect.setItems(strList);
+        activityField.setText("");
     }
 }

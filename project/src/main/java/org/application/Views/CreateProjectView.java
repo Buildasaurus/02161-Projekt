@@ -7,23 +7,29 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.application.Controllers.CreateProjectController;
+import org.application.Models.Project;
 import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
 
-public class CreateProjectView extends VBox
-{
+public class CreateProjectView extends VBox {
     CreateProjectController controller;
+    Project loadedProject = null;
 
     public CreateProjectView() {
     }
 
-    public void setController(CreateProjectController controller)
-    {
+    public CreateProjectView(Project loadedProject) {
+        this.loadedProject = loadedProject;
+    }
+
+    public void setController(CreateProjectController controller) {
         this.controller = controller;
         initialize();
     }
 
     private void initialize() {
+        boolean editingProject = loadedProject != null;
+
         // Title
         Text title = new Text("Choose name and other relevant data for Project");
         title.setFill(Color.BLACK);
@@ -39,25 +45,40 @@ public class CreateProjectView extends VBox
         getChildren().add(projectLeader);
 
         DatePicker startDate = new DatePicker();
+        startDate.setEditable(false);
         startDate.setPromptText("Start Date");
         getChildren().add(startDate);
 
         DatePicker endDate = new DatePicker();
+        endDate.setEditable(false);
         endDate.setPromptText("End Date");
         getChildren().add(endDate);
 
         // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> {
-            if (SystemModel.getProjectByName(name.getText()) == null)
+            if (SystemModel.getProjectByName(
+                    name.getText()) == null || editingProject) // only create project, if a project with the same name doesn't exist
             {
                 controller.handleCreateProject(
                         name.getText(),
                         projectLeader.getText(),
                         GeneralMethods.convertDatePickerToCalender(startDate),
-                        GeneralMethods.convertDatePickerToCalender(endDate));
+                        GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
             }
         });
+        if (editingProject) {
+            name.setText(loadedProject.getName());
+            projectLeader.setText(loadedProject.getProjectLeaderID());
+
+            // Set start date to the saved project's start date
+            startDate.setValue(GeneralMethods.convertCalendarToLocalDate(loadedProject.getStartWeek()));
+
+            // Set end date to the saved project's end date
+            endDate.setValue(GeneralMethods.convertCalendarToLocalDate(loadedProject.getEndWeek()));
+        }
+
         getChildren().add(completeButton);
+        getChildren().add(Buttons.backButton());
     }
 }

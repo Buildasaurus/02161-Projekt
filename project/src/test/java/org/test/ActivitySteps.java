@@ -35,6 +35,10 @@ public class ActivitySteps {
     public void tearDown() {
         SystemModel.reset();
     }
+    @io.cucumber.java.Before
+    public void start() {
+        SystemModel.reset();
+    }
 
     @Then("{int} activities exist")
     public void activitiesExist(int amountOfActivitiesExpected) {
@@ -291,5 +295,16 @@ public class ActivitySteps {
     public void addEmployeeToActivity() {
         Employee testEmployee = SystemModel.getEmployees().get(0);
         SystemModel.getProjectActivities().get(0).assignEmployee(testEmployee);
+    }
+
+    @When("a project activity is created with the employee {string} assigned")
+    public void addProjectActivityWithEmployee(String employeeString) {
+//        Employee testEmployee = SystemModel.getEmployees().get(0);
+        Project testProject = SystemModel.getProjects().get(0);
+        GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
+        String[] employeeIDString = {employeeString};
+        ProjectActivity testActivity = new ProjectActivity(startDay, endDay, 100, "testActivity", testProject, employeeIDString);
+        testProject.addActivity(testActivity);
     }
 }

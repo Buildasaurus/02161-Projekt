@@ -1,15 +1,15 @@
 package org.application.Views;
-import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 import org.application.Controllers.EmployeeController;
-import org.application.Models.Buttons;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
-import org.application.Models.SystemModel;
-import org.application.Utils.GeneralMethods;
 
 public class ProjectOverviewView extends VBox {
-    private Project project;
+    private final Project project;
     EmployeeController controller;
 
     public ProjectOverviewView(EmployeeController controller, Project project) {
@@ -41,6 +41,12 @@ public class ProjectOverviewView extends VBox {
         ProgressBar overallProgressBar = new ProgressBar(overallProgress);
         this.getChildren().add(new Label("Overall Progress"));
         this.getChildren().add(overallProgressBar);
+
+        // Display each activity with its progress
+        for (ProjectActivity activity : project.getActivities()) {
+            ActivityProgressView activityProgressView = new ActivityProgressView(activity);
+            this.getChildren().add(activityProgressView);
+        }
 
         Button OKButton = new Button("OK");
         OKButton.setOnAction(controller::handleOKButton);
