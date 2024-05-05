@@ -1,20 +1,5 @@
 FÅ PROGRAMMET TIL AT CRASHE ELLER GIVE FEJLBESKEDER
 
-
-todo:
-Tests
-- Tests der mangler coverage (alle sammen siden 04.05 13:43)
-
-employee.deleteTimeBlock (0%)
-
-Project constructor, med projektleder kendt fra starten (som parameter i konstruktør) (0%)
-
-SystemModel.getemployee - det specifikke tilfælde hvor man prøver at finde nogen som ikke er der, så burde den returnere null (60%)
-
-SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%)
-
-
-
 Rapport
 Find på specifikke ting der mangler i rapporten, og skriv dem her. (ja, det er en todo)
 D i SOLID
