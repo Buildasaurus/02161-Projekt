@@ -31,6 +31,20 @@ public class Project {
         SystemModel.addProject(this);
     }
 
+
+    public double getOverallProgress()
+    {
+        // Calculate total spent time and expected duration for all activities
+        int totalSpentTime = 0;
+        int totalExpectedDuration = 0;
+        for (ProjectActivity activity : getActivities()) {
+            totalSpentTime += activity.calculateSpentTime();
+            totalExpectedDuration += activity.getExpectedDuration();
+        }
+
+        // Calculate overall progress
+        return (double) totalSpentTime / totalExpectedDuration;
+    }
     /**
      * Adds an activity to the project. Remember that Project activities pr default are added to
      * the project, in the constructor.

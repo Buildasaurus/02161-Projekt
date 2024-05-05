@@ -27,16 +27,7 @@ public class ProjectOverviewView extends VBox {
 
         this.getChildren().addAll(nameLabel, idLabel, startWeekLabel, endWeekLabel, leaderLabel);
 
-        // Calculate total spent time and expected duration for all activities
-        int totalSpentTime = 0;
-        int totalExpectedDuration = 0;
-        for (ProjectActivity activity : project.getActivities()) {
-            totalSpentTime += activity.calculateSpentTime();
-            totalExpectedDuration += activity.getExpectedDuration();
-        }
-
-        // Calculate overall progress
-        double overallProgress = (double) totalSpentTime / totalExpectedDuration;
+        double overallProgress = project.getOverallProgress();
 
         ProgressBar overallProgressBar = new ProgressBar(overallProgress);
         this.getChildren().add(new Label("Overall Progress"));
