@@ -124,7 +124,7 @@ public class ProjectActivity extends Activity {
 
         // Calculate the progress as a value between 0.0 and 1.0
         double progress = (double) spentTime / expectedDuration;
-        assert progress > 0;
+        assert progress >= 0;
 
         // Ensure the progress does not exceed 1.0
         return Math.min(progress, 1.0);
