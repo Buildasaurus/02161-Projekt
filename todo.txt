@@ -1,6 +1,5 @@
 todo:
 Tests
-Man skal kunne assigne flere folk senere, til activites
 Man skal kunne sætte en projektleder senere, på projektet.
 - Tests der mangler coverage (alle sammen siden 04.05 13:43)
 
