@@ -55,14 +55,6 @@ public class TimeBlock {
         return (int) Math.round(minutes / 30.0);
     }
 
-    public void setStartTime(GregorianCalendar startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(GregorianCalendar endTime) {
-        this.endTime = endTime;
-    }
-
     public void delete()
     {
         employee.deleteTimeBlock(this);
