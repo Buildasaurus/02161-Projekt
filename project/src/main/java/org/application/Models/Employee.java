@@ -94,15 +94,6 @@ public class Employee {
         return (int) ((total - busyActivities) * freeDayCounter / totalDays); // 9
     }
 
-    public Activity getActivity(String searchActivity){
-        for (Activity activity: activities){
-            if (searchActivity.equals(activity.getName())){
-                return activity;
-            }
-        }
-        return null;
-    }
-
     /**
      * Calculates if the two periods defined by [start1, end1] and [start2, end2] overlaps
      *
