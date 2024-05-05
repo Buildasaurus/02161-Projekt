@@ -4,7 +4,11 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.application.Models.Employee;
 import org.application.Models.SystemModel;
@@ -43,15 +47,32 @@ public class ProjectSteps {
     @When("the Project Leader generates the report.")
     public void theProjectLeaderGeneratesTheReport() {
         Project project = SystemModel.getProjects().get(0);
-        Report report = project.createReport();
+        Report report = new Report(project);
+        report.saveToDisk("");
     }
 
-
-    @Then("a report is saved in our default folder")
+    @Then("a non-empty report is saved in our default folder")
     public void theReportIsSavedInOurDefaultFolder(){
-        File f = new File("report.csv");
-        assertTrue(f.exists());
+        String fileName = "report.csv";
+        Path filePath = Paths.get("", fileName);
+        try
+        {
+            List<String> lines = Files.readAllLines(filePath);
+            assert !lines.isEmpty();
+            System.out.println("Contents of the file:");
+            for (String line : lines) {
+                System.out.println(line);
+            }
+        }
+        catch (Exception e)
+        {
+            assert false;
+        }
+        assert Files.exists(filePath);
     }
+
+
+
 
 
     @Given("a project leader exists.")
