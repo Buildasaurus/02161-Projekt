@@ -12,8 +12,6 @@ Project constructor, med projektleder kendt fra starten (som parameter i konstru
 ProjectActivity.calculateSpentTime (0% - ok (måske lidt simpel) til White box test)
 alt i Report udover constructor - Det er måske svært at teste dog (20%)
 
-Project activity - constructor med en liste af employees (0%)
-
 SystemModel.getemployee - det specifikke tilfælde hvor man prøver at finde nogen som ikke er der, så burde den returnere null (60%)
 
 SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%)
