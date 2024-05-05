@@ -7,13 +7,13 @@ public class TimeBlock {
     /**
      * Start time in resolution of halfhours
      */
-    GregorianCalendar startTime;
+    private GregorianCalendar startTime;
     /**
      * End time in resolution of halfhours
      */
-    GregorianCalendar endTime;
-    Activity activity;
-    Employee employee;
+    private GregorianCalendar endTime;
+    private Activity activity;
+    private Employee employee;
 
     /**
      * A timeblock should never be created by itself. Instead use employee.createTimeblock()
@@ -53,5 +53,13 @@ public class TimeBlock {
         long diffInMillis = endTime.getTimeInMillis() - startTime.getTimeInMillis();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
         return (int) Math.round(minutes / 30.0);
+    }
+
+    public void setStartTime(GregorianCalendar startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(GregorianCalendar endTime) {
+        this.endTime = endTime;
     }
 }
