@@ -54,7 +54,10 @@ public class Employee {
     }
 
     public void deleteTimeBlock(TimeBlock timeBlock) {
-        timeBlocks.remove(timeBlock);
+        if(timeBlocks.remove(timeBlock))
+        {
+            timeBlock.delete();
+        }
     }
 
     public List<Activity> getActivities() {

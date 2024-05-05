@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import io.cucumber.java.en.And;
 import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
@@ -105,4 +106,13 @@ public class EmployeeSteps {
         assertEquals(SystemModel.findAvailableEmployees(startWeek, endWeek).get(0).getID(), testEmployeeID);
     }
 
+    @When("the employee named {string} is deleted")
+    public void theEmployeeNamedIsDeleted(String arg0) {
+        SystemModel.removeEmployee(SystemModel.getEmployee(arg0));
+    }
+
+    @And("{int} employees exist")
+    public void employeesExist(int arg0) {
+        assertEquals(SystemModel.getEmployees().size(), 0);
+    }
 }

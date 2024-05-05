@@ -63,7 +63,10 @@ public class ProjectActivity extends Activity {
     }
 
     public void removeTimeBlock(TimeBlock timeBlock) {
-        timeBlocks.remove(timeBlock);
+        if(timeBlocks.remove(timeBlock))
+        {
+            timeBlock.delete();
+        }
     }
 
     public List<TimeBlock> getTimeBlocks() {
