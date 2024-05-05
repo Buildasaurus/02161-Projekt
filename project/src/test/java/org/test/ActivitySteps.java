@@ -257,7 +257,7 @@ public class ActivitySteps {
     public void anEmployeeTriesToDeleteAReservedActivity() {
         Employee employee = SystemModel.getEmployees().get(0);
         ReservedActivity reservedActivity = (ReservedActivity) employee.getActivities().get(0);
-        employee.removeActivity(reservedActivity);
+        reservedActivity.delete();
     }
 
     @Then("the reserved activity no longer exists")
