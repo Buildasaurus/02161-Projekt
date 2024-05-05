@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import org.application.Models.Employee;
 import org.application.Models.SystemModel;
 import org.application.Models.Project;
+import org.application.Models.ProjectActivity;
 import org.application.Models.Report;
 
 
@@ -108,6 +109,33 @@ public class ProjectSteps {
     @Then("{int} projects exist")
     public void projectsExist(int numberOfExpectedProjects) {
         assertEquals(numberOfExpectedProjects,SystemModel.getProjects().size());
+    }
+
+    @Then("the total time spent on the project is {int} half-hours")
+    public void theTotalTimeSpentOnTheProjectIsHalfHours(Integer expectedTimeSpent) {
+        Project project = SystemModel.getProjects().get(0);
+        //calculate spent time
+        Integer totalSpentTime = 0;
+        for (ProjectActivity activity : project.getActivities()) {
+            totalSpentTime += activity.calculateSpentTime();
+        }
+        //check if calculation equal to expected
+        assertEquals(totalSpentTime, expectedTimeSpent);
+    }
+
+    @Then("the progress of the project is {double}")
+    public void theProgressOfTheProjectIs(Double progressExpected) {
+        Project project = SystemModel.getProjects().get(0);
+        // Calculate total spent time and expected duration for all activities
+        int totalSpentTime = 0;
+        int totalExpectedDuration = 0;
+        for (ProjectActivity activity : project.getActivities()) {
+            totalSpentTime += activity.calculateSpentTime();
+            totalExpectedDuration += activity.getExpectedDuration();
+        }
+        Double overallProgress = (double) totalSpentTime / totalExpectedDuration;
+        //check if calculation equal to expected
+        assertEquals(progressExpected, overallProgress);
     }
 
 }

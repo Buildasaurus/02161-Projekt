@@ -296,4 +296,20 @@ public class ActivitySteps {
         Employee testEmployee = SystemModel.getEmployees().get(0);
         SystemModel.getProjectActivities().get(0).assignEmployee(testEmployee);
     }
+
+    @Given("{int} project activities exists with expected duration of {int} half-hours each")
+    public void projectActivitiesExistsWithExpectedDurationOfHalfHoursEach(Integer numactivities, Integer duration) {
+        Project project = SystemModel.getProjects().get(0);
+        for (int i = 0; i < numactivities; i++){
+            // set startWeek to week 17. weekDate is set for the first day of 17th week of 2024.
+            GregorianCalendar startWeek = new GregorianCalendar();
+            startWeek.setWeekDate(2024, 17, 1);
+            // set endWeek to week 19.
+            GregorianCalendar endWeek = new GregorianCalendar();
+            endWeek.setWeekDate(2024, 19, 1);
+            // expected duration is set
+            int expectedDuration = duration;
+            new ProjectActivity(startWeek, endWeek, expectedDuration, "sample-activity" + (i + 1), project);        
+        }
+    }
 }
