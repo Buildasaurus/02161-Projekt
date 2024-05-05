@@ -28,6 +28,7 @@ public class Employee {
     /**
      * Removes a connection between an employee and the activity
      * For reserved activities, this essentially deletes it.
+     * Prerably use activity.delete()
      * @param activity The activity to remove from the employee
      */
     public void removeActivity(Activity activity) {
