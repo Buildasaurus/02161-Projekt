@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import io.cucumber.java.en.And;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.Project;
@@ -329,5 +330,32 @@ public class ActivitySteps {
         String[] employeeIDString = {employeeString};
         ProjectActivity testActivity = new ProjectActivity(startDay, endDay, 100, "testActivity", testProject, employeeIDString);
         testProject.addActivity(testActivity);
+    }
+
+    @When("the user changes the project activity to start in week {int}, ends in week {int}, and has {string} as project leader")
+    public void theUserChangesTheProjectActivityToStart(int startWeek, int endWeek, String projectLeader) {
+        ProjectActivity oldactivity = (ProjectActivity) SystemModel.getActivities().get(0);
+        GregorianCalendar startDay = new GregorianCalendar(2024,startWeek,1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,endWeek,5);
+        ProjectActivity a = new ProjectActivity(startDay,endDay, oldactivity.getExpectedDuration() , oldactivity.getName(), oldactivity.getAssignedProject());
+        SystemModel.getActivities().get(0).updateValues(a);
+        a.delete();
+    }
+
+    @Given("a project activity called {string} is created with the employee {string} assigned")
+    public void aProjectActivityCalledIsCreatedWithTheEmployeeAssigned(String name, String employeeString) {
+        //        Employee testEmployee = SystemModel.getEmployees().get(0);
+        Project testProject = SystemModel.getProjects().get(0);
+        GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
+        String[] employeeIDString = {employeeString};
+        ProjectActivity testActivity = new ProjectActivity(startDay, endDay, 100, name, testProject, employeeIDString);
+        testProject.addActivity(testActivity);
+    }
+
+
+    @Then("the name of the project activity is {string}")
+    public void theNameOfTheProjectActivityIs(String name) {
+        assert SystemModel.getActivities().get(0).getName().equals(name);
     }
 }

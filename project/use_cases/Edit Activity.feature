@@ -1,0 +1,12 @@
+# Created by jonat at 05/05/2024
+Feature: Edit Activity
+  # Enter feature description here
+  
+  Background:
+    Given 1 projects are created
+    And 1 employees are created
+
+  Scenario: Editing an existing project activity
+    Given a project activity called "Test" is created with the employee "0" assigned
+    When the user changes the project activity to start in week 2, ends in week 3, and has "0" as project leader
+    Then the name of the project activity is "Test"
