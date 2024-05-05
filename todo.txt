@@ -1,5 +1,6 @@
 todo:
-Tests der mangler coverage (alle sammen siden 04.05 13:43)
+Tests
+- Tests der mangler coverage (alle sammen siden 04.05 13:43)
 
 Der skal laves test til ReservedActivity.delete
 
@@ -14,13 +15,18 @@ Createreport - de specifikke tilæflde hvor der ikke er nogle activities (80% er
 ProjectActivity.calculateSpentTime (0% - ok (måske lidt simpel) til White box test)
 alt i Report udover constructor - Det er måske svært at teste dog (20%)
 
+ProjectActivity.updateValues - Måden vi assigner projekt leader. man sætter en
+gammel aktivitet lig en ny, og den burde have samme data. (0%)
+
+ReservedActivity.updateValues - man sætter en gammel aktivitet lig en ny, og den burde have samme data. (0%)
+
 SystemModel.getemployee - det specifikke tilfælde hvor man prøver at finde nogen som ikke er der, så burde den returnere null (60%)
 
 SystemModel.getProjectbyname (0%)
 
 SystemModel.findAvailableEmployees - den er måske lidt svær, fordi den returnere en rangering(0%)
 
-SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%) 
+SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%)
 
 Timeblock.getDuration (0%)
 
