@@ -43,12 +43,6 @@ public class Report implements CSVConvertable {
     public void saveToDisk(String path) {
         File csvFile = this.toCSV();
         File newFile = new File(path + "/" + csvFile.getName());
-        if (csvFile.renameTo(newFile)) {
-            System.out.println("Report saved to " + newFile.getAbsolutePath());
-        }
-        else {
-            System.out.println("Failed to save report to " + path);
-        }
     }
 }
 
