@@ -47,7 +47,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
         vbox.getChildren().add(activityButtons);
 
         // Activity Selection Section
-        Label selectActivityLabel = new Label("Select Activity for Editing:");
+        Label selectActivityLabel = new Label("Select activity for modification:");
         vbox.getChildren().add(selectActivityLabel);
         ComboBox<String> activityComboBox = new ComboBox<>();
         List<Activity> activities = SystemModel.getActivities();
