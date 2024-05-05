@@ -31,30 +31,6 @@ public class Project {
         SystemModel.addProject(this);
     }
 
-    public Report createReport() {
-        StringBuilder reportText = new StringBuilder();
-        reportText.append("Project Name: ").append(this.name).append("\n");
-        reportText.append("Project ID: ").append(this.projectID).append("\n");
-        reportText.append("Start Week: ").append(this.startWeek.getTime()).append("\n");
-        reportText.append("End Week: ").append(this.endWeek.getTime()).append("\n");
-        reportText.append("Project Leader ID: ").append(this.projectLeaderID).append("\n");
-        reportText.append("Activities: \n");
-        for (ProjectActivity activity : this.activities) {
-            reportText.append(activity.toString()).append(
-                    "\n"); // assuming toString method in ProjectActivity class provides relevant details
-        }
-        int totalSpentTime = 0;
-        int totalExpectedDuration = 0;
-        for (ProjectActivity activity : activities) {
-            totalSpentTime += activity.calculateSpentTime();
-            totalExpectedDuration += activity.getExpectedDuration();
-        }
-        double progress = (double) totalSpentTime / totalExpectedDuration * 100;
-        String progressstring = String.format("%.2f", progress);
-        reportText.append("Project progress: ").append(progressstring).append("% \n");
-        return new Report(reportText.toString());
-    }
-
     /**
      * Adds an activity to the project. Remember that Project activities pr default are added to
      * the project, in the constructor.
