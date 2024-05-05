@@ -95,4 +95,14 @@ public class EmployeeSteps {
         assertTrue(employee.getTimeBlocks().isEmpty());
     }
 
+    @Then("the most available employee from week {int} to {int} is {string}")
+    public void theMostAvailableEmployeeIs(int start, int end, String testEmployeeID) {
+        GregorianCalendar startWeek = new GregorianCalendar();
+        startWeek.setWeekDate(2024, start, 1);
+        // set endWeek to week 19.
+        GregorianCalendar endWeek = new GregorianCalendar();
+        endWeek.setWeekDate(2024, end, 1);
+        assertEquals(SystemModel.findAvailableEmployees(startWeek, endWeek).get(0).getID(), testEmployeeID);
+    }
+
 }
