@@ -28,7 +28,7 @@ public class CalendarView extends GridPane {
     private GregorianCalendar currentTime;
     private ComboBox<String> startSelect;
     private ComboBox<String> endSelect;
-    private TextField activityField;
+    private ComboBox<String> activityField;
     private ArrayList<TimeBlockView> timeBlocks;
 
     public CalendarView(Employee employee, EmployeeController controller) {
@@ -79,7 +79,7 @@ public class CalendarView extends GridPane {
             }
         });
 
-        activityField = new TextField();
+        activityField = Buttons.chooseProjectActivityComboBox();
         activityField.setPromptText("Please enter an existing activity");
 
         Button submitButton = new Button("Create timeblock");
@@ -153,8 +153,8 @@ public class CalendarView extends GridPane {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if (startSelect.getValue() != null && endSelect.getValue() != null) {
-                    Activity activity = SystemModel.getActivity(activityField.getText());
-                    if (activity != null && activity instanceof ProjectActivity) {
+                    Activity activity = SystemModel.getActivity(activityField.getSelectionModel().getSelectedItem());
+                    if (activity instanceof ProjectActivity) {
                         GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startSelect.getValue(), endSelect.getValue());
                         ProjectActivity projectActivity = (ProjectActivity) activity;
                         employee.createTimeBlock(projectActivity, calendars[0], calendars[1]);
@@ -174,7 +174,6 @@ public class CalendarView extends GridPane {
         endSelect.setValue(null);
         startSelect.setItems(strList);
         endSelect.setItems(strList);
-        activityField.setText("");
     }
 
     /**
