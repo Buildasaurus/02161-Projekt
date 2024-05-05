@@ -1,5 +1,6 @@
 package org.test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.GregorianCalendar;
 
@@ -72,6 +73,29 @@ public class EmployeeSteps {
     public void anEmployeePicksAProject() {
         Employee employee = SystemModel.getEmployees().get(0);
         Project pickedProject = SystemModel.getProjectByName("0");
+    }
+
+
+    @Then("the time spent is no longer registered")
+    public void theTimeSpentIsNoLongerRegistered() {
+        Project project = SystemModel.getProjects().get(0);
+        Double expected = 0.0;
+        Double actual = project.getOverallProgress();
+        assertEquals(expected,actual);
+    }
+
+
+    @When("the employee deletes the timeblock")
+    public void theEmployeeDeletesTheTimeblock() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        employee.deleteTimeBlock(employee.getTimeBlocks().get(0));
+
+    }
+
+    @Then("the timeblock no longer exists")
+    public void theTimeblockNoLongerExists() {
+        Employee employee = SystemModel.getEmployees().get(0);
+        assertTrue(employee.getTimeBlocks().isEmpty());
     }
 
 }
