@@ -15,14 +15,16 @@ public class Report implements CSVConvertable {
         reportText.append("Start Week: ").append(project.getStartWeek().getTime()).append("\n");
         reportText.append("End Week: ").append(project.getEndWeek().getTime()).append("\n");
         reportText.append("Project Leader ID: ").append(project.getProjectLeaderID()).append("\n");
+
+        double overallProgress = project.getOverallProgress();
+        reportText.append("Overall Progress: ").append(String.format("%.2f", overallProgress)).append("\n");
+
         reportText.append("Activities: \n");
         for (ProjectActivity activity : project.getActivities()) {
-            reportText.append(activity.toString()).append(
-                    "\n"); // assuming toString method in ProjectActivity class provides relevant details
+            reportText.append(activity.toString()).append("\n"); // assuming toString method in ProjectActivity class provides relevant details
+            reportText.append("Activity Progress: ").append(String.format("%.2f", activity.getProgress())).append("\n");
         }
-        double progress = project.getOverallProgress();
-        String progressstring = String.format("%.2f", progress);
-        reportText.append("Project progress: ").append(progressstring).append("% \n");
+
         text = reportText.toString();
     }
 
