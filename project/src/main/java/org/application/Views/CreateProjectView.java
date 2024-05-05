@@ -41,7 +41,7 @@ public class CreateProjectView extends VBox {
         name.setPromptText("Project Name");
         getChildren().add(name);
 
-        ComboBox<String> projectLeaderComboBox = Buttons.chooseEmployeeIDComboBox();
+        ComboBox<String> projectLeaderComboBox = GeneralViews.chooseEmployeeIDComboBox();
         getChildren().add(projectLeaderComboBox);
 
         DatePicker startDate = new DatePicker();
@@ -79,6 +79,6 @@ public class CreateProjectView extends VBox {
         }
 
         getChildren().add(completeButton);
-        getChildren().add(Buttons.backButton());
+        getChildren().add(GeneralViews.backButton());
     }
 }

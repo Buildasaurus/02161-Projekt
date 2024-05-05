@@ -73,7 +73,7 @@ public class CreateReservedActivityView extends GridPane {
             endDatePicker.setValue(GeneralMethods.convertCalendarToLocalDate(editedReservedActivity.getEndDate()));
         }
 
-        Button returnButton = Buttons.returnButton();
+        Button returnButton = GeneralViews.returnButton();
         add(returnButton, 1, 3);
 
         Button backButton = new Button("Back");

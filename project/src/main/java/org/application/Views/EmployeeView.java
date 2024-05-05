@@ -159,7 +159,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
         }
 
         // Return Button
-        vbox.getChildren().add(Buttons.returnButton());
+        vbox.getChildren().add(GeneralViews.returnButton());
 
         setContent(vbox);
     }

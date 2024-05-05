@@ -42,7 +42,7 @@ public class LoginView extends VBox {
         getChildren().add(loginButton);
 
         //
-        getChildren().add(Buttons.returnButton());
+        getChildren().add(GeneralViews.returnButton());
 
     }
 

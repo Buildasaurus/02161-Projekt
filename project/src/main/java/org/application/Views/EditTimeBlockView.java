@@ -32,7 +32,7 @@ public class EditTimeBlockView extends StackPane {
 
         mainBox.setSpacing(5.0);
 
-        ComboBox<String> activity = Buttons.chooseProjectActivityComboBox();
+        ComboBox<String> activity = GeneralViews.chooseProjectActivityComboBox();
         mainBox.getChildren().add(activity);
 
         activity.setValue(timeBlock.getActivity().getName());
@@ -88,7 +88,7 @@ public class EditTimeBlockView extends StackPane {
             }
         });
 
-        Button back = Buttons.backButton();
+        Button back = GeneralViews.backButton();
         buttonBox.getChildren().add(back);
     }
 

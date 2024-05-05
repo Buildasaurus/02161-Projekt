@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
@@ -79,7 +78,7 @@ public class CalendarView extends GridPane {
             }
         });
 
-        activityField = Buttons.chooseProjectActivityComboBox();
+        activityField = GeneralViews.chooseProjectActivityComboBox();
         activityField.setPromptText("Choose activity");
 
         Button submitButton = new Button("Create timeblock");

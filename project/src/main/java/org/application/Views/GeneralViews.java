@@ -2,10 +2,8 @@ package org.application.Views;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import org.application.App;
 import org.application.Models.Employee;
-import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 
@@ -14,7 +12,7 @@ import java.util.List;
 /**
  * Static class for commonly used buttons, to avoid code redundancy
  */
-public class Buttons {
+public class GeneralViews {
     /**
      * A button that returns to the main menu.
      *
