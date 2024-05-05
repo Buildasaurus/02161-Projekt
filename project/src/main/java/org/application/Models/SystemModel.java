@@ -73,14 +73,10 @@ public class SystemModel { // should be public static class, but java is stupid
 
         projectActivity.assignEmployee(e);
 
-        // TODO : make this read employees from a file
-        //  - This is though an extra feature. Not high priority
     }
 
     public static void addEmployee(Employee employee) {
         employees.add(employee);
-        //TODO : Make this also save the employee to the file
-        // - This is though an extra feature. Not high priority
     }
 
     public static Employee getEmployee(String id) {
