@@ -27,7 +27,7 @@ public class EditTimeBlockController implements IController {
     }
 
     public void handleEditTimeBlock(TimeBlock timeBlock, String activityName, String startString, String endString) {
-        Activity activity = SystemModel.getActivity(activityName);
+        Activity activity = SystemModel.findActivityWithName(activityName);
         if (activity instanceof ProjectActivity) {
             ProjectActivity projectActivity = (ProjectActivity) activity;
             GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startString, endString);

@@ -327,7 +327,6 @@ public class ActivitySteps {
         GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
         GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
         String[] employeeIDString = {employeeString};
-        ProjectActivity testActivity = new ProjectActivity(startDay, endDay, 100, "testActivity", testProject, employeeIDString);
-        testProject.addActivity(testActivity);
+        new ProjectActivity(startDay, endDay, 100, "testActivity", testProject, employeeIDString);
     }
 }

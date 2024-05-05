@@ -38,3 +38,4 @@ x bugfinding - den skal ikke crashe hele tiden.
 
 Rapport
 Find på specifikke ting der mangler i rapporten, og skriv dem her. (ja, det er en todo)
+D i SOLID

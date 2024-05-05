@@ -157,7 +157,7 @@ public class SystemModel { // should be public static class, but java is stupid
 
     }
 
-    public static Activity getActivity(String activityName) {
+    public static Activity findActivityWithName(String activityName) {
         List<Activity> activities = getActivities();
         for (Activity activity : activities) {
             if (activity.getName().equals(activityName)) {
