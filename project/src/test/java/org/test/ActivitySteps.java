@@ -336,7 +336,9 @@ public class ActivitySteps {
     public void theUserChangesTheProjectActivityToStart(int startWeek, int endWeek, String projectLeader) {
         ProjectActivity oldactivity = (ProjectActivity) SystemModel.getActivities().get(0);
         GregorianCalendar startDay = new GregorianCalendar(2024,startWeek,1);
-        GregorianCalendar endDay = new GregorianCalendar(2024,endWeek,5);
+        startDay.setWeekDate(2024, startWeek, 1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,endWeek,1);
+        endDay.setWeekDate(2024, endWeek, 1);
         ProjectActivity a = new ProjectActivity(startDay,endDay, oldactivity.getExpectedDuration() , oldactivity.getName(), oldactivity.getAssignedProject());
         SystemModel.getActivities().get(0).updateValues(a);
         a.delete();
