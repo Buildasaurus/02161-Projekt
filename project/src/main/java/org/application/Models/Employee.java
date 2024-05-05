@@ -115,7 +115,7 @@ public class Employee {
                         .count()) /
                 totalDays);
 
-        return result;
+        return result; // 9
     }
 
 
