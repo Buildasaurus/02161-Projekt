@@ -25,6 +25,11 @@ public class Employee {
         assert activities.contains(activity);
     }
 
+    /**
+     * Removes a connection between an employee and the activity
+     * For reserved activities, this essentially deletes it.
+     * @param activity The activity to remove from the employee
+     */
     public void removeActivity(Activity activity) {
         if (activities.contains(activity)) {
             activities.remove(activity);
