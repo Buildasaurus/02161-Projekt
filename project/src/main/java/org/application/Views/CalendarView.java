@@ -159,6 +159,7 @@ public class CalendarView extends GridPane {
                         ProjectActivity projectActivity = (ProjectActivity) activity;
                         employee.createTimeBlock(projectActivity, calendars[0], calendars[1]);
                         updateTimeBlocks();
+                        pruneFreeHalfHours();
                         clearData();
                     }
                 }
@@ -174,5 +175,31 @@ public class CalendarView extends GridPane {
         startSelect.setItems(strList);
         endSelect.setItems(strList);
         activityField.setText("");
+    }
+
+    /**
+     * Removes "dead space" time slots that cannot generate any timeblock as neither start time nor end time
+     */
+    private void pruneFreeHalfHours() {
+        ArrayList<Integer> tempList = new ArrayList<>();
+        for (int i = 0; i < freeHalfHours.size(); i++) {
+            if (i  == 0) {
+                if (freeHalfHours.get(i) + 1 != freeHalfHours.get(i + 1)) {
+                    tempList.add(freeHalfHours.get(i));
+                }
+            }
+            else if (freeHalfHours.get(i) - 1 != freeHalfHours.get(i - 1)) {
+                if (i == freeHalfHours.size() - 1) {
+                    tempList.add(freeHalfHours.get(i));
+                }
+                else if (freeHalfHours.get(i) + 1 != freeHalfHours.get(i + 1)) {
+                    tempList.add(freeHalfHours.get(i));
+                }
+            }
+        }
+        for (int val : tempList) {
+            int index = freeHalfHours.indexOf(val);
+            freeHalfHours.remove(index);
+        }
     }
 }
