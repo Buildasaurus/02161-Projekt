@@ -44,7 +44,7 @@ public class EmployeeSteps {
     @When("the employee spends {int} half-hours on activity {int}")
     public void spendExactTimeOnActivity(int halfHoursToSpend, int activityidx) {
         Employee testEmployee = SystemModel.getEmployees().get(0);
-        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(activityidx - 1);
+        ProjectActivity testActivity = (ProjectActivity) SystemModel.getActivities().get(activityidx);
         GregorianCalendar startTime = new GregorianCalendar(1,1,1,0,0);
         GregorianCalendar endTime = new GregorianCalendar(1,1,1, halfHoursToSpend / 2, (halfHoursToSpend % 2) * 30);
         testEmployee.createTimeBlock(testActivity, startTime, endTime);
