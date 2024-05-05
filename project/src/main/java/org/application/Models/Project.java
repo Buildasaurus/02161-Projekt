@@ -14,20 +14,20 @@ public class Project {
 
     public Project(String name, GregorianCalendar startWeek, GregorianCalendar endWeek,
                    String projectLeaderID) {
-        initialize(name, endWeek, startWeek);
+        initialize(name, startWeek, endWeek);
         this.projectLeaderID = projectLeaderID;
     }
 
-    public Project(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
-        initialize(name, endWeek, startWeek);
+    public Project(String name, GregorianCalendar startWeek, GregorianCalendar endWeek) {
+        initialize(name, startWeek, endWeek);
         removeProjectLeader();
     }
 
-    public void initialize(String name, GregorianCalendar endWeek, GregorianCalendar startWeek) {
+    public void initialize(String name, GregorianCalendar startWeek, GregorianCalendar endWeek) {
         this.projectID = SystemModel.getNextProjectID();
         this.name = name;
-        this.endWeek = endWeek;
         this.startWeek = startWeek;
+        this.endWeek = endWeek;
         SystemModel.addProject(this);
     }
 

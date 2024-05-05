@@ -139,6 +139,7 @@ public class ProjectSteps {
         testProject.delete();
     }
 
+<<<<<<< HEAD
     @When("a project with the name {string} is created")
     public void createProjectWithName(String projectName) {
         GregorianCalendar startWeek = new GregorianCalendar();
@@ -153,7 +154,7 @@ public class ProjectSteps {
     public void namedProjectExists(String expectedName) {
         assertNotNull(SystemModel.getProjectByName(expectedName));
     }
-
+=======
     @Then("the total time spent on the project is {int} half-hours")
     public void theTotalTimeSpentOnTheProjectIsHalfHours(Integer expectedTimeSpent) {
         Project project = SystemModel.getProjects().get(0);
@@ -180,4 +181,6 @@ public class ProjectSteps {
         //check if calculation equal to expected
         assertEquals(progressExpected, overallProgress);
     }
+
+>>>>>>> a2a5bbca84b9a6e74b1e9537cd63551f88d383b3
 }

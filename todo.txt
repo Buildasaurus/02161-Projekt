@@ -22,8 +22,6 @@ ReservedActivity.updateValues - man sætter en gammel aktivitet lig en ny, og de
 
 SystemModel.getemployee - det specifikke tilfælde hvor man prøver at finde nogen som ikke er der, så burde den returnere null (60%)
 
-SystemModel.getProjectbyname (0%)
-
 SystemModel.findAvailableEmployees - den er måske lidt svær, fordi den returnere en rangering(0%)
 
 SystemModel.getactivity(String activityName) (Er måske fin til White box test) (0%)
