@@ -111,6 +111,12 @@ public class ProjectSteps {
         assertEquals(numberOfExpectedProjects,SystemModel.getProjects().size());
     }
 
+    @When("the project is deleted")
+    public void theProjectIsDeleted() {
+        Project testProject = SystemModel.getProjects().get(0);
+        testProject.delete();
+    }
+
     @Then("the total time spent on the project is {int} half-hours")
     public void theTotalTimeSpentOnTheProjectIsHalfHours(Integer expectedTimeSpent) {
         Project project = SystemModel.getProjects().get(0);

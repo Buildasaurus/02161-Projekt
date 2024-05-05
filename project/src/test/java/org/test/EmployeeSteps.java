@@ -46,6 +46,12 @@ public class EmployeeSteps {
         testEmployee.createTimeBlock(testActivity, startTime, endTime);
     }
 
+    @Then("the employee has spent {int} half-hours on the activity")
+    public void spentExactTimeOnActivity(int halfHoursSpent) {
+        Employee testEmployee = SystemModel.getEmployees().get(0);
+        assertEquals(halfHoursSpent, testEmployee.getTimeBlocks().get(0).getDuration());
+    }
+
     @Then("the employee has {int} timeblocks attached")
     public void employeeHasTimeBlockAttached(int expectedTimeBlocks) {
         Employee testEmployee = SystemModel.getEmployees().get(0);
