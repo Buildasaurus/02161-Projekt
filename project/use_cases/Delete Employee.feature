@@ -6,6 +6,7 @@ Feature: Delete employee
     Given 1 projects are created
     Given an employee named "Me" is created
     Given 1 project activities exists with expected duration of 4 half-hours each
+    And the employee named "Me" is assigned to the project activity
     And the employee spends 2 half-hours on activity 0
     When the employee named "Me" is deleted
     Then the progress of the project is 0.5

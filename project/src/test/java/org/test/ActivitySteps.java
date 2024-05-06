@@ -2,22 +2,13 @@
 
 package org.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import io.cucumber.java.en.And;
+import io.cucumber.java.en.*;
 import io.cucumber.java.en_old.Ac;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
-
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,6 +17,8 @@ import java.util.HashMap;
 
 import org.application.Models.ReservedActivity;
 import org.junit.After;
+
+import static org.junit.Assert.*;
 
 //TODO look for duplicate steps that could be consolidated
 //TODO implement steps
@@ -343,10 +336,9 @@ public class ActivitySteps {
         startDay.setWeekDate(2024, startWeek, 1);
         GregorianCalendar endDay = new GregorianCalendar(2024,3,1);
         endDay.setWeekDate(2024, endWeek, 1);
-        System.out.println(startDay.get(Calendar.WEEK_OF_YEAR) + " end " + endDay.get(Calendar.WEEK_OF_YEAR));
-        System.out.println(" size is: " + SystemModel.getActivities().size());
         Activity activityToUpdate = SystemModel.getActivities().get(0);
         ProjectActivity a = new ProjectActivity(startDay,endDay, oldactivity.getExpectedDuration() , oldactivity.getName(), oldactivity.getAssignedProject());
+        a.assignEmployee(SystemModel.getEmployees().get(0));
         activityToUpdate.updateValues(a);
         a.delete();
     }
@@ -377,5 +369,42 @@ public class ActivitySteps {
         ReservedActivity a = new ReservedActivity(startDay,endDay, oldactivity.getName(), oldactivity.getAssignedEmployees().get(0));
         SystemModel.getActivities().get(0).updateValues(a);
         a.delete();
+    }
+
+    @Given("a project activity called {string} is created with employee {int} assigned")
+    public void aProjectActivityCalledIsCreatedWithEmployeeAssigned(String name, int employeeIndex) {
+        Project testProject = SystemModel.getProjects().get(0);
+        GregorianCalendar startDay = new GregorianCalendar(2024,5,1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,5,5);
+        Employee employee = SystemModel.getEmployees().get(employeeIndex);
+        ProjectActivity testActivity = new ProjectActivity(startDay, endDay, 100, name, testProject);
+        testActivity.assignEmployee(employee);
+        testProject.addActivity(testActivity);
+
+    }
+
+    @When("the user changes the project activity to start in week {int}, ends in week {int}, and has employee {int} assigned")
+    public void theUserChangesTheProjectActivityToStartInWeekEndsInWeekAndHasEmployeeAssigned(int startWeek, int endWeek, int employeeIndex) {
+        ProjectActivity oldactivity = (ProjectActivity) SystemModel.getActivities().get(0);
+        GregorianCalendar startDay = new GregorianCalendar(2024,2,1);
+        startDay.setWeekDate(2024, startWeek, 1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,3,1);
+        endDay.setWeekDate(2024, endWeek, 1);
+        Activity activityToUpdate = SystemModel.getActivities().get(0);
+        ProjectActivity a = new ProjectActivity(startDay,endDay, oldactivity.getExpectedDuration() , oldactivity.getName(), oldactivity.getAssignedProject());
+        a.assignEmployee(SystemModel.getEmployees().get(employeeIndex));
+        activityToUpdate.updateValues(a);
+        a.delete();
+    }
+
+    @And("employee {int} is assigned")
+    public void employeeIsAssigned(int arg0) {
+        assertTrue(SystemModel.getActivities().get(0).getAssignedEmployees().get(0).getID().equals(SystemModel.getEmployees().get(arg0).getID()));
+    }
+
+    @But("employee {int} is not assigned")
+    public void employeeIsNotAssigned(int arg0) {
+        assertFalse(SystemModel.getActivities().get(0).getAssignedEmployees().get(0).getID().equals(SystemModel.getEmployees().get(arg0).getID()));
+
     }
 }

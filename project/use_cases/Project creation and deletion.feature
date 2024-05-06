@@ -21,3 +21,10 @@ Scenario: Project with specific name is created
 Scenario: An employee is created with a known project leader
     When A project with a project leader named "leader" is created
     Then the project leader of the project is "leader"
+
+Scenario: An employee deletes a project with activities
+    When 1 projects are created
+    And 2 activities are created in the project
+    And the project is deleted
+    Then 0 projects exist
+    And 0 activities exist
