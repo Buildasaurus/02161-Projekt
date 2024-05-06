@@ -14,8 +14,17 @@ public abstract class Activity {
     protected GregorianCalendar endDate;
 
     public Activity(String name, GregorianCalendar startDate, GregorianCalendar endDate) {
+        if (startDate == null) {
+            throw new IllegalArgumentException("Activity's start date cannot be empty");
+        }
         this.startDate = startDate;
+        if (endDate == null) {
+            throw new IllegalArgumentException("Activity's end date cannot be empty");
+        }
         this.endDate = endDate;
+        if (startDate.after(endDate)) {
+            throw new IllegalArgumentException("Start date must be before end date");
+        }
         this.name = name;
     }
 

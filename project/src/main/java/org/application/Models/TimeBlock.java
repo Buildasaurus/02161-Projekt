@@ -24,7 +24,7 @@ public class TimeBlock {
      * @param startTime The start time of the working period, measured on a resolution of half-hours
      * @param endTime   The end time of the working period, measured on a resolution of half-hours
      * @param activity  The activity worked on in the period
-     * @param employee  The employee working on the activity TODO: (should be several later)
+     * @param employee  The employee working on the activity
      */
     public TimeBlock(GregorianCalendar startTime, GregorianCalendar endTime, ProjectActivity activity, Employee employee) {
         this.startTime = startTime;
