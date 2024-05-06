@@ -29,6 +29,11 @@ public class Project {
         this.name = name;
         this.startWeek = startWeek;
         this.endWeek = endWeek;
+        if (startWeek != null && endWeek != null) {
+            if (startWeek.after(endWeek)) {
+                throw new IllegalArgumentException("Start date must be before end date");
+            }
+        }
         SystemModel.addProject(this);
     }
 
