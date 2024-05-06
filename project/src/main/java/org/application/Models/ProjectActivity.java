@@ -47,9 +47,6 @@ public class ProjectActivity extends Activity {
             throw new IllegalArgumentException("Activity must have an assigned project");
         }
         this.assignedProject = assignedProject;
-        if (startWeek.after(endWeek)) {
-            throw new IllegalArgumentException("Start date must be before end date");
-        }
         assignedProject.addActivity(this);
 
     }

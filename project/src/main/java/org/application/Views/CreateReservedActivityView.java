@@ -54,8 +54,7 @@ public class CreateReservedActivityView extends GridPane {
         // OK button
         Button OKButton = new Button("OK");
         OKButton.setOnAction(e -> {
-            if (!(startDatePicker.getValue() == null || endDatePicker.getValue() == null) &&
-                    GeneralMethods.convertDatePickerToCalender(startDatePicker).before(GeneralMethods.convertDatePickerToCalender(endDatePicker))) {
+            try {
                 controller.handleCompleteProjectActivity(
                         new ReservedActivity(
                                 GeneralMethods.convertDatePickerToCalender(startDatePicker),
@@ -65,8 +64,8 @@ public class CreateReservedActivityView extends GridPane {
                         ),
                         editedReservedActivity
                 );
-            } else {
-                GeneralAlert alert = new GeneralAlert("Invalid data, please try again");
+            } catch (IllegalArgumentException exception) {
+                GeneralAlert alert = new GeneralAlert(exception.getMessage());
             }
         });
         add(OKButton, 0, 3);
