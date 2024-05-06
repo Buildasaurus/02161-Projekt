@@ -46,6 +46,8 @@ public class CreateProjectView extends VBox {
         name.setPromptText("Project Name");
         getChildren().add(name);
 
+        Label leaderLabel = new Label("Project Leader");
+        getChildren().add(leaderLabel);
         ComboBox<String> projectLeaderComboBox = GeneralViews.chooseEmployeeIDComboBox();
         getChildren().add(projectLeaderComboBox);
 
