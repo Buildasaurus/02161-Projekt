@@ -1,8 +1,11 @@
+// Jonathan
+
 package org.application.Views;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -32,11 +35,13 @@ public class CreateProjectView extends VBox {
         boolean editingProject = loadedProject != null;
 
         // Title
-        Text title = new Text("Choose name and other relevant data for Project");
+        Text title = new Text("You are creating a project");
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
         //Activity name
+        Label nameLabel = new Label("Project Name");
+        getChildren().add(nameLabel);
         TextField name = new TextField();
         name.setPromptText("Project Name");
         getChildren().add(name);
@@ -44,11 +49,15 @@ public class CreateProjectView extends VBox {
         ComboBox<String> projectLeaderComboBox = GeneralViews.chooseEmployeeIDComboBox();
         getChildren().add(projectLeaderComboBox);
 
+        Label startLabel = new Label("Start Date");
+        getChildren().add(startLabel);
         DatePicker startDate = new DatePicker();
         startDate.setEditable(false);
         startDate.setPromptText("Start Date");
         getChildren().add(startDate);
 
+        Label endLabel = new Label("End Date");
+        getChildren().add(endLabel);
         DatePicker endDate = new DatePicker();
         endDate.setEditable(false);
         endDate.setPromptText("End Date");
@@ -60,11 +69,19 @@ public class CreateProjectView extends VBox {
             if (SystemModel.getProjectByName(
                     name.getText()) == null || editingProject) // only create project, if a project with the same name doesn't exist
             {
-                controller.handleCreateProject(
-                        name.getText(),
-                        projectLeaderComboBox.getSelectionModel().getSelectedItem(),
-                        GeneralMethods.convertDatePickerToCalender(startDate),
-                        GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
+                if(correctDates(startDate, endDate))
+                {
+                    controller.handleCreateProject(
+                            name.getText(),
+                            projectLeaderComboBox.getSelectionModel().getSelectedItem(),
+                            GeneralMethods.convertDatePickerToCalender(startDate),
+                            GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
+                }
+                else {
+                    new GeneralAlert("Please choose an end date after the start date.");
+                }
+            } else {
+                GeneralAlert alert = new GeneralAlert("Project with this name already exists");
             }
         });
         if (editingProject) {
@@ -80,5 +97,9 @@ public class CreateProjectView extends VBox {
 
         getChildren().add(completeButton);
         getChildren().add(GeneralViews.backButton());
+    }
+    public boolean correctDates(DatePicker start, DatePicker end)
+    {
+        return start.getValue() == null || end.getValue() == null || !end.getValue().isBefore(start.getValue());
     }
 }

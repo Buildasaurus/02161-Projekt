@@ -34,6 +34,10 @@ import io.cucumber.java.en.Given;
 //TODO implement steps
 
 public class ProjectSteps {
+    @io.cucumber.java.Before
+    public void reset() {
+        SystemModel.reset();
+    }
     @io.cucumber.java.After
     public void tearDown() {
         SystemModel.reset();

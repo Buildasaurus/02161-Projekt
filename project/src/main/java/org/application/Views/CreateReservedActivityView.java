@@ -1,3 +1,4 @@
+//Jonathan
 package org.application.Views;
 
 import javafx.geometry.Insets;
@@ -31,20 +32,20 @@ public class CreateReservedActivityView extends GridPane {
         setHgap(5);
 
         // Name field
-        Label nameLabel = new Label("Navn:");
+        Label nameLabel = new Label("Name:");
         add(nameLabel, 0, 0);
         TextField nameField = new TextField();
         add(nameField, 1, 0);
 
         // Start date field
-        Label startDateLabel = new Label("Start-dato:");
+        Label startDateLabel = new Label("Start date:");
         add(startDateLabel, 0, 1);
         DatePicker startDatePicker = new DatePicker();
         startDatePicker.setEditable(false);
         add(startDatePicker, 1, 1);
 
         // End date field
-        Label endDateLabel = new Label("Slut-dato:");
+        Label endDateLabel = new Label("End date:");
         add(endDateLabel, 0, 2);
         DatePicker endDatePicker = new DatePicker();
         endDatePicker.setEditable(false);
@@ -53,7 +54,8 @@ public class CreateReservedActivityView extends GridPane {
         // OK button
         Button OKButton = new Button("OK");
         OKButton.setOnAction(e -> {
-            if (!(startDatePicker.getValue() == null || endDatePicker.getValue() == null)) {
+            if (!(startDatePicker.getValue() == null || endDatePicker.getValue() == null) &&
+                    GeneralMethods.convertDatePickerToCalender(startDatePicker).before(GeneralMethods.convertDatePickerToCalender(endDatePicker))) {
                 controller.handleCompleteProjectActivity(
                         new ReservedActivity(
                                 GeneralMethods.convertDatePickerToCalender(startDatePicker),
@@ -63,6 +65,8 @@ public class CreateReservedActivityView extends GridPane {
                         ),
                         editedReservedActivity
                 );
+            } else {
+                GeneralAlert alert = new GeneralAlert("Invalid data, please try again");
             }
         });
         add(OKButton, 0, 3);

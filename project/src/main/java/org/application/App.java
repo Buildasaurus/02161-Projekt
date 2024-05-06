@@ -1,3 +1,4 @@
+// Everyone
 package org.application;
 
 import javafx.application.Application;
@@ -36,6 +37,7 @@ public class App extends Application {
         scene.setRoot(newView);
     }
 
+
     public static void goToMainMenu() {
         MainView view = new MainView();
         MainController controller = new MainController(view);
@@ -63,6 +65,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        stage.setTitle("Time management application");
         SystemModel.createDefaultEmployees();
         goToMainMenu();
         stage.setScene(scene);

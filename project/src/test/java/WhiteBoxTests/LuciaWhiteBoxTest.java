@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 
 public class LuciaWhiteBoxTest {
-    //reset after every test
+    //reset before every test
     @Before
     public void start() {
         SystemModel.reset();

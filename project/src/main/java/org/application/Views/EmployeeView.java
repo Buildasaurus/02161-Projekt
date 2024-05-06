@@ -1,3 +1,4 @@
+//80% jonathan 10% martin 10% marinus
 package org.application.Views;
 
 import javafx.geometry.Insets;
@@ -67,6 +68,8 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                     activityComboBox.getSelectionModel().getSelectedItem()) != null) {
                 SystemModel.findActivityWithName(
                         activityComboBox.getSelectionModel().getSelectedItem()).delete();
+            } else {
+                GeneralAlert alert = new GeneralAlert("Please select an activity first");
             }
             refreshView();
         });
@@ -97,6 +100,8 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
             if (p != null) {
                 Report report = new Report(p);
                 report.saveToDisk();
+            } else {
+                GeneralAlert alert = new GeneralAlert("Please select a project first");
             }
         });
         Button editProjectButton = new Button("Edit Project");
@@ -111,6 +116,8 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                     projectComboBox.getSelectionModel().getSelectedItem()) != null) {
                 SystemModel.getProjectByName(
                         projectComboBox.getSelectionModel().getSelectedItem()).delete();
+            } else {
+                GeneralAlert alert = new GeneralAlert("Please select a project first");
             }
             refreshView();
         });

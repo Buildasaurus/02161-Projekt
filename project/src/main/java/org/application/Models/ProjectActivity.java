@@ -26,26 +26,32 @@ public class ProjectActivity extends Activity {
     public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, int time, String name,
                            Project assignedProject) {
         super(name, startWeek, endWeek);
-        if (startWeek.after(endWeek)) {
-            throw new IllegalArgumentException("start week should be before end week");
-        }
-        this.expectedDuration = time;
-        this.assignedProject = assignedProject;
-        assignedProject.addActivity(this);
+        initializeValues(startWeek,endWeek,time,assignedProject);
     }
 
     public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, int time, String name,
                            Project assignedProject, String[] assignedEmployeeIDs) {
         super(name, startWeek, endWeek);
-        this.expectedDuration = time;
-        this.assignedProject = assignedProject;
-        if (startWeek.after(endWeek)) {
-            throw new IllegalArgumentException("start week should be before end week");
-        }
+        initializeValues(startWeek,endWeek,time,assignedProject);
         for (String employeeID : assignedEmployeeIDs) {
             assignEmployee(employeeID);
         }
+    }
+
+    public void initializeValues(GregorianCalendar startWeek,
+                                 GregorianCalendar endWeek,
+                                 int expectedDuration,
+                                 Project assignedProject) {
+        this.expectedDuration = expectedDuration;
+        if (assignedProject == null) {
+            throw new IllegalArgumentException("Project activity must have an assigned project");
+        }
+        this.assignedProject = assignedProject;
+        if (startWeek.after(endWeek)) {
+            throw new IllegalArgumentException("Start date must be before end date");
+        }
         assignedProject.addActivity(this);
+
     }
 
     public void addTimeBlock(TimeBlock timeBlock) {
@@ -68,10 +74,6 @@ public class ProjectActivity extends Activity {
         {
             timeBlock.delete();
         }
-    }
-
-    public List<TimeBlock> getTimeBlocks() {
-        return timeBlocks;
     }
 
     /**

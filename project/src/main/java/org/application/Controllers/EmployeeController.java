@@ -1,3 +1,4 @@
+//90 % Jonathan 10% Marinus
 package org.application.Controllers;
 
 import javafx.event.ActionEvent;
@@ -77,6 +78,7 @@ public class EmployeeController implements IController {
 
     public void handleSeeOverview(Project project) {
         if (project == null) {
+            GeneralAlert alert = new GeneralAlert("Please select a project first");
             return;
         }
         ProjectOverviewView view = new ProjectOverviewView(this, project);
@@ -98,6 +100,8 @@ public class EmployeeController implements IController {
             CreateProjectController controller = new CreateProjectController(view);
             view.setController(controller);
             App.setRoot(controller);
+        } else {
+            GeneralAlert alert = new GeneralAlert("Please select a project first");
         }
     }
 
@@ -114,6 +118,8 @@ public class EmployeeController implements IController {
         }
         else if (activity instanceof ReservedActivity) {
             this.view = new CreateReservedActivityView(this, (ReservedActivity) activity);
+        } else if (activity == null) {
+            GeneralAlert alert = new GeneralAlert("Please select an activity first");
         }
         App.setRoot(this);
     }

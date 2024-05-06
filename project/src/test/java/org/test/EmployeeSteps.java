@@ -18,6 +18,16 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
 
 public class EmployeeSteps {
+
+    @io.cucumber.java.After
+    public void tearDown() {
+        SystemModel.reset();
+    }
+    @io.cucumber.java.Before
+    public void start() {
+        SystemModel.reset();
+    }
+
     @When("{int} employees are created")
     public void createEmployees(int numberOfEmployeesToCreate) {
         for(int i = 0; i < numberOfEmployeesToCreate; i++) {

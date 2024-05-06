@@ -19,29 +19,6 @@ public class MartinWhiteBoxTest {
     public void start() {
         SystemModel.reset();
     }
-/*
-    public static Activity findActivityWithName(String activityName) {
-        assert activityName != null;
-        Activity result = null;
-        List<Activity> activities = getActivities();
-        assert activities != null;
-        for (Activity activity : activities) {
-            assert activity != null;
-            assert activity.getName() != null;
-        }
-
-        for (Activity activity : activities) { // 1
-            if (activity.getName().equals(activityName)) { // 2
-                result = activity; // 3
-            }
-        }
-
-        if (result != null) {
-            assert activities.contains(result);
-        }
-        return result; // 4
-    }
-*/
 
 
     // Test case A: activities list contains an activity with the expected name.

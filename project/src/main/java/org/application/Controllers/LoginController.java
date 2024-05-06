@@ -1,9 +1,11 @@
+//Jonathan
 package org.application.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import org.application.App;
 import org.application.Models.SystemModel;
+import org.application.Views.GeneralAlert;
 
 
 public class LoginController implements IController {
@@ -21,7 +23,7 @@ public class LoginController implements IController {
     public void handleLogin(ActionEvent event, String userName) {
         System.out.println(userName);
         if (SystemModel.getEmployee(userName) == null) {
-            System.out.println("User not found");
+            GeneralAlert alert = new GeneralAlert("User with username: \"" + userName + "\" does not exist");
             return;
         }
 

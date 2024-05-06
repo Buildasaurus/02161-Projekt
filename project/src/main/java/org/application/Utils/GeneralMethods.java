@@ -1,3 +1,4 @@
+// 80% Marinus 10% Jonathan 10% Gpt-4 (we have used chatgpt to help with some of the first convertion methods)
 package org.application.Utils;
 
 import javafx.collections.FXCollections;
