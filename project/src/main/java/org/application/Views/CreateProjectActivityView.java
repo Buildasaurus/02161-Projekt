@@ -2,6 +2,11 @@
 
 package org.application.Views;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,6 +20,7 @@ import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
 
 import java.lang.IllegalArgumentException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -115,9 +121,38 @@ public class CreateProjectActivityView extends VBox {
 
         // Assigned Employees
         getChildren().add(new Label("Assigned Employees"));
-        TextField assignedEmployees = new TextField(controller.getEmployee().getID());
-        assignedEmployees.setPromptText("Assigned employees, space separated");
-        getChildren().add(assignedEmployees);
+        ObservableList<String> employees = FXCollections.observableArrayList(SystemModel.getEmployees().stream().map(
+                Employee::getID).collect(Collectors.toList()));
+        ComboBox<String> employeeSelect = new ComboBox<>(employees);
+        getChildren().add(employeeSelect);
+
+        ScrollPane employeePane = new ScrollPane();
+        getChildren().add(employeePane);
+
+        VBox assignedEmployees = new VBox();
+        employeePane.setContent(assignedEmployees);
+
+        Button addEmployee = new Button("Add");
+        getChildren().add(addEmployee);
+        addEmployee.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                Text text = new Text(employeeSelect.getSelectionModel().getSelectedItem());
+                assignedEmployees.getChildren().add(text);
+            }
+        });
+
+        Button removeEmployee = new Button("Remove");
+        getChildren().add(removeEmployee);
+        removeEmployee.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                for (Node node : assignedEmployees.getChildren()) {
+                    if (employeeSelect.getSelectionModel().getSelectedItem().equals(((Text) node).getText())) {
+                        assignedEmployees.getChildren().remove(node);
+                        break;
+                    }
+                }
+            }
+        });
 
         // Expected Duration Section
         getChildren().add(new Label("Expected Duration"));
@@ -156,6 +191,10 @@ public class CreateProjectActivityView extends VBox {
                 if (halfHours.getText() == "") {
                     throw new IllegalArgumentException("Field \"Expected Duration\" cannot be empty");
                 }
+                ArrayList<String> employeeList = new ArrayList<>();
+                for (Node node : assignedEmployees.getChildren()) {
+                    employeeList.add(((Text) node).getText());
+                }
                 controller.handleCompleteProjectActivity(
                         new ProjectActivity(
                                 GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText()), 
@@ -166,7 +205,7 @@ public class CreateProjectActivityView extends VBox {
                                 name.getText(),
                                 SystemModel.getProjectByName(
                                         projectSelectionCombobox.getSelectionModel().getSelectedItem()),
-                                assignedEmployees.getText().split(" ")
+                                employeeList.toArray(new String[0])
                         ),
                         activity
 
@@ -183,9 +222,10 @@ public class CreateProjectActivityView extends VBox {
             endWeek.setText("" + activity.getEndDate().get(Calendar.WEEK_OF_YEAR));
             startYear.setText("" + activity.getStartDate().get(Calendar.YEAR));
             endYear.setText("" + activity.getEndDate().get(Calendar.YEAR));
-            assignedEmployees.setText(activity.getAssignedEmployees().stream()
-                    .map(Employee::toString)  // assuming Employee has a toString method
-                    .collect(Collectors.joining(" ")));
+            for (Employee employee : activity.getAssignedEmployees()) {
+                Text text = new Text(employee.getID());
+                assignedEmployees.getChildren().add(text);
+            }
             halfHours.setText("" + activity.getExpectedDuration());
             projectSelectionCombobox.getSelectionModel().select(
                     activity.getAssignedProject().getName());
