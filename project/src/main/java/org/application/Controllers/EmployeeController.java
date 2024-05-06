@@ -61,6 +61,10 @@ public class EmployeeController implements IController {
     }
 
     public void handleUpdateSearch(ActionEvent event, VBox searchBox, GregorianCalendar start, GregorianCalendar end) {
+        if (start.after(end)) {
+            throw new IllegalArgumentException("Start date must be before end date");
+        }
+
         searchBox.getChildren().clear();
 
         List<Employee> sortedEmployees = SystemModel.findAvailableEmployees(start, end);
