@@ -21,7 +21,6 @@ public class ConstructorTests
 
     @Test
     public void ProjectActivityConstructor() {
-
         //Start week before endweek
         GregorianCalendar start = new GregorianCalendar(1,1,1);
         GregorianCalendar end = new GregorianCalendar(1,2,1);
@@ -29,6 +28,13 @@ public class ConstructorTests
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 new ProjectActivity(end,start,10,"Test",project));
 
-        assertEquals("start week should be before end week", exception.getMessage());
+        assertEquals("Start date must be before end date", exception.getMessage());
+
+
+        exception = assertThrows(IllegalArgumentException.class, () ->
+                new ProjectActivity(end,start,10,"Test",null));
+
+        assertEquals("Project activity must have an assigned project", exception.getMessage());
+
     }
 }
