@@ -55,4 +55,25 @@ public class ActivityTests
         GregorianCalendar newEnd = new GregorianCalendar(1,2,1);
     }
 
+    @Test
+    public void ActivityConstructorTest() {
+        Employee employee = new Employee("");
+        GregorianCalendar start = new GregorianCalendar(1,1,1);
+        GregorianCalendar end = new GregorianCalendar(1,2,1);
+        Project project = new Project("Project", start,end);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                new ProjectActivity(null,end,2,"",project));
+
+        assertEquals("Activity's start date cannot be empty", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () ->
+                new ProjectActivity(start,null,2,"",project));
+
+        assertEquals("Activity's end date cannot be empty", exception.getMessage());
+
+        ReservedActivity reservedActivity = new ReservedActivity(start, end,"",employee);
+
+    }
+
 }
