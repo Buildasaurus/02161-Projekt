@@ -32,7 +32,7 @@ public class ConstructorTests
 
 
         exception = assertThrows(IllegalArgumentException.class, () ->
-                new ProjectActivity(end,start,10,"Test",null));
+                new ProjectActivity(start,end,10,"Test",null));
 
         assertEquals("Project activity must have an assigned project", exception.getMessage());
 

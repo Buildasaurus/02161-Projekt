@@ -241,4 +241,11 @@ public class ProjectSteps {
     public void theProjectLeaderOfTheProjectIs(String arg0) {
         assert SystemModel.getProjects().get(0).getProjectLeaderID().equals(arg0);
     }
+
+    @Given("the project has no start and end date")
+    public void theProjectHasNoStartAndEndDate() {
+        SystemModel.getProjects().get(0).setStartWeek(null);
+        SystemModel.getProjects().get(0).setEndWeek(null);
+
+    }
 }
