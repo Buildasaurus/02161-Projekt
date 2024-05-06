@@ -120,20 +120,24 @@ public class CreateProjectActivityView extends VBox {
 
 
         // Assigned Employees
-        getChildren().add(new Label("Assigned Employees"));
+        getChildren().add(new Label("Choose Employee to Assign"));
         ObservableList<String> employees = FXCollections.observableArrayList(SystemModel.getEmployees().stream().map(
                 Employee::getID).collect(Collectors.toList()));
         ComboBox<String> employeeSelect = new ComboBox<>(employees);
         getChildren().add(employeeSelect);
 
+        getChildren().add(new Label("Assigned Employees"));
         ScrollPane employeePane = new ScrollPane();
         getChildren().add(employeePane);
 
         VBox assignedEmployees = new VBox();
         employeePane.setContent(assignedEmployees);
 
+        HBox employeeButtons = new HBox(5.0);
+        getChildren().add(employeeButtons);
+
         Button addEmployee = new Button("Add");
-        getChildren().add(addEmployee);
+        employeeButtons.getChildren().add(addEmployee);
         addEmployee.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 Text text = new Text(employeeSelect.getSelectionModel().getSelectedItem());
@@ -142,7 +146,7 @@ public class CreateProjectActivityView extends VBox {
         });
 
         Button removeEmployee = new Button("Remove");
-        getChildren().add(removeEmployee);
+        employeeButtons.getChildren().add(removeEmployee);
         removeEmployee.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 for (Node node : assignedEmployees.getChildren()) {
