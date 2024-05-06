@@ -171,7 +171,7 @@ public class CalendarView extends GridPane {
                     pruneFreeHalfHours();
                     clearData();
                 } catch (Exception exception) {
-                    GeneralAlert alert = new GeneralAlert(exception.getMessage());
+                    GeneralAlert.sendWarning(exception.getMessage());
                 }
             }
         };

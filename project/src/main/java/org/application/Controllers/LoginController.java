@@ -23,7 +23,7 @@ public class LoginController implements IController {
     public void handleLogin(ActionEvent event, String userName) {
         System.out.println(userName);
         if (SystemModel.getEmployee(userName) == null) {
-            GeneralAlert alert = new GeneralAlert("User with username: \"" + userName + "\" does not exist");
+            GeneralAlert.sendWarning("User with username: \"" + userName + "\" does not exist");
             return;
         }
 

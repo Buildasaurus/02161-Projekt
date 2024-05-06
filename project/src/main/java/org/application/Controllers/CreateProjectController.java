@@ -30,12 +30,11 @@ public class CreateProjectController implements IController {
             App.goToLastView();
         }
         else {
-            Project project;
             if (projectLeader == null) {
-                project = new Project(name, start, end);
+                new Project(name, start, end);
             }
             else {
-                project = new Project(name, start, end, projectLeader);
+                new Project(name, start, end, projectLeader);
             }
             App.goToLastView();
         }
