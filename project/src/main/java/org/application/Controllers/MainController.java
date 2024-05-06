@@ -29,14 +29,14 @@ public class MainController implements IController {
         CreateEmployeeView newView = new CreateEmployeeView();
         CreateEmployeeController controller = new CreateEmployeeController(newView);
         newView.setController(controller);
-        App.setRoot(newView);
+        App.setRoot(controller);
     }
 
     public void handleDeleteEmployee(ActionEvent event) {
         DeleteEmployeeView newView = new DeleteEmployeeView();
         DeleteEmployeeController controller = new DeleteEmployeeController(newView);
         newView.setController(controller);
-        App.setRoot(newView);
+        App.setRoot(controller);
     }
 
     public void handleCreateProject(ActionEvent event) {
