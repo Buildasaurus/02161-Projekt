@@ -45,13 +45,14 @@ public class Report implements CSVConvertable {
     }
 
 
-    public void saveToDisk() {
+    public void saveToDisk() throws IOException
+    {
         File csvFile = new File("report.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
             writer.write(this.text);
         }
         catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException("Folder already exists at this name: report.csv");
         }
     }
 }

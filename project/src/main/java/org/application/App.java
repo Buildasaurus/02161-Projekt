@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.application.Controllers.IController;
 import org.application.Controllers.MainController;
-import org.application.Models.SystemModel;
+import org.application.Models.*;
 import org.application.Views.IRefreshable;
 import org.application.Views.MainView;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class App extends Application {
     private static Scene scene;
@@ -63,10 +65,36 @@ public class App extends Application {
         setRoot(lastController);
     }
 
+    public static void createDefaultEmployees() {
+        // Loading projects
+        Project project = new Project("The Project", new GregorianCalendar(1, 1, 1), new GregorianCalendar(1, 10, 2));
+
+        // Loading employees
+        Employee e = new Employee("maju");
+        new ReservedActivity(new GregorianCalendar(1, 10, 1),
+                new GregorianCalendar(1, 10, 1), "Holiday", e);
+        ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1, 1, 1),
+                new GregorianCalendar(1, 2, 1), 6, "Testing", project);
+
+        projectActivity.assignEmployee(e);
+
+        GregorianCalendar currentTime = new GregorianCalendar();
+        e.createTimeBlock(projectActivity, new GregorianCalendar(currentTime.get(Calendar.YEAR),
+                        currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH), 8, 0),
+                new GregorianCalendar(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH),
+                        currentTime.get(Calendar.DAY_OF_MONTH), 10, 0));
+
+        projectActivity = new ProjectActivity(new GregorianCalendar(1, 3, 1), new GregorianCalendar(1, 3, 1), 4,
+                "codeRefactor", project);
+
+        projectActivity.assignEmployee(e);
+
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Time management application");
-        SystemModel.createDefaultEmployees();
+        createDefaultEmployees();
         goToMainMenu();
         stage.setScene(scene);
         stage.show();

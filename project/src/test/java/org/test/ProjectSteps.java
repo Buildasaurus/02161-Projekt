@@ -4,6 +4,7 @@ package org.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,11 +53,20 @@ public class ProjectSteps {
         project.removeProjectLeader();
     }
 
+    String exceptionMessage = null;
+
     @When("the Project Leader generates the report.")
     public void theProjectLeaderGeneratesTheReport() {
         Project project = SystemModel.getProjects().get(0);
         Report report = new Report(project);
-        report.saveToDisk();
+        try
+        {
+            report.saveToDisk();
+        }
+        catch(IOException e)
+        {
+            exceptionMessage = e.getMessage();
+        }
     }
 
     @Then("a non-empty report is saved in our default folder")
@@ -253,5 +263,34 @@ public class ProjectSteps {
                 new Project("My Project", end, start));
 
         assertEquals("Start date must be before end date", exception.getMessage());
+    }
+
+    @Then("an exception is thrown with the message {string}")
+    public void anExceptionIsThrownWithTheMessage(String excpectedExceptionMessage) {
+        assertTrue(exceptionMessage.equals(excpectedExceptionMessage));
+    }
+
+    @Given("a folder exists with the name {string}")
+    public void aFolderExistsWithTheName(String folderName) {
+        Path path = Paths.get(folderName);
+        try {
+            Files.createDirectory(path);
+        }
+        catch (Exception e) {
+            System.out.println("This should not happen, make sure to run nothingExists given");;
+        }
+    }
+
+    @Given("nothing exists with the name {string}")
+    public void nothingExistsWithTheName(String folderName) {
+        Path path = Paths.get(folderName);
+        try {
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

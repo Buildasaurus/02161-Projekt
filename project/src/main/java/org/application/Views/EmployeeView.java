@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import org.application.Controllers.EmployeeController;
 import org.application.Models.*;
 
+import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -99,7 +100,13 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                     projectComboBox.getSelectionModel().getSelectedItem());
             if (p != null) {
                 Report report = new Report(p);
-                report.saveToDisk();
+                try {
+                    report.saveToDisk();
+                }
+                catch (IOException exception)
+                {
+                    // TODO - Marinus make this a warning box
+                }
             } else {
                 GeneralAlert.sendWarning("Please select a project first");
             }
