@@ -26,7 +26,7 @@ public class JonathanWhiteBoxTest
     @Test
     public void testGetAvailabilityScoreB() {
         Employee e = new Employee("empl");
-        ReservedActivity a = new ReservedActivity(new GregorianCalendar(2024, GregorianCalendar.APRIL, 11),
+        new ReservedActivity(new GregorianCalendar(2024, GregorianCalendar.APRIL, 11),
                 new GregorianCalendar(2024, GregorianCalendar.APRIL, 12), "test", e);
         GregorianCalendar startTime = new GregorianCalendar(2024, GregorianCalendar.APRIL, 10);
         GregorianCalendar endTime = new GregorianCalendar(2024, GregorianCalendar.APRIL, 12);
@@ -39,7 +39,7 @@ public class JonathanWhiteBoxTest
     @Test
     public void testGetAvailabilityScoreC() {
         Employee e = new Employee("empl");
-        ReservedActivity a = new ReservedActivity(new GregorianCalendar(2024, GregorianCalendar.APRIL, 13),
+        new ReservedActivity(new GregorianCalendar(2024, GregorianCalendar.APRIL, 13),
                 new GregorianCalendar(2024, GregorianCalendar.APRIL, 14), "test", e);
         GregorianCalendar startTime = new GregorianCalendar(2024, GregorianCalendar.APRIL, 10);
         GregorianCalendar endTime = new GregorianCalendar(2024, GregorianCalendar.APRIL, 12);

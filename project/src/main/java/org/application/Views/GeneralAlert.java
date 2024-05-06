@@ -9,4 +9,10 @@ public class GeneralAlert {
         alert.setContentText(warningText);
         alert.show();
     }
+
+    public static void sendInformation(String infoText) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setContentText(infoText);
+        alert.show();
+    }
 }

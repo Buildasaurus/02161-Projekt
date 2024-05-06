@@ -102,10 +102,11 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                 Report report = new Report(p);
                 try {
                     report.saveToDisk();
+                    GeneralAlert.sendInformation("Report saved to: " + System.getProperty("user.dir") + "\\report.csv");
                 }
                 catch (IOException exception)
                 {
-                    // TODO - Marinus make this a warning box
+                    GeneralAlert.sendWarning(exception.getMessage());
                 }
             } else {
                 GeneralAlert.sendWarning("Please select a project first");

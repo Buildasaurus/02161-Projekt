@@ -25,11 +25,6 @@ import io.cucumber.java.en.Given;
 
 import static org.junit.Assert.*;
 
-//import org.junit.After;
-
-//TODO look for duplicate steps that could be consolidated
-//TODO implement steps
-
 public class ProjectSteps {
     @io.cucumber.java.Before
     public void reset() {
@@ -161,7 +156,7 @@ public class ProjectSteps {
         startWeek.setWeekDate(2024, 17, 1);
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        Project testProject = new Project(projectName, startWeek, endWeek);
+        new Project(projectName, startWeek, endWeek);
     }
 
     @Then("a project with the name {string} exists")
@@ -240,7 +235,7 @@ public class ProjectSteps {
         startWeek.setWeekDate(2024, 17, 1);
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
-        Project testProject = new Project("project", startWeek, endWeek, name);
+        new Project("project", startWeek, endWeek, name);
     }
 
     @Then("the project leader of the project is {string}")

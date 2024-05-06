@@ -2,6 +2,8 @@
 
 package org.application.Views;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,6 +15,7 @@ import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
+import org.controlsfx.control.CheckComboBox;
 
 import java.lang.IllegalArgumentException;
 import java.util.Calendar;
@@ -115,8 +118,10 @@ public class CreateProjectActivityView extends VBox {
 
         // Assigned Employees
         getChildren().add(new Label("Assigned Employees"));
-        TextField assignedEmployees = new TextField(controller.getEmployee().getID());
-        assignedEmployees.setPromptText("Assigned employees, space separated");
+        ObservableList<String> employees = FXCollections.observableArrayList(SystemModel.getEmployees().stream().map(
+                Employee::getID).collect(Collectors.toList()));
+        CheckComboBox<String> assignedEmployees = new CheckComboBox<>(employees);
+        assignedEmployees.getCheckModel().check(controller.getEmployee().getID());
         getChildren().add(assignedEmployees);
 
         // Expected Duration Section
@@ -166,7 +171,7 @@ public class CreateProjectActivityView extends VBox {
                                 name.getText(),
                                 SystemModel.getProjectByName(
                                         projectSelectionCombobox.getSelectionModel().getSelectedItem()),
-                                assignedEmployees.getText().split(" ")
+                                assignedEmployees.getCheckModel().getCheckedItems().toArray(new String[0])
                         ),
                         activity
 
@@ -183,9 +188,9 @@ public class CreateProjectActivityView extends VBox {
             endWeek.setText("" + activity.getEndDate().get(Calendar.WEEK_OF_YEAR));
             startYear.setText("" + activity.getStartDate().get(Calendar.YEAR));
             endYear.setText("" + activity.getEndDate().get(Calendar.YEAR));
-            assignedEmployees.setText(activity.getAssignedEmployees().stream()
-                    .map(Employee::toString)  // assuming Employee has a toString method
-                    .collect(Collectors.joining(" ")));
+            for (Employee employee : activity.getAssignedEmployees()) {
+                assignedEmployees.getCheckModel().check(employee.getID());
+            }
             halfHours.setText("" + activity.getExpectedDuration());
             projectSelectionCombobox.getSelectionModel().select(
                     activity.getAssignedProject().getName());
