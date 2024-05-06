@@ -1,3 +1,5 @@
+// Written by Martin, Lucia and Jonathan
+
 package org.test;
 
 import static org.junit.Assert.assertEquals;
@@ -329,8 +331,7 @@ public class ActivitySteps {
         GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
         GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
         String[] employeeIDString = {employeeString};
-        ProjectActivity testActivity = new ProjectActivity(startDay, endDay, 100, "testActivity", testProject, employeeIDString);
-        testProject.addActivity(testActivity);
+        new ProjectActivity(startDay, endDay, 100, "testActivity", testProject, employeeIDString);
     }
 
     @When("the user changes the project activity to start in week {int}, ends in week {int}, and has {string} as project leader")

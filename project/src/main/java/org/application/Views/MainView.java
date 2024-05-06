@@ -1,3 +1,4 @@
+//Jonathan
 package org.application.Views;
 
 import javafx.scene.control.Button;
@@ -21,7 +22,7 @@ public class MainView extends VBox {
     private void initialize() {
 
         // title
-        Text title = new Text("!AMaZing ApPliCation!");
+        Text title = new Text("Time management application");
         title.setFill(Color.BLACK);
         getChildren().add(title);
 

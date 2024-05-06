@@ -1,3 +1,5 @@
+// Written by Martin, Lucia and Jonathan
+
 package org.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -150,7 +152,6 @@ public class ProjectSteps {
         GregorianCalendar endWeek = new GregorianCalendar();
         endWeek.setWeekDate(2024, 19, 1);
         Project testProject = new Project(projectName, startWeek, endWeek);
-        SystemModel.addProject(testProject);
     }
 
     @Then("a project with the name {string} exists")
@@ -222,5 +223,18 @@ public class ProjectSteps {
         //check last line
         assertTrue(penultimateline.contains("No Activities"));
     }
-   
+
+    @When("A project with a project leader named {string} is created")
+    public void aProjectWithAProjectLeaderNamedIsCreated(String name) {
+        GregorianCalendar startWeek = new GregorianCalendar();
+        startWeek.setWeekDate(2024, 17, 1);
+        GregorianCalendar endWeek = new GregorianCalendar();
+        endWeek.setWeekDate(2024, 19, 1);
+        Project testProject = new Project("project", startWeek, endWeek, name);
+    }
+
+    @Then("the project leader of the project is {string}")
+    public void theProjectLeaderOfTheProjectIs(String arg0) {
+        assert SystemModel.getProjects().get(0).getProjectLeaderID().equals(arg0);
+    }
 }

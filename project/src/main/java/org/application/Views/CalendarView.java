@@ -1,3 +1,5 @@
+// written by Marinus
+
 package org.application.Views;
 
 import javafx.collections.ObservableList;
@@ -152,7 +154,7 @@ public class CalendarView extends GridPane {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 if (startSelect.getValue() != null && endSelect.getValue() != null) {
-                    Activity activity = SystemModel.getActivity(activityField.getSelectionModel().getSelectedItem());
+                    Activity activity = SystemModel.findActivityWithName(activityField.getSelectionModel().getSelectedItem());
                     if (activity instanceof ProjectActivity) {
                         GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startSelect.getValue(), endSelect.getValue());
                         ProjectActivity projectActivity = (ProjectActivity) activity;

@@ -1,3 +1,5 @@
+// 90% Jonathan 10% Marinus
+
 package org.application.Views;
 
 import javafx.scene.control.*;
@@ -164,10 +166,19 @@ public class CreateProjectActivityView extends VBox {
     private boolean isValidData(TextField startWeek, TextField endWeek, TextField halfHours, TextField name,
                                 ComboBox<String> projectSelectionCombobox, TextField assignedEmployees,
                                 TextField startYear, TextField endYear) {
-        return !(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || halfHours.getText().isEmpty() ||
-                name.getText().isEmpty() || projectSelectionCombobox.getSelectionModel().getSelectedItem() == null ||
-                assignedEmployees.getText() == null || endYear.getText().isEmpty() || startYear.getText().isEmpty()) &&
-                Integer.parseInt(startWeek.getText()) <= Integer.parseInt(endWeek.getText()) &&
-                Integer.parseInt(startYear.getText()) <= Integer.parseInt(endYear.getText());
+        try {
+            boolean value = !(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || halfHours.getText().isEmpty() ||
+                    name.getText().isEmpty() || projectSelectionCombobox.getSelectionModel().getSelectedItem() == null ||
+                    assignedEmployees.getText() == null || endYear.getText().isEmpty() || startYear.getText().isEmpty()) &&
+                    Integer.parseInt(startWeek.getText()) <= Integer.parseInt(endWeek.getText()) &&
+                    Integer.parseInt(startYear.getText()) <= Integer.parseInt(endYear.getText()) &&
+                    Integer.parseInt(halfHours.getText()) >= 0;
+            return  value;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+
     }
 }

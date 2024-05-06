@@ -1,3 +1,5 @@
+// 80% Jonathan 10% Marinus
+
 package org.application.Models;
 
 import java.util.GregorianCalendar;

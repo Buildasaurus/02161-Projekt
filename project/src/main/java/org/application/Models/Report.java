@@ -1,5 +1,6 @@
-package org.application.Models;
+// 50/50 Lucia Jonathan
 
+package org.application.Models;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

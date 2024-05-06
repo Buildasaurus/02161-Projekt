@@ -1,5 +1,6 @@
-package org.application.Models;
+// a little of everyone
 
+package org.application.Models;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -32,8 +33,7 @@ public class Project {
     }
 
 
-    public double getOverallProgress()
-    {
+    public double getOverallProgress() {
         // Calculate total spent time and expected duration for all activities
         int totalSpentTime = 0;
         int totalExpectedDuration = 0;

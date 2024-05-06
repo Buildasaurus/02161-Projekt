@@ -1,2 +1,3 @@
-Lav white box test på en metode
 Lav 1 sequence diagram til rapport 1, og stjæl en af lucias
+CTRL+F for ??
+Check if tables are nice in Latex

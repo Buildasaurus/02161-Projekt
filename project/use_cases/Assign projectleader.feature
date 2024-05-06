@@ -1,3 +1,5 @@
+# Probably written by Martin and Lucia
+
 Feature: Assign project leader
     Description: A project leader is assigned to a project
     Actors: User

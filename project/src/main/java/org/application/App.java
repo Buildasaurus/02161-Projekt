@@ -1,3 +1,4 @@
+// Everyone
 package org.application;
 
 import javafx.application.Application;
@@ -69,3 +70,4 @@ public class App extends Application {
         stage.show();
     }
 }
+

@@ -1,4 +1,7 @@
+// 60% Jonathan 20% maritn 20% marinus
+
 package org.application.Models;
+
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

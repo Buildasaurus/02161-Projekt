@@ -1,5 +1,6 @@
-package org.application.Models;
+// 50% Jonathan 15% Martin 15% Marinus 20% Lucia
 
+package org.application.Models;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -124,7 +125,7 @@ public class ProjectActivity extends Activity {
 
         // Calculate the progress as a value between 0.0 and 1.0
         double progress = (double) spentTime / expectedDuration;
-        assert progress > 0;
+        assert progress >= 0;
 
         // Ensure the progress does not exceed 1.0
         return Math.min(progress, 1.0);

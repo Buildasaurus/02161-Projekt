@@ -1,3 +1,5 @@
+# Probably written by Jonathan and Lucia
+
 Feature: Check Overview
     Description: A project leader is looking at the overview of a project
     Actors: Project leader

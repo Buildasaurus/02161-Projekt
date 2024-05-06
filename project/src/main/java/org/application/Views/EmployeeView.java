@@ -1,3 +1,4 @@
+//80% jonathan 10% martin 10% marinus
 package org.application.Views;
 
 import javafx.geometry.Insets;
@@ -59,13 +60,13 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
         HBox editActivityButtons = new HBox(5);
         Button editActivityButton = new Button("Edit Activity");
         editActivityButton.setOnAction(e -> controller.handleEditActivityOverview(e,
-                SystemModel.getActivity(
+                SystemModel.findActivityWithName(
                         activityComboBox.getSelectionModel().getSelectedItem())));
         Button deleteActivityButton = new Button("Delete Activity");
         deleteActivityButton.setOnAction(e -> {
-            if (SystemModel.getActivity(
+            if (SystemModel.findActivityWithName(
                     activityComboBox.getSelectionModel().getSelectedItem()) != null) {
-                SystemModel.getActivity(
+                SystemModel.findActivityWithName(
                         activityComboBox.getSelectionModel().getSelectedItem()).delete();
             }
             refreshView();
