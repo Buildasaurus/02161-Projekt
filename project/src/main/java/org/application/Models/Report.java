@@ -1,6 +1,8 @@
 // 50/50 Lucia Jonathan
 
 package org.application.Models;
+import javafx.scene.control.Label;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,8 +15,17 @@ public class Report implements CSVConvertable {
         StringBuilder reportText = new StringBuilder();
         reportText.append("Project Name: ").append(project.getName()).append("\n");
         reportText.append("Project ID: ").append(project.getProjectID()).append("\n");
-        reportText.append("Start Week: ").append(project.getStartWeek().getTime()).append("\n");
-        reportText.append("End Week: ").append(project.getEndWeek().getTime()).append("\n");
+
+        if (project.getStartWeek() != null) {
+            reportText.append("Start Week: ").append(project.getStartWeek().getTime()).append("\n");
+        } else {
+            reportText.append("Start date not chosen yet\n");
+        }
+        if (project.getEndWeek() != null) {
+            reportText.append("End Week: ").append(project.getEndWeek().getTime()).append("\n");
+        } else {
+            reportText.append("End date not chosen yet\n");
+        }
         reportText.append("Project Leader ID: ").append(project.getProjectLeaderID()).append("\n");
 
         if (!project.getActivities().isEmpty()){
