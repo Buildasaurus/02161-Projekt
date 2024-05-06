@@ -23,13 +23,13 @@ public class CreateEmployeeController implements IController {
 
     public void handleCompletePressed(ActionEvent event, String name) {
         if (name.length() <= 4) {
-            Employee newEmployee = new Employee(name);
+            new Employee(name);
             MainView newView = new MainView();
             MainController controller = new MainController(newView);
             newView.setController(controller);
             App.setRoot(controller);
         } else {
-            GeneralAlert alert = new GeneralAlert("ID must be at least 4 characters long");
+            GeneralAlert.sendWarning("ID must be at least 4 characters long");
         }
     }
 }

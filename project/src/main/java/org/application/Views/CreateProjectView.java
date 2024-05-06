@@ -79,7 +79,7 @@ public class CreateProjectView extends VBox {
                         GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
 
             } catch (Exception exception) {
-                GeneralAlert alert = new GeneralAlert(exception.getMessage());
+                GeneralAlert.sendWarning(exception.getMessage());
             }
         });
         if (editingProject) {

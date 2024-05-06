@@ -3,7 +3,6 @@ package org.application.Views;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -31,12 +30,11 @@ public class DeleteEmployeeView extends VBox {
         Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e ->
                 {
-                    if(SystemModel.getEmployee(employees.getValue()) != null)
-                    {
+                    if(SystemModel.getEmployee(employees.getValue()) != null) {
                         controller.handleDeletePressed(SystemModel.getEmployee(employees.getSelectionModel().getSelectedItem()));
                     }
                     else {
-                        GeneralAlert a = new GeneralAlert("Choose an employee to delete first.");
+                        GeneralAlert.sendWarning("Choose an employee to delete first.");
                     }
                 });
 

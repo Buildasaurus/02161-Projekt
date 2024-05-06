@@ -65,7 +65,7 @@ public class CreateReservedActivityView extends GridPane {
                         editedReservedActivity
                 );
             } catch (IllegalArgumentException exception) {
-                GeneralAlert alert = new GeneralAlert(exception.getMessage());
+                GeneralAlert.sendWarning(exception.getMessage());
             }
         });
         add(OKButton, 0, 3);

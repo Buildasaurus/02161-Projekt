@@ -69,7 +69,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                 SystemModel.findActivityWithName(
                         activityComboBox.getSelectionModel().getSelectedItem()).delete();
             } else {
-                GeneralAlert alert = new GeneralAlert("Please select an activity first");
+                GeneralAlert.sendWarning("Please select an activity first");
             }
             refreshView();
         });
@@ -101,7 +101,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                 Report report = new Report(p);
                 report.saveToDisk();
             } else {
-                GeneralAlert alert = new GeneralAlert("Please select a project first");
+                GeneralAlert.sendWarning("Please select a project first");
             }
         });
         Button editProjectButton = new Button("Edit Project");
@@ -117,7 +117,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                 SystemModel.getProjectByName(
                         projectComboBox.getSelectionModel().getSelectedItem()).delete();
             } else {
-                GeneralAlert alert = new GeneralAlert("Please select a project first");
+                GeneralAlert.sendWarning("Please select a project first");
             }
             refreshView();
         });

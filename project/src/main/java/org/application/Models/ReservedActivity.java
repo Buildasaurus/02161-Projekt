@@ -1,7 +1,6 @@
 // 70% Jonathan 30% Lucia
 
 package org.application.Models;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ReservedActivity extends Activity {

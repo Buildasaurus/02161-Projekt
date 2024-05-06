@@ -55,7 +55,7 @@ public class SystemModel { // should be public static class, but java is stupid
 
         // Loading employees
         Employee e = new Employee("maju");
-        ReservedActivity activity = new ReservedActivity(new GregorianCalendar(1, 10, 1),
+        new ReservedActivity(new GregorianCalendar(1, 10, 1),
                 new GregorianCalendar(1, 10, 1), "Holiday", e);
         ProjectActivity projectActivity = new ProjectActivity(new GregorianCalendar(1, 1, 1),
                 new GregorianCalendar(1, 2, 1), 6, "Testing", project);

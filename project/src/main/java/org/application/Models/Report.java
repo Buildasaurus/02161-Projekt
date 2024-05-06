@@ -1,7 +1,6 @@
 // 50/50 Lucia Jonathan
 
 package org.application.Models;
-import javafx.scene.control.Label;
 
 import java.io.BufferedWriter;
 import java.io.File;
