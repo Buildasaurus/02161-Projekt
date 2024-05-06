@@ -105,7 +105,7 @@ public class EmployeeView extends ScrollPane implements IRefreshable {
                 }
                 catch (IOException exception)
                 {
-                    // TODO - Marinus make this a warning box
+                    GeneralAlert.sendWarning(exception.getMessage());
                 }
             } else {
                 GeneralAlert.sendWarning("Please select a project first");

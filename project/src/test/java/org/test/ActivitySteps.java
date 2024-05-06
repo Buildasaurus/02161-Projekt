@@ -17,9 +17,6 @@ import org.application.Models.ReservedActivity;
 
 import static org.junit.Assert.*;
 
-//TODO look for duplicate steps that could be consolidated
-//TODO implement steps
-
 public class ActivitySteps {
 
     ProjectActivity projectActivity;
@@ -59,8 +56,6 @@ public class ActivitySteps {
             }
         }
         assertEquals(expectedProjects,activitiesMap.size());
-        // TODO remove this
-        assertEquals(expectedProjects,SystemModel.getEmployees().get(0).getActivities().size());
     }
 
 /*

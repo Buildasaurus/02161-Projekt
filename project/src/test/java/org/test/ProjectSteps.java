@@ -25,11 +25,6 @@ import io.cucumber.java.en.Given;
 
 import static org.junit.Assert.*;
 
-//import org.junit.After;
-
-//TODO look for duplicate steps that could be consolidated
-//TODO implement steps
-
 public class ProjectSteps {
     @io.cucumber.java.Before
     public void reset() {
