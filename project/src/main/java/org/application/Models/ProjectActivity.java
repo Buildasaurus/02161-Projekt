@@ -44,7 +44,7 @@ public class ProjectActivity extends Activity {
                                  Project assignedProject) {
         this.expectedDuration = expectedDuration;
         if (assignedProject == null) {
-            throw new IllegalArgumentException("Activity must have an assigned project");
+            throw new IllegalArgumentException("Project activity must have an assigned project");
         }
         this.assignedProject = assignedProject;
         assignedProject.addActivity(this);

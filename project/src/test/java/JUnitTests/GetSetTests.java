@@ -1,8 +1,6 @@
 package JUnitTests;
 
-import org.application.Models.Employee;
-import org.application.Models.Project;
-import org.application.Models.SystemModel;
+import org.application.Models.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,6 +58,19 @@ public class GetSetTests
         Project project = new Project("My Project", start, end);
         SystemModel.addProject(project);
         assertEquals(1, SystemModel.getProjects().size());
+    }
+
+    @Test
+    public void TimeBlockGetSetters() {
+        GregorianCalendar start = new GregorianCalendar(1,1,1);
+        GregorianCalendar end = new GregorianCalendar(1,2,1);
+        Project project = new Project("My Project", start, end);
+        ProjectActivity activity = new ProjectActivity(start,end,2,"hej",project);
+        Employee employee = new Employee("me");
+        TimeBlock timeBlock = new TimeBlock(start,end,activity,employee);
+        assertEquals(timeBlock.getActivity(), activity);
+        assertEquals(timeBlock.getStartTime(),start);
+        assertEquals(timeBlock.getEndTime(),end);
     }
 
 
