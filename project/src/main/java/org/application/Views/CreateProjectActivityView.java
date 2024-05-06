@@ -140,6 +140,16 @@ public class CreateProjectActivityView extends VBox {
         employeeButtons.getChildren().add(addEmployee);
         addEmployee.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
+                if (employeeSelect.getSelectionModel().getSelectedItem() == null) {
+                    GeneralAlert.sendWarning("Please select an Employee first");
+                    return;
+                }
+                for (Node node : assignedEmployees.getChildren()) {
+                    if (employeeSelect.getSelectionModel().getSelectedItem().equals(((Text) node).getText())) {
+                        GeneralAlert.sendWarning("This employee is already assigned");
+                        return;
+                    }
+                }
                 Text text = new Text(employeeSelect.getSelectionModel().getSelectedItem());
                 assignedEmployees.getChildren().add(text);
             }
@@ -149,12 +159,17 @@ public class CreateProjectActivityView extends VBox {
         employeeButtons.getChildren().add(removeEmployee);
         removeEmployee.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
+                if (employeeSelect.getSelectionModel().getSelectedItem() == null) {
+                    GeneralAlert.sendWarning("Please select an Employee first");
+                    return;
+                }
                 for (Node node : assignedEmployees.getChildren()) {
                     if (employeeSelect.getSelectionModel().getSelectedItem().equals(((Text) node).getText())) {
                         assignedEmployees.getChildren().remove(node);
-                        break;
+                        return;
                     }
                 }
+                GeneralAlert.sendWarning("Cannot remove employee not assigned to activity");
             }
         });
 
