@@ -26,26 +26,29 @@ public class ProjectActivity extends Activity {
     public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, int time, String name,
                            Project assignedProject) {
         super(name, startWeek, endWeek);
-        if (startWeek.after(endWeek)) {
-            throw new IllegalArgumentException("start week should be before end week");
-        }
-        this.expectedDuration = time;
-        this.assignedProject = assignedProject;
-        assignedProject.addActivity(this);
+        initializeValues(startWeek,endWeek,time,assignedProject);
     }
 
     public ProjectActivity(GregorianCalendar startWeek, GregorianCalendar endWeek, int time, String name,
                            Project assignedProject, String[] assignedEmployeeIDs) {
         super(name, startWeek, endWeek);
-        this.expectedDuration = time;
+        initializeValues(startWeek,endWeek,time,assignedProject);
+        for (String employeeID : assignedEmployeeIDs) {
+            assignEmployee(employeeID);
+        }
+    }
+
+    public void initializeValues(GregorianCalendar startWeek,
+                                 GregorianCalendar endWeek,
+                                 int expectedDuration,
+                                 Project assignedProject) {
+        this.expectedDuration = expectedDuration;
         this.assignedProject = assignedProject;
         if (startWeek.after(endWeek)) {
             throw new IllegalArgumentException("start week should be before end week");
         }
-        for (String employeeID : assignedEmployeeIDs) {
-            assignEmployee(employeeID);
-        }
         assignedProject.addActivity(this);
+
     }
 
     public void addTimeBlock(TimeBlock timeBlock) {
