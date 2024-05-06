@@ -1,8 +1,6 @@
 package JUnitTests;
 
 import org.application.Models.Employee;
-import org.application.Models.Project;
-import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 import org.junit.Before;
 import org.junit.Test;

@@ -40,7 +40,7 @@ public class GetSetTests
 
         GregorianCalendar start = new GregorianCalendar(1,1,1);
         GregorianCalendar end = new GregorianCalendar(1,2,1);
-        Project project = new Project("My Project", start, end);
+        new Project("My Project", start, end);
         assertNull(SystemModel.getProjectByName("doesNotExist"));
     }
 

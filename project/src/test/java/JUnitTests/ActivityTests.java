@@ -31,8 +31,8 @@ public class ActivityTests
 
         assertEquals("Given activity should be of instance ProjectActivity", exception.getMessage());
 
-        GregorianCalendar newStart = new GregorianCalendar(1,1,1);
-        GregorianCalendar newEnd = new GregorianCalendar(1,2,1);
+        new GregorianCalendar(1,1,1);
+        new GregorianCalendar(1,2,1);
 
 
     }
@@ -51,8 +51,8 @@ public class ActivityTests
 
         assertEquals("Given activity should be of instance ReservedActivity", exception.getMessage());
 
-        GregorianCalendar newStart = new GregorianCalendar(1,1,1);
-        GregorianCalendar newEnd = new GregorianCalendar(1,2,1);
+        new GregorianCalendar(1,1,1);
+        new GregorianCalendar(1,2,1);
     }
 
 }

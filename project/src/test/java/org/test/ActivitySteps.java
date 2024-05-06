@@ -3,20 +3,17 @@
 package org.test;
 
 import io.cucumber.java.en.*;
-import io.cucumber.java.en_old.Ac;
 import org.application.Models.Activity;
 import org.application.Models.Employee;
 import org.application.Models.Project;
 import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import org.application.Models.ReservedActivity;
-import org.junit.After;
 
 import static org.junit.Assert.*;
 
