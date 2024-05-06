@@ -102,6 +102,8 @@ public class ActivitySteps {
         GregorianCalendar givenstart = new GregorianCalendar();
         givenstart.setWeekDate(2024, int1, 1);
         Activity testActivity = SystemModel.getActivities().get(0);
+        System.out.println("size is " + SystemModel.getActivities().size());
+        System.out.println(testActivity.getStartDate().get(Calendar.WEEK_OF_YEAR));
         assertEquals(givenstart.get(Calendar.WEEK_OF_YEAR),testActivity.getStartDate().get(Calendar.WEEK_OF_YEAR));
     }
 
@@ -328,8 +330,8 @@ public class ActivitySteps {
     public void addProjectActivityWithEmployee(String employeeString) {
 //        Employee testEmployee = SystemModel.getEmployees().get(0);
         Project testProject = SystemModel.getProjects().get(0);
-        GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
-        GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
+        GregorianCalendar startDay = new GregorianCalendar(2024,5,1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,5,5);
         String[] employeeIDString = {employeeString};
         new ProjectActivity(startDay, endDay, 100, "testActivity", testProject, employeeIDString);
     }
@@ -337,20 +339,23 @@ public class ActivitySteps {
     @When("the user changes the project activity to start in week {int}, ends in week {int}, and has {string} as project leader")
     public void theUserChangesTheProjectActivityToStart(int startWeek, int endWeek, String projectLeader) {
         ProjectActivity oldactivity = (ProjectActivity) SystemModel.getActivities().get(0);
-        GregorianCalendar startDay = new GregorianCalendar(2024,startWeek,1);
+        GregorianCalendar startDay = new GregorianCalendar(2024,2,1);
         startDay.setWeekDate(2024, startWeek, 1);
-        GregorianCalendar endDay = new GregorianCalendar(2024,endWeek,1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,3,1);
         endDay.setWeekDate(2024, endWeek, 1);
+        System.out.println(startDay.get(Calendar.WEEK_OF_YEAR) + " end " + endDay.get(Calendar.WEEK_OF_YEAR));
+        System.out.println(" size is: " + SystemModel.getActivities().size());
+        Activity activityToUpdate = SystemModel.getActivities().get(0);
         ProjectActivity a = new ProjectActivity(startDay,endDay, oldactivity.getExpectedDuration() , oldactivity.getName(), oldactivity.getAssignedProject());
-        SystemModel.getActivities().get(0).updateValues(a);
+        activityToUpdate.updateValues(a);
         a.delete();
     }
 
     @Given("a project activity called {string} is created with the employee {string} assigned")
     public void aProjectActivityCalledIsCreatedWithTheEmployeeAssigned(String name, String employeeString) {
         Project testProject = SystemModel.getProjects().get(0);
-        GregorianCalendar startDay = new GregorianCalendar(2024,12,1);
-        GregorianCalendar endDay = new GregorianCalendar(2024,12,5);
+        GregorianCalendar startDay = new GregorianCalendar(2024,5,1);
+        GregorianCalendar endDay = new GregorianCalendar(2024,5,5);
         String[] employeeIDString = {employeeString};
         ProjectActivity testActivity = new ProjectActivity(startDay, endDay, 100, name, testProject, employeeIDString);
         testProject.addActivity(testActivity);
