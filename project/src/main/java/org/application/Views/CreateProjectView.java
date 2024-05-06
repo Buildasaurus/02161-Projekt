@@ -67,6 +67,8 @@ public class CreateProjectView extends VBox {
                         projectLeaderComboBox.getSelectionModel().getSelectedItem(),
                         GeneralMethods.convertDatePickerToCalender(startDate),
                         GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
+            } else {
+                GeneralAlert alert = new GeneralAlert("Project with this name already exists");
             }
         });
         if (editingProject) {
