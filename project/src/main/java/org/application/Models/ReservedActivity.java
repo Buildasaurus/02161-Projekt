@@ -10,18 +10,6 @@ public class ReservedActivity extends Activity {
         employee.addActivity(this);
     }
 
-    public int getStartDay() {
-        return getStartDate().get(Calendar.DAY_OF_MONTH);
-    }
-
-    public int getEndDay() {
-        return getEndDate().get(Calendar.DAY_OF_MONTH);
-    }
-
-    public int getEndMonth() {
-        return getEndDate().get(Calendar.MONTH);
-    }
-
     public void updateValues(Activity activity) {
         if (!(activity instanceof ReservedActivity)) {
             throw new IllegalArgumentException("Given activity should be of instance ReservedActivity");

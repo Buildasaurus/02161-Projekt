@@ -70,10 +70,6 @@ public class ProjectActivity extends Activity {
         }
     }
 
-    public List<TimeBlock> getTimeBlocks() {
-        return timeBlocks;
-    }
-
     /**
      * Deletes all references to assigned employees and the assigned project.
      */
