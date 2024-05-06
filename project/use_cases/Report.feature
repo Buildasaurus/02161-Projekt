@@ -18,3 +18,9 @@ Scenario: Project Leader generates report in a project with no activities
     When the Project Leader generates the report.
     Then a non-empty report is saved in our default folder
     And the report does not have listed activities
+
+Scenario: Project Leader generates report in a project with no start and end date
+    Given the project has no start and end date
+    When the Project Leader generates the report.
+    Then a non-empty report is saved in our default folder
+    And the report does not have listed activities
