@@ -1,12 +1,6 @@
 // Written by Martin, Lucia and Jonathan
 
 package org.test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +21,8 @@ import org.application.Models.Report;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
+
+import static org.junit.Assert.*;
 
 //import org.junit.After;
 
@@ -247,5 +243,15 @@ public class ProjectSteps {
         SystemModel.getProjects().get(0).setStartWeek(null);
         SystemModel.getProjects().get(0).setEndWeek(null);
 
+    }
+
+    @Then("a project cannot start before it end")
+    public void aProjectCannotStartBeforeItEnd() {
+        GregorianCalendar start = new GregorianCalendar(1,1,1);
+        GregorianCalendar end = new GregorianCalendar(1,2,1);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                new Project("My Project", end, start));
+
+        assertEquals("Start date must be before end date", exception.getMessage());
     }
 }

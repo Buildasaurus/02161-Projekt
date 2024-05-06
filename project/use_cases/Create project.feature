@@ -8,3 +8,7 @@ Scenario: Create project
     When 1 employees are created
     And 1 projects are created
     Then 1 projects exist
+
+Scenario: Create project
+    When 1 employees are created
+    Then a project cannot start before it end
