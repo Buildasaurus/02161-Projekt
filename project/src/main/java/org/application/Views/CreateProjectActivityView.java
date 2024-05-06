@@ -139,6 +139,8 @@ public class CreateProjectActivityView extends VBox {
                         activity
 
                 );
+            } else {
+                GeneralAlert alert = new GeneralAlert("Invalid data, please try again");
             }
         });
         getChildren().add(completeButton);

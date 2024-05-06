@@ -22,8 +22,18 @@ public class ProjectOverviewView extends VBox {
     private void initView() {
         Label nameLabel = new Label("Project Name: " + project.getName());
         Label idLabel = new Label("Project ID: " + project.getProjectID());
-        Label startWeekLabel = new Label("Start Week: " + project.getStartWeek().getTime());
-        Label endWeekLabel = new Label("End Week: " + project.getEndWeek().getTime());
+        Label startWeekLabel = new Label();
+        if (project.getStartWeek() == null) {
+            startWeekLabel.setText("Start Week: not set");
+        } else {
+            startWeekLabel.setText("Start Week: " + project.getStartWeek().getTime());
+        }
+        Label endWeekLabel = new Label();
+        if (project.getEndWeek() == null) {
+            endWeekLabel.setText("End Week: not set");
+        } else {
+            endWeekLabel.setText("End Week: " + project.getEndWeek().getTime());
+        }
         Label leaderLabel = new Label("Project Leader ID: " + project.getProjectLeaderID());
 
         this.getChildren().addAll(nameLabel, idLabel, startWeekLabel, endWeekLabel, leaderLabel);

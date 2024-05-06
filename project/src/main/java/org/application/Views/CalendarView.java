@@ -163,6 +163,8 @@ public class CalendarView extends GridPane {
                         pruneFreeHalfHours();
                         clearData();
                     }
+                } else {
+                    GeneralAlert alert = new GeneralAlert("Invalid data, please try again");
                 }
             }
         };
