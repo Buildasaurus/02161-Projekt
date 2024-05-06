@@ -14,6 +14,7 @@ import org.application.Models.ProjectActivity;
 import org.application.Models.SystemModel;
 import org.application.Utils.GeneralMethods;
 
+import java.lang.IllegalArgumentException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -124,12 +125,28 @@ public class CreateProjectActivityView extends VBox {
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e ->
         {
-            if (isValidData(startWeek, endWeek, halfHours, name, projectSelectionCombobox, assignedEmployees, startYear,
-                    endYear)) {
+            try {
+                if (startWeek.getText() == "") {
+                    throw new IllegalArgumentException("Field \"Start Week\" cannot be empty");
+                }
+                if (endWeek.getText() == "") {
+                    throw new IllegalArgumentException("Field \"End Week\" cannot be empty");
+                }
+                if (startYear.getText() == "") {
+                    throw new IllegalArgumentException("Field \"Start Year\" cannot be empty");
+                }
+                if (endYear.getText() == "") {
+                    throw new IllegalArgumentException("Field \"End Year\" cannot be empty");
+                }
+                if (halfHours.getText() == "") {
+                    throw new IllegalArgumentException("Field \"Expected Duration\" cannot be empty");
+                }
                 controller.handleCompleteProjectActivity(
                         new ProjectActivity(
-                                GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText())),
-                                GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText())),
+                                GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText()), 
+                                        Integer.parseInt(startYear.getText())),
+                                GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText()), 
+                                        Integer.parseInt(endYear.getText())),
                                 Integer.parseInt(halfHours.getText()),
                                 name.getText(),
                                 SystemModel.getProjectByName(
@@ -139,8 +156,8 @@ public class CreateProjectActivityView extends VBox {
                         activity
 
                 );
-            } else {
-                GeneralAlert alert = new GeneralAlert("Invalid data, please try again");
+            } catch (Exception exception) {
+                GeneralAlert alert = new GeneralAlert(exception.getMessage());
             }
         });
         getChildren().add(completeButton);
