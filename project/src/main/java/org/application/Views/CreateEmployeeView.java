@@ -3,6 +3,7 @@
 package org.application.Views;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -24,10 +25,12 @@ public class CreateEmployeeView extends VBox {
 
     private void initialize() {
         // title
-        Text title = new Text("Choose name and other relevant data for employee");
+        Text title = new Text("Creating new employee");
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
+        Label nameLabel = new Label("Choose 4 character long ID");
+        getChildren().add(nameLabel);
         TextField name = new TextField();
         name.setPromptText("ID");
         getChildren().add(name);
