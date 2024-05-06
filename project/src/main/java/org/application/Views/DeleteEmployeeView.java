@@ -28,9 +28,17 @@ public class DeleteEmployeeView extends VBox {
         getChildren().add(employees);
 
         // Create button
-        Button deleteButton = new Button("Complete");
+        Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e ->
-            controller.handleDeletePressed(SystemModel.getEmployee(employees.getSelectionModel().getSelectedItem())));
+                {
+                    if(SystemModel.getEmployee(employees.getValue()) != null)
+                    {
+                        controller.handleDeletePressed(SystemModel.getEmployee(employees.getSelectionModel().getSelectedItem()));
+                    }
+                    else {
+                        GeneralAlert a = new GeneralAlert("Choose an employee to delete first.");
+                    }
+                });
 
         getChildren().add(deleteButton);
 
