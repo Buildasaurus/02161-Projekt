@@ -69,11 +69,17 @@ public class CreateProjectView extends VBox {
             if (SystemModel.getProjectByName(
                     name.getText()) == null || editingProject) // only create project, if a project with the same name doesn't exist
             {
-                controller.handleCreateProject(
-                        name.getText(),
-                        projectLeaderComboBox.getSelectionModel().getSelectedItem(),
-                        GeneralMethods.convertDatePickerToCalender(startDate),
-                        GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
+                if(correctDates(startDate, endDate))
+                {
+                    controller.handleCreateProject(
+                            name.getText(),
+                            projectLeaderComboBox.getSelectionModel().getSelectedItem(),
+                            GeneralMethods.convertDatePickerToCalender(startDate),
+                            GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
+                }
+                else {
+                    new GeneralAlert("Please choose an end date after the start date.");
+                }
             } else {
                 GeneralAlert alert = new GeneralAlert("Project with this name already exists");
             }
@@ -91,5 +97,9 @@ public class CreateProjectView extends VBox {
 
         getChildren().add(completeButton);
         getChildren().add(GeneralViews.backButton());
+    }
+    public boolean correctDates(DatePicker start, DatePicker end)
+    {
+        return start.getValue() == null || end.getValue() == null || !end.getValue().isBefore(start.getValue());
     }
 }
