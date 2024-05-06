@@ -21,9 +21,8 @@ public class LoginView extends VBox {
     }
 
     private void initialize() {
-
         // title
-        Text title = new Text("!Username!");
+        Text title = new Text("Login");
         title.setFill(Color.BLACK);
         getChildren().add(title);
 
