@@ -153,18 +153,25 @@ public class CalendarView extends GridPane {
     private EventHandler<ActionEvent> submitTimeBlock() {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                if (startSelect.getValue() != null && endSelect.getValue() != null) {
-                    Activity activity = SystemModel.findActivityWithName(activityField.getSelectionModel().getSelectedItem());
-                    if (activity instanceof ProjectActivity) {
-                        GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startSelect.getValue(), endSelect.getValue());
-                        ProjectActivity projectActivity = (ProjectActivity) activity;
-                        employee.createTimeBlock(projectActivity, calendars[0], calendars[1]);
-                        updateTimeBlocks();
-                        pruneFreeHalfHours();
-                        clearData();
+                try {
+                    if (startSelect.getValue() == null) {
+                        throw new IllegalArgumentException("Please select a start time");
                     }
-                } else {
-                    GeneralAlert alert = new GeneralAlert("Invalid data, please try again");
+                    if (endSelect.getValue() == null) {
+                        throw new IllegalArgumentException("Please select an end time");
+                    }
+                    Activity activity = SystemModel.findActivityWithName(activityField.getSelectionModel().getSelectedItem());
+                    if (activity == null) {
+                        throw new IllegalArgumentException("Please select an activity");
+                    }
+                    GregorianCalendar[] calendars = GeneralMethods.stringsToCalendarList(startSelect.getValue(), endSelect.getValue());
+                    ProjectActivity projectActivity = (ProjectActivity) activity;
+                    employee.createTimeBlock(projectActivity, calendars[0], calendars[1]);
+                    updateTimeBlocks();
+                    pruneFreeHalfHours();
+                    clearData();
+                } catch (Exception exception) {
+                    GeneralAlert alert = new GeneralAlert(exception.getMessage());
                 }
             }
         };
