@@ -66,22 +66,18 @@ public class CreateProjectView extends VBox {
         // Create button
         Button completeButton = new Button("Complete");
         completeButton.setOnAction(e -> {
-            if (SystemModel.getProjectByName(
-                    name.getText()) == null || editingProject) // only create project, if a project with the same name doesn't exist
-            {
-                if(correctDates(startDate, endDate))
-                {
-                    controller.handleCreateProject(
-                            name.getText(),
-                            projectLeaderComboBox.getSelectionModel().getSelectedItem(),
-                            GeneralMethods.convertDatePickerToCalender(startDate),
-                            GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
+            try {
+                // only create project, if a project with the same name doesn't exist
+                if (SystemModel.getProjectByName(name.getText()) != null && !editingProject) {
+                    throw new IllegalArgumentException("Project with this name already exists");
                 }
-                else {
-                    new GeneralAlert("Please choose an end date after the start date.");
-                }
-            } else {
-                GeneralAlert alert = new GeneralAlert("Project with this name already exists");
+                controller.handleCreateProject(name.getText(),
+                        projectLeaderComboBox.getSelectionModel().getSelectedItem(),
+                        GeneralMethods.convertDatePickerToCalender(startDate),
+                        GeneralMethods.convertDatePickerToCalender(endDate), loadedProject);
+
+            } catch (Exception exception) {
+                GeneralAlert alert = new GeneralAlert(exception.getMessage());
             }
         });
         if (editingProject) {

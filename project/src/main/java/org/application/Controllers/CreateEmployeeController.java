@@ -29,7 +29,7 @@ public class CreateEmployeeController implements IController {
             newView.setController(controller);
             App.setRoot(controller);
         } else {
-            GeneralAlert alert = new GeneralAlert("ID must be 4 characters long");
+            GeneralAlert alert = new GeneralAlert("ID must be at least 4 characters long");
         }
     }
 }

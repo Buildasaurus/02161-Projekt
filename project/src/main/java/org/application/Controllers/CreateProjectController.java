@@ -37,7 +37,7 @@ public class CreateProjectController implements IController {
             else {
                 project = new Project(name, start, end, projectLeader);
             }
-            App.goToMainMenu();
+            App.goToLastView();
         }
     }
 }
