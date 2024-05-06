@@ -62,23 +62,22 @@ public class EmployeeController implements IController {
 
     public void handleUpdateSearch(ActionEvent event, VBox searchBox, GregorianCalendar start, GregorianCalendar end) {
         searchBox.getChildren().clear();
-        if (start == null || end == null) {
-            searchBox.getChildren().add(new Text("start or end date missing"));
-            return;
-        }
+
         List<Employee> sortedEmployees = SystemModel.findAvailableEmployees(start, end);
+        int counter = 1;
         for (Employee employee : sortedEmployees) {
-            Text text = new Text(employee.getID());
+            Text text = new Text(counter + ". " + employee.getID());
             if (employee.getAvailabilityScore(start, end) <= 0) {
                 text.setFill(Color.RED);
             }
             searchBox.getChildren().add(text);
+            counter++;
         }
     }
 
     public void handleSeeOverview(Project project) {
         if (project == null) {
-            GeneralAlert alert = new GeneralAlert("Please select a project first");
+            GeneralAlert.sendWarning("Please select a project first");
             return;
         }
         ProjectOverviewView view = new ProjectOverviewView(this, project);
@@ -101,7 +100,7 @@ public class EmployeeController implements IController {
             view.setController(controller);
             App.setRoot(controller);
         } else {
-            GeneralAlert alert = new GeneralAlert("Please select a project first");
+            GeneralAlert.sendWarning("Please select a project first");
         }
     }
 
@@ -119,7 +118,7 @@ public class EmployeeController implements IController {
         else if (activity instanceof ReservedActivity) {
             this.view = new CreateReservedActivityView(this, (ReservedActivity) activity);
         } else if (activity == null) {
-            GeneralAlert alert = new GeneralAlert("Please select an activity first");
+            GeneralAlert.sendWarning("Please select an activity first");
         }
         App.setRoot(this);
     }

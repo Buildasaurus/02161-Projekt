@@ -79,7 +79,7 @@ public class CreateProjectActivityView extends VBox {
 
 
         // Employee Availability Section
-        getChildren().add(new Label("Sorted list of most available employees"));
+        getChildren().add(new Label("Search for available employees in selected time period"));
         Button updateSearch = new Button("Search");
         getChildren().add(updateSearch);
 
@@ -87,12 +87,27 @@ public class CreateProjectActivityView extends VBox {
         VBox names = new VBox();
         names.getChildren().add(new Text("Please search"));
         updateSearch.setOnAction(e -> {
-            if (!(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || startYear.getText().isEmpty() || endYear.getText().isEmpty()))
+            try {
+                if (startWeek.getText() == "") {
+                    throw new IllegalArgumentException("Field \"Start Week\" cannot be empty");
+                }
+                if (endWeek.getText() == "") {
+                    throw new IllegalArgumentException("Field \"End Week\" cannot be empty");
+                }
+                if (startYear.getText() == "") {
+                    throw new IllegalArgumentException("Field \"Start Year\" cannot be empty");
+                }
+                if (endYear.getText() == "") {
+                    throw new IllegalArgumentException("Field \"End Year\" cannot be empty");
+                }
                 controller.handleUpdateSearch(e, names,
                         GeneralMethods.intToCalendar(Integer.parseInt(startWeek.getText()),
                                 Integer.parseInt(startYear.getText())),
                         GeneralMethods.intToCalendar(Integer.parseInt(endWeek.getText()),
                                 Integer.parseInt(endYear.getText())));
+            } catch (Exception exception) {
+                GeneralAlert.sendWarning(exception.getMessage());
+            }                
         });
         pane.setContent(names);
         getChildren().add(pane);
@@ -157,7 +172,7 @@ public class CreateProjectActivityView extends VBox {
 
                 );
             } catch (Exception exception) {
-                GeneralAlert alert = new GeneralAlert(exception.getMessage());
+                GeneralAlert.sendWarning(exception.getMessage());
             }
         });
         getChildren().add(completeButton);
@@ -180,24 +195,5 @@ public class CreateProjectActivityView extends VBox {
             controller.goToEmployeeView();
         });
         getChildren().add(backButton);
-    }
-
-    private boolean isValidData(TextField startWeek, TextField endWeek, TextField halfHours, TextField name,
-                                ComboBox<String> projectSelectionCombobox, TextField assignedEmployees,
-                                TextField startYear, TextField endYear) {
-        try {
-            boolean value = !(startWeek.getText().isEmpty() || endWeek.getText().isEmpty() || halfHours.getText().isEmpty() ||
-                    name.getText().isEmpty() || projectSelectionCombobox.getSelectionModel().getSelectedItem() == null ||
-                    assignedEmployees.getText() == null || endYear.getText().isEmpty() || startYear.getText().isEmpty()) &&
-                    Integer.parseInt(startWeek.getText()) <= Integer.parseInt(endWeek.getText()) &&
-                    Integer.parseInt(startYear.getText()) <= Integer.parseInt(endYear.getText()) &&
-                    Integer.parseInt(halfHours.getText()) >= 0;
-            return  value;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-
     }
 }
